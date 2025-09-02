@@ -43,8 +43,8 @@ senha VARCHAR (100) NOT NULL
 CREATE TABLE monitor_temp(
 id_temp INT PRIMARY KEY AUTO_INCREMENT,
 id_sensor INT NOT NULL,
-dt_coleta DATE default (CURRENT_DATE),
-hr_coleta TIME default (CURRENT_TIME),
+dt_coleta DATE DEFAULT (CURRENT_DATE),
+hr_coleta TIME DEFAULT (CURRENT_TIME),
 temperatura DECIMAL (4,2) NOT NULL,
 temp_max DECIMAL (4,2),
 temp_min DECIMAL (4,2)
