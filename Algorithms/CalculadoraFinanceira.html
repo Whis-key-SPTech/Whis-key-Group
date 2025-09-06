@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="calculadora1()">Calculadora de perda por Angel's Share</button>
+    <button onclick="calculadora2()">Calculadora de taxa de Angel's Share</button>
+    <button onclick="calculadora3()">Calculadora de Caso</button><br><br>
+    <hr>
+    <div id="mainPage"></div>
+</body>
+</html>
+<script>
+
+    function gotoMain(){
+        mainPage.innerHTML = ``;
+    }
+    function calculadora1(){
+        mainPage.innerHTML = `
+        <div id="calculadora1">
+        <h1>Calculadora de perda por Angel's Share</h1>
+        <label for="input_barrilQuant">Insira a quantidade de barris em maturação</label><br>
+        <input type="number" id="input_barrilQuant"><br><br>
+        <label for="input_tamBarril">Insira o tamanho dos barris (LITROS)</label><br>
+        <input type="number" id="input_tamBarril"><br><br>
+        <label for="input_precoMedio">Insira o preço médio do litro do seu Uísque.</label><br>
+        <input type="number" id="input_precoMedio"><br><br>
+        <label for="input_angelShare">Insira a taxa de Angel's Share (porcento)</label><br>
+        <input type="number" id="input_angelShare"><br><br>
+        <label for="input_anos">Insira o tempo da maturação (Anos)</label><br>
+        <input type="number" id="input_anos"><br><br>
+
+        <button onclick="getAngelLoss()">Calcular Perda</button><br><br>
+
+        <div id="calc1Mensagem"></div>
+        
+        <button onclick="gotoMain()">Voltar</button>
+    </div>`
+    }
+
+    function calculadora2(){
+        mainPage.innerHTML = 
+        `<div id="calculadora2">
+        <h1>Calculadora de taxa de Angel's Share</h1>
+        <label for="input_volumeInicial">Insira o volume inicial da sua última produção (L)</label><br>
+        <input type="number" id="input_volumeInicial"><br><br>
+        <label for="input_volumeFinal">Insira o volume final da sua última produção (L)</label><br>
+        <input type="number" id="input_volumeFinal"><br><br>
+        <label for="input_anos2">Insira o tempo total da maturação da sua última produção (Anos)</label><br>
+        <input type="number" id="input_anos2"><br><br>
+
+        <button onclick="getAngel()">Calcular Angel's Share</button><br><br>
+
+        <div id="calc2Mensagem"></div>
+        
+        <button onclick="gotoMain()">Voltar</button>
+        </div>`
+    }
+
+    function calculadora3(){
+        mainPage.innerHTML = 
+        `
+        <h1>Calculadora de Caso</h1>
+        <label for="ipt_barril">Insira a quantidade de barris em maturação</label>
+        <input type="number" id="ipt_barril"><br>
+        <label for="ipt_litros">Insira o tamanho dos barris (LITROS)</label>
+        <input type="number" id="ipt_litros"><br>
+        <label for="ipt_maturacao">Insira o tempo de maturação (ANOS)</label>
+        <input type="number" id="ipt_maturacao" placeholder="tempo em anos"><br>
+
+        <button onclick="btt_calcularpior()">Calcular Pior Cenario</button> <br>
+
+        <button onclick="btt_calcularmelhor()">Calcular Melhor Cenário</button>
+
+        <div id="div_mensagem"></div>
+        <div id="div_msg"></div><br><br>
+
+        <button onclick="gotoMain()">Voltar</button>
+        `
+    }
+
+
+    var perda = 0;
+    var precoMedio = 0;
+    var tamBarril = 0;
+    var quantBarril = 0;
+    function getAngelLoss(){
+        quantBarril = Number(input_barrilQuant.value);
+        tamBarril =  Number(input_tamBarril.value);
+        var inicial = quantBarril * tamBarril;
+        var ratio = Number(input_angelShare.value/100);
+        var ano = Number(input_anos.value)
+        precoMedio = Number(input_precoMedio.value);
+    
+       
+        var valorFinal = inicial * (1 - ratio) ** ano;
+        perda = inicial - valorFinal
+        var valorPerda =  perda * precoMedio;
+        var perdaBarril = perda / quantBarril;
+
+
+
+        calc1Mensagem.innerHTML = `Ao final de ${ano} anos, dos seus ${inicial} litros iniciais, sobrarão ${valorFinal}L,<br>
+    o que equivale a um prejuizo de aproximadamente ${perda}L, ${perdaBarril} barris ou  R$${valorPerda}<br><br>
+    <button onclick="getInfo()">Análise Diária</button><br><br>
+    <div id="detalhe"></div>`;
+    }
+
+    function getInfo(){
+
+    var perdaDiaria = perda / 365.25;
+    var valorDiario = perdaDiaria * precoMedio;
+
+    detalhe.innerHTML = `A sua perda diária aproximada é de: <br>
+    ${perdaDiaria} litros por evaporação; <br>
+    Que resultam num prejuizo diario de R$${valorDiario}`;
+    }
+
+    function getAngel(){
+        var volumeInicial = Number(input_volumeInicial.value);
+        var volumeFinal = Number(input_volumeFinal.value);
+        var ano = Number(input_anos2.value)
+
+        var aShare = (1 - (volumeFinal / volumeInicial) ** (1/ano))*100
+
+        calc2Mensagem.innerHTML = `Seu Angel's Share é ${aShare}%`;
+    }
+
+        
+    function btt_calcularpior (){
+        var barril = Number(ipt_barril.value);
+        var litros = Number(ipt_litros.value);
+        var anos = Number(ipt_maturacao.value);
+        var quantidade = barril * litros
+        var share = quantidade * (1-0.10)**anos
+
+        
+
+        div_mensagem.innerHTML += `Aproximando um pior cenário, com<span style="color:red"><b> Angel's Share em 10% ao ano. </span><b> Depois de ${anos} anos você perderá aproximadamente<br>
+        <span style="color:red"><b>${quantidade - share}</span>,<b> resultando em uma reserva final de <span style="color:red"><b> ${share}</span><b> litros!<br><br>`
+    }
+
+    function btt_calcularmelhor(){
+        var barril = Number(ipt_barril.value);
+        var litros = Number(ipt_litros.value);
+        var anos = Number(ipt_maturacao.value);
+        var quantidade = barril * litros
+        var share = quantidade * (1-0.02)**anos
+
+        div_mensagem.innerHTML += `Aproximando um melhor cenário, com<span style="color:green"><b> Angel's Share em 2% ao ano. </span><b> Depois de ${anos} anos você perderá aproximadamente<br>
+        <span style="color:green"><b>${quantidade - share}</span>,<b> resultando na uma reserva final de <span style="color:green"><b> ${share}</span> litros!<br><br><br>`
+           
+
+    }
+
+</script>
