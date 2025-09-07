@@ -5,10 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    span{
+        color:#ffa500;
+    }
+    hr{
+        color: #1c311e;
+        border: solid 1px #1c311e;
+        width: 100%;
+    }
+    .navbar{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-weight: 900;
+        
+    }
+    .conteudo{
+        align-self: center;
+        justify-self: center;
+        border: solid 1px black;
+        border-radius: 2%;
+        border-left: solid 8px black;
+        padding: 2%;
+        background-color: rgb(203, 215, 210);
+    }
+</style>
 <body>
+    <div class="navbar">
+    <div >WHI<span>S{</span>KEY<span>}</span></div>
     <button onclick="calculadora1()">Calculadora de perda por Angel's Share</button>
     <button onclick="calculadora2()">Calculadora de taxa de Angel's Share</button>
     <button onclick="calculadora3()">Calculadora de Caso</button><br><br>
+    </div>
     <hr>
     <div id="mainPage"></div>
 </body>
@@ -20,7 +50,7 @@
     }
     function calculadora1(){
         mainPage.innerHTML = `
-        <div id="calculadora1">
+        <div id="calculadora1" class="conteudo">
         <h1>Calculadora de perda por Angel's Share</h1>
         <label for="input_barrilQuant">Insira a quantidade de barris em maturação</label><br>
         <input type="number" id="input_barrilQuant"><br><br>
@@ -43,7 +73,7 @@
 
     function calculadora2(){
         mainPage.innerHTML = 
-        `<div id="calculadora2">
+        `<div id="calculadora2" class="conteudo">
         <h1>Calculadora de taxa de Angel's Share</h1>
         <label for="input_volumeInicial">Insira o volume inicial da sua última produção (L)</label><br>
         <input type="number" id="input_volumeInicial"><br><br>
@@ -63,15 +93,16 @@
     function calculadora3(){
         mainPage.innerHTML = 
         `
+        <div class="conteudo">
         <h1>Calculadora de Caso</h1>
-        <label for="ipt_barril">Insira a quantidade de barris em maturação</label>
-        <input type="number" id="ipt_barril"><br>
-        <label for="ipt_litros">Insira o tamanho dos barris (LITROS)</label>
-        <input type="number" id="ipt_litros"><br>
-        <label for="ipt_maturacao">Insira o tempo de maturação (ANOS)</label>
-        <input type="number" id="ipt_maturacao" placeholder="tempo em anos"><br>
+        <label for="ipt_barril">Insira a quantidade de barris em maturação</label><br>
+        <input type="number" id="ipt_barril"><br><br>
+        <label for="ipt_litros">Insira o tamanho dos barris (LITROS)</label><br>
+        <input type="number" id="ipt_litros"><br><br>
+        <label for="ipt_maturacao">Insira o tempo de maturação (ANOS)</label><br>
+        <input type="number" id="ipt_maturacao" placeholder="tempo em anos"><br><br>
 
-        <button onclick="btt_calcularpior()">Calcular Pior Cenario</button> <br>
+        <button onclick="btt_calcularpior()">Calcular Pior Cenario</button> <br><br>
 
         <button onclick="btt_calcularmelhor()">Calcular Melhor Cenário</button>
 
@@ -79,6 +110,7 @@
         <div id="div_msg"></div><br><br>
 
         <button onclick="gotoMain()">Voltar</button>
+        </div>
         `
     }
 
@@ -103,8 +135,8 @@
 
 
 
-        calc1Mensagem.innerHTML = `Ao final de ${ano} anos, dos seus ${inicial} litros iniciais, sobrarão ${valorFinal}L,<br>
-    o que equivale a um prejuizo de aproximadamente ${perda}L, ${perdaBarril} barris ou  R$${valorPerda}<br><br>
+        calc1Mensagem.innerHTML = `Ao final de ${ano} anos, dos seus ${inicial} litros iniciais, sobrarão ${valorFinal} litros,<br>
+    o que equivale a um prejuizo de aproximadamente: <br>${perda} litros (${(perda * 100) / inicial}%),<br> ${perdaBarril} barris<br> ou  R$${valorPerda}<br><br>
     <button onclick="getInfo()">Análise Diária</button><br><br>
     <div id="detalhe"></div>`;
     }
@@ -116,7 +148,7 @@
 
     detalhe.innerHTML = `A sua perda diária aproximada é de: <br>
     ${perdaDiaria} litros por evaporação; <br>
-    Que resultam num prejuizo diario de R$${valorDiario}`;
+    Que resultam num prejuizo diario de R$${valorDiario}<br><br>`;
     }
 
     function getAngel(){
