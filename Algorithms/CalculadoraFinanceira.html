@@ -17,27 +17,27 @@
     .navbar{
         display: flex;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: space-around;
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         font-weight: 900;
         
     }
     .conteudo{
+        width: 50%;
         align-self: center;
         justify-self: center;
-        border: solid 1px black;
+        border: solid 1px #1c311e;
         border-radius: 2%;
-        border-left: solid 8px black;
+        border-left: solid 8px #1c311e;
         padding: 2%;
-        background-color: rgb(203, 215, 210);
     }
 </style>
 <body>
     <div class="navbar">
     <div >WHI<span>S{</span>KEY<span>}</span></div>
-    <button onclick="calculadora1()">Calculadora de perda por Angel's Share</button>
     <button onclick="calculadora2()">Calculadora de taxa de Angel's Share</button>
-    <button onclick="calculadora3()">Calculadora de Caso</button><br><br>
+    <button onclick="calculadora1()">Calculadora de perda por Angel's Share</button>
+
     </div>
     <hr>
     <div id="mainPage"></div>
@@ -63,11 +63,13 @@
         <label for="input_anos">Insira o tempo da maturação (Anos)</label><br>
         <input type="number" id="input_anos"><br><br>
 
+
         <button onclick="getAngelLoss()">Calcular Perda</button><br><br>
+        <hr>
 
         <div id="calc1Mensagem"></div>
         
-        <button onclick="gotoMain()">Voltar</button>
+        <br><button onclick="gotoMain()">Voltar</button>
     </div>`
     }
 
@@ -83,35 +85,14 @@
         <input type="number" id="input_anos2"><br><br>
 
         <button onclick="getAngel()">Calcular Angel's Share</button><br><br>
+        <button onclick="btt_calcularmelhor()">Calcular Melhor Cenário</button>
+        <br><br>
+        <hr>
 
         <div id="calc2Mensagem"></div>
         
-        <button onclick="gotoMain()">Voltar</button>
+        <br><button onclick="gotoMain()">Voltar</button>
         </div>`
-    }
-
-    function calculadora3(){
-        mainPage.innerHTML = 
-        `
-        <div class="conteudo">
-        <h1>Calculadora de Caso</h1>
-        <label for="ipt_barril">Insira a quantidade de barris em maturação</label><br>
-        <input type="number" id="ipt_barril"><br><br>
-        <label for="ipt_litros">Insira o tamanho dos barris (LITROS)</label><br>
-        <input type="number" id="ipt_litros"><br><br>
-        <label for="ipt_maturacao">Insira o tempo de maturação (ANOS)</label><br>
-        <input type="number" id="ipt_maturacao" placeholder="tempo em anos"><br><br>
-
-        <button onclick="btt_calcularpior()">Calcular Pior Cenario</button> <br><br>
-
-        <button onclick="btt_calcularmelhor()">Calcular Melhor Cenário</button>
-
-        <div id="div_mensagem"></div>
-        <div id="div_msg"></div><br><br>
-
-        <button onclick="gotoMain()">Voltar</button>
-        </div>
-        `
     }
 
 
@@ -131,11 +112,11 @@
         var valorFinal = inicial * (1 - ratio) ** ano;
         perda = inicial - valorFinal
         var valorPerda =  perda * precoMedio;
-        var perdaBarril = perda / quantBarril;
+        var perdaBarril = perda / tamBarril;
 
 
 
-        calc1Mensagem.innerHTML = `Ao final de ${ano} anos, dos seus ${inicial} litros iniciais, sobrarão ${valorFinal} litros,<br>
+        calc1Mensagem.innerHTML = `Ao final de ${ano} anos, <b>com suas atuais medidas de temperatura e umidade</b>, dos seus ${inicial} litros iniciais sobrarão ${valorFinal} litros,<br>
     o que equivale a um prejuizo de aproximadamente: <br>${perda} litros (${(perda * 100) / inicial}%),<br> ${perdaBarril} barris<br> ou  R$${valorPerda}<br><br>
     <button onclick="getInfo()">Análise Diária</button><br><br>
     <div id="detalhe"></div>`;
@@ -158,32 +139,23 @@
 
         var aShare = (1 - (volumeFinal / volumeInicial) ** (1/ano))*100
 
-        calc2Mensagem.innerHTML = `Seu Angel's Share é ${aShare}%`;
+        calc2Mensagem.innerHTML = `<br>Com seu cenário atual de umidade e temperatura, seu Angel's Share é <b>${aShare}%</b><br>`;
+        contadorCalc1 = 0;
     }
 
-        
-    function btt_calcularpior (){
-        var barril = Number(ipt_barril.value);
-        var litros = Number(ipt_litros.value);
-        var anos = Number(ipt_maturacao.value);
-        var quantidade = barril * litros
-        var share = quantidade * (1-0.10)**anos
-
-        
-
-        div_mensagem.innerHTML += `Aproximando um pior cenário, com<span style="color:red"><b> Angel's Share em 10% ao ano. </span><b> Depois de ${anos} anos você perderá aproximadamente<br>
-        <span style="color:red"><b>${quantidade - share}</span>,<b> resultando em uma reserva final de <span style="color:red"><b> ${share}</span><b> litros!<br><br>`
-    }
-
+    var contadorCalc1 = 0
     function btt_calcularmelhor(){
-        var barril = Number(ipt_barril.value);
-        var litros = Number(ipt_litros.value);
-        var anos = Number(ipt_maturacao.value);
-        var quantidade = barril * litros
-        var share = quantidade * (1-0.02)**anos
+        var volumeInicial = Number(input_volumeInicial.value);
+        var volumeFinal = Number(input_volumeFinal.value);
+        var anos = Number(input_anos2.value);
+        var share = volumeInicial * (1-0.02)**anos
 
-        div_mensagem.innerHTML += `Aproximando um melhor cenário, com<span style="color:green"><b> Angel's Share em 2% ao ano. </span><b> Depois de ${anos} anos você perderá aproximadamente<br>
-        <span style="color:green"><b>${quantidade - share}</span>,<b> resultando na uma reserva final de <span style="color:green"><b> ${share}</span> litros!<br><br><br>`
+        if(contadorCalc1 < 1){
+        calc2Mensagem.innerHTML += `<br>Comparando com um cenário ideal, com<span style="color:green"><b> Angel's Share em 2% ao ano. </span><b> Depois de ${anos} anos você deixaria de perder aproximadamente<br>
+        <span style="color:green"><b>${share - volumeFinal}</span> Litros,<b> resultando na uma reserva final de <span style="color:green"><b> ${share}</span> litros!`
+        contadorCalc1++;
+        }
+
            
 
     }
