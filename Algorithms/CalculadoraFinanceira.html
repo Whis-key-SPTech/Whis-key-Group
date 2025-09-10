@@ -45,9 +45,8 @@
 </html>
 <script>
 
-    function gotoMain(){
-        mainPage.innerHTML = ``;
-    }
+    calculadora2();
+
     function calculadora1(){
         mainPage.innerHTML = `
         <div id="calculadora1" class="conteudo">
@@ -69,7 +68,6 @@
 
         <div id="calc1Mensagem"></div>
         
-        <br><button onclick="gotoMain()">Voltar</button>
     </div>`
     }
 
@@ -91,7 +89,6 @@
 
         <div id="calc2Mensagem"></div>
         
-        <br><button onclick="gotoMain()">Voltar</button>
         </div>`
     }
 
@@ -116,20 +113,20 @@
 
 
 
-        calc1Mensagem.innerHTML = `Ao final de ${ano} anos, <b>com suas atuais medidas de temperatura e umidade</b>, dos seus ${inicial} litros iniciais sobrarão ${valorFinal} litros,<br>
-    o que equivale a um prejuizo de aproximadamente: <br>${perda} litros (${(perda * 100) / inicial}%),<br> ${perdaBarril} barris<br> ou  R$${valorPerda}<br><br>
+        calc1Mensagem.innerHTML = `Ao final de ${ano} anos, <b>com suas atuais medidas de temperatura e umidade</b>, dos seus ${inicial} litros iniciais sobrarão aproximadamente ${valorFinal.toFixed(2)} litros,<br>
+    o que equivale a um prejuizo de aproximadamente: <br>${perda.toFixed(2)} litros (${((perda * 100) / inicial).toFixed(1)}%),<br> ${perdaBarril.toFixed()} barris<br> ou  ${valorPerda.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}<br><br>
     <button onclick="getInfo()">Análise Diária</button><br><br>
     <div id="detalhe"></div>`;
     }
 
     function getInfo(){
-
-    var perdaDiaria = perda / 365.25;
+    var ano = Number(input_anos.value)
+    var perdaDiaria = (perda / ano) / 365.25;
     var valorDiario = perdaDiaria * precoMedio;
 
     detalhe.innerHTML = `A sua perda diária aproximada é de: <br>
-    ${perdaDiaria} litros por evaporação; <br>
-    Que resultam num prejuizo diario de R$${valorDiario}<br><br>`;
+    ${perdaDiaria.toFixed(2)} litros por evaporação; <br>
+    Que resultam num prejuizo diario de ${valorDiario.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}<br><br>`;
     }
 
     function getAngel(){
@@ -139,7 +136,9 @@
 
         var aShare = (1 - (volumeFinal / volumeInicial) ** (1/ano))*100
 
-        calc2Mensagem.innerHTML = `<br>Com seu cenário atual de umidade e temperatura, seu Angel's Share é <b>${aShare}%</b><br>`;
+        calc2Mensagem.innerHTML = `<br>Com seu cenário atual de umidade e temperatura;<br>
+        Sabendo que a produção iniciou com ${volumeInicial} litros e finalizou com ${volumeFinal} litros após ${ano} anos: <br>
+        Seu Angel's Share é de aproximadamente <b>${aShare.toFixed(1)}% ao ano.</b><br>`;
         contadorCalc1 = 0;
     }
 
@@ -152,7 +151,7 @@
 
         if(contadorCalc1 < 1){
         calc2Mensagem.innerHTML += `<br>Comparando com um cenário ideal, com<span style="color:green"><b> Angel's Share em 2% ao ano. </span><b> Depois de ${anos} anos você deixaria de perder aproximadamente<br>
-        <span style="color:green"><b>${share - volumeFinal}</span> Litros,<b> resultando na uma reserva final de <span style="color:green"><b> ${share}</span> litros!`
+        <span style="color:green"><b>${(share - volumeFinal).toFixed(2)}</span> Litros,<b> resultando na uma reserva final de <span style="color:green"><b> ${share.toFixed(2)}</span> litros!`
         contadorCalc1++;
         }
 
