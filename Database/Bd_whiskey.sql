@@ -23,7 +23,7 @@ USE BD_WHISKEY;
 CREATE TABLE empresa(
 id_empresa INT PRIMARY KEY AUTO_INCREMENT,
 nome_empresa VARCHAR (50)NOT NULL,
-cnpj CHAR (17) NOT NULL,
+cnpj CHAR (18) NOT NULL,
 dt_inicio_contrato DATE NOT NULL,
 dt_fim_contrato DATE
 );
