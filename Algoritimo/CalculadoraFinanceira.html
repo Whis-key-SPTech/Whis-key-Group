@@ -34,7 +34,7 @@
 </style>
 <body>
     <div class="navbar">
-    <div>WHI<span class="span_amarelo">S{</span>KEY<span>}</span></div>
+    <div>WHI<span>S{</span>KEY<span>}</span></div>
     <button onclick="calculadora2()">Calculadora de taxa de Angel's Share</button>
     <button onclick="calculadora1()">Calculadora de perda por Angel's Share</button>
 
@@ -115,8 +115,8 @@
 
         calc1Mensagem.innerHTML = `Ao final de ${ano} anos, <b>com suas atuais medidas de temperatura e umidade</b>, dos seus ${inicial} litros iniciais sobrarão aproximadamente ${valorFinal.toFixed(2)} litros,<br>
     o que equivale a um prejuizo de aproximadamente: <br>${perda.toFixed(2)} litros (${((perda * 100) / inicial).toFixed(1)}%),<br> ${perdaBarril.toFixed()} barris<br> ou  ${valorPerda.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}<br><br>
-    <button onclick="getInfo()">Análise Diária</button><br><br>
     <div id="detalhe"></div>`;
+    getInfo();
     }
 
     function getInfo(){
@@ -125,8 +125,8 @@
     var valorDiario = perdaDiaria * precoMedio;
 
     detalhe.innerHTML = `A sua perda diária aproximada é de: <br>
-    ${perdaDiaria.toFixed(2)} litros por evaporação; <br>
-    Que resultam num prejuizo diario de ${valorDiario.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}<br><br>`;
+    ${perdaDiaria.toFixed(2)} litros por evaporação, <br>
+    Que resulta num prejuizo diario de ${valorDiario.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}<br><br>`;
     }
 
     function getAngel(){
@@ -134,7 +134,7 @@
         var volumeFinal = Number(input_volumeFinal.value);
         var ano = Number(input_anos2.value)
 
-        var i = (1 - (m / c) ** (1/n))*100
+        var aShare = (1 - (volumeFinal / volumeInicial) ** (1/ano))*100
 
         calc2Mensagem.innerHTML = `<br>Com seu cenário atual de umidade e temperatura;<br>
         Sabendo que a produção iniciou com ${volumeInicial} litros e finalizou com ${volumeFinal} litros após ${ano} anos: <br>

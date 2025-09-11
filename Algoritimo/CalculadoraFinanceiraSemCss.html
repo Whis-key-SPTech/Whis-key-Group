@@ -6,9 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    WHI<span style="color: #ffa500;">S{</span>KEY<span style="color: #ffa500;">}</span>
+    <div class="navbar">
+    WHI<span style="color: #ffa500">S{</span>KEY<span style="color: #ffa500">}</span>
     <button onclick="calculadora2()">Calculadora de taxa de Angel's Share</button>
     <button onclick="calculadora1()">Calculadora de perda por Angel's Share</button>
+
+    </div>
     <hr>
     <div id="mainPage"></div>
 </body>
@@ -19,7 +22,7 @@
 
     function calculadora1(){
         mainPage.innerHTML = `
-        <div id="calculadora1">
+        <div id="calculadora1" class="conteudo">
         <h1>Calculadora de perda por Angel's Share</h1>
         <label for="input_barrilQuant">Insira a quantidade de barris em maturação</label><br>
         <input type="number" id="input_barrilQuant"><br><br>
@@ -43,7 +46,7 @@
 
     function calculadora2(){
         mainPage.innerHTML = 
-        `<div id="calculadora2">
+        `<div id="calculadora2" class="conteudo">
         <h1>Calculadora de taxa de Angel's Share</h1>
         <label for="input_volumeInicial">Insira o volume inicial da sua última produção (L)</label><br>
         <input type="number" id="input_volumeInicial"><br><br>
@@ -85,8 +88,8 @@
 
         calc1Mensagem.innerHTML = `Ao final de ${ano} anos, <b>com suas atuais medidas de temperatura e umidade</b>, dos seus ${inicial} litros iniciais sobrarão aproximadamente ${valorFinal.toFixed(2)} litros,<br>
     o que equivale a um prejuizo de aproximadamente: <br>${perda.toFixed(2)} litros (${((perda * 100) / inicial).toFixed(1)}%),<br> ${perdaBarril.toFixed()} barris<br> ou  ${valorPerda.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}<br><br>
-    <button onclick="getInfo()">Análise Diária</button><br><br>
     <div id="detalhe"></div>`;
+    getInfo();
     }
 
     function getInfo(){
@@ -95,8 +98,8 @@
     var valorDiario = perdaDiaria * precoMedio;
 
     detalhe.innerHTML = `A sua perda diária aproximada é de: <br>
-    ${perdaDiaria.toFixed(2)} litros por evaporação; <br>
-    Que resultam num prejuizo diario de ${valorDiario.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}<br><br>`;
+    ${perdaDiaria.toFixed(2)} litros por evaporação, <br>
+    Que resulta num prejuizo diario de ${valorDiario.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}<br><br>`;
     }
 
     function getAngel(){
