@@ -1,2 +1,2 @@
-# Whis-key-Group
-Repositório voltado a atividades que devem ser feitas em grupo.
+# Banco de Dados
+Área voltada para comportar todos os scripts de banco de dados do projeto.
