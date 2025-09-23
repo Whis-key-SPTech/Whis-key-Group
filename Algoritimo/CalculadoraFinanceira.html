@@ -24,13 +24,16 @@
         
     }
     .conteudo{
-        width: 50%;
+        width: 80%;
+        font-size: 20px;
         justify-self: center;
         border: solid 1px #1c311e;
         border-radius: 2%;
         border-left: solid 8px #1c311e;
         padding: 2%;
+        
     }
+    
 </style>
 <body>
     <div class="navbar">
@@ -147,10 +150,10 @@
         var volumeInicial = Number(input_volumeInicial.value);
         var volumeFinal = Number(input_volumeFinal.value);
         var anos = Number(input_anos2.value);
-        var share = volumeInicial * (1-0.02)**anos
+        var share = volumeInicial * (1-0.04)**anos
 
         if(contadorCalc1 < 1){
-        calc2Mensagem.innerHTML += `<br>Comparando com um cenário ideal, com<span style="color:green"><b> Angel's Share em 2% ao ano. </span><b> Depois de ${anos} anos você deixaria de perder aproximadamente<br>
+        calc2Mensagem.innerHTML += `<br>Comparando com um cenário ideal, com<span style="color:green"><b> Angel's Share em 4% ao ano. </span><b> Depois de ${anos} anos você deixaria de perder aproximadamente<br>
         <span style="color:green"><b>${(share - volumeFinal).toFixed(2)}</span> Litros,<b> resultando na uma reserva final de <span style="color:green"><b> ${share.toFixed(2)}</span> litros!`
         contadorCalc1++;
         }
