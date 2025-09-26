@@ -13,6 +13,8 @@
       width: 100%;
       background-color: #1C311E;
       box-shadow: 15px 7px 4px 0px #00000025;
+      position: relative;
+      top: 0px;
     }
     .logo{
       display: flex;
@@ -24,6 +26,8 @@
       height: 119px;
       width: 100%;
       background-color: #1C311E;
+      position: fixed;
+      bottom: 0px;
     }
 
     .main{
@@ -37,7 +41,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 496px;
+      height: 587px;
       width: 560px;
       padding: 40px 30px;
       border-radius: 15px 15px 15px 15px;
@@ -54,7 +58,7 @@
     }
 
     .input-box {
-      margin: 15px 0px 40px 0px;
+      margin: 15px 0px 18px 0px;
     }
 
     .input-box input {
@@ -69,7 +73,11 @@
       color: rgba(0, 0, 0, 0.6);
       font-size: 20px;
       font-weight: 300;
-      text-transform: uppercase;
+      padding-right: 22px ;
+    }
+    .input-box input::placeholder {
+        text-transform: uppercase;
+        
     }
     .btn {
       width: 198px;
