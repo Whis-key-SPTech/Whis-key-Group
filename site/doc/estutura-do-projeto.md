@@ -16,8 +16,7 @@ O código deste projeto segue a seguinte estrutura atualmente:
 |   +-- public/       # Onde se encontra todos nosso arquivos visuais utilizados.
 |   |   |
 |    +-- doc/           # Está documentação de nossos padrões de desenvolvimento.
-|   |
-|   +-- lib/              # Configuração de bibliotecas e utilitários externos.
+|             # Configuração de bibliotecas e utilitários externos.
 |  
 ```
 

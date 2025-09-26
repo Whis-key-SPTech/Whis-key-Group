@@ -31,7 +31,7 @@ Cria commits para subir posteriormente, adione no texto alterações feitas seja
 *Sempre utilize o pre-fixo para analise:
  após ser analisada pelo responsável do github será atualizada para aprovoção*.
 
-#### `git commit -m "para analise: tudo que foi feito`
+#### `git commit -m "para analise: tudo que foi feito"`
 
 Enviar alteração para o github.
 
@@ -42,6 +42,7 @@ Enviar alteração para o github.
 O projeto segue os seguintes padrões de nomenclatura:
 
 - `kebab-case`: Para nome de arquivos;
-- `PascalCase`: Para nome de componentes, interfaces e tipos;
 - `camelCase`: Para nome de variáveis, funções e *custom hooks*;
+
+
 - `SCREAMING_SNAKE_CASE`: Para constantes e dados estáticos.
