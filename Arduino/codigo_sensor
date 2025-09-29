@@ -18,12 +18,9 @@ void loop() {
     Serial.println ("Erro ao ler os dados do sensor");
 
   }else{
-    Serial.print("Umidade: ");
     Serial.print(umidade);
-    Serial.print(" % ");
-    Serial.print("Temperatura: ");
+        Serial.println(":");
     Serial.print(temperatura);
-    Serial.println(" ºC");
 
   }
 
