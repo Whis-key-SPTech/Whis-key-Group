@@ -1,17 +1,18 @@
 @font-face {
   font-family: "Gotham Light";
   src: url("fonts/gotham-light.woff2") format("woff2");
-  font-weight: normal; /* Ou o peso adequado para a sua licença */
-  font-style: normal; /* Ou itálico, se aplicável */
+  font-weight: normal; 
+  font-style: normal; 
 }
+
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Lato", sans-serif;
-  font-size: 25px;
 }
+
 
 .header {
   display: flex;
@@ -27,76 +28,6 @@
   display: flex;
   width: 100%;
   max-width: 1400px;
-}
-.container {
-  margin: 20px;
-  padding: 20px;
-  display: flex;
-  height: 90%;
-  justify-content: center;
-  flex-direction: column;
-  align-items: column;
-  text-align: center;
-}
-
-.container h1 {
-  color: #ffa500;
-  text-align: center;
-  font-family: "Gotham Light";
-  font-size: 65px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
-}
-.team .row{
-    border-radius: 150px;
-    padding: 10px;
-}
-.container p {
-  color: #000;
-
-  text-align: center;
-  font-family: Lato;
-  font-size: 50px;
-  font-style: italic;
-  font-weight: 400;
-  line-height: normal;
-}
-.container-foto {
-  display: flex;
-  height: 90%;
-  justify-content: center;
-  flex-direction: column;
-  align-items: column;
-  text-align: center;
-}
-.container-foto h1 {
-  color: #1c311e;
-  text-align: center;
-  font-family: "Gotham Light";
-  font-size: 70px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
-}
-.team {
-  text-align: center;
-  margin: 40px 0;
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-  gap: 80px;
-}
-
-.row img {
-  
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover; 
 }
 
 
