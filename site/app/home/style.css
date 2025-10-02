@@ -1,0 +1,58 @@
+body{
+    background-color: #FFFAFA;
+    margin: 0px;
+    padding: 0px;
+}
+/* HEADER E MENU*/
+#header{
+    background-color: #1C311E;
+    height: 97px; ;width:100%;
+    display: flex;          /* ativa o flexbox */
+    justify-content: space-between; /* joga um pra esquerda e outro pra direita */
+    align-items: center;    /* centraliza verticalmente */
+    padding: 0 20px;        /* espaço interno nas laterais */
+    box-sizing: border-box;
+    box-shadow: 15px 7px 4px 0px rgba(0, 0, 0, 0.3);    
+}
+#menu a{
+    text-decoration: none;
+    color: #ffffff;
+}
+#menu button{
+    background-color: #FFA500;
+    border-radius: 10px;
+    border-color: #FFA500;
+    height:36px ;width:173px;
+    cursor: pointer;
+}
+#menu button:hover {
+    background-color: #FF7A00; /* muda a cor */
+    transform: scale(1.05);   /* dá um leve zoom */
+}
+nav img{
+    width: 255.77px; height: 143.87px;
+    padding-top: 35px;
+}
+/* FIM HEADER E MENU*/
+    #banner{
+        background-color: #244027;
+        width:100%; height:507px;
+        box-shadow: 15px 7px 4px 0px rgba(0, 0, 0, 0.3);
+        margin-top: 5%;
+        display: flex;
+        justify-content: space-between;
+    }
+    @font-face {
+        font-family: 'Angleton'; src: url('TAN-Angleton-Regular.ttf')format('truetype');
+    }
+
+    #banner{
+        font-family:'Angleton';
+        color: white;
+    }
+    #frase{
+        padding: 8%;
+    }
+/* fim do banner*/
+
+/* inicio contato*/
