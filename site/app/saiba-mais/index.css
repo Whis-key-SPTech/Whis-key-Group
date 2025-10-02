@@ -5,8 +5,8 @@
 }
 
 .container {
-  margin: 20px;
-  padding: 20px;
+  margin: 0px;
+  padding: 40px;
   display: flex;
   height: 90%;
   justify-content: center;
