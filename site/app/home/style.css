@@ -101,7 +101,7 @@ body{
         font-family: sans-serif;
         border-radius: 50px;
         font-size: 30px;
-        margin-left: -700px;
+        margin-left: -600px;
         margin-bottom: 200px;
 
     }
@@ -113,6 +113,15 @@ body{
         font-family: sans-serif;
         border-radius: 50px;
         font-size: 30px;
-        
+        margin-left: 750px;
+    }
+    .quem_somos{
+        text-align: center;
+        align-items: center;
+        font-family: 'GothanL';
+        font-size: 45px;
+    }
+    .paragrafo{
+        align-items: center;
     }
 
