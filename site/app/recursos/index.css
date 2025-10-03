@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  
 }
 
 html, body {
@@ -16,6 +17,7 @@ body {
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
+  width: 100%;
 }
 
 .container_h01 h1 {
@@ -51,9 +53,11 @@ body {
 }
 
 .container_p01 p {
+  font-family: 'Lato';
   font-size: 34px;
   flex: 1;
 }
+
 
 .container_p01 img {
   flex-shrink: 0;
@@ -70,6 +74,7 @@ body {
 }
 
 .container_p02 p {
+  font-family: 'Lato';
   font-size: 34px;
   flex: 1;
 }
