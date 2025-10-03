@@ -65,8 +65,9 @@
   font-size: 15px;
   padding: 0;
   margin: 0;
-  font-style: italic;
-   font-family: "lato";
+  
+   
+   
 }
 
 .footer ul li {
@@ -76,6 +77,8 @@
   align-items: center;
   font-style: italic;
   font-family: "lato";
+  
+
 }
 
 .footer ul li img {
