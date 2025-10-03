@@ -3,14 +3,13 @@ body{
     margin: 0px;
     padding: 0px;
 }
-/* HEADER E MENU*/
 #header{
     background-color: #1C311E;
     height: 97px; ;width:100%;
-    display: flex;          /* ativa o flexbox */
-    justify-content: space-between; /* joga um pra esquerda e outro pra direita */
-    align-items: center;    /* centraliza verticalmente */
-    padding: 0 20px;        /* espaço interno nas laterais */
+    display: flex;        
+    justify-content: space-between; 
+    align-items: center;    
+    padding: 0 20px;        
     box-sizing: border-box;
     box-shadow: 15px 7px 4px 0px rgba(0, 0, 0, 0.3);    
 }
@@ -26,8 +25,8 @@ body{
     cursor: pointer;
 }
 #menu button:hover {
-    background-color: #FF7A00; /* muda a cor */
-    transform: scale(1.05);   /* dá um leve zoom */
+    background-color: #FF7A00; 
+    transform: scale(1.05);   
 }
 #imagem img{
     width: 761px; height: 507px;
@@ -49,11 +48,17 @@ body{
     #banner{
         font-family:'Angleton';
         color: white;
+        max-width: 1600px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 65px;
     }
     #frase{
-        width: 463px;
+        width: 100%;
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         font-size: 22.5px;
         
     }
@@ -63,49 +68,66 @@ body{
 /* fim do banner*/
 
 /* inicio descricao*/
+
     .descricao{
         background-image: url(../background/forma.png);
         background-repeat: no-repeat;
         background-size: cover; 
         height: 790.5px;
-        margin-top: 54px;
+        display: flex;            
+        align-items: center;       
+    }
+    .flex{
+        display: flex;            
+        align-items: center;      
+        justify-content: space-between;   
+        max-width: 1200px;
+        width: 100%;
+        margin: 0px auto
+    }
 
-        display: flex;             /* ativa o flexbox */
-        flex-direction: column;    /* organiza em coluna */
-        align-items: center;       /* centraliza horizontal */
-        justify-content: center;   /* centraliza vertical */
-        text-align: center; 
+    .descricao .container{
+       position: relative;
+       width: 595px;
+       text-align: left;
+    }
+
+     .descricao .container::after{
+       content: '{';
+       position: absolute;
+       left: -45px;
+       top: 0px;
+       color: #FFA500;
+       font-size: 80px;
+       font-weight: lighter;
+       
+    }
+      .descricao .container::before{
+       content: '}';
+       position: absolute;
+       right: 60px;
+       bottom: 90px;
+       color: #FFA500;
+       font-size: 80px;
+       font-weight: lighter;
+       
     }
     .descricao h1{
         font-family:'GothanL';
-    }
-    #texto1 h1{
         color: black;
-        text-align: center;
+        text-align: left;
+        font-size: 45px;
+        margin-bottom: 45px;
     }
-    #texto2 h1{
-        color: black;
-        text-align: center;
-    } 
+    .descricao h1 span{
+        color:#FFA500;
+        
+    }
     #velho img{
         width: 370px;
         height: 540px;
-        margin-left: 1110px;
-        margin-top: 100px;
     }
-    #forma button{
-        width: 376px;
-        height: 70px;
-        background-color: #1C311E;
-        color: white ;
-        font-family: sans-serif;
-        border-radius: 50px;
-        font-size: 30px;
-        margin-left: -700px;
-        margin-bottom: 200px;
-
-    }
-    #botao{
+    #contato{
         width: 376px;
         height: 70px;
         background-color: #1C311E;
