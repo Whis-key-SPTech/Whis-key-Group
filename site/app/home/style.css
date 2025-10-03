@@ -202,6 +202,7 @@ button:active{
     font-weight: lighter;
     font-style: italic;
     margin-bottom: 10px;
+    color: white;
 }
 
 .btn_simulador{
@@ -223,6 +224,9 @@ button:active{
     background-color: #ffb62f;
 }
 
+.subtitulo_calculadora .baixo{
+    color: white;
+}
 
 
 .img_calculadora{
