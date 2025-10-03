@@ -75,7 +75,8 @@ body{
         background-size: cover; 
         height: 790.5px;
         display: flex;            
-        align-items: center;       
+        align-items: center;  
+        margin-bottom: 140px;     
     }
     .flex{
         display: flex;            
@@ -120,7 +121,7 @@ body{
         margin-bottom: 45px;
     }
     .descricao h1 span{
-        color:
+        color: #FFA500;
     }
     #velho img{
         width: 370px;
@@ -136,4 +137,265 @@ body{
         font-size: 30px;
         
     }
+    .quem_somos{
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        flex-direction: column;
+        max-width: 824px;
+        width: 100%;
+        margin: 0px auto;
+        margin-bottom: 140px;
+    }
+    
+  .quem_somos h1{
+        font-size: 70px;
+        font-weight: lighter;
+    }
 
+   .quem_somos p{
+        font-size: 45px;
+        width: 824px;
+        text-align: center;
+        font-weight: lighter;
+    }
+
+    
+button{
+    cursor: pointer;
+}
+
+button:active{
+    transform: scale(0.97);
+}
+
+
+.box_simulacao {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    padding: 250px 0px;
+    background-image: url(../public/institucional/retangulo-2.svg);
+    background-size: cover;
+    height: 710.5px;
+}
+
+.textos_simulacao{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 50%;
+    margin-left: 30px;
+}
+
+.subtitulo_calculadora {
+    font-size: 70px;
+    margin-bottom: 30px;
+}
+
+.subtitulo_calculadora .topo{
+    color: #FFA500;
+}
+
+.textos_simulacao .text_simulacao{
+    font-size: 34px;
+    font-weight: lighter;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.btn_simulador{
+    color: white;
+    background-color: #FFA500;
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: 700;
+    padding: 5px 0 5px 0;
+    border: none;
+    border-radius: 10px;
+    transition: 0.3s;
+    margin-top: 20px;
+    align-self: center;
+}
+
+.btn_simulador:hover{
+    background-color: #ffb62f;
+}
+
+
+
+.img_calculadora{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.img_calculadora img {
+    width: 70%;
+}
+
+.box_contato{
+    display: flex;
+    flex-direction: column;
+}
+
+.subtitle_contato{
+    font-size: 70px;
+    font-family: 'Gotham Light', sans-serif;
+    align-self: center;
+    margin-bottom: 100px;
+}
+
+.subtitle_contato .em_contato{
+    color: #FFA500;
+}
+
+.box_contato .container{
+    display: flex;
+}
+
+.img_contato{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.img_contato img {
+    height: 327px;
+    width: 488px;
+}
+
+.form_contato{
+    width: 50%;
+}
+
+.form_contato input{
+    width: 300px;
+    height: 60px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    border: 1px solid #444;
+    padding-left: 10px;
+}
+
+#txtArea_msg{
+    width: 630px;
+    height: 200px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.form_contato .ipt_mensagem{
+    width: 630px;
+    height: 200px;
+}
+
+.form_contato .btn_enviar_msg {
+    width: 300px;
+    height: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    background-color: #FFA500;
+    border: none;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.form_contato .btn_enviar_msg:hover {
+    background-color: #ffb62f;
+}
+
+.form_contato button{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+footer {
+  background-color: #1c311e;
+  color: white;
+  padding: 40px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  font-size: 16px;
+}
+
+.footer > div {
+  flex: 1;
+  min-width: 220px;
+  margin: 0 20px;
+}
+
+
+.footer h3 {
+    font-family: "lato";
+    font-size: 25px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: capitalize;
+    font-style: italic;
+}
+
+
+.footer ul {
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+    font-style: italic;
+    font-family: "lato";
+}
+
+.footer ul li {
+    margin-bottom: 12px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    font-style: italic;
+    font-family: "lato";
+}
+
+.footer ul li img {
+    width: 20px;
+    height: 20px;
+}
+
+.footer .logo-footer {
+  text-align: center;
+}
+
+.footer .logo-footer img {
+    max-height: 90px;
+    margin-bottom: 15px;
+}
+
+.footer .social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer .social img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.footer .social img:hover {
+    transform: scale(1.1);
+}
+
+.footer-bottom {
+    width: 100%;
+    text-align: center;
+    color: #ccc;
+    font-size: 14px;
+    margin-top: 30px;
+    border-top: 1px solid #444;
+    padding-top: 15px;
+}
