@@ -39,7 +39,12 @@
       if (email === "" || senha === "") {
         alert("Por favor, preencha todos os campos.");
       } else {
-        alert("Bem-vindo(a) a Whis{key}, " + email + "!");
+        if(email.includes('@')){
+        alert("Bem-vindo(a) a Whis{key}, " + email + "!")
+        }
+        else{
+          alert("Digite um email válido")
+        };
       }
     }
   </script>
