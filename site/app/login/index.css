@@ -14,6 +14,34 @@
       background-color: #1C311E;
       box-shadow: 15px 7px 4px 0px #00000025;
     }
+
+    .navbar{
+      display: flex;
+      justify-content: space-between;
+      width: 600px;
+      list-style: none;
+      font-size: 18px;
+      padding: 10px;
+      font-family: 'Lato', sans-serif;
+      align-self: center;
+    }
+
+    .navbar li{
+      cursor: pointer;
+      height: 100%;
+    }
+
+    .navbar li a{
+      text-decoration: none;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      transition: 0.2s;
+    }
+
+    .navbar li a:hover{
+      background-color: #335736;
+    }
     .logo{
       display: flex;
       width: 100%;
@@ -90,4 +118,10 @@
 
     .btn:hover {
       opacity: 0.8;
+    }
+
+    @media screen and (max-width: 1656px){
+      .navbar{
+        width: 800px;
+      }
     }

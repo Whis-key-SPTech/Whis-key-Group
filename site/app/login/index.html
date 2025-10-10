@@ -4,12 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./index.css">
+  <link rel="shortcut icon" href="../public/institucional/favicon.png" type="image/x-icon">
   <title>Tela de Login</title>
 </head>
 <body>
   <header class="header">
     <div class="logo">
-     <img src="../public/Whiskey.logo 1.svg" width="258.64" height="145.49">
+      <a href="../home/index.html"><img src="../public/Whiskey.logo 1.svg" width="258.64" height="145.49"></a>
+     
+    </div>
+    <div class="navbar">
+      <li><a href="../home/index.html">HOME</a></li>
+      <li><a href="../saiba-mais/index.html">SOBRE NÓS</a></li>
+      <li><a href="../calculadoraFinanceira/index.html">SIMULADOR</a></li>
     </div>
   </header>
   <main class="main">
@@ -39,7 +46,12 @@
       if (email === "" || senha === "") {
         alert("Por favor, preencha todos os campos.");
       } else {
-        alert("Bem-vindo(a) a Whis{key}, " + email + "!");
+        if(email.includes('@')){
+        alert("Bem-vindo(a) a Whis{key}, " + email + "!")
+        }
+        else{
+          alert("Digite um email válido")
+        };
       }
     }
   </script>
