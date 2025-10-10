@@ -31,12 +31,12 @@
             </ul>
         </nav>
         <div class="kpi kpi-media">
-              <div>
+            <div>
                 <h2>Temperatura média</h2>
             </div>
             <div class="info">
                 <div class="flex">
-                    <h2 id="div_qtd_media">23</h2>
+                    <h2 id="div_qtd_media"></h2>
                     <span class="med">ºC</span>
                 </div>
                 <div class="container">
@@ -48,11 +48,11 @@
             </div>
         </div>
         <div class="kpi kpi-users">
-               <div>
+            <div>
                 <h2>USUÁRIOS
                     ATIVOS
                 </h2>
-             </div>
+            </div>
             <div>
                 <h2 id="div_qtd_user">5</h2>
             </div>
@@ -84,17 +84,17 @@
     <main class="main">
         <div class="grafico-umidade">
             <div class="container">
-                <h2>Temperatura média</h2>
+                <h2>Umidade média por hora</h2>
                 <div class="grafico">
                     <canvas id="graficoUmidade"></canvas>
                 </div>
                 <img src="../../public/icons/umid.svg" width="60" height="60" class="img-umidade" alt="">
-                <div class="flex"><span class="text-metrica">70</span><span>%</span></div>
+                <div class="flex"><span class="text-metrica" id="div_text_metrica"></span><span>%</span></div>
             </div>
         </div>
         <div class="grafico-temperatura">
             <div class="container">
-                <h2>Umidade média</h2>
+                <h2>Temperatura média por hora</h2>
                 <canvas id="myChart"></canvas>
             </div>
         </div>
@@ -116,23 +116,24 @@
 </html>
 <script>
     var registros = [[28, 80, 343], [13, 82, 344], [28, 83, 345], [23, 76, 346], [31, 87, 347], [43, 80, 348], [28, 82, 349]]
-   
-    function render(){
-    var contadorRegistros = 0
-    var qtdRegistro = 7
-    var qtdAlertasAtivos = 0
-            var div_registrosHTML = ''
-    while (contadorRegistros < qtdRegistro) {
-        var color = 'green'
-        var delay = contadorRegistros * 200
-        if ((registros[contadorRegistros][0] > 35 && registros[contadorRegistros][0] < 40) || (registros[contadorRegistros][0] < 28 && registros[contadorRegistros][0] > 20)) {
-            color = 'yellow'
-            qtdAlertasAtivos++
-        } else if (registros[contadorRegistros][0] >= 40 || registros[contadorRegistros][0] <= 20) {
-            color = 'red'
-            qtdAlertasAtivos++
-        }
-        div_registrosHTML += ` 
+
+    function render() {
+        var contadorRegistros = 0
+        var qtdRegistro = 7
+        var qtdAlertasAtivos = 0
+        var div_registrosHTML = ''
+        while (contadorRegistros < qtdRegistro) {
+            var color = 'green'
+            var delay = contadorRegistros * 200
+            if ((registros[contadorRegistros][0] > 35 && registros[contadorRegistros][0] < 40) || (registros[contadorRegistros][0] < 28 && registros[contadorRegistros][0] > 20)) {
+                color = 'yellow'
+                qtdAlertasAtivos++
+            } else if (registros[contadorRegistros][0] >= 40 || registros[contadorRegistros][0] <= 20) {
+                color = 'red'
+                qtdAlertasAtivos++
+            }
+            var contadorAlerta = 0 
+            div_registrosHTML += ` 
          <li class="card-historico ${color}"  style="animation-delay: ${delay}ms">
                         <div class="flex" style="gap:12px;">
                             <div class="flex">
@@ -164,18 +165,34 @@
                         </div>
                 </li>
                 `
-        contadorRegistros++
-    }
-    div_registros.innerHTML = div_registrosHTML
-    div_qtdAlertasAtivos.innerHTML = qtdAlertasAtivos
+            contadorRegistros++
+        }
+        div_registros.innerHTML = div_registrosHTML
+       var intervaloAlerta = setInterval(() => {
+            if(contadorAlerta < qtdAlertasAtivos){
+                        contadorAlerta++
+                div_qtdAlertasAtivos.innerHTML = contadorAlerta
+            }else(
+                clearInterval(intervaloAlerta)
+            )
+        },250)
+        var contadorTemp = 0
+          var intervaloTemperatura = setInterval(() => {
+            if(contadorTemp < 26){
+                        contadorTemp++
+                div_qtd_media.innerHTML = contadorTemp
+            }else(
+                clearInterval(intervaloTemperatura)
+            )
+        },100)
     }
     render()
     const ctx = document.getElementById('myChart');
 
-    new Chart(ctx, {
+   var graficoLinha = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sext', 'Sab', 'Dom'],
+            labels: ['5h', '10h', '15h', '20h', '22h', '3h'],
             datasets: [{
                 label: 'Temperatura Média Semanal',
                 tension: 0.4,
@@ -198,14 +215,14 @@
             }
         }
     });
-
+    var porcentagem = 70
     const graficoCtx = document.getElementById('graficoUmidade');
     var graficoPizza = new Chart(graficoCtx, {
         type: 'doughnut',
         data: {
             datasets: [{
                 label: 'Umidade',
-                data: [70, 30],
+                data: [porcentagem, 30],
                 backgroundColor: ['#5cca07bd', '#eee'],
                 borderWidth: 0,
                 borderRadius: [10, 0]
@@ -221,4 +238,111 @@
             }
         }
     });
+    function diminuirPorcentage(){
+         var corPorcentagem = 'black'
+             var contadorLinha = 0
+          const intervaloMenos = setInterval(() => {
+             while(contadorLinha < dadosLinha.length){
+                  if(contadorLinha == 2){
+                    if( dadosLinha[contadorLinha]  < 40){
+                        dadosLinha[contadorLinha] += 5
+                    }else{
+                        dadosLinha[contadorLinha] -= 5
+                    }
+                }else if(contadorLinha == 5){
+                      if( dadosLinha[contadorLinha]  < 40){
+                    dadosLinha[contadorLinha] += 7
+                      }else{
+                        dadosLinha[contadorLinha] -= 7
+                      }
+                }else if(contadorLinha == 7){
+                      if( dadosLinha[contadorLinha]  < 40){
+                    dadosLinha[contadorLinha] += 1.8
+                      }else{
+                        dadosLinha[contadorLinha] -= 1.8
+                      }
+                }
+             
+                contadorLinha++
+            }
+    if (porcentagem <= 50) {
+        clearInterval(intervaloMenos);
+         aumentarPorcentagem()
+    } else {
+        if(porcentagem <= 70){
+                    corPorcentagem = 'red'
+            }
+        else if(porcentagem < 80 && porcentagem > 70){
+                    corPorcentagem = 'yellow'
+            }
+        div_text_metrica.innerHTML = `<span  class="${corPorcentagem}">${porcentagem}</span>`
+        porcentagem -= 1;
+        graficoPizza.data.datasets[0].data = [porcentagem, 100 - porcentagem];
+        graficoLinha.data.datasets[0].data = [dadosLinha[0], dadosLinha[1], dadosLinha[2], dadosLinha[3], dadosLinha[4], dadosLinha[5], dadosLinha[6]];
+        graficoPizza.update({
+            duration: 100,
+            easing: 'easeInOutQuad'
+        });
+        graficoLinha.update({
+                    duration: 100,
+                    easing: 'easeInOutQuad'
+                });
+    }
+}, 100);
+    }
+    var dadosLinha =  graficoLinha.data.datasets[0].data
+    function aumentarPorcentagem(){
+        var corPorcentagem = 'black'
+        var contadorLinha = 0
+          const intervaloMais = setInterval(() => {
+            while(contadorLinha < dadosLinha.length){
+                if(contadorLinha == 3){
+                      if( dadosLinha[contadorLinha]  > 20){
+                    dadosLinha[contadorLinha] -= 4
+                      }else{
+                          dadosLinha[contadorLinha] += 4
+                      }
+                }else if(contadorLinha == 1){
+                      if( dadosLinha[contadorLinha]  > 20){
+                    dadosLinha[contadorLinha] -= 6
+                      }else{
+                        dadosLinha[contadorLinha] += 6
+                      }
+                }else if(contadorLinha == 6){
+                      if( dadosLinha[contadorLinha]  > 20){
+                    dadosLinha[contadorLinha] -= 3
+                      }else{
+                         dadosLinha[contadorLinha] += 3
+
+                      }
+                }
+             
+                    contadorLinha++
+            }
+            if (porcentagem >= 90) {
+                clearInterval(intervaloMais);
+                diminuirPorcentage()
+            } else {
+                if(porcentagem <= 70){
+                    corPorcentagem = 'red'
+                }
+                 else if(porcentagem < 80 && porcentagem > 70){
+                    corPorcentagem = 'yellow'
+            }
+                div_text_metrica.innerHTML = `<span  class="${corPorcentagem}">${porcentagem}</span>`
+                porcentagem += 1;
+                graficoPizza.data.datasets[0].data = [porcentagem, 100 - porcentagem];
+                graficoLinha.data.datasets[0].data = [dadosLinha[0], dadosLinha[1], dadosLinha[2], dadosLinha[3], dadosLinha[4], dadosLinha[5], dadosLinha[6]];
+                graficoPizza.update({
+                    duration: 100,
+                    easing: 'easeInOutQuad'
+                });
+                graficoLinha.update({
+                    duration: 100,
+                    easing: 'easeInOutQuad'
+                });
+            }
+        }, 100);
+    }
+    diminuirPorcentage()
 </script>

@@ -435,9 +435,22 @@ body {
     bottom: 25%;
 }
 
-.grafico-umidade .container .flex .text-metrica {
+.grafico-umidade .container .flex .text-metrica span{
     font-size: 40px;
     font-weight: bolder;
+    color: rgb(15, 133, 4);
+
+}
+.grafico-umidade .container .flex .text-metrica span.red {
+    font-size: 40px;
+    font-weight: bolder;
+    color: rgb(133, 4, 4);
+
+}
+.grafico-umidade .container .flex .text-metrica span.yellow{
+    font-size: 40px;
+    font-weight: bolder;
+    color: rgb(112, 133, 4);
 
 }
 
