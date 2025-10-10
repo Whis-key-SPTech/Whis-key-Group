@@ -1,58 +1,79 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
-   <link rel="stylesheet" href="../utils/index.css">
-  <title>Tela de Login</title>
-</head>
-<body>
-  <header class="header">
-    <div class="logo">
-     <img src="../public/Whiskey.logo 1.svg" width="258.64" height="145.49">
-    </div>
-  </header>
-  <main class="main">
-    <img src="../public/S{KEY}.svg" width="545" height="306" alt="" srcset="">
-    <div class="container">
-      <div class="input-box">
-        <span>EMAIL</span>
-        <br>
-        <input type="email" id="email" placeholder="digite seu email">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="../utils/index.css" />
+    <link rel="shortcut icon" href="../public/institucional/favicon.png" type="image/x-icon">
+    <title>Tela de cadastro</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img
+          src="../public/Whiskey.logo 1.svg"
+          width="258.64"
+          height="145.49"
+        />
       </div>
-      <div class="input-box">
-        <span>NOME</span>
-        <br>
-        <input type="text" id="nome" placeholder="digite o nome">
+    </header>
+    <main class="main">
+      <img
+        src="../public/S{KEY}.svg"
+        width="545"
+        height="306"
+        alt=""
+        srcset=""
+      />
+      <div class="container">
+        <div class="input-box">
+          <span>EMAIL</span>
+          <br />
+          <input type="email" id="email" placeholder="digite seu email" />
         </div>
         <div class="input-box">
-        <span>SENHA</span>
-        <br>
-        <input type="password" id="senha" placeholder="digite sua senha">
-      </div>
-      <div class="input-box">
-        <span>CONFIRMAR</span>
-        <br>
-        <input type="password" id="confirmar_senha" placeholder="confirme a senha">
+          <span>NOME</span>
+          <br />
+          <input type="text" id="nome" placeholder="digite o nome" />
         </div>
-      <button class="btn" onclick="cadastrar()">Cadastrar</button>
-    </div>
-  </main>
-  <footer class="footer">
+        <div class="input-box">
+          <span>SENHA</span>
+          <br />
+          <input type="password" id="senha" placeholder="digite sua senha" />
+        </div>
+        <div class="input-box">
+          <span>CONFIRMAR</span>
+          <br />
+          <input
+            type="password"
+            id="confirmar_senha"
+            placeholder="confirme a senha"
+          />
+        </div>
+        <button class="btn" onclick="cadastrar()">Cadastrar</button>
+      </div>
+    </main>
+    <footer class="footer"></footer>
+    <script>
+      function cadastrar() {
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+        const senha = document.getElementById("senha").value;
+        const confsenha = document.getElementById("confirmar_senha").value;
 
-  </footer>
-  <script>
-    function cadastrar() {
-      const email = document.getElementById("email").value;
-      const senha = document.getElementById("senha").value;
-
-      if (email === "" || senha === "") {
-        alert("Por favor, preencha todos os campos.");
-      } else {
-        alert("Bem-vindo(a) a Whis{key}, " + email + "!");
+        if (nome === "" || email === "" || senha === "" || confsenha === "") {
+          alert(`Por favor, preencha todos os campos.`);
+        } 
+        else {
+          if ((nome!= isNaN) && email.includes("@") && senha == confsenha) {
+            alert(`Cadastro realizado com sucesso, ${nome} !`);
+          }
+          else{
+            alert(`Falha ao realizar oo cadastro, Verifique as informações`)
+          }
+        }
       }
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>

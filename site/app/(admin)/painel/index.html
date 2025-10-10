@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Painel dashboard</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="options">
+            <div onclick="handleNavbar()" class="menu-button">
+                <div id="menu-label"></div>
+                <div id="menu-label"></div>
+                <div id="menu-label"></div>
+            </div>
+            <h2>Bem vindo Frezza</h2>
+        </div>
+        <div></div>
+        <div></div>
+        <nav class="navbar" id="navbar">
+            <ul class="lista-menu">
+                <li class="lista">Home</li>
+                <li  class="lista">Dashboard</li>
+                <li class="list-dashboard">
+                    <ul>
+                        <li class="lista dentro">Sensores</li>
+                        <li class="lista dentro">Financeiro</li>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+        <div class="kpi kpi-média"></div>
+        <div class="kpi kpi-users"></div>
+        <div class="kpi kpi-alerts"></div>
+        <div class="logs" id="log"></div>
+    </header>
+    <main class="main">
+        <div class="grafico-umidade"></div>
+        <div class="grafico-temperatura"><canvas id="myChart"></canvas></div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var navBarOpen = true
+        function handleNavbar() {
+            if (navBarOpen) {
+                navbar.style.width = `0px`;
+                navBarOpen = false;
+            } else {
+                navbar.style.width = `15%`
+                navBarOpen = true;
+            }
+            console.log('entrou')
+        }
+    </script>
+</body>
+
+</html>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabádo', 'Domingo'],
+      datasets: [{
+        label: 'Temperatura Média Semanal',
+        tension:0.4,
+        fill:true,
+        borderColor: '#50C156',
+        backgroundColor: 'rgba(80, 193, 86,0.5)',
+        data: [27.5, 26.8, 27.9, 28.2, 27.1, 27.6, 40],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
