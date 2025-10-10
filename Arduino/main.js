@@ -67,7 +67,7 @@ const serial = async (
                 'INSERT INTO registro (id, temperatura, umidade) VALUES (default, ?, ?)',
                 [sensorTemperatura, sensorUmidade]
             );
-            console.log("valores inseridos no banco: ", sensorUmidade + ", " + sensorTemperatura);
+            console.log("valores inseridos no banco: ", sensorTemperatura + ", " + sensorUmidade);
 
         }
 
