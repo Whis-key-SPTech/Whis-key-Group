@@ -63,8 +63,9 @@
 
         if (nome === "" || email === "" || senha === "" || confsenha === "") {
           alert(`Por favor, preencha todos os campos.`);
-        } else {
-          if (nome != isNaN && email.includes("@") && senha == confsenha) {
+        } 
+        else {
+          if ((nome!= isNaN) && email.includes("@") && senha == confsenha) {
             alert(`Cadastro realizado com sucesso, ${nome} !`);
           }
           else{
