@@ -40,10 +40,9 @@
     </header>
     <main class="main">
         <div class="grafico-umidade"></div>
-        <div class="grafico-temperatura">
-
-        </div>
+        <div class="grafico-temperatura"><canvas id="myChart"></canvas></div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         var navBarOpen = true
         function handleNavbar() {
@@ -60,3 +59,29 @@
 </body>
 
 </html>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabádo', 'Domingo'],
+      datasets: [{
+        label: 'Temperatura Média Semanal',
+        tension:0.4,
+        fill:true,
+        borderColor: '#50C156',
+        backgroundColor: 'rgba(80, 193, 86,0.5)',
+        data: [27.5, 26.8, 27.9, 28.2, 27.1, 27.6, 40],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
