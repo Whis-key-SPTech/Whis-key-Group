@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/ae37c4f9c1.js" crossorigin="anonymous"></script>
     <title>Painel dashboard</title>
 </head>
 
@@ -23,26 +25,80 @@
         <nav class="navbar" id="navbar">
             <ul class="lista-menu">
                 <li class="lista">Home</li>
-                <li  class="lista">Dashboard</li>
-                <li class="list-dashboard">
-                    <ul>
-                        <li class="lista dentro">Sensores</li>
-                        <li class="lista dentro">Financeiro</li>
-                    </ul>
-                </li>
+                <li class="lista">Sensores</li>
+                <li class="lista">Financeiro</li>
 
             </ul>
         </nav>
-        <div class="kpi kpi-média"></div>
-        <div class="kpi kpi-users"></div>
-        <div class="kpi kpi-alerts"></div>
-        <div class="logs" id="log"></div>
+        <div class="kpi kpi-media">
+              <div>
+                <h2>Temperatura média</h2>
+            </div>
+            <div class="info">
+                <div class="flex">
+                    <h2 id="div_qtd_media">23</h2>
+                    <span class="med">ºC</span>
+                </div>
+                <div class="container">
+                    <img src="../../public/icons/temp.svg" width="30" height="70" alt="">
+                </div>
+            </div>
+            <div>
+                <p>A temperatura adquada é entre 25º a 30º</p>
+            </div>
+        </div>
+        <div class="kpi kpi-users">
+               <div>
+                <h2>USUÁRIOS
+                    ATIVOS
+                </h2>
+             </div>
+            <div>
+                <h2 id="div_qtd_user">5</h2>
+            </div>
+            <div>
+                <p>Quantidade de usuários ativos no sistema</p>
+            </div>
+        </div>
+        <div class="kpi kpi-alerts">
+            <div>
+                <h2>ALERTAS
+                    ATIVOS
+                </h2>
+            </div>
+            <div>
+                <h2 id="div_qtdAlertasAtivos"></h2>
+            </div>
+            <div>
+                <p>Caso algum parâmetro esteja inadequado</p>
+            </div>
+        </div>
+        <div class="logs" id="log">
+            <h2>Histórico</h2>
+            <span>Os logs dos ultimos 10 dados</span>
+            <h3>Sensores: <span>3</span></h3>
+            <ul id="div_registros">
+            </ul>
+        </div>
     </header>
     <main class="main">
-        <div class="grafico-umidade"></div>
-        <div class="grafico-temperatura"><canvas id="myChart"></canvas></div>
+        <div class="grafico-umidade">
+            <div class="container">
+                <h2>Temperatura média</h2>
+                <div class="grafico">
+                    <canvas id="graficoUmidade"></canvas>
+                </div>
+                <img src="../../public/icons/umid.svg" width="60" height="60" class="img-umidade" alt="">
+                <div class="flex"><span class="text-metrica">70</span><span>%</span></div>
+            </div>
+        </div>
+        <div class="grafico-temperatura">
+            <div class="container">
+                <h2>Umidade média</h2>
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         var navBarOpen = true
         function handleNavbar() {
@@ -53,35 +109,116 @@
                 navbar.style.width = `15%`
                 navBarOpen = true;
             }
-            console.log('entrou')
         }
     </script>
 </body>
 
 </html>
 <script>
-  const ctx = document.getElementById('myChart');
-
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabádo', 'Domingo'],
-      datasets: [{
-        label: 'Temperatura Média Semanal',
-        tension:0.4,
-        fill:true,
-        borderColor: '#50C156',
-        backgroundColor: 'rgba(80, 193, 86,0.5)',
-        data: [27.5, 26.8, 27.9, 28.2, 27.1, 27.6, 40],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+    var registros = [[28, 80, 343], [13, 82, 344], [28, 83, 345], [23, 76, 346], [31, 87, 347], [43, 80, 348], [28, 82, 349]]
+   
+    function render(){
+    var contadorRegistros = 0
+    var qtdRegistro = 7
+    var qtdAlertasAtivos = 0
+            var div_registrosHTML = ''
+    while (contadorRegistros < qtdRegistro) {
+        var color = 'green'
+        var delay = contadorRegistros * 200
+        if ((registros[contadorRegistros][0] > 35 && registros[contadorRegistros][0] < 40) || (registros[contadorRegistros][0] < 28 && registros[contadorRegistros][0] > 20)) {
+            color = 'yellow'
+            qtdAlertasAtivos++
+        } else if (registros[contadorRegistros][0] >= 40 || registros[contadorRegistros][0] <= 20) {
+            color = 'red'
+            qtdAlertasAtivos++
         }
-      }
+        div_registrosHTML += ` 
+         <li class="card-historico ${color}"  style="animation-delay: ${delay}ms">
+                        <div class="flex" style="gap:12px;">
+                            <div class="flex">
+                                <p id="met">
+                                    ${registros[contadorRegistros][0]}
+                                </p>
+                                <p id="med">ºC</p>
+                            </div>
+                            <div class="flex"  id="met">-</div>
+                            <div class="flex">
+                                <p id="met">${registros[contadorRegistros][1]}</p>
+                                <p id="med">%</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex" style="gap:12px;">
+                            <div class="flex">
+                                <p id="met-menos">
+                                    #0${registros[contadorRegistros][2]}
+                                </p>
+                            </div>
+                            <div class="flex"  id="met-menos">•</div>
+                            <div class="flex">
+                                <p id="met-menos">
+                                    Sensor
+                                </p>
+                            </div>
+                        </div>
+                        </div>
+                </li>
+                `
+        contadorRegistros++
     }
-  });
+    div_registros.innerHTML = div_registrosHTML
+    div_qtdAlertasAtivos.innerHTML = qtdAlertasAtivos
+    }
+    render()
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sext', 'Sab', 'Dom'],
+            datasets: [{
+                label: 'Temperatura Média Semanal',
+                tension: 0.4,
+                fill: true,
+                borderColor: '#50C156',
+                backgroundColor: 'rgba(80, 193, 86,0.5)',
+                data: [27.5, 26.8, 27.9, 28.2, 27.1, 27.6, 40],
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: true }
+            }
+        }
+    });
+
+    const graficoCtx = document.getElementById('graficoUmidade');
+    var graficoPizza = new Chart(graficoCtx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                label: 'Umidade',
+                data: [70, 30],
+                backgroundColor: ['#5cca07bd', '#eee'],
+                borderWidth: 0,
+                borderRadius: [10, 0]
+            }]
+        },
+        options: {
+            cutout: '75%',
+            rotation: -90,
+            circumference: 180,
+            plugins: {
+                legend: { display: true },
+                tooltip: { enabled: true }
+            }
+        }
+    });
 </script>

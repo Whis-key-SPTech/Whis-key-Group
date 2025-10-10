@@ -1,18 +1,23 @@
-*{
+* {
     padding: 0px;
     margin: 0px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.header{
+body {
+    background-color: #F3F3F3;
+}
+
+.header {
     height: 200px;
     width: 100%;
     background-color: #1C311E;
     border-radius: 0px 0px 100px 100px;
     position: relative;
-    z-index:40;
+    z-index: 40;
 }
-.header .options{
+
+.header .options {
     display: flex;
     align-items: center;
     height: 70px;
@@ -20,25 +25,29 @@
     margin: auto;
     gap: 190px;
 }
-.header .options h2{
+
+.header .options h2 {
     color: white;
     font-size: 46px;
     font-weight: bolder;
 }
-.menu-button{
+
+.menu-button {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
     cursor: pointer;
 }
-#menu-label{
-    height: 8px;
+
+#menu-label {
+    height: 4px;
     width: 50px;
     border-radius: 40px;
     background-color: white;
 }
-.navbar{
+
+.navbar {
     width: 15%;
     height: 88.9vh;
     background-color: #F9F9F9;
@@ -48,140 +57,435 @@
     transition: 0.9s ease-in-out;
     display: flex;
     flex-direction: column;
-    align-items:self-start;
-    padding-top: 40px;
-    font-size: x-large;
-    font-weight:600;
+    align-items: self-start;
+    padding-top: 200px;
+    font-size: large;
+    font-weight: 500;
 }
-.navbar ul{
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: last baseline;
-  gap: 40px;
-  color:  #525252;
-  margin-left: 25px;
-  width: 100%;
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: last baseline;
+    gap: 40px;
+    color: #525252;
+    margin-left: 25px;
+    width: 100%;
 }
-.navbar .lista-menu .lista{
+
+.navbar .lista-menu .lista {
     position: relative;
     width: 100%;
 }
-.navbar .lista-menu .lista:hover{
+
+.navbar .lista-menu .lista:hover {
     position: relative;
     width: 100%;
     color: #356A0B;
     font-weight: bold;
     transition: 0.4s ease-in-out;
 }
-.navbar .lista-menu .lista:after{
-   content: ""; 
-  position: absolute; 
-  left: -25px;
-  bottom: -5px;
-  width: 0; 
-  height: 50px; 
-  background-color: #50c1568e;
-  transition: width 0.4s;
+
+.navbar .lista-menu .lista:after {
+    content: "";
+    position: absolute;
+    left: -25px;
+    bottom: -15px;
+    width: 0;
+    height: 50px;
+    background-color: #50c1568e;
+    transition: width 0.4s;
 }
-.navbar .lista-menu .lista:before{
-   content: ""; 
-  position: absolute; 
-  left: -25px;
-  bottom: -5px;
-  width: 0px; 
-  height: 0px; 
-  background-color: #356A0B;
-  transition: width 0.3s;
-  border-radius: 20px;
+
+.navbar .lista-menu .lista:before {
+    content: "";
+    position: absolute;
+    left: -25px;
+    bottom: -15px;
+    width: 0px;
+    height: 0px;
+    background-color: #356A0B;
+    transition: width 0.3s;
+    border-radius: 20px;
 }
+
 .navbar .lista-menu .lista:hover::after {
-  width: 100%;
+    width: 100%;
 }
+
 .navbar .lista-menu .lista:hover::before {
-  height: 50px;
-  width: 5px; 
+    height: 50px;
+    width: 5px;
 }
-.dentro{
-    width: 50%;
+
+.dentro {
+    width: 100%;
     margin: auto;
     margin-left: 15px;
 }
-.list-dashboard{
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: last baseline;
-  gap: 60px;
-  cursor: pointer;
-  position: relative;
-  color:  #525252;
+
+.list-dashboard {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: last baseline;
+    gap: 60px;
+    cursor: pointer;
+    position: relative;
+    color: #525252;
 }
-.list-dashboard::after{
-  content: '';
-  position: absolute;
-  left: 0px;
-  top: -4px;
-  height: 110px;
-  width: 2px;
-  background-color: #525252;
+
+.list-dashboard::after {
+    content: '';
+    position: absolute;
+    left: 0px;
+    top: -4px;
+    height: 110px;
+    width: 2px;
+    background-color: #525252;
 }
-#log{
+
+
+#log {
     width: 250px;
     height: 88.9vh;
     background-color: #F9F9F9;
     position: absolute;
     top: 40%;
     right: 20px;
-    border-radius:  40px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 10px;
 }
-.kpi{
-     height: 30vh;
-     background-color: #F9F9F9;
-     border-radius:  40px;
-}
-.kpi-média{
-    position: absolute;
-     top: 40%;
-     left: 18%;
-     width: 28%;
 
+#log h2 {
+    font-size: 30px;
 }
-.kpi-users{
+
+#log h3 {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.659);
+}
+
+#log h3 span {
+    font-size: 20px;
+    color: black;
+}
+
+#log span {
+    color: #525252;
+    font-size: 10px;
+}
+
+#log ul {
+    list-style: none;
+    width: 100%;
+}
+
+.card-historico {
+    width: 80%;
+    border-radius: 30px;
+    margin: auto;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    opacity: 0;
+    transform: translateX(50px);
+    animation: descer 1.2s ease forwards;
+}
+
+@keyframes descer {
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.card-historico.green {
+    background-color: #50c15694;
+}
+
+.card-historico.red {
+    background-color: #e61e1e8f;
+}
+
+.card-historico.yellow {
+    background-color: #e3e61e95;
+}
+
+#met {
+    font-size: 28px;
+    font-weight: 600
+}
+
+#med {
+    font-size: 21px;
+    font-weight: light;
+    margin-left: 2px;
+    margin-top: 4px;
+}
+
+#met-menos {
+    font-size: 12px;
+    font-weight: 600;
+    color: #525252
+}
+
+#med-menos {
+    font-size: 12px;
+    font-weight: light;
+    margin-left: 2px;
+    margin-top: 4px;
+    color: #525252;
+}
+
+#div_registros {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: 1s ease-in-out;
+}
+
+.kpi {
+    height: 30vh;
+    background-color: #F9F9F9;
+    border-radius: 40px;
+}
+
+.kpi-media {
     position: absolute;
-     top: 40%;
-     left: 48.5%;
+    top: 40%;
+    left: 18%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 40px;
+    gap: 25px;
+    
+}
+
+.kpi-users {
+    position: absolute;
+    top: 40%;
+    left: 48.5%;
     width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
-.kpi-alerts{
-     position: absolute;
-     top: 40%;
-     left: 65.5%;
-     width: 15%;
 
+.kpi-alerts {
+    position: absolute;
+    top: 40%;
+    left: 65.5%;
+    width: 15%;
+    background-color: #e61e1eea;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
-.main{
+.kpi-alerts div h2 {
+    font-size: x-large;
+    font-weight: 700;
+    width: 150px;
+    color: white;
+    text-align: center;
+}
+
+.kpi-users div h2 {
+    font-size: x-large;
+    font-weight: 700;
+    width: 150px;
+    color: #525252;
+    text-align: center;
+}
+.kpi-media div h2 {
+    font-size: x-large;
+    font-weight: 600;
+    color: #525252;
+    text-align: left;
+}
+.kpi-media div .med {
+    font-size: 30px;
+    font-weight: 400;
+    color: #525252;
+    text-align: left;
+}
+.kpi-media div .container {
+    height: 90px;
+    width: 100px;
+    background-color: #50c1568c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px 0px #50c1568e;
+}
+.kpi-media .info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 30px;
+}
+#div_qtdAlertasAtivos{
+    font-size: 70px;
+    line-height: 0.8;
+}
+#div_qtd_user{
+    font-size: 70px;
+    line-height: 0.8;
+    color: black;
+    
+}
+#div_qtd_media{
+    font-size: 70px;
+    line-height: 0.8;
+    color: black;
+    font-weight: 400;
+    position: relative;
+}
+
+
+.kpi-alerts div p {
+    font-weight: 400;
+    width: 150px;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+}
+
+.kpi-users div p {
+    font-weight: 400;
+    width: 150px;
+    font-size: 12px;
+    text-align: center;
+}
+.kpi-media div p {
+    font-weight: 400;
+    color: #525252;
+    font-size: 12px;
+    text-align: left;
+    position: relative;
+    
+}
+.kpi-media div p::after{
+   content: '';
+   position: absolute;
+   top: -7px;
+   left: -25px;
+   height: 1.5px;
+   border-radius: 5px;
+   background-color: #D9D9D9;
+   width: 100%;
+}
+
+
+.main {
     position: relative;
     height: 80vh;
     background-color: #F3F3F3;
 }
-.grafico-umidade{
-     position: absolute;
-     top: 25%;
-     left: 18%;
-     width: 30%;
-     height: 50vh;
-     background-color: #F9F9F9;
-     border-radius:  40px;
-     z-index: 100;
+
+.grafico-umidade {
+    position: absolute;
+    top: 25%;
+    left: 18%;
+    width: 30%;
+    height: 44vh;
+    background-color: #F9F9F9;
+    border-radius: 40px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.grafico-temperatura{
-     position: absolute;
-     top: 25%;
-     right: 20%;
-     width: 30%;
-     height: 50vh;
-     background-color: #F9F9F9;
-     border-radius:  40px;
-     z-index: 100;
+
+.grafico-umidade .container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.grafico-umidade .container h2 {
+    position: absolute;
+    top: 25px;
+    color: #525252
+}
+
+.grafico-umidade .container .flex {
+    font-size: 40px;
+    font-weight: bolder;
+    position: absolute;
+    bottom: 25%;
+}
+
+.grafico-umidade .container .flex .text-metrica {
+    font-size: 40px;
+    font-weight: bolder;
+
+}
+
+.grafico-umidade .container .flex span {
+    font-size: 30px;
+    font-weight: lighter;
+
+
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-umidade {
+    position: absolute;
+    bottom: 40%;
+}
+
+.grafico-temperatura {
+    position: absolute;
+    top: 25%;
+    right: 20%;
+    width: 30%;
+    height: 50vh;
+    background-color: #F9F9F9;
+    border-radius: 40px;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.grafico-temperatura .container {
+    position: relative;
+    height: 100%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    gap: 14px;
+}
+
+.grafico-temperatura .container h2 {
+    top: 25px;
+    color: #525252
 }
