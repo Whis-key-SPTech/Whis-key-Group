@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Painel dashboard</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="options">
+            <div onclick="handleNavbar()" class="menu-button">
+                <div id="menu-label"></div>
+                <div id="menu-label"></div>
+                <div id="menu-label"></div>
+            </div>
+            <h2>Bem vindo Frezza</h2>
+        </div>
+        <div></div>
+        <div></div>
+        <nav class="navbar" id="navbar">
+            <ul>
+                <li>Home</li>
+                <li class="list-dashboard">
+                    Dashboard
+                    <ul>
+                        <li>Sensores</li>
+                        <li>Financeiro</li>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+        <div class="kpi kpi-média"></div>
+        <div class="kpi kpi-users"></div>
+        <div class="kpi kpi-alerts"></div>
+        <div class="logs" id="log"></div>
+    </header>
+    <main class="main">
+        <div class="grafico-umidade"></div>
+        <div class="grafico-temperatura"></div>
+    </main>
+    <script>
+        var navBarOpen = true
+        function handleNavbar() {
+            if (navBarOpen) {
+                navbar.style.width = `0px`;
+                navBarOpen = false;
+            } else {
+                navbar.style.width = `15%`
+                navBarOpen = true;
+            }
+            console.log('entrou')
+        }
+    </script>
+</body>
+
+</html>
