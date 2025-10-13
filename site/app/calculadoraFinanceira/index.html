@@ -169,7 +169,6 @@
     if (!volumeInicial || !volumeFinal || !ano) {
       resultado.innerHTML = "<p>Por favor, preencha todos os campos.</p>";
       resultado.classList.add("mostrar");
-      return;
     }
 
     var aShare = (1 - Math.pow(volumeFinal / volumeInicial, 1 / ano)) * 100;
@@ -188,7 +187,7 @@
     var volumeInicial = Number(input_volumeInicial.value);
     var volumeFinal = Number(input_volumeFinal.value);
     var anos = Number(input_anos2.value);
-    if (!volumeInicial || !volumeFinal || !anos) return;
+    if (!volumeInicial || !volumeFinal || !anos);
     var shareIdeal = volumeInicial * Math.pow(1 - 0.04, anos);
     if (contadorCalc1 < 1) {
       resultado.innerHTML += `

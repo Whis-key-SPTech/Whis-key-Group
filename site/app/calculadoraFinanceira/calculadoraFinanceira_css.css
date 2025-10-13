@@ -176,7 +176,6 @@ body {
 .tab:hover {
   background: linear-gradient(90deg, #ffa500, #ffcc66);
   color: #1c311e;
-  transform: scale(1.05);
 }
 
 /* ===== Conteúdo ===== */
