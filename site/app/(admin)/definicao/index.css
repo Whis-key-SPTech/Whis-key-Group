@@ -26,6 +26,7 @@
 .btn button {
   width: 91px;
   height: 40px;
+  font-size: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,7 +107,7 @@
    margin-left: 50px;
 }
 
-.containerD input {
+.containerD > input {
   width: 260px;
   height: 40px;
   border-radius: 8px;
@@ -130,6 +131,126 @@
   margin-left: 50px;
 }
 
+.box{
+  width: 300px;
+  height: 80%;
+  background-color: #172919;
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.box P{
+  color: #FFA500;
+  font-family: "Gotham Black",sans-serif;
+  position: absolute;
+  font-size: 18px;
+  top: -60px;
+  left: -10px;
+
+}
+.box label{
+  color: #FFA500;
+  font-family: "Gotham Black",sans-serif;
+  font-weight: bold;
+  position: absolute;
+  font-size: 15px;
+  top: 50px;
+  left:-5px;
+  
+}
+.box select {
+  position: absolute;
+  font-size: 15px;
+  top: 60px;
+  right:10px;
+  color: black;
+  border-radius: 5px;
+  height: 30px;
+  display: flex;
+  text-align: center;
+}
+
+
+.input_conf {
+    width: 100%;
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 50px; 
+    padding-bottom: 50px; 
+}
+
+.range-group {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom:-60px;
+    gap: 10px; 
+}
+
+.range-item {
+    width: 90%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; 
+}
+
+.box .range-label {
+    font-size: 15px;
+    color: #FFA500;
+    font-weight: bold;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; 
+    margin-bottom: 5px; 
+    padding-left: 5px; 
+}
+
+.box .range-value {
+    font-size: 15px;
+    color: #FFA500;
+    font-weight: bold;
+    position: absolute;
+    right: 5px; 
+    top: 10px;
+}
+
+.custom-range {
+    width: 90%; 
+}
+
+.box button {
+    width: 150px;
+    height: 40px;
+    font-size: 10px;
+    background-color: #FFA500;
+    border: none;
+    border-radius: 10px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute; 
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2px;
+}
+
+.box button:hover {
+  background-color: #ffb733;
+}
 .btn-atualizar:hover {
   background-color: #ffb733;
 }
@@ -142,6 +263,7 @@
   color: #FFA500;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 40px;
-  margin-right: 50px;
+  position:absolute ;
+  bottom: -100px;
+  right: 20px;
 }
