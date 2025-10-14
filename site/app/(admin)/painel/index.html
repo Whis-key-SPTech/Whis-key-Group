@@ -18,7 +18,7 @@
                 <div id="menu-label"></div>
                 <div id="menu-label"></div>
             </div>
-            <h2>Bem vindo Frezza</h2>
+            <h2>Bem vindo Frizza</h2>
         </div>
         <div></div>
         <div></div>
@@ -32,7 +32,7 @@
         </nav>
         <div class="kpi kpi-media">
             <div>
-                <h2>Temperatura média</h2>
+                <h2>Temperatura</h2>
             </div>
             <div class="info">
                 <div class="flex">
@@ -44,13 +44,13 @@
                 </div>
             </div>
             <div>
-                <p>A temperatura adquada é entre 25º a 30º</p>
+                <p>A temperatura adquada é entre 20º a 25º</p>
             </div>
         </div>
         <div class="kpi kpi-users">
             <div>
-                <h2>USUÁRIOS
-                    ATIVOS
+                <h2>NOVOS
+                    KPIS
                 </h2>
             </div>
             <div>
@@ -84,7 +84,7 @@
     <main class="main">
         <div class="grafico-umidade">
             <div class="container">
-                <h2>Umidade média por hora</h2>
+                <h2>Umidade em tempo real</h2>
                 <div class="grafico">
                     <canvas id="graficoUmidade"></canvas>
                 </div>
@@ -94,7 +94,7 @@
         </div>
         <div class="grafico-temperatura">
             <div class="container">
-                <h2>Temperatura média por hora</h2>
+                <h2>Temperatura em tempo real</h2>
                 <canvas id="myChart"></canvas>
             </div>
         </div>
@@ -192,9 +192,9 @@
    var graficoLinha = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['5h', '10h', '15h', '20h', '22h', '3h'],
+            labels: ['10:00h', '10:30h', '11:00h', '11:30h', '12:00h', '12:30'],
             datasets: [{
-                label: 'Temperatura Média Semanal',
+                label: 'Temperatura ',
                 tension: 0.4,
                 fill: true,
                 borderColor: '#50C156',
@@ -229,9 +229,9 @@
             }]
         },
         options: {
-            cutout: '75%',
+            cutout: '80%',
             rotation: -90,
-            circumference: 180,
+            circumference: 360,
             plugins: {
                 legend: { display: true },
                 tooltip: { enabled: true }

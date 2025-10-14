@@ -6,16 +6,17 @@ body {
     linear-gradient(135deg, rgba(28,49,30,0.8), rgba(47,82,51,0.8)),
     url('https://i.pinimg.com/1200x/fa/33/30/fa33305c4b6960a0134a918454820b35.jpg') 
     center/cover no-repeat fixed;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   background-attachment: fixed;
 }
 
 .container {
   display: flex;
-  width: 90%;
+  width: 80%;
   max-width: 1100px;
   height: 600px;
   border-radius: 15px;
@@ -28,7 +29,7 @@ body {
   flex: 0.5;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px);
-  padding: 50px;
+  padding: 23px;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -89,7 +90,7 @@ body {
 
 /* ===== Painel direito ===== */
 .right-panel {
-  flex: 1;
+  flex: 0.4;
   background: linear-gradient(135deg, rgba(28,49,30,0.6), rgba(0,0,0,0.8)),
    url('https://www.agedandcharred.com/cdn/shop/articles/journey_whiskey_how_its_made.jpg?v=1710523089') center/cover no-repeat;
   color: #fff;
