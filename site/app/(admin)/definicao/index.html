@@ -65,6 +65,8 @@
         <br />
 
         <div class="conteudo">
+
+          <img src="../../public/saiba-mais/f1 (Santiago).jpg" alt="" class="user">
           <div class="texto">
             Gustavo
             <hr />
@@ -117,38 +119,80 @@
         
         <div class="range-item">
             <span class="range-label">Umidade Máxima</span>
-            <input type="range" class="custom-range" id="umidade-max" min="0" max="100" value="80">
-            <span class="range-value">80%</span>
+            <input oninput="valorUmiMax()" type="range" class="custom-range" id="umidade-max" min="0" max="100" value="80">
+            <spn id="range-valueUmax">80%</span>
         </div>
         
         <div class="range-item">
             <span class="range-label">Umidade Mínima</span>
-            <input type="range" class="custom-range" id="umidade-min" min="0" max="100" value="55">
-            <span class="range-value">55%</span>
+            <input oninput="valorUmiMin()" type="range" class="custom-range" id="umidade-min" min="0" max="100" value="55">
+            <span id="range-valueUmin">55%</span>
         </div>
         
         <div class="range-item">
             <span class="range-label">Temperatura Máxima</span>
-            <input type="range" class="custom-range temp-range" id="temperatura-max" min="0" max="50" value="24">
-            <span class="range-value">24°C</span>
+            <input oninput="valorTempMax()" type="range" class="custom-range temp-range" id="temperatura-max" min="0" max="50" value="24">
+            <span id="range-valueTmax">24°C</span>
         </div>
         
         <div class="range-item">
             <span class="range-label">Temperatura Mínima</span>
-            <input type="range" class="custom-range temp-range" id="temperatura-min" min="0" max="50" value="15">
-            <span class="range-value">15°C</span>
+            <input oninput="valorTempMin()" type="range" class="custom-range temp-range" id="temperatura-min" min="0" max="50" value="15">
+            <span id="range-valueTmin">15°C</span>
         </div>
             
-           <button>SALVAR ALTERAÇÕES</button>
+           <button onclick="salvar()">SALVAR ALTERAÇÕES</button>
           </div>
-
         </div>
-        
       </div>
-     
-
-
       <button class="btn-deletar">DELETAR CONTA</button>
     </main>
   </body>
 </html>
+<script>
+
+
+
+  function valorUmiMax(){
+
+  var UmidadeMax = document.getElementById("umidade-max").value;
+
+  document.getElementById("range-valueUmax").innerHTML =  `${UmidadeMax} %`;
+}
+
+function valorUmiMin(){
+ var UmidadeMin = document.getElementById("umidade-min").value;
+
+  document.getElementById("range-valueUmin").innerHTML =  `${UmidadeMin} %`;
+}
+
+function valorTempMax(){
+  var TemperaturaMax = document.getElementById("temperatura-max").value;
+
+  document.getElementById("range-valueTmax").innerHTML =  `${TemperaturaMax} °C`;
+}
+
+  function valorTempMin(){
+  var TemperaturaMin = document.getElementById("temperatura-min").value;
+
+  document.getElementById("range-valueTmin").innerHTML =  `${TemperaturaMin} °C`;
+}
+
+function salvar(){
+
+  var UmidadeMax = document.getElementById("umidade-max").value;;
+
+var UmidadeMin = document.getElementById("umidade-min").value;
+
+var TemperaturaMax = document.getElementById("temperatura-max").value;
+
+var TemperaturaMin = document.getElementById("temperatura-min").value;
+  alert(`As alterações foram salvas <br> 
+  valores definidos são ${UmidadeMax} Para umidade máxima<br>
+  ${UmidadeMin} Para umidade Minima<br>
+  ${TemperaturaMax} Para Temperatura Maxima<br>
+  ${TemperaturaMin} Para Temperatura Minima
+  `)
+}
+  
+</script>
