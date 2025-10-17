@@ -1,22 +1,14 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  
-}
 
-html body {
-  min-height: 100vh;
-}
-
-body {
+main{
+  padding-top: 100px;
   font-family: 'Gotham', Arial, sans-serif;
   background-color: #141f21;
   color: #f1f1f1;
-  background-image: url('../background/bg_recursos.jpg');
+  background-image: url('../public/background/bg_recursos.jpg');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
+  height: 3305px;
   width: 100%;
 }
 
@@ -33,7 +25,7 @@ body {
 
 .container_h02 h1 {
   margin-right: 100px;
-  margin-top: 100px;
+  margin-top: 150px;
   text-align: right;
   font-family: "Gotham", sans-serif;
   font-size: 60px;
@@ -78,6 +70,40 @@ body {
   font-family: 'Lato';
   font-size: 34px;
   flex: 1;
+}
+
+
+.container_h03 h1 {
+  margin-left: 100px;
+  margin-top: 200px;
+  text-align: left;
+  font-family: "Gotham", sans-serif;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.container_p03 {
+  color: #fffafa;
+  margin-left: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  text-align: left;
+}
+
+.container_p03 p {
+  font-family: 'Lato';
+  font-size: 34px;
+  flex: 1;
+}
+
+
+.container_p03 img {
+  flex-shrink: 0;
+  margin-bottom: 100px;
 }
 
 .container_p02 img {

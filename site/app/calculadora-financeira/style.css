@@ -1,28 +1,20 @@
-/* ===== Layout base ===== */
+
+
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: 
+}
+.container{
+    background: 
     linear-gradient(135deg, rgba(28,49,30,0.8), rgba(47,82,51,0.8)),
     url('https://i.pinimg.com/1200x/fa/33/30/fa33305c4b6960a0134a918454820b35.jpg') 
     center/cover no-repeat fixed;
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items:first baseline;
   background-attachment: fixed;
   overflow-x:hidden;
-}
-
-.container {
-  display: flex;
-  width: 100%;
-  height: 600px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 /* ===== Painel esquerdo ===== */
@@ -89,7 +81,7 @@ body {
   box-shadow: 0 0 25px rgba(255, 165, 0, 0.7);
 }
 
-/* ===== Painel direito ===== */
+
 .right-panel {
   flex: 1;
   background: linear-gradient(135deg, rgba(28,49,30,0.6), rgba(0,0,0,0.8)),
@@ -178,14 +170,12 @@ body {
   color: #1c311e;
 }
 
-/* ===== Conteúdo ===== */
 .content {
   margin-top: 70px;
   display: flex;
   width: 100%;
 }
 
-/* ===== Animações de Slide ===== */
 .slide-left {
   animation: slideLeft 0.4s ease forwards;
 }

@@ -57,10 +57,10 @@
     <footer class="footer"></footer>
     <script>
       function cadastrar() {
-        const nome = document.getElementById("nome").value;
-        const email = document.getElementById("email").value;
-        const senha = document.getElementById("senha").value;
-        const confsenha = document.getElementById("confirmar_senha").value;
+        var nome = document.getElementById("nome").value;
+        var email = document.getElementById("email").value;
+        var senha = document.getElementById("senha").value;
+        var confsenha = document.getElementById("confirmar_senha").value;
 
         if (nome === "" || email === "" || senha === "" || confsenha === "") {
           alert(`Por favor, preencha todos os campos.`);

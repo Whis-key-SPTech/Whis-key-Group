@@ -13,16 +13,65 @@
   font-family: "Lato", sans-serif;
 }
 
+#header{
+    background-color: #1C311E;
+    height: 97px;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    box-sizing: border-box;
+    box-shadow: 15px 7px 4px 0px rgba(0, 0, 0, 0.3);    
+}
+#menu a{
+    text-decoration: none;
+    color: #ffffff;
+}
+#menu button{
+    background-color: #FFA500;
+    border-radius: 10px;
+    border-color: #FFA500;
+    height:36px ;width:173px;
+    cursor: pointer;
+}
+#menu button:hover {
+    background-color: #FF7A00; 
+    transform: scale(1.05);   
+}
+#imagem img{
+    width: 761px; height: 507px;
+}
 
-.header {
-  display: flex;
-  justify-content: center;
-  height: 119px;
-  width: 100%;
-  background-color: #1c311e;
-  box-shadow: 15px 7px 4px 0px #00000025;
-  position: relative;
-  top: 0px;
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    list-style: none;
+    font-size: 20px;
+    padding: 10px;
+    font-family: 'Lato', sans-serif;
+}
+
+.navbar li{
+    cursor: pointer;
+    height: 100%;
+}
+
+.navbar li a{
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.navbar li a:hover{
+    background-color: #335736;
+}
+
+.btn_cliente{
+  color: white;
 }
 .logo {
   display: flex;
