@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configurações do whisky</title>
+
+    <link rel="stylesheet" href="../../utils/index.css" />
+
+    <link rel="stylesheet" href="../definicao/index.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <a href="../../(admin)/painel/index.html">
+          <svg
+            class="icone"
+            xmlns="http://www.w3.org/2000/svg"
+            width="35"
+            height="30"
+            viewBox="0 0 35 30"
+            fill="none"
+          >
+            <rect
+              x="-6.10352e-05"
+              width="34.2995"
+              height="6.63377"
+              rx="3.31689"
+              fill="white"
+            />
+            <rect
+              x="-0.00012207"
+              y="10.6138"
+              width="34.2995"
+              height="7.29715"
+              rx="3.64858"
+              fill="white"
+            />
+            <rect
+              x="-0.00012207"
+              y="22.5562"
+              width="34.2995"
+              height="7.29715"
+              rx="3.64858"
+              fill="white"
+            />
+          </svg>
+          <img
+            src="../../public/Whiskey.logo 1.svg"
+            width="258.64"
+            height="145.49"
+          />
+        </a>
+      </div>
+
+      <div class="btn">
+        <button>SAIR</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <p>PERFIL ATUAL</p>
+
+        <br />
+
+        <div class="conteudo">
+
+          <img src="../../public/saiba-mais/f1 (Santiago).jpg" alt="" class="user">
+          <div class="texto">
+            Gustavo
+            <hr />
+            <br />
+            gustavo@gmail.com
+            <hr />
+            <br />
+            00.000.000/0001-00
+            <hr />
+            <br />
+            tipo Whisky
+            <hr />
+          </div>
+        </div>
+      </div>
+
+      <div class="containerD">
+
+        <p>Informações da Conta</p>
+
+
+        <label for="input_nome">Nome</label>
+        <input type="text" id="input_nome">
+
+        <label for="input_senha">Senha</label>
+        <input type="password" id="input_senha">
+
+         <label for="input_email">Email</label>
+        <input type="email" id="input_email">
+
+        <button class="btn-atualizar">ATUALIZAR USUÁRIO</button>
+
+
+        <div class="box">
+
+          <p>Parâmetros de maturação</p>
+
+
+          <label for="tipo">Tipo de  <br>whisky</label>
+
+          <select name="tipo" id="tipo">
+            <option value="">Blended Whisky</option>
+            <option value="">Single Malt Whisky</option>
+            <option value="">Grain Whisky</option>
+            <option value="">Burbon-Style Whisky</option>
+          </select>
+
+          <div class="input_conf">
+          <div class="range-group">
+        
+        <div class="range-item">
+            <span class="range-label">Umidade Máxima</span>
+            <input oninput="valorUmiMax()" type="range" class="custom-range" id="umidade-max" min="0" max="100" value="80">
+            <spn id="range-valueUmax">80%</span>
+        </div>
+        
+        <div class="range-item">
+            <span class="range-label">Umidade Mínima</span>
+            <input oninput="valorUmiMin()" type="range" class="custom-range" id="umidade-min" min="0" max="100" value="55">
+            <span id="range-valueUmin">55%</span>
+        </div>
+        
+        <div class="range-item">
+            <span class="range-label">Temperatura Máxima</span>
+            <input oninput="valorTempMax()" type="range" class="custom-range temp-range" id="temperatura-max" min="0" max="50" value="24">
+            <span id="range-valueTmax">24°C</span>
+        </div>
+        
+        <div class="range-item">
+            <span class="range-label">Temperatura Mínima</span>
+            <input oninput="valorTempMin()" type="range" class="custom-range temp-range" id="temperatura-min" min="0" max="50" value="15">
+            <span id="range-valueTmin">15°C</span>
+        </div>
+            
+           <button onclick="salvar()">SALVAR ALTERAÇÕES</button>
+          </div>
+        </div>
+      </div>
+      <button class="btn-deletar">DELETAR CONTA</button>
+    </main>
+  </body>
+</html>
+<script>
+
+
+
+  function valorUmiMax(){
+
+  var UmidadeMax = document.getElementById("umidade-max").value;
+
+  document.getElementById("range-valueUmax").innerHTML =  `${UmidadeMax} %`;
+}
+
+function valorUmiMin(){
+ var UmidadeMin = document.getElementById("umidade-min").value;
+
+  document.getElementById("range-valueUmin").innerHTML =  `${UmidadeMin} %`;
+}
+
+function valorTempMax(){
+  var TemperaturaMax = document.getElementById("temperatura-max").value;
+
+  document.getElementById("range-valueTmax").innerHTML =  `${TemperaturaMax} °C`;
+}
+
+  function valorTempMin(){
+  var TemperaturaMin = document.getElementById("temperatura-min").value;
+
+  document.getElementById("range-valueTmin").innerHTML =  `${TemperaturaMin} °C`;
+}
+
+function salvar(){
+
+  var UmidadeMax = document.getElementById("umidade-max").value;;
+
+var UmidadeMin = document.getElementById("umidade-min").value;
+
+var TemperaturaMax = document.getElementById("temperatura-max").value;
+
+var TemperaturaMin = document.getElementById("temperatura-min").value;
+  alert(`As alterações foram salvas <br> 
+  valores definidos são ${UmidadeMax} Para umidade máxima<br>
+  ${UmidadeMin} Para umidade Minima<br>
+  ${TemperaturaMax} Para Temperatura Maxima<br>
+  ${TemperaturaMin} Para Temperatura Minima
+  `)
+}
+  
+</script>

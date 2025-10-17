@@ -202,9 +202,9 @@
     var graficoLinha = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['5h', '10h', '15h', '20h', '22h', '3h'],
+            labels: ['10:00h', '10:30h', '11:00h', '11:30h', '12:00h', '12:30'],
             datasets: [{
-                label: 'Temperatura Média Semanal',
+                label: 'Temperatura ',
                 tension: 0.4,
                 fill: true,
                 borderColor: '#50C156',
@@ -239,9 +239,9 @@
             }]
         },
         options: {
-            cutout: '75%',
+            cutout: '80%',
             rotation: -90,
-            circumference: 180,
+            circumference: 360,
             plugins: {
                 legend: { display: true },
                 tooltip: { enabled: true }
