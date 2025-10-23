@@ -120,7 +120,7 @@
         <div class="range-item">
             <span class="range-label">Umidade Máxima</span>
             <input oninput="valorUmiMax()" type="range" class="custom-range" id="umidade-max" min="0" max="100" value="80">
-            <spn id="range-valueUmax">80%</span>
+            <span id="range-valueUmax">80%</span>
         </div>
         
         <div class="range-item">
@@ -151,8 +151,6 @@
 </html>
 <script>
 
-
-
   function valorUmiMax(){
 
   var UmidadeMax = document.getElementById("umidade-max").value;
@@ -180,7 +178,7 @@ function valorTempMax(){
 
 function salvar(){
 
-  var UmidadeMax = document.getElementById("umidade-max").value;;
+var UmidadeMax = document.getElementById("umidade-max").value;;
 
 var UmidadeMin = document.getElementById("umidade-min").value;
 

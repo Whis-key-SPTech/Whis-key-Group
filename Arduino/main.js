@@ -17,7 +17,7 @@ const serial = async (
 ) => {
 
     // conexão com o banco de dados MySQL
-    let poolBancoDados = mysql.createPool(
+    let poolBancoDados = mysql.servidor(
         {
             host: 'localhost',
             user: 'aluno',
@@ -50,7 +50,7 @@ const serial = async (
     // processa os dados recebidos do Arduino
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
-        const valores = data.split(';');
+        const valores = data.split(';');tempo[endpoint]
         const sensorTemperatura = parseInt(valores[0]);
         const sensorUmidade = parseFloat(valores[1]);
 
