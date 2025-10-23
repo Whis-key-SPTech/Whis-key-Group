@@ -3,7 +3,6 @@
       padding: 0;
       box-sizing: border-box;
       font-family: Arial, sans-serif;
-      font-size: 25px;
     }
 
  
@@ -12,6 +11,7 @@
       justify-content: space-around;
       align-items: center;
       height: 700px;
+      font-size: 25px;
     }
     .container {
       display: flex;

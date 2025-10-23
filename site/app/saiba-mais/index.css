@@ -3,34 +3,6 @@
     font-family: 'GothanL'; src: url('GothamLight.ttf')format('truetype');
 }
 
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    width: 600px;
-    list-style: none;
-    font-size: 20px;
-    padding: 10px;
-    font-family: 'Lato', sans-serif;
-    align-self: center;
-}
-
-.navbar li{
-    cursor: pointer;
-    height: 100%;
-}
-
-.navbar li a{
-    text-decoration: none;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    transition: 0.2s;
-}
-
-.navbar li a:hover{
-    background-color: #335736;
-}
-
 .container {
   margin: 0px;
   padding: 40px;
