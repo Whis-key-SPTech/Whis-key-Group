@@ -30,39 +30,28 @@ body {
   #animacao img{
     will-change: transform, opacity, filter;
     animation: trasparent 0.9s cubic-bezier(.22,.9,.25,1) 1.8s forwards; 
+    filter: drop-shadow(2px 1px 7px 10px rgb(25, 25, 25));
   }
 
   @keyframes slide{
     0% {
-      opacity: 1;
-      background-color:  #365f15;
+        opacity: 1;
+        backdrop-filter: blur(10px);
+        background-color: #1E3423;
     }
     60% {
       opacity: 1;
-      background-color: #365f15;
+      backdrop-filter: blur(10px);
+      background-color: #1E3423;
     }
-    85% {
+    100% {
       opacity: 0.98;
-      background-color: rgba(54,95,21,0.15);
-    }
-    95%{
+      backdrop-filter: blur(10px);
+      background-color: #1E3423;
     }
     100% {
       opacity: 0; 
       pointer-events: none;
-    }
-  }
-
-  @keyframes trasparent{
-    0% {
-      opacity: 1;
-
-    }
-    40% {
-      opacity: 0.95;
-    }
-    100% {
-      opacity: 0;
     }
   }
 

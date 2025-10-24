@@ -37,8 +37,18 @@
                     <p>Caso algum parâmetro esteja inadequado</p>
                 </div>
             </div>
-            <div class="box"></div>
-            <div class="box"><h2 style="text-align: center;">Sensor 02</h2></div>
+
+            <!--Botão que escolhe o sensor-->
+
+            <div class="box_sensor"></div>
+            <div class="box_sensor">               
+                <select name="selecionarSensor" id="selecao_sensor">
+                <option value="1">S01</option>
+                <option value="2">S02</option>
+                <option value="3">S03</option>
+            </select></div>
+
+
                <div class="box kpi kpi-media" >
                 <div>
                     <h2>Temperatura média</h2>
@@ -59,9 +69,13 @@
              <div class="box grafico-temperatura"> 
                 <div class="container">
                     <h2>Temperatura por hora</h2>
+                    <section>
+                            <input type="date" id="data_temp">
+                    </section>
                     <canvas id="myChart"></canvas>
                 </div>
             </div>
+
             <div class="box grafico-umidade">
                 <div class="container">
                     <h2>Umidade atual</h2>
@@ -72,12 +86,17 @@
                     <div class="flex"><span class="text-metrica" id="div_text_metrica"></span><span>%</span></div>
                 </div>
             </div>
+
             <div class="box grafico-temperatura"> 
                 <div class="container">
                     <h2>Umidade por hora</h2>
+                    <section>
+                        <input type="date" id="data_umid">
+                    </section>
                     <canvas id="chartUmidade"></canvas>
                 </div>
             </div>
+
             <div class="box logs" id="log">
                 <h2>Histórico</h2>
                 <span>Os logs dos ultimos 10 dados</span>

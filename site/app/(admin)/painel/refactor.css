@@ -44,7 +44,7 @@ body {
     }
     85% {
       opacity: 0.98;
-      background-color: rgba(54,95,21,0.15);
+      background-color: rgba(255, 255, 255, 0.15);
     }
     95%{
     }
@@ -66,7 +66,6 @@ body {
       opacity: 0;
     }
   }
-
 
 .menu-button {
     display: flex;
@@ -93,6 +92,7 @@ body {
     font-weight: 500;
     width: 100%;
 }
+
 .header{
     height: 119px;
     display: flex;
@@ -102,9 +102,11 @@ body {
     border-radius: 0px 0px 20px 0px;
     width: 100%;
 }
+
 .header a{
     margin-left:  -20px;
 }
+
 .navbarMenu ul {
     list-style: none;
     display: flex;
@@ -120,6 +122,7 @@ body {
     position: relative;
     width: 100%;
 }
+
 .grid{
     margin-top: 0px;
     z-index: 100;
@@ -138,6 +141,7 @@ body {
     padding: 0px;
     margin: 0px;
 }
+
 .grid.nav{
     margin-top: 0px;
     z-index: 100;
@@ -154,6 +158,26 @@ body {
     width: 100%;
     transition: grid-template-columns 0.5s ease;
 }
+
+.box_sensor {
+    cursor: pointer;
+    background-color: #ccd595;
+    color: #331f19;
+    border-radius: 5px;
+    border: none ;
+    outline: none;
+}
+
+select {
+    cursor: pointer;
+    background-color: #ccd595;
+    color: #331f19;
+    border-radius: 5px;
+    border: none ;
+    outline: none;
+}
+
+
 .grid > :nth-child(1){
    grid-area: navbar;
    position: relative;
