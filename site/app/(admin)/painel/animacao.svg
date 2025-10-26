@@ -19,7 +19,7 @@
     font-size: 180px; 
     }
     #key { 
-      fill: #12351c; 
+      fill:  #F6A000; 
       font-size: 160px;
        opacity: 0; 
        transform: translateY(20px) scale(0.98); 

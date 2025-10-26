@@ -29,9 +29,10 @@ body {
     padding-top: 30px;
     padding-left: 30px;
     z-index: 120;
+    pointer-events: auto;
+    color: #7d080a;
     will-change: transform, opacity, background-color;
-    pointer-events: none;
-    /*  animation: slide 3.6s cubic-bezier(.22,.9,.25,1) forwards; */
+    animation: slide 3.6s cubic-bezier(.22, .9, .25, 1) forwards;
 }
 
 #animacao img {
@@ -42,7 +43,7 @@ body {
 @keyframes slide {
     0% {
         opacity: 1;
-        background-color: #12351c
+        background-color: #12351c;
     }
 
     60% {
@@ -97,11 +98,13 @@ body {
     background-color: #F9F9F9;
     transition: 0.9s ease-in-out;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     align-items: self-start;
     font-size: large;
     font-weight: 500;
     width: 100%;
+
 }
 
 .header {
@@ -114,10 +117,8 @@ body {
     width: 100%;
 }
 
-.header img {
-    margin-left: -23px;
-    width: 120%;
-    height: 120%;
+.header a {
+    margin-left: -20px;
 }
 
 .navbarMenu ul {
@@ -136,6 +137,136 @@ body {
     width: 100%;
 }
 
+.perfil {
+    height: 200px;
+    background-color: #1C311E;
+    width: 100px;
+    border-radius: 0px 30px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+    color: white;
+    width: 100%;
+    padding: 16px;
+}
+
+.perfil>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.perfil>div h3 {
+    margin-left: 35px;
+}
+
+.perfil ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    color: white;
+    width: 100%;
+    color: white;
+    list-style: none;
+}
+
+.perfil ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100px;
+    gap: 15px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+.perfil ul li a{
+   text-decoration: none;
+   color: white;
+}
+.perfil h3 {
+    font-size: 15px;
+    font-weight: 100;
+}
+
+.kpi-situacao {
+    display: flex;
+    flex-direction: column;
+    align-items: first baseline;
+    justify-content: center;
+    gap: 30px;
+    height: 200px;
+    padding-left: 30px;
+
+}
+
+.kpi-situacao .flex span {
+    text-transform: uppercase;
+    margin-right: 20px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+.kpi-situacao .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 5px 25px;
+    width: 350px;
+    height: 50%;
+    position: relative;
+    inset: 0;
+}
+
+.kpi-situacao h2 {
+    font-size: 25px;
+    color: #9F0F11;
+    text-transform: uppercase;
+}
+
+.kpi-situacao .container .gravidade {
+    width: 70px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.kpi-situacao .container .gravidade.red {
+    background-color: #9F0F11;
+    text-transform: uppercase;
+}
+
+.kpi-situacao .container .gravidade.yellow {
+    background-color: #FFA500;
+}
+
+.kpi-situacao .container .gravidade.green {
+    background-color: #50C156;
+}
+
+.kpi-situacao .container span {
+    text-align: left;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.kpi-situacao .container span:nth-child(4) {
+    color: #50C156;
+}
+
+.kpi-situacao .container span:nth-child(5) {
+    color: #FFA500;
+}
+
+.kpi-situacao .container span:nth-child(6) {
+    color: #9F0F11;
+}
+
 .grid {
     margin-top: 0px;
     z-index: 100;
@@ -149,7 +280,7 @@ body {
         " kpiUmidade graficoUmidade historico"
     ;
     transition: grid-template-columns 0.5s ease;
-    height: 80vh;
+    height: 140vh;
     width: 100%;
     padding: 0px;
     margin: 0px;
@@ -159,22 +290,21 @@ body {
     margin-top: 0px;
     z-index: 100;
     display: grid;
-    grid-template-columns: 0.7fr 1.8fr 0.5fr 0.5fr;
-    grid-template-rows: 1fr  1fr 1fr 1fr;
+    grid-template-columns: 0.7fr 1fr 1.7fr 0.8fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-areas:
         "navbar   alertas situacao select"
-        "navbar   kpiTemperatura graficoTemperatura graficoTemperatura "
-        "navbar kpiUmidade graficoUmidade graficoUmidade"
+        "navbar   kpiTemperatura graficoTemperatura historico"
+        "navbar kpiUmidade graficoUmidade historico"
     ;
-    height: 800px;
-    width: 95%;
+    width: 100%;
     transition: grid-template-columns 0.5s ease;
 }
 
 .box_sensor {
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     padding-left: 20px;
     justify-content: center;
     cursor: pointer;
@@ -190,7 +320,7 @@ body {
     font-size: 12px;
 }
 
-#selecao_sensor{
+#selecao_sensor {
     cursor: pointer;
     border-radius: 5px;
     border: none;
@@ -203,21 +333,27 @@ body {
 }
 
 
+
 .grid> :nth-child(1) {
     grid-area: navbar;
-    position: relative;
-    width: 200px;
+    width: 250px;
+    position: fixed;
+    /* fixa na tela */
+    left: 0;
+    top: 0;
+    height: 100vh;
 }
 
 .grid> :not(:first-child) {
     margin-top: 30px;
     border-radius: 25px;
     margin-left: 20px;
+
 }
 
 .grid> :nth-child(2) {
     grid-area: situacao;
-    
+
 }
 
 .grid> :nth-child(3) {
@@ -248,6 +384,9 @@ body {
     grid-area: graficoUmidade;
 }
 
+.grid> :nth-child(9) {
+    grid-area: historico;
+}
 
 
 .box {
@@ -320,78 +459,6 @@ body {
     background-color: #525252;
 }
 
-.kpi-situacao {
-    display: flex;
-    flex-direction: column;
-    align-items: first baseline;
-    justify-content: center;
-    gap: 10px;
-    height: 150px;
-    padding-left: 30px;
-}
-
-.kpi-situacao .flex span{
-    text-transform: uppercase;
-    margin-right: 20px;
-    font-size: 25px;
-    font-weight: bold;
-}
-
-
-.kpi-situacao .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 5px 25px;
-    width: 350px;
-    height: 50%;
-    position: relative;
-    inset: 0;
-}
-
-.kpi-situacao h2 {
-    font-size: 25px;
-    color: #9F0F11;
-    text-transform: uppercase;
-}
-
-.kpi-situacao .container .gravidade {
-    width:  50px;
-    height: 40px;
-    border-radius: 5px;
-}
-
-.kpi-situacao .container .gravidade.red {
-    background-color: #9F0F11;
-    text-transform: uppercase;
-}
-
-.kpi-situacao .container .gravidade.yellow {
-    background-color: #FFA500;
-}
-
-.kpi-situacao .container .gravidade.green {
-    background-color: #50C156;
-}
-
-.kpi-situacao .container span {
-    text-align: left;
-    font-size: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.kpi-situacao .container span:nth-child(4) {
-    color: #50C156;
-}
-
-.kpi-situacao .container span:nth-child(5) {
-    color: #FFA500;
-}
-
-.kpi-situacao .container span:nth-child(6) {
-    color: #9F0F11;
-}
 
 #log {
     display: flex;
@@ -495,9 +562,18 @@ body {
 }
 
 .kpi {
-    background-color: #F9F9F9;
+    background-color: #ffffff;
 }
 
+.kpi-media {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 40px;
+    gap: 25px;
+    height: 300px;
+    color: #50C156';
+}
 
 
 .kpi-users {
@@ -513,52 +589,38 @@ body {
 }
 
 .kpi-alerts {
-    background-color: #e92a2a;
+    background-color: #e61e1eea;
     display: flex;
-    position: relative;
-    left: 15%;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    height: 150px;
-    padding-left: 20px;
-    width: 350px;
-    font-size: 25px;
-    color: white;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(254, 90, 90, 0.4);
+    gap: 20px;
+    height: 200px;
     animation: pulsar 1.8s ease-in-out infinite;
 }
 
 @keyframes pulsar {
-    0%  {
+    0% {
         box-shadow: 0 0 15px rgba(254, 90, 90, 0.6);
         transform: scale(1);
     }
+
     50% {
         box-shadow: 0px 0px 25px rgba(254, 90, 90, 0.8);
-        transform: scale(1.01);
+        transform: scale(1.02);
     }
-     100% {
+
+    100% {
         box-shadow: 0 0 15px rgba(254, 90, 90, 0.8);
         transform: scale(1);
     }
 }
-#div_qtdAlertasAtivos {
-    font-size: 100px;
-    line-height: 0.8;
-}
 
-.kpi-alerts div:nth-child(2) {
-    display: flex;
-    align-items: center;
-    justify-content: first baseline;
-}
-
-.kpi-alerts div:nth-child(2) h2 {
+.kpi-alerts div h2 {
+    font-size: x-large;
     font-weight: 700;
     width: 150px;
-    color: #711315;
+    color: white;
     text-align: center;
 }
 
@@ -575,37 +637,18 @@ body {
     font-weight: 600;
     color: #525252;
     text-align: left;
-   
 }
 
-
-
-.kpi-media .grafico {
-    position: absolute;
-   left: 0%;
-   height: 250px;
-}
-
-.kpi-media .container{
-    position: relative;
-    top: -40px;
-}
-.kpi-media .container .flex{
-    position: absolute;
-    top: 135px;
-    right: 80px;
-    display: flex;
+.kpi-media div .med {
+    font-size: 30px;
     font-weight: 400;
     color: #525252;
-    font-size: 12px;
     text-align: left;
 }
-.container-img {
-    position: absolute;
-    top:140px;
-    right: -20px;
-    height: 60px;
-    width: 70px;
+
+.kpi-media div .container {
+    height: 90px;
+    width: 100px;
     background-color: #50c1568c;
     display: flex;
     justify-content: center;
@@ -613,42 +656,18 @@ body {
     border-radius: 15px;
     box-shadow: 5px 5px 5px 0px #50c1568e;
 }
-.kpi-media div .med {
-    font-size: 30px;
-    font-weight: 400;
-    color: #525252;
-    text-align: left;
-}
-.kpi-media {
+
+.kpi-media .info {
     display: flex;
-    flex-direction: column;
-    padding-left: 40px;
-    gap: 25px;
-    position: relative;
-    padding: 40px;
-}
-.seta{
-    height: 145px;
-    width: 4.5px;
-    background-color: black;
-    position: absolute;
-    top: 53px;
-    left: 118px;
-    transform: rotate(45deg);
-    transform-origin: bottom center; 
-}
-.seta::after{
-    content: '';
-    height: 20px;
-    width: 20px;
-    border-radius: 20px;
-    background-color: black;
-    position: absolute;
-    bottom: -2px;
-    left: -8px;
- 
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 30px;
 }
 
+#div_qtdAlertasAtivos {
+    font-size: 70px;
+    line-height: 0.8;
+}
 
 #div_qtd_user {
     font-size: 70px;
@@ -679,6 +698,26 @@ body {
     width: 150px;
     font-size: 12px;
     text-align: center;
+}
+
+.kpi-media div p {
+    font-weight: 400;
+    color: #525252;
+    font-size: 12px;
+    text-align: left;
+    position: relative;
+
+}
+
+.kpi-media div p::after {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: -25px;
+    height: 1.5px;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    width: 100%;
 }
 
 
@@ -758,18 +797,19 @@ body {
 }
 
 .grafico-temperatura {
-    background-color: #F9F9F9;
+    background-color: #ffffff;
     border-radius: 40px;
-    z-index: 10;
+    z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    height: 300px;
 }
 
 .grafico-temperatura .container {
     position: relative;
-    height: 100%;
+    height: 250px;
     width: 90%;
     display: flex;
     align-items: center;
@@ -778,7 +818,44 @@ body {
     gap: 14px;
 }
 
-.grafico-temperatura .container h2 {
-    top: 25px;
-    color: #525252
+.grafico-temperatura .header-grafico {
+    background-color: #1C311E;
+    border-radius: 40px 40px 0px 0px;
+    width: 100%;
+    height: 50px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+  #toast {
+    position: absolute;
+    top: -200px;
+    right: 0%;
+    height: 20vh;
+    width: 400px;
+    border-radius: 10px;
+    font-size: 14px;
+    border: solid 2px #f3f3f3;
+    background-color: #1c311e;
+    color: rgba(255, 255, 255, 0.821);
+    padding-left: 0px;
+    overflow: hidden;
+    transition: 0.6s ease-in-out;
+    z-index: 150;
+  }
+
+  .display {
+    border-right: 6px solid rgba(9, 31, 2, 0.642);
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 15px;
+    padding: 0px 25px;
+    width: 100%;
+    height: 100%;
+    font-weight: 800;
+    text-transform: uppercase;
+     z-index: 180;
+  }
