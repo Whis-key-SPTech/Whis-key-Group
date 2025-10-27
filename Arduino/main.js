@@ -22,7 +22,7 @@ const serial = async (
             host: 'localhost',
             user: 'root',
             password: 'Guxtatec#1',
-            database: 'BD_WHISKEY',
+            database: 'whiskey',
             port: 3306
         }
     ).promise();
@@ -64,7 +64,7 @@ const serial = async (
             // este insert irá inserir os dados na tabela "medida"
             
             await poolBancoDados.execute(
-                'INSERT INTO registro (temperatura, umidade) VALUES (?, ?)',
+                'INSERT INTO registro (id_registro, temperatura, umidade) VALUES (default, ?, ?)',
                 [sensorTemperatura, sensorUmidade]
             );
             console.log("valores inseridos no banco: ", sensorTemperatura + ", " + sensorUmidade);
