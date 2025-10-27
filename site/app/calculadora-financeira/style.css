@@ -12,17 +12,11 @@ body {
   height: 100%;
   display: flex;
   justify-content: center;
-<<<<<<< HEAD:site/app/calculadora-financeira/style.css
-  align-items:first baseline;
-=======
-  align-items: center;
-  width: 100%;
->>>>>>> d462179b12b09a869242e3d74d10d6a51e05461a:site/app/calculadoraFinanceira/calculadoraFinanceira_css.css
+  align-items: baseline;
   background-attachment: fixed;
   overflow-x:hidden;
 }
 
-/* ===== Painel esquerdo ===== */
 .left-panel {
   flex: 0.5;
   background: rgba(255,255,255,0.1);
