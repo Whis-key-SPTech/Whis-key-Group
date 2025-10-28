@@ -128,7 +128,7 @@ body{
     }
 
    .quem_somos p{
-        font-size: 45px;
+        font-size: 40px;
         width: 824px;
         text-align: center;
         font-weight: lighter;
@@ -264,6 +264,70 @@ button:active{
     border-radius: 10px;
     padding-left: 10px;
     padding-top: 10px;
+}
+/* nova adição */
+ .conteiner-regra {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.card {
+  position: relative;
+  border-radius: 10px;
+  border: 2px solid #FFA500; 
+  top: 10px;
+  bottom: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.1s ease;
+
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 5px 8px 20px #1c311e;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  opacity:0.8;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover img {
+  opacity: 1;
+}
+
+.card-content {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  color: black;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.card-content h5 {
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 6px;
+  color: #FFA500;
+}
+
+.card-content h3 {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+ 
 }
 
 .form_contato .ipt_mensagem{

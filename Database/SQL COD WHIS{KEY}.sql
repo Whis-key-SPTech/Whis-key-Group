@@ -26,24 +26,25 @@ temp_max DECIMAL (4,2),
 temp_min DECIMAL (4,2),
 umid_max INT,
 umid_min INT,
-tipo_whisky VARCHAR (50)
+tipo_whisky VARCHAR (50),
+fk_idEmpresa INT,
+	CONSTRAINT EmpresaPredefinicao
+     FOREIGN KEY (fk_idEmpresa)
+		REFERENCES predefinicao(id_predefinicao)
 );
 
 -- Tabela contendo as informações de cadastro dos usuários de cada empresa.
 CREATE TABLE usuario(
-id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+id_usuario INT AUTO_INCREMENT,
 fk_idEmpresa INT NOT NULL,
-fk_idPredefinicao INT NOT NULL,
 nome_usuario VARCHAR (50) NOT NULL,
 email VARCHAR (100) NOT NULL UNIQUE,
 senha VARCHAR (100) NOT NULL,
-privilegio INT,
+privilegio INT, 
 CONSTRAINT UsuarioEmpresa 
 foreign key(fk_idEmpresa) 
 references empresa(id_empresa),
-CONSTRAINT PredefinicaoUsuario
-FOREIGN KEY(fk_idPredefinicao)
-REFERENCES predefinicao(id_predefinicao)
+PRIMARY KEY (id_usuario, fk_idEmpresa)
 );
 
 -- Tabela contendo as informações dos sensores.
@@ -52,10 +53,10 @@ CREATE TABLE sensor(
 id_sensor INT PRIMARY KEY AUTO_INCREMENT,
 codigo_sensor CHAR(5), -- Os dois primeiros números determinam o número do sensor e os outros determinam a identificação do barril a qual o sensor pertence.
 localidade VARCHAR (100),
-fk_idUsuario INT,
-CONSTRAINT SensorUsuario
-FOREIGN KEY(fk_idUsuario)
-REFERENCES usuario(id_usuario)
+fk_idPredefinicao INT,
+CONSTRAINT SensorPredefinicao
+FOREIGN KEY(fk_idPredefinicao)
+REFERENCES predefinicao(id_predefinicao)
 );
 
 -- Tabela contendo os dados coletados pelos sensores de temperatura. 
@@ -88,16 +89,16 @@ INSERT INTO empresa (nome_empresa, cnpj, dt_inicio_contrato, dt_fim_contrato) VA
     
 -- predefinicao
 INSERT INTO predefinicao (temp_max, temp_min, umid_max, umid_min, tipo_whisky) VALUE
-	(20, 25, 80, 60, 'Jack Daniel'),
-	(21, 26, 80, 60, 'Jack Daniel'),
-	(22, 24, 80, 60, 'Jack Daniel');
+	(20, 25, 80, 60, 'Rye'),
+	(21, 26, 80, 60, 'Bourbon'),
+	(22, 24, 80, 60, ' Tennessee Whiskey');
     
 
 -- Inserção dos dados na tabela usuario.
-INSERT INTO usuario (fk_idEmpresa, fk_idPredefinicao, nome_usuario, email, senha, privilegio) VALUE
-	(1, 1,'Gleison Almeida','gleison.almeida@gmail.com', '1651656125',0),
-	(2, 2,'Gustavo Kenzo','gustavo.kenzo@gmail.com', '165165561',1),
-	(3, 3,'Gustavo Henrique','gustavo.henrique@gmail.com', '4854616584',1);
+INSERT INTO usuario (fk_idEmpresa, nome_usuario, email, senha, privilegio) VALUE
+	(1,'Gleison Almeida','gleison.almeida@gmail.com', '1651656125',0),
+	(2,'Gustavo Kenzo','gustavo.kenzo@gmail.com', '165165561',1),
+	(3,'Gustavo Henrique','gustavo.henrique@gmail.com', '4854616584',1);
 
     select * from usuario;
     
@@ -105,7 +106,7 @@ INSERT INTO usuario (fk_idEmpresa, fk_idPredefinicao, nome_usuario, email, senha
     ON usuario.fk_idEmpresa = empresa.id_empresa;
     
     -- sensor
-INSERT INTO sensor (codigo_sensor, localidade, fk_idUsuario) VALUE
+INSERT INTO sensor (codigo_sensor, localidade, fk_idPredefinicao) VALUE
 	('01556', 'Armazem Norte 1',1),
 	('02678', 'Armazem Norte 2',2),
 	('03478', 'Armazem Norte 3',3);
@@ -126,16 +127,20 @@ INSERT INTO registro (fk_idSensor,temperatura,umidade) VALUES
     
 -- JOIN COM AS TABELAS
 -- Empresa + Usuário
-SELECT empresa.nome_empresa AS Empresa,
-       usuario.nome_usuario AS Usuario
-FROM empresa
-JOIN usuario ON empresa.id_empresa = usuario.fk_idEmpresa;
+SELECT empresa.id_empresa AS ID,
+       empresa.nome_empresa AS Empresa,
+       empresa.cnpj AS CNPJ,
+       empresa.dt_inicio_contrato AS DATA_INICIO_CONTRATO,
+       empresa.dt_fim_contrato AS DATA_FIM_CONTRATO
+		FROM empresa
+		JOIN usuario ON empresa.id_empresa = usuario.fk_idEmpresa;
 
--- Usuário + Predefinição
-SELECT usuario.nome_usuario AS Nome,
-       usuario.email AS Email,
-       usuario.senha AS Senha,
-       usuario.privilegio AS Privilegio,
+
+-- Empresa + Predefinição
+SELECT empresa.id_empresa AS ID,
+       empresa.email AS Email,
+       empresa.senha AS Senha,
+       empresa.privilegio AS Privilegio,
        predefinicao.tipo_whisky AS Whisky
 FROM usuario
 JOIN predefinicao ON usuario.fk_idPredefinicao = predefinicao.id_predefinicao;
@@ -147,11 +152,6 @@ SELECT registro.temperatura AS Temperatura,
 FROM registro
 JOIN sensor ON registro.fk_idSensor = sensor.id_sensor;
 
--- Geral
-
-Select * from usuario 
-JOIN predefinicao 
-ON predefinicao.id_predefinicao = usuario.fk_idPredefinicao;
 -- SELECTS ANTIGOS
     
 -- Apresentação dos dados cadastrados na tabela empresa.
