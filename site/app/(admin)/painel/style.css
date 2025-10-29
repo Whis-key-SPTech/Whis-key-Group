@@ -53,7 +53,6 @@ body {
 
     85% {
         opacity: 0.98;
-        background-color: rgba(255, 255, 255, 0.15);
     }
 
     95% {}
@@ -140,16 +139,17 @@ body {
 
 
 .header {
-    height: 119px;
+    height: 97px;
+    width:100%;
     display: flex;
     align-items: center;
     background-color: #1C311E;
     margin-bottom: 11px;
-    border-radius: 0px 0px 80px 0px;
-    z-index: -10;
+    z-index: 100;
     width: 100%;
     position: absolute;
     top: 0px;
+    box-shadow: 15px 7px 4px 0px rgba(0, 0, 0, 0.3);  
 }
 
 .header a {
@@ -367,7 +367,7 @@ body {
 }
 
 .gravidade.green {
-    background-color: #50C156;
+    background-color: #2D5031;
 }
 
  .container.situacao span {
@@ -389,7 +389,7 @@ body {
 }
 
  .container.situacao span:nth-child(2) {
-    color: #50C156;
+    color: #2D5031;
 }
 
 .container.situacao span:nth-child(4) {
@@ -401,7 +401,7 @@ body {
 }
 
 .grid.nav {
-    margin-top: 0px;
+    margin-top: 110px;
     z-index: 100;
     display: grid;
     grid-template-columns: 0.5fr 0.5fr 1fr 1fr;
@@ -934,7 +934,7 @@ body {
  .text-metrica {
     font-size: 45px;
     line-height: 0.9;
-    color: #50C156;
+    color: #2D5031;
     font-weight: 600;
 
 }

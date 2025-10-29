@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./icons/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/ae37c4f9c1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
 
-    <title>Painel dashboard</title>
+
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -23,9 +25,11 @@
                 <img src="../../login/risk.svg" width="35" height="35">
             </div>
         </div>
+
         <div class="header">
-            <a href="/home/index.html"><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
+            <a><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
         </div>
+
         <main class="grid nav" id="container">
             <div class="box navbarMenu">
                 <div class="toggle" id="toggleMenu" onclick="handleToggleMenu()">
@@ -97,18 +101,19 @@
                     </li>
                 </ul>
                 <div class="perfil">
-                    <div>
+
+                    <div class="perfil-usuario" onclick="window.location.href='../definicao/index.html'" style="cursor: pointer">
                         <div class="flex"><img src="../../public/painel/Test Account.svg" width="50" height="50" alt="">
-                            <p>Bem vindo</p>
+                            <p>Bem vindo(a)</p>
+                            <p>Araripe</p>
                         </div>
-                        <p>Araripe</p>
                     </div>
                     <ul>
-                        <li> <img src="../../public/painel/Change User.svg" width="30" height="30" alt=""> <a
-                                href="\Whis-key-Group\site\app\(admin)\userConfig\index.html">Configurações</a></li>
+                        <li onclick="window.location.href='../definicao/index.html'"> 
+                             <img src="../../public/painel/Change User.svg" width="30" height="30" alt="" > <a
+                                href="../userConfig/index.html">Configurações</a></li>
                         <li> <img src="../../public/painel/Exit Sign.svg" width="30" height="30" alt=""> <a
-                                href="/home/index.html"> Sair </a> </li>
-
+                                href="../../cadastro/index.html"> Sair </a> </li>
                     </ul>
                 </div>
             </div>
@@ -204,11 +209,13 @@
                 <h2>Histórico</h2>
                 <span>Os ultimos 5 registros <b>deste</b> sensor</span>
                 <ul id="div_registros">
+                    
 
                 </ul>
             </div>
         </main>
     </div>
+
 </body>
 
 </html>
@@ -217,7 +224,7 @@
     var registros = [[28, 80, 343], [13, 82, 343], [28, 83, 343], [23, 76, 343], [31, 87, 343], [43, 80, 343], [28, 82, 343]]
 
     //Animação da logo
-    setTimeout(render, 3600)
+    setTimeout(render, 3000)
     function init() {
         animacao.innerHTML = `
       <img src="../../public/painel/animacao.svg" width="845" height="606" alt="" srcset="">
@@ -246,7 +253,8 @@
             chart.classList.add('left')
             handleToggleChartOn = false
             graficos.innerHTML = `
-                  <canvas id="chartUmidade" width='2.5'></canvas>
+                  <canvas id="chartUmidade"></canvas>
+
             `
             text_grafico.innerHTML = `
                 Umidade a cada 10 min
@@ -258,10 +266,10 @@
                     labels: ['10min', '20min', '30min', '40min', '50min', '60min'],
                     datasets: [
                         {
-                            label: 'Umidade por hora',
+                            label: 'Umidade',
                             tension: 0,
                             fill: true,
-                            borderColor: '#50C156',
+                            borderColor: '#2D5031',
                             backgroundColor: 'rgba(80, 193, 86,0.5)',
                             data: [70, 70, 65, 65, 70.1, 90, 85],
                             borderWidth: 2,
@@ -288,6 +296,7 @@
                     ]
                 },
                 options: {
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             min: 50,
@@ -350,7 +359,7 @@
                             label: 'Temperatura',
                             fill: true,
                             tension: 0.1,
-                            borderColor: '#50C156',
+                            borderColor: '#2D5031',
                             backgroundColor: 'rgba(80, 193, 86,0.5)',
                             data: [22, 15.8, 27, 22, 22, 27.6, 10],
                             borderWidth: 2,
@@ -514,7 +523,7 @@
                     label: 'Temperatura',
                     fill: true,
                     tension: 0.1,
-                    borderColor: '#50C156',
+                    borderColor: '#2D5031',
                     backgroundColor: 'rgba(80, 193, 86,0.5)',
                     data: [22, 15.8, 27, 22, 22, 27.6, 10],
                     borderWidth: 2,
