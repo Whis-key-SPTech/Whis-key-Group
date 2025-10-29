@@ -17,6 +17,13 @@ dt_inicio_contrato DATE NOT NULL,
 dt_fim_contrato DATE
 );
 
+-- Tabela em relação a localidade do sensor
+CREATE TABLE localidade_sensor(
+id_LocalidadeSensor INT PRIMARY KEY AUTO_INCREMENT,
+nome_localidade VARCHAR(45),
+numero_local INT
+);
+
 -- Tabela contendo as configurações e limitadores de temperatura e umidade para cada tipo de whisky.
 /*Esta tabela será utilizada futuramente para relacionar as predefinições de temperatura e umidade máxima e mínima para cada tipo de whisky,
  ela irá se relacionar com as tabelas monitor_temp, monitor_umid e tipo_whisky a fim de conectar todos esses dados.*/
@@ -28,21 +35,21 @@ umid_max INT,
 umid_min INT,
 tipo_whisky VARCHAR (50),
 fk_idEmpresa INT,
-	CONSTRAINT EmpresaPredefinicao
-     FOREIGN KEY (fk_idEmpresa)
-		REFERENCES predefinicao(id_predefinicao)
+	CONSTRAINT PredefinicaoEmpresa
+		FOREIGN KEY (fk_idEmpresa)
+			REFERENCES empresa(id_empresa)
 );
 
 -- Tabela contendo as informações de cadastro dos usuários de cada empresa.
 CREATE TABLE usuario(
 id_usuario INT AUTO_INCREMENT,
-fk_idEmpresa INT NOT NULL,
 nome_usuario VARCHAR (50) NOT NULL,
 email VARCHAR (100) NOT NULL UNIQUE,
 senha VARCHAR (100) NOT NULL,
-privilegio INT, 
+privilegio INT,
+fk_idEmpresa INT NOT NULL,
 CONSTRAINT UsuarioEmpresa 
-foreign key(fk_idEmpresa) 
+foreign key (fk_idEmpresa) 
 references empresa(id_empresa),
 PRIMARY KEY (id_usuario, fk_idEmpresa)
 );
@@ -50,17 +57,21 @@ PRIMARY KEY (id_usuario, fk_idEmpresa)
 -- Tabela contendo as informações dos sensores.
 -- Esta tabela será usada futuramente para se relacionar com as tabelas a cima a fim de um maior controle dos dados.
 CREATE TABLE sensor(
-id_sensor INT PRIMARY KEY AUTO_INCREMENT,
+id_sensor INT AUTO_INCREMENT,
 codigo_sensor CHAR(5), -- Os dois primeiros números determinam o número do sensor e os outros determinam a identificação do barril a qual o sensor pertence.
-localidade VARCHAR (100),
 fk_idPredefinicao INT,
 CONSTRAINT SensorPredefinicao
 FOREIGN KEY(fk_idPredefinicao)
-REFERENCES predefinicao(id_predefinicao)
+REFERENCES predefinicao(id_Predefinicao),
+fk_idLocalidadeSensor INT,
+	CONSTRAINT SensorLocalidade
+		FOREIGN KEY (fk_idLocalidadeSensor)
+			REFERENCES localidade_sensor(id_LocalidadeSensor),
+PRIMARY KEY (id_sensor, fk_idLocalidadeSensor)
 );
 
 -- Tabela contendo os dados coletados pelos sensores de temperatura. 
- CREATE TABLE registro (
+ CREATE TABLE registro(
 id_registro INT PRIMARY KEY AUTO_INCREMENT,
 fk_idSensor INT NOT NULL,
 dt_coleta DATE DEFAULT (CURRENT_DATE),
@@ -78,6 +89,7 @@ DESC usuario;
 DESC registro;
 DESC predefinicao;
 DESC sensor;
+DESC localidade_sensor;
 
 -- Inserção dos dados na tabela empresa.
 INSERT INTO empresa (nome_empresa, cnpj, dt_inicio_contrato, dt_fim_contrato) VALUE
@@ -87,31 +99,38 @@ INSERT INTO empresa (nome_empresa, cnpj, dt_inicio_contrato, dt_fim_contrato) VA
 	('Bacardi Limited', '59.104.737/0001-05', '2025-08-20', '2027-08-20'),
 	('Beam Suntor', '17.530.779/0001-50', '2025-08-20', '2035-08-20');
     
+-- Localidade Sensor
+
+INSERT INTO localidade_sensor(nome_localidade, numero_local) VALUES
+	('Armazém norte','1'),
+	('Armazém sul','2'),
+	('Armazém leste','3');
+    
+    
 -- predefinicao
-INSERT INTO predefinicao (temp_max, temp_min, umid_max, umid_min, tipo_whisky) VALUE
-	(20, 25, 80, 60, 'Rye'),
-	(21, 26, 80, 60, 'Bourbon'),
-	(22, 24, 80, 60, ' Tennessee Whiskey');
+INSERT INTO predefinicao (temp_max, temp_min, umid_max, umid_min, tipo_whisky,fk_idEmpresa) VALUE
+	(20, 25, 80, 60, 'Lamas', 1),
+	(21, 26, 80, 60, 'Old Eight',2),
+	(21, 26, 80, 60, 'Old Eight',3),
+	(21, 26, 80, 60, 'Old Eight',4),
+	(22, 24, 80, 60, 'Blended whisky',5);
     
 
 -- Inserção dos dados na tabela usuario.
 INSERT INTO usuario (fk_idEmpresa, nome_usuario, email, senha, privilegio) VALUE
-	(1,'Gleison Almeida','gleison.almeida@gmail.com', '1651656125',0),
-	(2,'Gustavo Kenzo','gustavo.kenzo@gmail.com', '165165561',1),
-	(3,'Gustavo Henrique','gustavo.henrique@gmail.com', '4854616584',1);
+	(1,'Kauan Batista','kauan.batista@gmail.com', '1651656125',0),
+	(2,'Gustavo Rucaglia','gustavo.rucaglia@gmail.com', '165165561',1),
+	(3,'Gustavo Henrique','gustavo.henrique@gmail.com', '4854616584',1),
+	(4,'Giovanni Angel','giovanni.angel@gmail.com', '4854616584',1),
+	(5,'Vitória Ferreira','vitoria.ferreira@gmail.com', '4854616584',1),
+	(3,'André Luiz','andre.luiz@gmail.com', '4854616584',0);
 
-    select * from usuario;
-    
-    SELECT empresa.nome_empresa as Empresa, usuario.nome_usuario as Usuario FROM empresa JOIN usuario 
-    ON usuario.fk_idEmpresa = empresa.id_empresa;
-    
     -- sensor
-INSERT INTO sensor (codigo_sensor, localidade, fk_idPredefinicao) VALUE
-	('01556', 'Armazem Norte 1',1),
-	('02678', 'Armazem Norte 2',2),
-	('03478', 'Armazem Norte 3',3);
+INSERT INTO sensor (codigo_sensor, fk_idPredefinicao, fk_idLocalidadeSensor) VALUE
+	('01556',1,1),
+	('02678',2,2),
+	('03478',3,3);
 
-    
 -- registro
 INSERT INTO registro (fk_idSensor,temperatura,umidade) VALUES
 	(1, 25, 50),
@@ -126,46 +145,42 @@ INSERT INTO registro (fk_idSensor,temperatura,umidade) VALUES
     select*from usuario;
     
 -- JOIN COM AS TABELAS
+
+-- JOIN Geral
+SELECT registro.id_registro AS ID,
+	   empresa.nome_empresa AS Empresa,
+	   predefinicao.tipo_whisky AS Tipo_Whisky,
+	   localidade_sensor.nome_localidade AS Espaço,
+	   registro.temperatura AS Temperatura,
+       registro.umidade AS Umidade
+       FROM registro
+JOIN sensor ON registro.fk_idSensor = sensor.id_sensor
+JOIN localidade_sensor ON sensor.fk_idLocalidadeSensor = localidade_sensor.id_LocalidadeSensor
+JOIN predefinicao ON sensor.fk_idPredefinicao = predefinicao.id_predefinicao
+JOIN empresa ON predefinicao.fk_idEmpresa = empresa.id_empresa
+ORDER BY ID;
+
+
+
 -- Empresa + Usuário
-SELECT empresa.id_empresa AS ID,
-       empresa.nome_empresa AS Empresa,
-       empresa.cnpj AS CNPJ,
-       empresa.dt_inicio_contrato AS DATA_INICIO_CONTRATO,
-       empresa.dt_fim_contrato AS DATA_FIM_CONTRATO
-		FROM empresa
-		JOIN usuario ON empresa.id_empresa = usuario.fk_idEmpresa;
+SELECT empresa.nome_empresa AS Empresa,
+       usuario.nome_usuario AS Usuario
+FROM empresa
+JOIN usuario ON empresa.id_empresa = usuario.fk_idEmpresa;
 
-
--- Empresa + Predefinição
-SELECT empresa.id_empresa AS ID,
-       empresa.email AS Email,
-       empresa.senha AS Senha,
-       empresa.privilegio AS Privilegio,
+-- Usuário + Predefinição
+SELECT usuario.nome_usuario AS Nome,
+       usuario.email AS Email,
+       usuario.senha AS Senha,
+       usuario.privilegio AS Privilegio,
        predefinicao.tipo_whisky AS Whisky
 FROM usuario
 JOIN predefinicao ON usuario.fk_idPredefinicao = predefinicao.id_predefinicao;
 
 -- Sensor + Registro
-SELECT registro.temperatura AS Temperatura,
-       registro.umidade AS Umidade,
-       sensor.localidade AS Localizacao
-FROM registro
-JOIN sensor ON registro.fk_idSensor = sensor.id_sensor;
-
--- SELECTS ANTIGOS
-    
--- Apresentação dos dados cadastrados na tabela empresa.
-SELECT * FROM empresa;
-SELECT nome_empresa AS Empresa, cnpj AS CNPJ, dt_inicio_contrato AS 'Inicio do contrato' FROM empresa;
-
--- Apresentação dos dados cadastrados na tabela usuario.
-SELECT * FROM usuario;
-SELECT nome_usuario AS Nome, email AS Email FROM usuario;
-
--- Apresentação dos dados cadastrados na tabela predefinicao.
-SELECT * FROM predefinicao;
-SELECT tipo_whisky AS 'Tipos Cadastrados' FROM predefinicao;
-
--- Apresentação dos dados cadastrados na tabela sensor.
-SELECT * FROM sensor;
-SELECT codigo_sensor AS 'Sensor', localidade AS Localizado FROM sensor;
+SELECT registro.id_registro AS ID, 
+	   registro.temperatura AS Temperatura,
+       registro.umidade AS Umidade
+       FROM registro
+JOIN sensor ON registro.fk_idSensor = sensor.id_sensor
+ORDER BY ID;
