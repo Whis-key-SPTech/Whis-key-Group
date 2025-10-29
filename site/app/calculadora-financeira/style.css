@@ -18,7 +18,7 @@ body {
   display: flex;
   flex-direction: column;
   padding-bottom: 100px;
-  min-height: 650px;
+  min-height: 695px;
   background: rgba(0, 0, 0, 0.419);
 }
 
