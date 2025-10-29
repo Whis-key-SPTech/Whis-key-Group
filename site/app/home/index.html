@@ -1,24 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="../public/institucional/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../utils/index.css">
     <title>Whiskey</title>
 </head>
 
 <body>
 
-    <header id="header">
+   <header id="header">
         <nav>
-            <img src="../public/Whiskey.logo 1.svg" alt="">
+            <a href="../home/index.html"><img src="../public/institucional/logo-whiskey.svg" alt=""></a>
         </nav>
+
+        <div class="navbar">
+            <li><a href="../home/index.html">HOME</a></li>
+            <li><a href="../saiba-mais/index.html">SOBRE NÓS</a></li>
+            <li><a href="../calculadora-financeira/index.html">SIMULADOR</a></li>
+        </div>
         <div id="menu">
-            <button><a href="../login/index.html">ARÉA DO CLIENTE</a></button>
+            <a href="../login/index.html"  style="text-decoration: none;">
+             <button class="btn_cliente">ÁREA DO CLIENTE</button>
+            </a>
         </div>
     </header>
-
     <div id="banner">
         <div id="frase">
             <h1>CONSISTÊNCIA É A CHAVE PARA <b style="color:#ffa500"> O SEU SUCESSO</b></h1>
@@ -40,18 +49,61 @@
                         desperdício, mais sabor,
                         mais resultado. </h1>
                 </div>
-                <button id="contato" onclick="contato()">Contato</button>
+                  <a href="#contatoDiv" style="text-decoration: none;">
+                    <button id="contato">Entrar em contato</button>
+                 </a>
             </div>
             <div id="velho">
                 <img src="../public/institucional/homem-whisky.png" alt="">
             </div>
         </div>
     </div>
+
+    <br>
+    <br>
+   <div class="conteiner-regra">
+
+  <div class="card"  onclick="window.location.href='../recursos/index.html'">
+    <img src="../public/institucional/barril.png" alt="Imagem 1">
+    <div class="card-content">
+      <h5>SAIBA MAIS</h5>
+      <h3>DESCONTROLE DO AMBIENTE</h3>
+    </div>
+  </div>
+
+  <div class="card" onclick="window.location.href='../recursos/index.html'">
+    <img src="../public/institucional/negocio.png" alt="Imagem 2">
+    <div class="card-content">
+      <h5>SAIBA MAIS</h5>
+      <h3>ATENDIMENTO PERSONALIZADO</h3>
+    </div>
+  </div>
+
+  <div class="card"  onclick="window.location.href='../recursos/index.html'">
+    <img src="../public/institucional/controle.png" alt="Imagem 3">
+    <div class="card-content">
+      <h5>SAIBA MAIS</h5>
+      <h3>MONITORAMENTO DO AMBIENTE</h3>
+    </div>
+  </div>
+
+  <div class="card"  onclick="window.location.href='../recursos/index.html'">
+    <img src="../public/institucional/dashboard.png" alt="Imagem 4">
+    <div class="card-content">
+      <h5>SAIBA MAIS</h5>
+      <h3>ANÁLISE DETALHADA</h3>
+    </div>
+  </div>
+
+</div>
+ <br>
+    <br>
     <section>
         <div class="quem_somos">
             <br><br>
             <div id="titulo">
-                <h1>QUEM <b style="color:#ffa500"> SOMOS</b></h1>
+                <h1>QUEM<b style="color:#ffa500"> SOMOS</b></h1>
+                <br> <br>
             </div>
             <div class="paragrafo">
                 <p><i>Somos uma startup dedicada a transformar o processo de maturação do whiskey por meio da
@@ -59,7 +111,10 @@
                         preciso e em tempo real de cada etapa da maturação, monitorando
                         variáveis fundamentais que influenciam diretamente na qualidade do produto final.</i></p>
             </div>
-            <button id="contato" onclick="contato()">Saiba mais</button>
+             <a href="../saiba-mais/index.html" style="text-decoration: none;">
+                <br> <br>
+                <button id="contato"  >Saiba mais</button>
+            </a>
         </div>
     </section>
     </div>
@@ -77,14 +132,16 @@
                     </div>
                     <span class="text_simulacao">Faça uma simulação de como o Angel's Share afeta sua produção e
                         faturamento com nosso simulador financeiro</span>
-                    <button class="btn_simulador">Simulador</button>
+                     <a href="../calculadora-financeira/index.html" style="text-decoration: none;">
+                        <button class="btn_simulador" >Simulador</button>
+                    </a>
                 </div>
                 <div class="img_calculadora">
                     <img src="../../app/public/institucional/calculator.png">
                 </div>
             </div>
 
-            <div class="box_contato">
+            <div class="box_contato" id="contatoDiv">
                 <span class="subtitle_contato">ENTRE <span class="em_contato">EM CONTATO!</span></span>
 
                 <div class="container">

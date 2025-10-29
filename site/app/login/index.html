@@ -1,47 +1,136 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./index.css">
+  <link rel="shortcut icon" href="../public/institucional/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="../utils/index.css">
   <title>Tela de Login</title>
 </head>
+
 <body>
-  <header class="header">
-    <div class="logo">
-     <img src="../public/Whiskey.logo 1.svg" width="258.64" height="145.49">
+  <header id="header">
+    <nav>
+      <a href="../home/index.html"><img src="../public/institucional/logo-whiskey.svg" alt=""></a>
+    </nav>
+
+    <div class="navbar">
+      <li><a href="../home/index.html">HOME</a></li>
+      <li><a href="../saiba-mais/index.html">SOBRE NÓS</a></li>
+      <li><a href="../calculadora-financeira/index.html">SIMULADOR</a></li>
+    </div>
+    <div id="menu">
+      <a href="../login/index.html" style="text-decoration: none;">
+        <button class="btn_cliente">ÁREA DO CLIENTE</button>
+      </a>
     </div>
   </header>
   <main class="main">
-    <img src="../public/S{KEY}.svg" width="545" height="306" alt="" srcset="">
+    <div id="animacao">
+    </div>
+    <div id="toast">
+      <div class="display">
+        <h3 id="mensagem_error"></h3>
+        <img src="./risk.svg" width="35" height="35">
+      </div>
+    </div>
     <div class="container">
       <div class="input-box">
         <span>EMAIL</span>
         <br>
-        <input type="email" id="email" placeholder="digite seu email">
+        <input type="email" id="ipt_email" oninput="input()" onblur="validarEmail()" placeholder="digite seu email">
       </div>
       <div class="input-box">
         <span>SENHA</span>
         <br>
-        <input type="password" id="senha" placeholder="digite sua senha">
-        </div>
-      <button class="btn" onclick="login()">Login</button>
+        <div class="invisivel" id="senha_visibilidade" onclick="exibir()"></div>
+        <input type="password" id="ipt_senha" oninput="input()" placeholder="digite sua senha">
+      </div>
+      <button class="btn" id="btn_login" onclick="login()">Login</button>
     </div>
   </main>
   <footer class="footer">
 
   </footer>
   <script>
-    function login() {
-      const email = document.getElementById("email").value;
-      const senha = document.getElementById("senha").value;
-
-      if (email === "" || senha === "") {
-        alert("Por favor, preencha todos os campos.");
+    var tentativas = 4
+    function init() {
+      animacao.innerHTML = `
+      <img src="./animacao.svg" width="845" height="606" alt="" srcset="">
+      `
+    }
+    init()
+    function input() {
+      if (tentativas > 1) {
+        toast.style.top = '-80px'
+        ipt_email.classList.remove('shake', 'error')
+        ipt_senha.classList.remove('shake', 'error')
+      }
+    }
+    function validarEmail() {
+      if (tentativas > 1) {
+        var email = ipt_email.value
+        if (!email.includes('@')) {
+          mensagem_error.innerHTML = 'Por favor, coloque um e-mail valido.'
+          ipt_email.classList.add('shake', 'error')
+          toast.style.top = '20px'
+          btn_login.classList.add('disable')
+          btn_login.disabled = true
+        } else {
+          btn_login.disabled = false
+          btn_login.classList.remove('disable')
+        }
+      }
+    }
+    function bloquear() {
+      mensagem_error.innerHTML = 'Conta bloqueada, acesse o e-mail de confirmação enviado.'
+      toast.style.top = '20px'
+      btn_login.classList.add('disable')
+      btn_login.disabled = true
+    }
+    function exibir() {
+      if (senha_visibilidade.classList.contains('invisivel')) {
+        ipt_senha.type = 'text'
+        senha_visibilidade.classList.remove("invisivel")
+        senha_visibilidade.classList.add("visivel")
       } else {
-        alert("Bem-vindo(a) a Whis{key}, " + email + "!");
+        ipt_senha.type = 'password'
+        senha_visibilidade.classList.remove("visivel")
+        senha_visibilidade.classList.add("invisivel")
+      }
+    }
+    function login() {
+      var email = ''
+      var email = ipt_email.value
+      var senha = ipt_senha.value
+      ipt_email.classList.remove('shake', 'error')
+      ipt_senha.classList.remove('shake', 'error')
+      if (tentativas > 1) {
+        tentativas--
+        if (email === "" || senha === "") {
+          toast.style.top = '20px'
+          mensagem_error.innerHTML = 'Por favor, preencha todos os campos.'
+          ipt_email.classList.add('shake', 'error')
+          ipt_senha.classList.add('shake', 'error')
+          btn_login.classList.add('disable')
+          btn_login.disabled = true
+        } else {
+          if (email == 'claudio@gmail.com' && senha == 'Whiskey@1234') {
+            window.location.href = "/app/(admin)/painel/index.html";
+          } else {
+            ipt_email.classList.add('shake', 'error')
+            ipt_senha.classList.add('shake', 'error')
+            toast.style.top = '20px'
+            mensagem_error.innerHTML = `Senha ou e-mail invalido, possui mais ${tentativas} tentativas.`
+          };
+        }
+      } else {
+        bloquear()
       }
     }
   </script>
 </body>
+
 </html>

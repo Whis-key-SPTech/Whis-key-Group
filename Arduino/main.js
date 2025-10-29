@@ -8,22 +8,23 @@ const SERIAL_BAUD_RATE = 9600;
 const SERVIDOR_PORTA = 3300;
 
 // habilita ou desabilita a inserção de dados no banco de dados
-const HABILITAR_OPERACAO_INSERIR = false;
+const HABILITAR_OPERACAO_INSERIR = true;
 
 // função para comunicação serial
 const serial = async (
-    valoresSensorUmidade,
     valoresSensorTemperatura,
+    valoresSensorUmidade,
+    
 ) => {
 
     // conexão com o banco de dados MySQL
     let poolBancoDados = mysql.createPool(
         {
-            host: 'HOST_DO_BANCO',
-            user: 'USUARIO_DO_BANCO',
-            password: 'SENHA_DO_BANCO',
-            database: 'DATABASE_DO_BANCO',
-            port: 3306
+            host: 'localhost',
+            user: 'aluno',
+            password: 'Sptech#2024',
+            database: 'BD_WHISKEY',
+            port: 3307
         }
     ).promise();
 
@@ -51,22 +52,27 @@ const serial = async (
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
         const valores = data.split(';');
-        const sensorTemperatura = parseInt(valores[0]);
-        const sensorUmidade = parseFloat(valores[1]);
+        const sensorTemperatura = parseInt(valores[1]);
+        const sensorUmidade = parseFloat(valores[0]);
 
         // armazena os valores dos sensores nos arrays correspondentes
-        valoresSensorUmidade.push(sensorUmidade);
         valoresSensorTemperatura.push(sensorTemperatura);
+        valoresSensorUmidade.push(sensorUmidade);
 
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
 
-            // este insert irá inserir os dados na tabela "medida"
+            // este insert irá inserir os dados na tabela "registro"
+            
             await poolBancoDados.execute(
-                'INSERT INTO medida (sensor_Umidade, sensor_Temperatura) VALUES (?, ?)',
-                [sensorUmidade, sensorTemperatura]
+                'INSERT INTO registro (fk_idSensor, temperatura, umidade) VALUES (1, ?, ?)',
+                'INSERT INTO registro (fk_idSensor, temperatura, umidade) VALUES (2, ?, ?)',
+                'INSERT INTO registro (fk_idSensor, temperatura, umidade) VALUES (3, ?, ?)',
+                [sensorTemperatura, sensorUmidade],
+                [sensorTemperatura + 2, sensorUmidade + 10],
+                [sensorTemperatura + 5, sensorUmidade + 20],
             );
-            console.log("valores inseridos no banco: ", sensorUmidade + ", " + sensorTemperatura);
+            console.log(`valores inseridos no banco:  Temperatura ${sensorTemperatura}  Umidade ${sensorUmidade} \n `);
 
         }
 

@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200">
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&amp;display=swap');
+
+    text {
+      font-family: "lora",serif;
+      font-weight: 700;
+    }
+    #yellow { 
+      fill: #F6A000;
+      font-size: 160px; 
+      }
+      .white { 
+      fill: #fcfcfcff;
+      font-size: 160px; 
+      }
+    #braces-left, #braces-right 
+    { fill: #F6A000;
+    font-size: 180px; 
+    }
+    #key { 
+      fill:  #F6A000; 
+      font-size: 160px;
+       opacity: 0; 
+       transform: translateY(20px) scale(0.98); 
+       }
+
+    #yellow { 
+      animation: fadeIn 0.5s forwards; 
+      animation-delay: 0.05s; 
+      }
+      .white { 
+      animation: fadeIn 0.5s forwards; 
+      animation-delay: 0.05s; 
+      }
+    #braces-left { 
+      animation: braceLeft 0.7s ease-in forwards; 
+      animation-delay: 0.15s;
+      }
+    #braces-right { 
+      animation: braceRight 0.7s ease-in forwards;
+       animation-delay: 0.18s; 
+       }
+    #key {
+       animation: keyEnter 0.6s forwards;
+        animation-delay: 0.95s; 
+      }
+
+    @keyframes fadeIn { 
+      from {
+        opacity:0;
+        transform:scale(0.8);
+        } 
+      to
+      {
+        opacity:1;
+        transform:scale(1);
+        } 
+      }
+    @keyframes braceLeft { 
+      0% 
+      {
+      opacity:0; 
+      transform:translateX(150px);
+      } 
+      100% {
+        opacity:1;
+        transform:translateX(0);
+        } 
+      }
+    @keyframes braceRight { 
+      0% {
+        opacity:0; 
+        transform:translateX(-200px);
+        } 
+        100% {
+          opacity:1;
+           transform:translateX(0);
+           } 
+        }
+    @keyframes keyEnter { 
+      from {
+        opacity:0;
+        transform:translateY(20px)
+        scale(0.98);
+        } 
+        to{
+          opacity:1; 
+          transform:translateY(0) 
+          scale(1);
+          } 
+        }
+  </style>
+  <text class="white" x="0" y="160" >W</text>
+  <text class="white" x="180" y="160" >H</text>
+  <text class="white" x="330" y="160" >I</text>
+  <text id="yellow" x="410" y="160">S</text>
+  <text id="braces-left" x="500" y="150">{</text>
+  <text id="key" x="570" y="160">KEY</text>
+  <text id="braces-right" x="910" y="150">}</text>
+</svg>

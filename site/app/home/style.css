@@ -2,41 +2,16 @@ body{
     background-color: #FFFAFA;
     margin: 0px;
     padding: 0px;
+    font-family: 'Lato', sans-serif;
 }
-#header{
-    background-color: #1C311E;
-    height: 97px; ;width:100%;
-    display: flex;        
-    justify-content: space-between; 
-    align-items: center;    
-    padding: 0 20px;        
-    box-sizing: border-box;
-    box-shadow: 15px 7px 4px 0px rgba(0, 0, 0, 0.3);    
-}
-#menu a{
-    text-decoration: none;
-    color: #ffffff;
-}
-#menu button{
-    background-color: #FFA500;
-    border-radius: 10px;
-    border-color: #FFA500;
-    height:36px ;width:173px;
-    cursor: pointer;
-}
-#menu button:hover {
-    background-color: #FF7A00; 
-    transform: scale(1.05);   
-}
-#imagem img{
-    width: 761px; height: 507px;
-}
+
 /* FIM HEADER E MENU*/
     #banner{
         background-color: #244027;
-        width:100%; height:507px;
+        width:100%;
+        height:507px;
         box-shadow: 15px 7px 4px 0px rgba(0, 0, 0, 0.3);
-        margin-top: 5%;
+        margin-top: 5vh;
         display: flex;
         justify-content: space-between;
     }
@@ -48,7 +23,6 @@ body{
     #banner{
         font-family:'Angleton';
         color: white;
-        max-width: 1600px;
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 65px;
@@ -70,10 +44,10 @@ body{
 /* inicio descricao*/
 
     .descricao{
-        background-image: url(../background/forma.png);
+        background-image: url(../public/background/forma.png);
         background-repeat: no-repeat;
         background-size: cover; 
-        height: 790.5px;
+        height: 850.5px;
         display: flex;            
         align-items: center;  
         margin-bottom: 140px;     
@@ -154,7 +128,7 @@ body{
     }
 
    .quem_somos p{
-        font-size: 45px;
+        font-size: 40px;
         width: 824px;
         text-align: center;
         font-weight: lighter;
@@ -172,12 +146,12 @@ button:active{
 
 .box_simulacao {
     display: flex;
-    align-items: center;
+    align-items: self-start;
+    padding-top: 350px;
     justify-items: center;
-    padding: 250px 0px;
     background-image: url(../public/institucional/retangulo-2.svg);
     background-size: cover;
-    height: 710.5px;
+    height: 1141.5px;
 }
 
 .textos_simulacao{
@@ -202,6 +176,7 @@ button:active{
     font-weight: lighter;
     font-style: italic;
     margin-bottom: 10px;
+    color: white;
 }
 
 .btn_simulador{
@@ -223,6 +198,9 @@ button:active{
     background-color: #ffb62f;
 }
 
+.subtitulo_calculadora .baixo{
+    color: white;
+}
 
 
 .img_calculadora{
@@ -238,6 +216,7 @@ button:active{
 .box_contato{
     display: flex;
     flex-direction: column;
+    margin-top: -125px;
 }
 
 .subtitle_contato{
@@ -285,6 +264,70 @@ button:active{
     border-radius: 10px;
     padding-left: 10px;
     padding-top: 10px;
+}
+/* nova adição */
+ .conteiner-regra {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.card {
+  position: relative;
+  border-radius: 10px;
+  border: 2px solid #FFA500; 
+  top: 10px;
+  bottom: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.1s ease;
+
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 5px 8px 20px #1c311e;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  opacity:0.8;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover img {
+  opacity: 1;
+}
+
+.card-content {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  color: black;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.card-content h5 {
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 6px;
+  color: #FFA500;
+}
+
+.card-content h3 {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+ 
 }
 
 .form_contato .ipt_mensagem{

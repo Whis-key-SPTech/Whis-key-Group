@@ -1,58 +1,141 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
-   <link rel="stylesheet" href="../utils/index.css">
-  <title>Tela de Login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="../utils/index.css" />
+  <link rel="shortcut icon" href="../public/institucional/favicon.png" type="image/x-icon">
+  <title>Tela de cadastro</title>
 </head>
+
 <body>
-  <header class="header">
-    <div class="logo">
-     <img src="../public/Whiskey.logo 1.svg" width="258.64" height="145.49">
+  <header id="header">
+    <nav>
+      <a href="../home/index.html"><img src="../public/institucional/logo-whiskey.svg" alt=""></a>
+    </nav>
+
+    <div class="navbar">
     </div>
   </header>
   <main class="main">
-    <img src="../public/S{KEY}.svg" width="545" height="306" alt="" srcset="">
+    <div id="animacao">
+    </div>
+    <div id="toast">
+      <div class="display">
+        <h3 id="mensagem_error"></h3>
+        <img src="../login/risk.svg" width="35" height="35">
+      </div>
+    </div>
     <div class="container">
       <div class="input-box">
         <span>EMAIL</span>
         <br>
-        <input type="email" id="email" placeholder="digite seu email">
+        <input type="email" id="ipt_email" oninput="input()" onblur="validarEmail()" placeholder="digite seu email">
       </div>
       <div class="input-box">
         <span>NOME</span>
-        <br>
-        <input type="text" id="nome" placeholder="digite o nome">
+        <br />
+        <input type="text" id="nome" placeholder="digite o nome" />
+      </div>
+      <div>
+        <div class="input-box">
+          <span>SENHA</span>
+          <br />
+          <input type="password" id="ipt_senha" placeholder="digite sua senha" />
+          <div class="invisivel" id="senha_visibilidade" onclick="exibir()"></div>
         </div>
         <div class="input-box">
-        <span>SENHA</span>
-        <br>
-        <input type="password" id="senha" placeholder="digite sua senha">
-      </div>
-      <div class="input-box">
-        <span>CONFIRMAR</span>
-        <br>
-        <input type="password" id="confirmar_senha" placeholder="confirme a senha">
+          <span>CONFIRMAR</span>
+          <br />
+          <input type="password" id="confirmar_senha" placeholder="confirme a senha" />
         </div>
-      <button class="btn" onclick="cadastrar()">Cadastrar</button>
-    </div>
+        <button class="btn" id="btn_cadastro" onclick="cadastrar()">Cadastrar</button>
+
+      </div>
   </main>
-  <footer class="footer">
-
-  </footer>
+  <footer class="footer"></footer>
   <script>
-    function cadastrar() {
-      const email = document.getElementById("email").value;
-      const senha = document.getElementById("senha").value;
+    function init() {
+      animacao.innerHTML = `
+      <img src="../login/animacao.svg" width="845" height="606" alt="">
+    `;
+    }
+    init();
 
-      if (email === "" || senha === "") {
-        alert("Por favor, preencha todos os campos.");
+    function validarEmail() {
+      var email = ipt_email.value.trim();
+
+      if (!email.includes('@') || !email.includes('.')) {
+        mensagem_error.innerHTML = 'Por favor, coloque um e-mail válido.';
+        ipt_email.classList.add('shake', 'error');
+        toast.style.top = '20px';
+        toast.style.left = '20px';
+        btn_cadastro.classList.add('disable');
+        btn_cadastro.disabled = true;
       } else {
-        alert("Bem-vindo(a) a Whis{key}, " + email + "!");
+        ipt_email.classList.remove('shake', 'error');
+        mensagem_error.innerHTML = '';
+        btn_cadastro.disabled = false;
+        btn_cadastro.classList.remove('disable');
       }
     }
+
+    function exibir() {
+      if (senha_visibilidade.classList.contains('invisivel')) {
+        ipt_senha.type = 'text';
+        senha_visibilidade.classList.remove('invisivel');
+        senha_visibilidade.classList.add('visivel');
+      } else {
+        ipt_senha.type = 'password';
+        senha_visibilidade.classList.remove('visivel');
+        senha_visibilidade.classList.add('invisivel');
+      }
+    }
+
+    function cadastrar() {
+      var email = ipt_email.value.trim();
+      var senha = ipt_senha.value.trim();
+      var nome_valor = nome.value.trim();
+      var conf = confirmar_senha.value.trim();
+
+      ipt_email.classList.remove('shake', 'error');
+      ipt_senha.classList.remove('shake', 'error');
+      nome.classList.remove('shake', 'error');
+      confirmar_senha.classList.remove('shake', 'error');
+
+      if (email === '' || senha === '' || nome_valor === '' || conf === '') {
+        mensagem_error.innerHTML = 'Por favor, preencha todos os campos.';
+        toast.style.top = '20px';
+        toast.style.left = '20px';
+        ipt_email.classList.add('shake', 'error');
+        ipt_senha.classList.add('shake', 'error');
+        nome.classList.add('shake', 'error');
+        confirmar_senha.classList.add('shake', 'error');
+
+      }
+      else if (senha != conf) {
+        mensagem_error.innerHTML = 'As senhas não coincidem.';
+        toast.style.top = '20px';
+        toast.style.left = '20px';
+        ipt_senha.classList.add('shake', 'error');
+        confirmar_senha.classList.add('shake', 'error');
+      }
+      else{
+        alert(`CADASTRO REALIZADO `)
+          toast.style.left = '20px';
+        ipt_email.classList.remove('shake', 'error');
+        ipt_senha.classList.remove('shake', 'error');
+        nome.classList.remove('shake', 'error');
+        confirmar_senha.classList.remove('shake', 'error');
+        window.location.href='../login/index.html';
+      }
+      
+
+
+
+
+    }
+
   </script>
-</body>
-</html>

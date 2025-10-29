@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../utils/index.css">
+    <link rel="shortcut icon" href="../../public/institucional/favicon.png" type="image/x-icon">
+
+    <title>Gestão de Usuários</title>
+</head>
+
+<body>
+     <header id="header">
+    <nav>
+      <a href="../painel/index.html"><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
+    </nav>
+    <div class="navbar">
+    </div>
+  </header>
+    <main>
+        <div class="box_left">
+            <span class="title">PERFIL ATUAL</span>
+
+            <div class="container">
+                <img src="../../public/painel/Test Account.svg" 
+                alt="" 
+                class="user"
+                style="background-color: #1C311E; border-radius: 50%; width: 70px; height: 70px; object-fit: cover;">
+                <span class="username">Júlia Araripe</span>
+                <span class="useremail">julia.araripe@whiskey.com</span>
+                <span class="userinfo">00.000.000/0001-00</span>
+                <span class="typeOfWhisky">Tipo Whisky</span>
+            </div>
+        </div>
+        <div class="box_right">
+            <div class="container">
+                <div class="btn_register">
+                    <button onclick="window.location.href='../../cadastro/index.html'">
+                        <img src="icons/user_icon.png" alt="Ícone de usuário">
+                        CADASTRAR
+                    </button>
+                </div>
+                <span class="title">Gestão de Usuários</span>
+                <div class="table_users_div">
+                    <table class="table_users">
+                        <thead>
+                            <tr class="table_head">
+                                <th><input type="checkbox" name="" id="checkbox"></th>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Cargo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" name="" id="checkbox"></td>
+                                <td>Vitória Ferreira</td>
+                                <td>vitoria@whiskey.tech</td>
+                                <td>Gerente</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="" id="checkbox"></td>
+                                <td>André Santos</td>
+                                <td>andre@whiskey.tech</td>
+                                <td>Analista</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="" id="checkbox"></td>
+                                <td>Giovanni Angel</td>
+                                <td>giovanni@whiskey.tech</td>
+                                <td>Técnico do Sensor</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="nav">
+                    <button>
+                        <img src="icons/icon_trash.png" alt="">
+                        DELETAR</button>
+
+                    <nav class="pagination">
+                        <ul>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
