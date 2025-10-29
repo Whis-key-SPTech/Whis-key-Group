@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/ae37c4f9c1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+
     <title>Painel dashboard</title>
 </head>
 
@@ -14,56 +17,126 @@
     <div class="slide">
         <div id="animacao">
         </div>
-        <header class="header">
-            <div class="options">
-                <div onclick="handleNavbar()" class="menu-button">
-                    <div id="menu-label"></div>
-                    <div id="menu-label"></div>
-                    <div id="menu-label"></div>
-                </div>
-                <h2>Bem vindo Frizza!</h2>
+        <div id="toast">
+            <div class="display">
+                <h3 id="mensagem_error">Atenção existem 2 alertas ativos!</h3>
+                <img src="../../login/risk.svg" width="35" height="35">
             </div>
-            <div></div>
-            <div></div>
-            <nav class="navbar" id="navbar">
+        </div>
+        <div class="header">
+            <a href="/home/index.html"><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
+        </div>
+        <main class="grid nav" id="container">
+            <div class="box navbarMenu">
+                <div class="toggle" id="toggleMenu" onclick="handleToggleMenu()">
+                    <div class="active right" id="option">
+                    </div>
+                    <img src="../../public/painel/home.svg" width="30" height="30" alt="">
+                    <img src="../../public/painel/financial.svg" width="25" height="25" alt="">
+                </div>
                 <ul class="lista-menu">
-                    <li class="lista">Home</li>
-                    <li class="lista">Sensores</li>
-                    <li class="lista">Financeiro</li>
-
+                    <li class="lista">
+                        <div class="container red">
+                            <div class="circle red">
+                                <div>
+                                    <img src="../../public/painel/barrel-2 5.png" width="24" height="20" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span>Barril - 1</span>
+                        </div>
+                    </li>
+                    <li class="lista">
+                        <div class="container yellow">
+                            <div class="circle yellow">
+                                <div>
+                                    <img src="../../public/painel/barrel-2 5.png" width="24" height="20" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span>Barril - 2</span>
+                        </div>
+                    </li>
+                    <li class="lista">
+                        <div class="container yellow">
+                            <div class="circle yellow">
+                                <div>
+                                    <img src="../../public/painel/barrel-2 5.png" width="24" height="20" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span>Barril - 3</span>
+                        </div>
+                    </li>
+                    <li class="lista">
+                        <div class="container">
+                            <div class="circle">
+                                <div>
+                                    <img src="../../public/painel/barrel-2 5.png" width="24" height="20" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span>Barril - 4</span>
+                        </div>
+                    </li>
+                    <li class="lista">
+                        <div class="container">
+                            <div class="circle">
+                                <div>
+                                    <img src="../../public/painel/barrel-2 5.png" width="24" height="20" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span>Barril - 5</span>
+                        </div>
+                    </li>
                 </ul>
-            </nav>
-            <div class="kpi kpi-media">
-                <div>
-                    <h2>Temperatura média</h2>
+                <div class="perfil">
+                    <div>
+                        <div class="flex"><img src="../../public/painel/Test Account.svg" width="50" height="50" alt="">
+                            <p>Bem vindo</p>
+                        </div>
+                        <p>Araripe</p>
+                    </div>
+                    <ul>
+                        <li> <img src="../../public/painel/Change User.svg" width="30" height="30" alt=""> <a
+                                href="\Whis-key-Group\site\app\(admin)\userConfig\index.html">Configurações</a></li>
+                        <li> <img src="../../public/painel/Exit Sign.svg" width="30" height="30" alt=""> <a
+                                href="/home/index.html"> Sair </a> </li>
+
+                    </ul>
                 </div>
-                <div class="info">
+            </div>
+            <div class="box kpi-sensor" onclick="popUp()">
+                <div class="identity">
                     <div class="flex">
-                        <h2 id="div_qtd_media"></h2>
-                        <span class="med">ºC</span>
+                        <h2>Sensor - </span>
+                            <h2>1</h2>
                     </div>
-                    <div class="container">
-                        <img src="../../public/icons/temp.svg" width="30" height="70" alt="">
+                    <span>#001</span>
+                </div>
+
+                <div class="container">
+                    <div class="circle">
+                        <div>
+                        </div>
+                        <img src="../../public/painel/barrel-2 5.png" width="64" height="58" alt=""
+                            style="z-index: 50; margin-left: 5px;">
                     </div>
                 </div>
-                <div>
-                    <p>A temperatura adquada é entre 25º a 30º</p>
+                <br>
+                <div class="flex local">
+                    <span class="text">Local: </span>
+                    <span> armazem 5 setor 2 - cima </span>
                 </div>
             </div>
-            <div class="kpi kpi-users">
-                <div>
-                    <h2>USUÁRIOS
-                        ATIVOS
-                    </h2>
-                </div>
-                <div>
-                    <h2 id="div_qtd_user">5</h2>
-                </div>
-                <div>
-                    <p>Quantidade de usuários ativos no sistema</p>
-                </div>
-            </div>
-            <div class="kpi kpi-alerts">
+
+            <div class="box kpi kpi-alerts">
                 <div>
                     <h2>ALERTAS
                         ATIVOS
@@ -72,34 +145,67 @@
                 <div>
                     <h2 id="div_qtdAlertasAtivos"></h2>
                 </div>
-                <div>
-                    <p>Caso algum parâmetro esteja inadequado</p>
-                </div>
             </div>
-            <div class="logs" id="log">
-                <h2>Histórico</h2>
-                <span>Os logs dos ultimos 10 dados</span>
-                <h3>Sensores: <span>3</span></h3>
-                <ul id="div_registros">
-                </ul>
-            </div>
-        </header>
-        <main class="main">
-            <div class="grafico-umidade">
-                <div class="container">
-                    <h2>Umidade média por hora</h2>
-                    <div class="grafico">
-                        <canvas id="graficoUmidade"></canvas>
+            <div class="box kpi kpi-media">
+                <div class="flex">
+                    <div>
+                        <h2>Temperatura atual</h2>
+
+                        <div class="info">
+                            <div class="flex">
+                                <h2 id="div_qtd_media"></h2>
+                                <span class="med">ºC</span>
+                            </div>
+                        </div>
                     </div>
-                    <img src="../../public/icons/umid.svg" width="60" height="60" class="img-umidade" alt="">
-                    <div class="flex"><span class="text-metrica" id="div_text_metrica"></span><span>%</span></div>
+                    <div class="container situacao">
+                        <div class="gravidade green"></div> <span>20º | 25º</span>
+                        <div class="gravidade yellow"></div> <span> 15º | 30º </span>
+                        <div class="gravidade red"></div>
+                        <span>15 | 30º</span>
+                    </div>
                 </div>
             </div>
-            <div class="grafico-temperatura">
-                <div class="container">
-                    <h2>Temperatura média por hora</h2>
+            <div class="box grafico-temperatura">
+                <div class="header-grafico">
+                    <h2 id="text_grafico">Temperatura a cada 10 minutos</h2>
+                    <div class="toggle" id="toggleChart" onclick="handleToggleChart()">
+                        <div class="active right" id="chart">
+                        </div>
+                        <img src="../../public/painel/termometro.svg" width="27" height="27" alt="">
+                        <img src="../../public/painel/Cloud.svg" width="27" height="27" alt="">
+                    </div>
+                </div>
+                <div class="container" id="graficos">
                     <canvas id="myChart"></canvas>
                 </div>
+            </div>
+
+            <div class="box grafico-umidade">
+                <div class="flex">
+                    <div class="container">
+                        <h2>Umidade atual</h2>
+                        <br>
+                        <div class="grafico">
+                            <canvas id="graficoUmidade" width="150" height="150"></canvas>
+                        </div>
+                        <img src="../../public/icons/umid.svg" width="40" height="40" class="img-umidade" alt="">
+                        <div class="flex"><span class="text-metrica" id="div_text_metrica">70</span><span>%</span></div>
+                    </div>
+                </div>
+                <div class="container situacao">
+                    <div class="gravidade green"></div> <span>20º | 25º</span>
+                    <div class="gravidade yellow"></div> <span> 15º | 30º </span>
+                    <div class="gravidade red"></div>
+                    <span>15 | 30º</span>
+                </div>
+            </div>
+            <div class="box logs" id="log">
+                <h2>Histórico</h2>
+                <span>Os ultimos 5 registros <b>deste</b> sensor</span>
+                <ul id="div_registros">
+
+                </ul>
             </div>
         </main>
     </div>
@@ -107,30 +213,226 @@
 
 </html>
 <script>
+    // Registros do historico
+    var registros = [[28, 80, 343], [13, 82, 343], [28, 83, 343], [23, 76, 343], [31, 87, 343], [43, 80, 343], [28, 82, 343]]
 
-    var registros = [[28, 80, 343], [13, 82, 344], [28, 83, 345], [23, 76, 346], [31, 87, 347], [43, 80, 348], [28, 82, 349]]
-
-     var navBarOpen = true
-        function handleNavbar() {
-            if (navBarOpen) {
-                navbar.style.width = `0px`;
-                navBarOpen = false;
-            } else {
-                navbar.style.width = `15%`
-                navBarOpen = true;
-            }
-        }
-
-        function init() {
-      animacao.innerHTML = `
-      <img src="./animacao.svg" width="845" height="606" alt="" srcset="">
+    //Animação da logo
+    setTimeout(render, 3600)
+    function init() {
+        animacao.innerHTML = `
+      <img src="../../public/painel/animacao.svg" width="845" height="606" alt="" srcset="">
       `
     }
     init()
+
+    var handleToggleMenuOn = true
+    function handleToggleMenu() {
+        if (handleToggleMenuOn) {
+            option.classList.remove('right')
+            option.classList.add('left')
+            handleToggleMenuOn = false
+
+        } else {
+            option.classList.add('right')
+            option.classList.remove('left')
+            handleToggleMenuOn = true
+        }
+    }
+
+    var handleToggleChartOn = true
+    function handleToggleChart() {
+        if (handleToggleChartOn) {
+            chart.classList.remove('right')
+            chart.classList.add('left')
+            handleToggleChartOn = false
+            graficos.innerHTML = `
+                  <canvas id="chartUmidade" width='2.5'></canvas>
+            `
+            text_grafico.innerHTML = `
+                Umidade a cada 10 min
+            `
+            const ctxUmidade = document.getElementById('chartUmidade');
+            var graficoLinha = new Chart(ctxUmidade, {
+                type: 'line',
+                data: {
+                    labels: ['10min', '20min', '30min', '40min', '50min', '60min'],
+                    datasets: [
+                        {
+                            label: 'Umidade por hora',
+                            tension: 0,
+                            fill: true,
+                            borderColor: '#50C156',
+                            backgroundColor: 'rgba(80, 193, 86,0.5)',
+                            data: [70, 70, 65, 65, 70.1, 90, 85],
+                            borderWidth: 2,
+                            spanGaps: true,
+                        },
+                        {
+                            label: 'Máximo',
+                            fill: true,
+                            tension: 0.1,
+                            borderColor: '#7d080a80',
+                            backgroundColor: '#7d080a80',
+                            data: [],
+                            borderWidth: 2,
+                        },
+                        {
+                            label: 'Mínimo',
+                            fill: true,
+                            tension: 0.1,
+                            borderColor: '#0f6f9f80',
+                            backgroundColor: '#0f6f9f80',
+                            data: [],
+                            borderWidth: 2,
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            min: 50,
+                            max: 90,
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: { enabled: true },
+                        annotation: {
+                            annotations: {
+                                limiteMaximo: {
+                                    type: 'line',
+                                    yMin: 80,
+                                    yMax: 80,
+                                    borderColor: '#7d080a80',
+                                    borderWidth: 3,
+                                },
+                                limiteMinimo: {
+                                    type: 'line',
+                                    yMin: 60,
+                                    yMax: 60,
+                                    borderColor: '#0f6f9f80',
+                                    borderWidth: 3,
+                                    label: {
+                                        content: 'Limite Minimo (20 °C)',
+                                        enabled: true,
+                                        position: 'end',
+                                        backgroundColor: 'rgba(255,0,0,0.7)',
+                                        color: '#fff'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+        } else {
+            chart.classList.add('right')
+            chart.classList.remove('left')
+            handleToggleChartOn = true
+            graficos.innerHTML = `
+                    <canvas id="myChart" width="2.5"></canvas>
+                    
+            `
+            text_grafico.innerHTML = `
+                Temperatura a cada 10 min
+            `
+            const ctx = document.getElementById('myChart');
+            var graficoLinha = new Chart(ctx, {
+                type: 'line',
+
+                data: {
+                    labels: ['10min', '20min', '30min', '40min', '50min', '60min'],
+                    datasets: [
+                        {
+                            label: 'Temperatura',
+                            fill: true,
+                            tension: 0.1,
+                            borderColor: '#50C156',
+                            backgroundColor: 'rgba(80, 193, 86,0.5)',
+                            data: [22, 15.8, 27, 22, 22, 27.6, 10],
+                            borderWidth: 2,
+                        }, {
+                            label: 'Máximo',
+                            fill: true,
+                            tension: 0.1,
+                            borderColor: '#7d080a80',
+                            backgroundColor: '#7d080a80',
+                            data: [],
+                            borderWidth: 2,
+                        },
+                        {
+                            label: 'Mínimo',
+                            fill: true,
+                            tension: 0.1,
+                            borderColor: '#0f6f9f80',
+                            backgroundColor: '#0f6f9f80',
+                            data: [],
+                            borderWidth: 2,
+                        }
+                    ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: { enabled: true },
+                        annotation: {
+                            annotations: {
+                                limiteMaximo: {
+                                    type: 'line',
+                                    yMin: 25,
+                                    yMax: 25,
+                                    borderColor: '#7d080a80',
+                                    borderWidth: 3,
+                                },
+                                limiteMinimo: {
+                                    type: 'line',
+                                    yMin: 20,
+                                    yMax: 20,
+                                    borderColor: '#0f6f9f80',
+                                    borderWidth: 3,
+                                    label: {
+                                        content: 'Limite Minimo (20 °C)',
+                                        enabled: true,
+                                        position: 'end',
+                                        backgroundColor: 'rgba(255,0,0,0.7)',
+                                        color: '#fff'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+    // Alerta
+    var pop = false
+    function popUp() {
+        if (pop) {
+            toast.style.top = '-200px'
+            pop = false
+        } else {
+            toast.style.top = '0'
+            pop = true
+        }
+    }
+
+    //Animação dos números e verificação das temperaturas
     function render() {
         var contadorRegistros = 0
-        var qtdRegistro = 7
-        var qtdAlertasAtivos = 0
+        var qtdRegistro = 5
+        var qtdAlertasAtivos = 1
         var div_registrosHTML = ''
         while (contadorRegistros < qtdRegistro) {
             var color = 'green'
@@ -145,7 +447,7 @@
             var contadorAlerta = 0
             div_registrosHTML += ` 
          <li class="card-historico ${color}"  style="animation-delay: ${delay}ms">
-                        <div class="flex" style="gap:12px;">
+                        <div class="flex" style="gap:6px;">
                             <div class="flex">
                                 <p id="met">
                                     ${registros[contadorRegistros][0]}
@@ -178,6 +480,7 @@
             contadorRegistros++
         }
         div_registros.innerHTML = div_registrosHTML
+
         var intervaloAlerta = setInterval(() => {
             if (contadorAlerta < qtdAlertasAtivos) {
                 contadorAlerta++
@@ -186,6 +489,7 @@
                 clearInterval(intervaloAlerta)
             )
         }, 250)
+
         var contadorTemp = 0
         var intervaloTemperatura = setInterval(() => {
             if (contadorTemp < 26) {
@@ -196,35 +500,85 @@
             )
         }, 100)
     }
-    render()
+
     const ctx = document.getElementById('myChart');
+    const ctxUmidade = document.getElementById('chartUmidade');
 
     var graficoLinha = new Chart(ctx, {
         type: 'line',
+
         data: {
-            labels: ['10:00h', '10:30h', '11:00h', '11:30h', '12:00h', '12:30'],
-            datasets: [{
-                label: 'Temperatura ',
-                tension: 0.4,
-                fill: true,
-                borderColor: '#50C156',
-                backgroundColor: 'rgba(80, 193, 86,0.5)',
-                data: [27.5, 26.8, 27.9, 28.2, 27.1, 27.6, 40],
-                borderWidth: 2,
-            }]
+            labels: ['10min', '20min', '30min', '40min', '50min', '60min'],
+            datasets: [
+                {
+                    label: 'Temperatura',
+                    fill: true,
+                    tension: 0.1,
+                    borderColor: '#50C156',
+                    backgroundColor: 'rgba(80, 193, 86,0.5)',
+                    data: [22, 15.8, 27, 22, 22, 27.6, 10],
+                    borderWidth: 2,
+                }, {
+                    label: 'Máximo',
+                    fill: true,
+                    tension: 0.1,
+                    borderColor: '#7d080a80',
+                    backgroundColor: '#7d080a80',
+                    data: [],
+                    borderWidth: 2,
+                },
+                {
+                    label: 'Mínimo',
+                    fill: true,
+                    tension: 0.1,
+                    borderColor: '#0f6f9f80',
+                    backgroundColor: '#0f6f9f80',
+                    data: [],
+                    borderWidth: 2,
+                }
+            ]
         },
         options: {
+            maintainAspectRatio: false,
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: false
                 }
             },
             plugins: {
-                legend: { display: false },
-                tooltip: { enabled: true }
+                legend: {
+                    position: 'top'
+                },
+                tooltip: { enabled: true },
+                annotation: {
+                    annotations: {
+                        limiteMaximo: {
+                            type: 'line',
+                            yMin: 25,
+                            yMax: 25,
+                            borderColor: '#7d080a80',
+                            borderWidth: 3,
+                        },
+                        limiteMinimo: {
+                            type: 'line',
+                            yMin: 20,
+                            yMax: 20,
+                            borderColor: '#0f6f9f80',
+                            borderWidth: 3,
+                            label: {
+                                content: 'Limite Minimo (20 °C)',
+                                enabled: true,
+                                position: 'end',
+                                backgroundColor: 'rgba(255,0,0,0.7)',
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
             }
         }
     });
+
     var porcentagem = 70
     const graficoCtx = document.getElementById('graficoUmidade');
     var graficoPizza = new Chart(graficoCtx, {
@@ -239,14 +593,14 @@
             }]
         },
         options: {
-            cutout: '80%',
+            cutout: '75%',
             rotation: -90,
-            circumference: 360,
+            circumference: 180,
             plugins: {
                 legend: { display: true },
                 tooltip: { enabled: true }
             }
         }
     });
-    
+
 </script>

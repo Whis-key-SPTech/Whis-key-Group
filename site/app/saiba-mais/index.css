@@ -3,6 +3,13 @@
     font-family: 'GothanL'; src: url('GothamLight.ttf')format('truetype');
 }
 
+body {
+  background-image: url(../public/background/bg_saiba_mais.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .container {
   margin: 0px;
   padding: 40px;
