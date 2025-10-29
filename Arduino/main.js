@@ -12,8 +12,9 @@ const HABILITAR_OPERACAO_INSERIR = true;
 
 // função para comunicação serial
 const serial = async (
-    valoresSensorUmidade,
     valoresSensorTemperatura,
+    valoresSensorUmidade,
+    
 ) => {
 
     // conexão com o banco de dados MySQL
@@ -22,7 +23,7 @@ const serial = async (
             host: 'localhost',
             user: 'root',
             password: 'Guxtatec#1',
-            database: 'whiskey',
+            database: 'BD_WHISKEY',
             port: 3306
         }
     ).promise();
@@ -51,23 +52,23 @@ const serial = async (
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
         const valores = data.split(';');
-        const sensorTemperatura = parseInt(valores[0]);
-        const sensorUmidade = parseFloat(valores[1]);
+        const sensorTemperatura = parseInt(valores[1]);
+        const sensorUmidade = parseFloat(valores[0]);
 
         // armazena os valores dos sensores nos arrays correspondentes
-        valoresSensorUmidade.push(sensorUmidade);
         valoresSensorTemperatura.push(sensorTemperatura);
+        valoresSensorUmidade.push(sensorUmidade);
 
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
 
-            // este insert irá inserir os dados na tabela "medida"
+            // este insert irá inserir os dados na tabela "registro"
             
             await poolBancoDados.execute(
-                'INSERT INTO registro (id_registro, temperatura, umidade) VALUES (default, ?, ?)',
+                'INSERT INTO registro (id_registro,temperatura, umidade) VALUES (default, ?, ?)',
                 [sensorTemperatura, sensorUmidade]
             );
-            console.log("valores inseridos no banco: ", sensorTemperatura + ", " + sensorUmidade);
+            console.log(`valores inseridos no banco:  Temperatura ${sensorTemperatura}  Umidade ${sensorUmidade} \n `);
 
         }
 
