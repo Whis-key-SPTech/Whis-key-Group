@@ -12,8 +12,9 @@ const HABILITAR_OPERACAO_INSERIR = true;
 
 // função para comunicação serial
 const serial = async (
-    valoresSensorUmidade,
     valoresSensorTemperatura,
+    valoresSensorUmidade,
+    
 ) => {
 
     // conexão com o banco de dados MySQL
@@ -55,13 +56,13 @@ const serial = async (
         const sensorUmidade = parseFloat(valores[0]);
 
         // armazena os valores dos sensores nos arrays correspondentes
-        valoresSensorUmidade.push(sensorUmidade);
         valoresSensorTemperatura.push(sensorTemperatura);
+        valoresSensorUmidade.push(sensorUmidade);
 
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
 
-            // este insert irá inserir os dados na tabela "medida"
+            // este insert irá inserir os dados na tabela "registro"
             
             await poolBancoDados.execute(
                 'INSERT INTO registro (fk_idSensor, temperatura, umidade) VALUES (1, ?, ?)',
@@ -71,7 +72,7 @@ const serial = async (
                 [sensorTemperatura + 2, sensorUmidade + 10],
                 [sensorTemperatura + 5, sensorUmidade + 20],
             );
-            console.log("valores inseridos no banco: ", sensorTemperatura + ", " + sensorUmidade);
+            console.log(`valores inseridos no banco:  Temperatura ${sensorTemperatura}  Umidade ${sensorUmidade} \n `);
 
         }
 

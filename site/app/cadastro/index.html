@@ -113,18 +113,25 @@
         ipt_senha.classList.add('shake', 'error');
         nome.classList.add('shake', 'error');
         confirmar_senha.classList.add('shake', 'error');
-        btn_cadastro.classList.add('disable');
-        btn_cadastro.disabled = true;
 
       }
-
-      if (senha != conf) {
+      else if (senha != conf) {
         mensagem_error.innerHTML = 'As senhas não coincidem.';
         toast.style.top = '20px';
         toast.style.left = '20px';
         ipt_senha.classList.add('shake', 'error');
         confirmar_senha.classList.add('shake', 'error');
       }
+      else{
+        alert(`CADASTRO REALIZADO `)
+          toast.style.left = '20px';
+        ipt_email.classList.remove('shake', 'error');
+        ipt_senha.classList.remove('shake', 'error');
+        nome.classList.remove('shake', 'error');
+        confirmar_senha.classList.remove('shake', 'error');
+        window.location.href='../login/index.html';
+      }
+      
 
 
 
