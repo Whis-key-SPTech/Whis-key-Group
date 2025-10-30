@@ -226,6 +226,7 @@
       resultado.classList.add("mostrar");
     }
 
+    // calculo de porcentagem
     var aShare = (1 - Math.pow(volumeFinal / volumeInicial, 1 / ano)) * 100;
     resultado.innerHTML = `
       <h2>Resultados</h2>
@@ -243,6 +244,7 @@
     var volumeFinal = Number(input_volumeFinal.value);
     var anos = Number(input_anos2.value);
     if (!volumeInicial || !volumeFinal || !anos);
+    // Juros compostos
     var shareIdeal = volumeInicial * Math.pow(1 - 0.04, anos);
     if (contadorCalc1 < 1) {
       resultado.innerHTML += `
