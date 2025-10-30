@@ -393,10 +393,6 @@ body {
 }
 
 .container.situacao span:nth-child(4) {
-    color: #FFA500;
-}
-
-.container.situacao span:nth-child(6) {
     color: #9F0F11;
 }
 
@@ -862,7 +858,13 @@ body {
     font-weight: 600;
     position: relative;
 }
-
+.max{
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    font-size: large;
+    font-weight: 700;
+}
 
 .kpi-alerts div p {
     font-weight: 400;
