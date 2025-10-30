@@ -69,6 +69,7 @@
 
       if (!email.includes('@') || !email.includes('.')) {
         mensagem_error.innerHTML = 'Por favor, coloque um e-mail válido.';
+        //Estilização do css 
         ipt_email.classList.add('shake', 'error');
         toast.style.top = '20px';
         toast.style.left = '20px';
@@ -81,7 +82,8 @@
         btn_cadastro.classList.remove('disable');
       }
     }
-
+  
+    // Caixa de texto
     function exibir() {
       if (senha_visibilidade.classList.contains('invisivel')) {
         ipt_senha.type = 'text';
@@ -93,6 +95,7 @@
         senha_visibilidade.classList.add('invisivel');
       }
     }
+
 
     function cadastrar() {
       var email = ipt_email.value.trim();
