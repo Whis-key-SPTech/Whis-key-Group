@@ -52,8 +52,8 @@
                         </div>
                     </li>
                     <li class="lista">
-                        <div class="container yellow">
-                            <div class="circle yellow">
+                        <div class="container red">
+                            <div class="circle red">
                                 <div>
                                     <img src="../../public/painel/barrel-2 5.png" width="24" height="20" alt="">
                                 </div>
@@ -64,8 +64,8 @@
                         </div>
                     </li>
                     <li class="lista">
-                        <div class="container yellow">
-                            <div class="circle yellow">
+                        <div class="container red">
+                            <div class="circle red">
                                 <div>
                                     <img src="../../public/painel/barrel-2 5.png" width="24" height="20" alt="">
                                 </div>
@@ -158,16 +158,15 @@
 
                         <div class="info">
                             <div class="flex">
-                                <h2 id="div_qtd_media"></h2>
+                                <h2 id="div_qtd_media">26</h2>
                                 <span class="med">ºC</span>
                             </div>
                         </div>
                     </div>
                     <div class="container situacao">
+                        <div class="max">Max | Min</div>
                         <div class="gravidade green"></div> <span>20º | 25º</span>
-                        <div class="gravidade yellow"></div> <span> 15º | 30º </span>
-                        <div class="gravidade red"></div>
-                        <span>15 | 30º</span>
+                        <div class="gravidade red"></div> <span> 15º | 30º </span>
                     </div>
                 </div>
             </div>
@@ -200,9 +199,7 @@
                 </div>
                 <div class="container situacao">
                     <div class="gravidade green"></div> <span>20º | 25º</span>
-                    <div class="gravidade yellow"></div> <span> 15º | 30º </span>
-                    <div class="gravidade red"></div>
-                    <span>15 | 30º</span>
+                    <div class="gravidade red"></div> <span> 15º | 30º </span>
                 </div>
             </div>
             <div class="box logs" id="log">
@@ -224,7 +221,7 @@
     var registros = [[28, 80, 343], [13, 82, 343], [28, 83, 343], [23, 76, 343], [31, 87, 343], [43, 80, 343], [28, 82, 343]]
 
     //Animação da logo
-    setTimeout(render, 3000)
+    render()
     function init() {
         animacao.innerHTML = `
       <img src="../../public/painel/animacao.svg" width="845" height="606" alt="" srcset="">
@@ -489,25 +486,7 @@
             contadorRegistros++
         }
         div_registros.innerHTML = div_registrosHTML
-
-        var intervaloAlerta = setInterval(() => {
-            if (contadorAlerta < qtdAlertasAtivos) {
-                contadorAlerta++
-                div_qtdAlertasAtivos.innerHTML = contadorAlerta
-            } else (
-                clearInterval(intervaloAlerta)
-            )
-        }, 250)
-
         var contadorTemp = 0
-        var intervaloTemperatura = setInterval(() => {
-            if (contadorTemp < 26) {
-                contadorTemp++
-                div_qtd_media.innerHTML = contadorTemp
-            } else (
-                clearInterval(intervaloTemperatura)
-            )
-        }, 100)
     }
 
     const ctx = document.getElementById('myChart');
