@@ -69,12 +69,14 @@
    #ipt_senha {
     position: relative;
   }
-
-  .invisivel::before {
+#contain{
+  position: relative;
+}
+ .invisivel::before {
     content: '';
     position: absolute;
-    bottom: 275px;
-    right: 90px;
+    bottom: 39px;
+    right: 22px;
     background-image: url(../../app/login/Invisible.svg);
     height: 30px;
     width: 30px;
@@ -83,20 +85,9 @@
     background-position: center;
     z-index: 20;
   }
-
-  .visivel::before {
-    content: '';
-    position: absolute;
-    bottom: 275px;
-    right: 90px;
-    background-image: url(../login/Eye.svg);
+ .invisivel {
     height: 30px;
-    width: 30px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    z-index: 20;
-
+    width: 200px;
   }
 
 
