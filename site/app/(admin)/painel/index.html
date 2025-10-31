@@ -102,15 +102,17 @@
                 </ul>
                 <div class="perfil">
 
-                    <div class="perfil-usuario" onclick="window.location.href='../definicao/index.html'" style="cursor: pointer">
+                    <div class="perfil-usuario" onclick="window.location.href='../definicao/index.html'"
+                        style="cursor: pointer">
                         <div class="flex"><img src="../../public/painel/Test Account.svg" width="50" height="50" alt="">
                             <p>Bem vindo(a)</p>
                         </div>
                     </div>
                     <ul>
-                        <li onclick="window.location.href='../definicao/index.html'"> 
-                             <img src="../../public/painel/Change User.svg" width="30" height="30" alt="" > <a
-                                href="../userConfig/index.html">Configurações</a></li>
+                        <li onclick="window.location.href='../definicao/index.html'">
+                            <img src="../../public/painel/Change User.svg" width="30" height="30" alt=""> <a
+                                href="../userConfig/index.html">Configurações</a>
+                        </li>
                         <li> <img src="../../public/painel/Exit Sign.svg" width="30" height="30" alt=""> <a
                                 href="../../cadastro/index.html"> Sair </a> </li>
                     </ul>
@@ -136,7 +138,7 @@
                 <br>
                 <div class="flex local">
                     <span class="text">Local: </span>
-                    <span> armazem 5 setor 2 - cima </span>
+                    <span> armazem 5 | setor 2 </span>
                 </div>
             </div>
 
@@ -165,7 +167,7 @@
                     <div class="container situacao">
                         <div class="max">Max | Min</div>
                         <div class="gravidade green"></div> <span>20º | 25º</span>
-                        <div class="gravidade red"></div> <span> 15º | 30º </span>
+                        <div class="gravidade red"></div> <span> &lt;20º | 30º&gt; </span>
                     </div>
                 </div>
             </div>
@@ -197,16 +199,18 @@
                     </div>
                 </div>
                 <div class="container situacao">
-                    <div class="gravidade green"></div> <span>20º | 25º</span>
-                    <div class="gravidade red"></div> <span> 15º | 30º </span>
+                    <div class="max">Max | Min</div>
+                    <div class="gravidade green"></div> <span>60% | 80%</span>
+                    <div class="gravidade red"></div> <span> &lt;60% | 80%&gt; </span>
                 </div>
             </div>
             <div class="box logs" id="log">
+                <div class="ampliar">
+                    <img src="./icons/Enlarge.svg" alt="" width="28" height="28">
+                </div>
                 <h2>Histórico</h2>
                 <span>Os ultimos 5 registros <b>deste</b> sensor</span>
                 <ul id="div_registros">
-                    
-
                 </ul>
             </div>
         </main>
@@ -216,7 +220,7 @@
 </html>
 <script>
     // Registros do historico
-    var registros = [[28, 80, 343], [13, 82, 343], [28, 83, 343], [23, 76, 343], [31, 87, 343], [43, 80, 343], [28, 82, 343]]
+    var registros = [[22, 70, 343], [16, 70, 343], [26, 65, 343], [23, 70, 343], [23, 75, 343], [26, 80, 343], [25, 82, 343]]
 
     //Animação da logo
     render()
@@ -227,6 +231,7 @@
     }
     init()
 
+    // altera menu
     var handleToggleMenuOn = true
     function handleToggleMenu() {
         if (handleToggleMenuOn) {
@@ -241,6 +246,7 @@
         }
     }
 
+    // altera grafico
     var handleToggleChartOn = true
     function handleToggleChart() {
         if (handleToggleChartOn) {
@@ -438,14 +444,12 @@
         var qtdRegistro = 5
         var qtdAlertasAtivos = 1
         var div_registrosHTML = ''
+        //Verificando e colocando cor nos historicos 
         while (contadorRegistros < qtdRegistro) {
             var color = 'green'
             var delay = contadorRegistros * 200
-            if ((registros[contadorRegistros][0] > 35 && registros[contadorRegistros][0] < 40) || (registros[contadorRegistros][0] < 28 && registros[contadorRegistros][0] > 20)) {
-                color = 'yellow'
-                qtdAlertasAtivos++
-            } else if (registros[contadorRegistros][0] >= 40 || registros[contadorRegistros][0] <= 20) {
-                color = 'red'
+            if (registros[contadorRegistros][0] > 25  || registros[contadorRegistros][0] < 20) {
+                 color = 'red'
                 qtdAlertasAtivos++
             }
             var contadorAlerta = 0
