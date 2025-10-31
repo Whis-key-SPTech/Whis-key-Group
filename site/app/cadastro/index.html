@@ -64,6 +64,12 @@
     }
     init();
 
+      function input() {
+        toast.style.top = '-80px'
+        ipt_email.classList.remove('shake', 'error')
+        ipt_senha.classList.remove('shake', 'error')
+    }
+
     function validarEmail() {
       var email = ipt_email.value.trim();
 
@@ -96,18 +102,23 @@
       }
     }
 
-
+//
     function cadastrar() {
+      var senha = ''
       var email = ipt_email.value.trim();
-      var senha = ipt_senha.value.trim();
+       senha = ipt_senha.value.trim();
       var nome_valor = nome.value.trim();
       var conf = confirmar_senha.value.trim();
+       var qtdNumeros = 0
+        var qtdEspecial = 0
 
+      //tremer a caixa de erro
       ipt_email.classList.remove('shake', 'error');
       ipt_senha.classList.remove('shake', 'error');
       nome.classList.remove('shake', 'error');
       confirmar_senha.classList.remove('shake', 'error');
 
+      //validar se as caixas estão preechidas
       if (email === '' || senha === '' || nome_valor === '' || conf === '') {
         mensagem_error.innerHTML = 'Por favor, preencha todos os campos.';
         toast.style.top = '20px';
@@ -117,7 +128,37 @@
         nome.classList.add('shake', 'error');
         confirmar_senha.classList.add('shake', 'error');
 
-      }
+      // variaveis com vetor
+      }else if(senha != ''){
+        var especial = ['@','#',"$","%","&","*", "(", ")"]
+        var numeros = ['0','1','2','3','4','5','6','7','8','9']
+        var count = 0
+         var countNum = 0
+      
+        //quantidade de caracteres especiais e numericas
+        while(count < especial.length){
+           if(senha.includes(especial[count])){
+              qtdEspecial++
+           }
+            count++
+            console.log('a')
+          }
+             while(countNum < numeros.lenght){
+            if(senha.includes(numeros[countNum])){
+              qtdNumeros++
+            }
+              countNum++
+          }
+            console.log('Especial: ' + qtdEspecial + " Especial: " + qtdNumeros )
+        }
+        else if(qtdEspecial < 1 && qtdNumeros < 1){
+           mensagem_error.innerHTML = 'Coloque pelo menos um caracter especial e um número';
+        toast.style.top = '20px';
+        toast.style.left = '20px';
+        ipt_senha.classList.add('shake', 'error');
+        confirmar_senha.classList.add('shake', 'error');
+        console.log('entrou')
+        }
       else if (senha != conf) {
         mensagem_error.innerHTML = 'As senhas não coincidem.';
         toast.style.top = '20px';
