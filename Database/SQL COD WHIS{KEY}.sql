@@ -12,9 +12,7 @@ DROP DATABASE BD_WHISKEY;
 CREATE TABLE empresa(
 id_empresa INT PRIMARY KEY AUTO_INCREMENT,
 nome_empresa VARCHAR (50)NOT NULL,
-cnpj CHAR (18) NOT NULL,
-dt_inicio_contrato DATE NOT NULL,
-dt_fim_contrato DATE
+cnpj CHAR (18) NOT NULL
 );
 
 -- Tabela em relação a localidade do sensor
@@ -92,12 +90,12 @@ DESC sensor;
 DESC localidade_sensor;
 
 -- Inserção dos dados na tabela empresa.
-INSERT INTO empresa (nome_empresa, cnpj, dt_inicio_contrato, dt_fim_contrato) VALUE
-	('Brown-Forman', '36.631.108/0001-20', '2025-08-20', NULL),
-	('Diageo plc', '62.166.848/0001-42', '2025-08-20', '2030-08-20'),
-	('Pernod Ricard', '33.856.394/0017-09', '2025-08-20', NULL),
-	('Bacardi Limited', '59.104.737/0001-05', '2025-08-20', '2027-08-20'),
-	('Beam Suntor', '17.530.779/0001-50', '2025-08-20', '2035-08-20');
+INSERT INTO empresa (nome_empresa, cnpj) VALUE
+	('Brown-Forman', '36.631.108/0001-20'),
+	('Diageo plc', '62.166.848/0001-42'),
+	('Pernod Ricard', '33.856.394/0017-09'),
+	('Bacardi Limited', '59.104.737/0001-05'),
+	('Beam Suntor', '17.530.779/0001-50');
     
 -- Localidade Sensor
 
