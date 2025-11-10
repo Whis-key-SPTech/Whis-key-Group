@@ -6,7 +6,6 @@
   }
 
 
-
   .main {
     display: flex;
     justify-content: space-around;
@@ -80,7 +79,7 @@
     height: 496px;
     width: 560px;
     padding: 40px 30px;
-    border-radius: 15px 15px 15px 15px;
+    border-radius: 5px 5px 5px 5px;
     background: #FFFAFA;
     box-shadow: 5px 6px 13px 2px rgb(10.98% 19.22% 11.76%);
     color: #000000;
@@ -138,7 +137,7 @@
     padding-left: 22px;
     border: none;
     outline: none;
-    border-radius: 20px;
+    border-radius: 10px;
     background: #D9D9D9;
     color: rgba(0, 0, 0, 0.6);
     font-size: 20px;
