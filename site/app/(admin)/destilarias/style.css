@@ -1,0 +1,274 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Alexandria", sans-serif;
+}
+
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Barra Lateral */
+.barra-lateral {
+    background-color: #F9F9F9;
+    width: 250px;
+    padding: 20px;
+    height: 100%;
+    position: fixed;
+    margin-top: 97px;
+   
+}
+.info-sensor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.navegacao-principal ul {
+    list-style: none;
+}
+
+.navegacao-principal li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navegacao-principal .ativo {
+    background-color: #ccffcc;
+    color: green;
+}
+
+.navegacao-secundaria ul {
+    list-style: none;
+}
+
+.navegacao-secundaria li {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.sair-vermelho {
+    color: red;
+}
+
+/* Conteúdo Principal */
+.conteudo-principal {
+    margin-left: 250px;
+    flex-grow: 1;
+    padding: 20px 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: baseline;
+    gap: 40px;
+}
+
+.resumo {
+    display: flex;
+    gap: 28px;
+}
+
+.cartao-resumo {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 4px 4px 4px #1c311e51;
+    width: 257px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.cartao-resumo.tipos-situacao {
+    width: 500px;
+    padding: 20px 34px;
+}
+
+.cartao-resumo h2 {
+    font-size: 32px;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+.tipos-situacao h2 {
+    font-size: 24px;
+    color: #1C311E;
+    font-weight: bold;
+}
+
+.cartao-resumo p {
+    font-size: 64px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #1C311E;
+}
+
+.tipos-situacao p {
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-weight: bolder;
+    align-self: flex-start;
+    color: #1C311E;
+}
+
+.estavel {
+    color: #50C156;
+}
+
+.atencao {
+    color: #FFA500;
+}
+
+.grave {
+    color: #CF1619;
+}
+
+.container {
+    width: 100%;
+    background-color: #F9F9F9;
+    border-radius: 20px;
+}
+
+.abas-navegacao {
+    display: flex;
+    justify-content: baseline;
+    background-color: #1C311E;
+    padding: 10px;
+    border-radius: 20px 20px 0px 0px;
+    margin-bottom: 20px;
+    align-items: center;
+    gap: 40px;
+}
+
+.abas-navegacao h2 {
+    color: white;
+    font-size: 32px;
+    justify-self: center;
+}
+
+
+.abas-navegacao ul {
+    display: flex;
+    list-style: none;
+    background-color: #1C311E;
+    color: white;
+}
+
+.abas-navegacao li {
+    padding: 10px 20px;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+    text-align: center;
+    flex: 0px;
+    font-weight: 300;
+}
+
+.abas-navegacao .aba-ativa {
+    font-weight: bolder;
+}
+
+.abas-navegacao li:not(:last-child)::before {
+    content: '';
+    height: 36px;
+    width: 1px;
+    background-color: #D9D9D9;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: scaleX(2);
+    transform-origin: right;
+}
+
+
+/* Lista de Destilarias */
+.lista-destilarias {
+    margin: 45px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    gap: 20px;
+    overflow-y: scroll;
+    height: 400px;
+    gap: 40px;
+}
+.lista-destilarias::-webkit-scrollbar  {
+      width: 8px; 
+}
+
+.lista-destilarias::-webkit-scrollbar-track {
+  background: #f1f1f100;
+  border-radius: 8px;
+}
+
+.lista-destilarias::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 8px;
+}
+
+.cartao-destilaria {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    border: solid 3px #1C311E;
+    color: #1C311E;
+    height: 187px;
+    cursor: pointer;
+}
+
+.cartao-destilaria h3 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.cartao-destilaria p {
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 25px;
+}
+
+.sensores-situacao {
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.sensores {
+    font-size: 40px;
+    font-weight: bold;
+    align-self: center;
+}
+
+.situacao {
+    font-size: 20px;
+    font-weight: bold;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cartao-destilaria.grave .situacao {
+    color: #CF1619;
+}
+
+.cartao-destilaria.atencao .situacao {
+    color: #FFA500;
+}
+
+.cartao-destilaria.estavel .situacao {
+    color: #50C156;
+}

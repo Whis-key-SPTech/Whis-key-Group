@@ -1,0 +1,140 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHISKEY</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+     <div class="header">
+            <a><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
+        </div>
+    <aside class="barra-lateral">
+        <nav class="navegacao-principal">
+            <ul>
+                <li class="ativo">
+                    Dashboard Geral
+                </li>
+                <li>
+                    Dashboard Barris
+                </li>
+                <li>
+                    Dashboard Sensor
+                </li>
+                <li>
+                    Usuários
+                </li>
+            </ul>
+        </nav>
+        <br><br>
+        <br>
+        <nav class="navegacao-secundaria">
+            <ul>
+                <li> Configurações</li>
+                <li>Trocar conta</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="conteudo-principal">
+        <section class="resumo">
+            <div class="cartao-resumo sensores">
+                <h2>Sensores</h2>
+                <p>24</p>
+            </div>
+            <div class="cartao-resumo ultimas-horas">
+                <h2>Nas últimas</h2>
+                <p>10h</p>
+            </div>
+            <div class="cartao-resumo tipos-situacao">
+                <h2>TIPOS DE SITUAÇÃO</h2>
+                <p><span class="estavel">ESTÁVEL:</span> 0 alertas ativos</p>
+                <p><span class="atencao">ATENÇÃO:</span> >=1 alertas em atenção</p>
+                <p><span class="grave">GRAVE:</span> >=1 alertas grave</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <nav class="abas-navegacao">
+                <ul>
+                    <li class="aba-ativa">Todas</li>
+                    <li>Grave</li>
+                    <li>Atenção</li>
+                    <li>Estável</li>
+                </ul>
+                <h2>Destilarias</h2>
+            </nav>
+
+            <section class="lista-destilarias">
+                <div class="cartao-destilaria grave">
+                    <h3>Destilaria 04</h3>
+                    <p>Localidade: Rua General</p>
+                    <div class="sensores-situacao">
+                        <span >SENSORES<br><span class="sensores">6</span></span>
+                        <span>SITUAÇÃO ATUAL<br><span class="situacao">GRAVE</span></span>
+                    </div>
+                </div>
+                <div class="cartao-destilaria grave">
+                    <h3>Destilaria 05</h3>
+                    <p>Localidade: Rua Miguel</p>
+                    <div class="sensores-situacao">
+                        <span>SENSORES<br><span class="sensores">3</span></span>
+                        <span>SITUAÇÃO ATUAL<br><span class="situacao">GRAVE</span></span>
+                    </div>
+                </div>
+                <div class="cartao-destilaria atencao">
+                    <h3>Destilaria 08</h3>
+                    <p>Localidade: Rua Vitorino</p>
+                    <div class="sensores-situacao">
+                        <span >SENSORES<br><span class="sensores">4</span></span>
+                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ATENÇÃO</span></span>
+                    </div>
+                </div>
+                <div class="cartao-destilaria atencao">
+                    <h3>Destilaria 01</h3>
+                    <p>Localidade: Rua Boa Vista</p>
+                    <div class="sensores-situacao">
+                        <span >SENSORES<br><span class="sensores">9</span></span>
+                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ATENÇÃO</span></span>
+                    </div>
+                </div>
+                <div class="cartao-destilaria estavel">
+                    <h3>Destilaria 02</h3>
+                    <p>Localidade: Rua Quitauna</p>
+                    <div class="sensores-situacao">
+                        <span >SENSORES<br><span class="sensores">2</span></span>
+                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
+                    </div>
+                </div>
+                <div class="cartao-destilaria estavel">
+                    <h3>Destilaria 04</h3>
+                    <p>Localidade: Rua Belval</p>
+                    <div class="sensores-situacao">
+                        <span >SENSORES<br><span class="sensores">4</span></span>
+                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
+                    </div>
+                </div>
+                <div class="cartao-destilaria estavel">
+                    <h3>Destilaria 10</h3>
+                    <p>Localidade: Rua  Rowling</p>
+                    <div class="sensores-situacao">
+                        <span >SENSORES<br><span class="sensores">2</span></span>
+                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
+                    </div>
+                </div>
+        </div>
+        </section>
+    </main>
+</body>
+
+</html>

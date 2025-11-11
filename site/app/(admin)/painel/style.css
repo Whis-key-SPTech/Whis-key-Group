@@ -137,27 +137,6 @@ body {
     transform: translateX(52px);
 }
 
-
-.header {
-    height: 97px;
-    width:100%;
-    display: flex;
-    align-items: center;
-    background-color: #1C311E;
-    margin-bottom: 11px;
-    z-index: 100;
-    width: 100%;
-    position: absolute;
-    top: 0px;
-    box-shadow: 15px 7px 4px 0px rgba(0, 0, 0, 0.3);  
-}
-
-.header a {
-    margin-left: -20px;
-}
-
-
-
 .navbarMenu ul.lista-menu {
     list-style: none;
     display: flex;

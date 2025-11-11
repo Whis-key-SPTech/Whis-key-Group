@@ -12,22 +12,20 @@
 </head>
 
 <body>
-     <header id="header">
-    <nav>
-      <a href="../painel/index.html"><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
-    </nav>
-    <div class="navbar">
-    </div>
-  </header>
+    <header id="header">
+        <nav>
+            <a href="../painel/index.html"><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
+        </nav>
+        <div class="navbar">
+        </div>
+    </header>
     <main>
         <div class="box_left">
             <span class="title">PERFIL ATUAL</span>
 
             <div class="container">
-                <img src="../../public/painel/Test Account.svg" 
-                alt="" 
-                class="user"
-                style="background-color: #1C311E; border-radius: 50%; width: 70px; height: 70px; object-fit: cover;">
+                <img src="../../public/painel/Test Account.svg" alt="" class="user"
+                    style="background-color: #1C311E; border-radius: 50%; width: 70px; height: 70px; object-fit: cover;">
                 <span class="username">Júlia Araripe</span>
                 <span class="useremail">julia.araripe@whiskey.com</span>
                 <span class="userinfo">00.000.000/0001-00</span>
@@ -47,37 +45,19 @@
                     <table class="table_users">
                         <thead>
                             <tr class="table_head">
-                                <th><input type="checkbox" name="" id="checkbox"></th>
+                                <th><input type="checkbox" name="" class='checkbox' id="checkbox" onclick="selectAll()">
+                                </th>
                                 <th>Nome</th>
                                 <th>E-mail</th>
-                                <th>Cargo</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="checkbox" name="" id="checkbox"></td>
-                                <td>Vitória Ferreira</td>
-                                <td>vitoria@whiskey.tech</td>
-                                <td>Gerente</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" name="" id="checkbox"></td>
-                                <td>André Santos</td>
-                                <td>andre@whiskey.tech</td>
-                                <td>Analista</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" name="" id="checkbox"></td>
-                                <td>Giovanni Angel</td>
-                                <td>giovanni@whiskey.tech</td>
-                                <td>Técnico do Sensor</td>
-                            </tr>
+                        <tbody id="tabela">
                         </tbody>
                     </table>
                 </div>
 
                 <div class="nav">
-                    <button>
+                    <button onclick="deletar()">
                         <img src="icons/icon_trash.png" alt="">
                         DELETAR</button>
 
@@ -93,5 +73,54 @@
         </div>
     </main>
 </body>
+<script>
+    var listaUsuarios = [
+        [1, 'Vitória Ferreira', 'vitoria@whiskey.tech'],
+        [2, 'André Santos', 'andre@whiskey.tech'],
+        [3, 'Giovanni Angel', 'giovanni@whiskey.tech']
+    ]
+    var listaSelect = []
+
+    function render() {
+        var tabelaHtml = ''
+        var cont = 0
+        for (var cont = 0; cont < listaUsuarios.length; cont++) {
+            var pessoa = listaUsuarios[cont]
+            tabelaHtml += ` <tr>
+                                <td><input type="checkbox" oninput="selecionar(${pessoa[0]})" value=${pessoa[0]} name="" class='checkbox'
+                                        id="checkbox${pessoa[0]}"></td>
+                                <td>${pessoa[1]}</td>
+                                <td>${pessoa[2]}</td>
+                            </tr> `
+        }
+        tabela.innerHTML = tabelaHtml
+    }
+    render()
+    function selecionar(id) {
+        listaSelect.push(id)
+    }
+    function deletar() {
+        console.log('lista select: ' + listaSelect)
+        var novaLista = []
+        for (var i = 0; i < listaUsuarios.length; i++) {
+            var usuarioAtual = listaUsuarios[i]
+            for (var iS = 0; iS < listaSelect.length; iS++) {
+                if (usuarioAtual[0] != listaSelect[iS]) {
+                        novaLista.push(usuarioAtual);
+                }
+            }
+        }
+        listaSelect = []
+        listaUsuarios = novaLista
+        render()
+        console.log('nova lista: ' + novaLista)
+    }
+
+    function selectAll() {
+        for (var i = 0; i < listaUsuarios; i++) {
+            listaSelect.push(listaUsuarios[i][0])
+        }
+    }
+</script>
 
 </html>
