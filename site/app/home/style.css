@@ -11,7 +11,6 @@ body{
         width:100%;
         height:507px;
         box-shadow: 15px 7px 4px 0px rgba(0, 0, 0, 0.3);
-        margin-top: 5vh;
         display: flex;
         justify-content: space-between;
     }
@@ -21,20 +20,26 @@ body{
     }
 
     #banner{
-        font-family:'Angleton';
-        color: white;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 65px;
+        background-size: cover;       
+    background-position: center;   
+    background-repeat: no-repeat;  
+         background-image: url("../public/institucional/barris.png");
+    font-family: 'Angleton';
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 65px;
+    opacity: 80px;
+    width: 100%;
+    height: 450px;;
     }
     #frase{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-size: 22.5px;
-        
+      width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    font-size: 22.5px;
     }
      #frase h1{
         width: 463px;
@@ -43,64 +48,95 @@ body{
 
 /* inicio descricao*/
 
-    .descricao{
-        background-image: url(../public/background/forma.png);
-        background-repeat: no-repeat;
-        background-size: cover; 
-        height: 850.5px;
-        display: flex;            
-        align-items: center;  
-        margin-bottom: 140px;     
-    }
-    .flex{
-        display: flex;            
-        align-items: center;      
-        justify-content: space-between;   
-        max-width: 1200px;
-        width: 100%;
-        margin: 0px auto
-    }
+  .descricao {
+    background-image: url("../public/background/forma.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 80px 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 140px;
+}
 
-    .descricao .container{
-       position: relative;
-       width: 595px;
-       text-align: left;
-    }
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 60px; /* espaçamento elegante */
+}
 
-     .descricao .container::after{
-       content: '{';
-       position: absolute;
-       left: -45px;
-       top: 0px;
-       color: #FFA500;
-       font-size: 80px;
-       font-weight: lighter;
-       
-    }
-      .descricao .container::before{
-       content: '}';
-       position: absolute;
-       right: 60px;
-       bottom: 90px;
-       color: #FFA500;
-       font-size: 80px;
-       font-weight: lighter;
-       
-    }
-    .descricao h1{
-        font-family:'GothanL';
-        color: black;
-        text-align: left;
-        font-size: 45px;
-        margin-bottom: 45px;
-    }
-    .descricao h1 span{
-        color: #FFA500;
-    }
-    #velho img{
-        width: 370px;
-        height: 540px;
-    }
+.descricao .container {
+   position: relative;
+   max-width: 580px;
+   text-align: left;
+   line-height: 1.4;
+}
+
+.descricao .container::after {
+   content: '{';
+   position: absolute;
+   left: -35px;
+   top: -10px;
+   color: #FFA500;
+   font-size: 90px;
+   font-weight: 300;
+   opacity: 0.8;
+}
+
+.descricao .container::before {
+   content: '}';
+   position: absolute;
+   right: -25px;
+   bottom: -30px;
+   color: #FFA500;
+   font-size: 90px;
+   font-weight: 300;
+   opacity: 0.8;
+}
+
+.descricao h1 {
+    font-family: 'Gothan', Light;
+    color: #1c1c1c;
+    font-size: 42px;
+    margin-bottom: 28px;
+}
+
+.descricao h1 span {
+    color: #FFA500;
+    font-weight: 600;
+}
+
+.descricao p {
+    font-size: 20px;
+    color: #474747;
+    margin-bottom: 32px;
+}
+
+.botao {
+    background: #002614;
+    color: white;
+    padding: 16px 36px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: .3s;
+}
+
+.botao:hover {
+    background: #01371f;
+    transform: scale(1.06);
+}
+
+#velho img {
+    width: 400px;
+    height: auto;
+    border-radius: 12px; 
+    object-fit: cover;
+}
     #contato{
         width: 376px;
         height: 70px;
@@ -111,38 +147,48 @@ body{
         font-size: 30px;
         
     }
-    .quem_somos{
-        display: flex;
-        align-items: center;
-        justify-items: center;
-        flex-direction: column;
-        max-width: 824px;
-        width: 100%;
-        margin: 0px auto;
-        margin-bottom: 140px;
-    }
-    
-  .quem_somos h1{
-        font-size: 70px;
-        font-weight: lighter;
-    }
+   .quem_somos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 
-   .quem_somos p{
-        font-size: 40px;
-        width: 824px;
-        text-align: center;
-        font-weight: lighter;
-    }
-
-    
-button{
-    cursor: pointer;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto 120px auto;
+  padding: 0 1.5rem;
 }
 
-button:active{
-    transform: scale(0.97);
+
+.quem_somos h1 {
+  font-size: 3rem;
+  font-weight: 300;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
 }
 
+.quem_somos p {
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 780px;
+  color: #333;
+}
+
+button {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 14px rgba(0,0,0,0.15);
+}
+
+button:active {
+  transform: scale(0.97);
+}
 
 .box_simulacao {
     display: flex;
@@ -176,7 +222,8 @@ button:active{
     font-weight: lighter;
     font-style: italic;
     margin-bottom: 10px;
-    color: white;
+    color:  #ffffffd6;
+;
 }
 
 .btn_simulador{
@@ -266,7 +313,7 @@ button:active{
     padding-top: 10px;
 }
 /* nova adição */
- .conteiner-regra {
+.conteiner-regra {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2.5rem;
@@ -277,31 +324,33 @@ button:active{
 
 .card {
   position: relative;
-  border-radius: 10px;
-  border: 2px solid #FFA500; 
-  top: 10px;
-  bottom: 10px;
+  border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.1s ease;
-
+  background: #ffffff;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border 0.35s ease;
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 5px 8px 20px #1c311e;
+  transform: translateY(-8px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+  border: 2px solid #FFA500;
 }
 
 .card img {
-  width: 80%;
-  height: auto;
+  width: 100%;
+  height: 230px;
   object-fit: cover;
-  opacity:0.8;
-  transition: opacity 0.3s ease;
+  opacity: 0.85;
+  transition: opacity 0.3s ease, transform 0.4s ease;
 }
 
 .card:hover img {
   opacity: 1;
+  transform: scale(1.05);
 }
 
 .card-content {
@@ -309,25 +358,26 @@ button:active{
   bottom: 1rem;
   left: 1rem;
   right: 1rem;
-  color: black;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  padding: 0.4rem 0;
+  color: #000;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.4);
 }
 
 .card-content h5 {
   font-family: "Lato", sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  opacity: 0.85;
-  margin-bottom: 6px;
-  color: #FFA500;
+  font-weight: 700;
+  color: #002614;
+  margin-bottom: 3px;
 }
 
 .card-content h3 {
   font-family: "Lato", sans-serif;
-  font-size: 1.2rem;
-  font-weight: 500;
- 
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
 }
 
 .form_contato .ipt_mensagem{
