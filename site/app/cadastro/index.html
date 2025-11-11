@@ -130,49 +130,80 @@
         nome.classList.add('shake', 'error');
         confirmar_senha.classList.add('shake', 'error');
 
-        // variaveis com vetor
+      
       } else {
-        var especial = ['@', '#', "$", "%", "&", "*", "(", ")"]
-        var numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-        var count = 0
-        var countNum = 0
+        
+var especial = ['@', '#', "$", "%", "&", "*", "(", ")"]
+var numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+var count = 0
+var countNum = 0
 
-        //quantidade de caracteres especiais e numericas
-        while (count < especial.length) {
-          if (senha.includes(especial[count])) {
-            qtdEspecial++
-          }
-          count++
-          console.log('a')
-        }
-        while (countNum < numeros.length) {
-          if (senha.includes(numeros[countNum])) {
-            qtdNumeros++
-          }
-          countNum++
-        }
-        if (qtdEspecial < 1 || qtdNumeros < 1) {
-          mensagem_error.innerHTML = 'Coloque pelo menos um caracter especial e um número';
-          toast.style.top = '20px';
-          toast.style.left = '20px';
-          ipt_senha.classList.add('shake', 'error');
-          confirmar_senha.classList.add('shake', 'error');
-          console.log('entrou')
-        }else if (senha != conf) {
-          mensagem_error.innerHTML = 'As senhas não coincidem.';
-          toast.style.top = '20px';
-          toast.style.left = '20px';
-          ipt_senha.classList.add('shake', 'error');
-          confirmar_senha.classList.add('shake', 'error');
-        }
-        else {
-          toast.style.left = '20px';
-          ipt_email.classList.remove('shake', 'error');
-          ipt_senha.classList.remove('shake', 'error');
-          nome.classList.remove('shake', 'error');
-          confirmar_senha.classList.remove('shake', 'error');
-          window.location.href = '../login/index.html';
-        }
-      }
+while (count < especial.length) {
+  if (senha.includes(especial[count])) {
+    qtdEspecial++
+  }
+  count++
+}
+
+while (countNum < numeros.length) {
+  if (senha.includes(numeros[countNum])) {
+    qtdNumeros++
+  }
+  countNum++
+}
+
+if (qtdEspecial < 1 || qtdNumeros < 1) {
+  mensagem_error.innerHTML = 'Coloque pelo menos um caracter especial e um número';
+  toast.style.top = '20px';
+  toast.style.left = '20px';
+  ipt_senha.classList.add('shake', 'error');
+  confirmar_senha.classList.add('shake', 'error');
+  return;
+} else if (senha != conf) {
+  mensagem_error.innerHTML = 'As senhas não coincidem.';
+  toast.style.top = '20px';
+  toast.style.left = '20px';
+  ipt_senha.classList.add('shake', 'error');
+  confirmar_senha.classList.add('shake', 'error');
+  return;
+}
+}
+// Enviando o valor da nova input
+fetch("/usuarios/cadastrar", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    nomeServer: nome_valor,
+    emailServer: email,
+    senhaServer: senha
+  }),
+})
+  .then(function (resposta) {
+    console.log("resposta: ", resposta);
+
+    if (resposta.ok) {
+      alert ("Cadastro realizado com sucesso! Redirecionando...");
+      toast.style.remove = '20px';
+
+      setTimeout(() => {
+        window.location.href = '../login/index.html';
+      }, 2000);
+
+    } else {
+      alert ("Houve um erro ao tentar realizar o cadastro!");
     }
+  })
+  .catch(function (resposta) {
+    console.log(`#ERRO: ${resposta}`);
+  });
+
+return false;
+      }
+    
+
+
+    
+
   </script>
