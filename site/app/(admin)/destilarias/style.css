@@ -12,6 +12,10 @@ body {
     height: 100vh;
 }
 
+a{
+    text-decoration: none;
+    pointer-events: none;
+}
 /* Barra Lateral */
 .barra-lateral {
     background-color: #F9F9F9;
@@ -22,13 +26,8 @@ body {
     margin-top: 97px;
    
 }
-.info-sensor{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
+
+
 .navegacao-principal ul {
     list-style: none;
 }
@@ -60,9 +59,8 @@ body {
 
 /* Conteúdo Principal */
 .conteudo-principal {
-    margin-left: 250px;
     flex-grow: 1;
-    padding: 20px 75px;
+    padding: 20px 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,7 +79,7 @@ body {
     border-radius: 15px;
     text-align: center;
     box-shadow: 4px 4px 4px #1c311e51;
-    width: 257px;
+    width: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -90,31 +88,33 @@ body {
 }
 
 .cartao-resumo.tipos-situacao {
-    width: 500px;
+    width: 400px;
     padding: 20px 34px;
 }
-
-.cartao-resumo h2 {
-    font-size: 32px;
+.cartao-resumo.ultimas-horas{
+    width: 500px;
+}
+.cartao-resumo h3 {
+    font-size: 26px;
     margin-bottom: 25px;
     font-weight: 400;
 }
 
-.tipos-situacao h2 {
+.tipos-situacao h3{
     font-size: 24px;
     color: #1C311E;
     font-weight: bold;
 }
 
 .cartao-resumo p {
-    font-size: 64px;
+    font-size: 28px;
     margin-bottom: 10px;
     font-weight: bold;
     color: #1C311E;
 }
 
 .tipos-situacao p {
-    font-size: 24px;
+    font-size: 18px;
     margin-bottom: 5px;
     font-weight: bolder;
     align-self: flex-start;
@@ -141,13 +141,14 @@ body {
 
 .abas-navegacao {
     display: flex;
-    justify-content: baseline;
+    justify-content: space-around;
     background-color: #1C311E;
     padding: 10px;
     border-radius: 20px 20px 0px 0px;
     margin-bottom: 20px;
     align-items: center;
     gap: 40px;
+    color: white;
 }
 
 .abas-navegacao h2 {
@@ -155,7 +156,14 @@ body {
     font-size: 32px;
     justify-self: center;
 }
-
+.filter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.filter h4{
+    color: white;
+}
 
 .abas-navegacao ul {
     display: flex;
@@ -191,15 +199,15 @@ body {
 }
 
 
-/* Lista de Destilarias */
 .lista-destilarias {
     margin: 45px;
     display: grid;
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
     gap: 20px;
     overflow-y: scroll;
     height: 400px;
     gap: 40px;
+      pointer-events: none;
 }
 .lista-destilarias::-webkit-scrollbar  {
       width: 8px; 
@@ -224,6 +232,12 @@ body {
     color: #1C311E;
     height: 187px;
     cursor: pointer;
+    transition: 0.6s ease-in-out;
+    pointer-events: all;
+    z-index: 10;
+}
+.cartao-destilaria:hover{
+    transform: translateY(0.8px);
 }
 
 .cartao-destilaria h3 {

@@ -1,6 +1,7 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,112 +10,139 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
-<body>
-     <div class="header">
-            <a><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
-        </div>
-    <aside class="barra-lateral">
-        <nav class="navegacao-principal">
-            <ul>
-                <li>
-                   Dashboard Geral
-                </li>
-                <li class="ativo">
-                    Dashboard Barris
-                </li>
-                <li>
-                    Dashboard Sensor
-                </li>
-                <li>
-                    Usuários
-                </li>
-            </ul>
-        </nav>
-        <nav class="navegacao-secundaria">
-            <ul>
-                <li> Configurações</li>
-                <li> Trocar conta</li>
-                <li class="sair-vermelho"> Sair</li>
-            </ul>
-        </nav>
-    </aside>
 
+<body>
+    <div class="header">
+        <a><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
+    </div>
     <main class="conteudo-principal">
         <section class="resumo">
-            <div>
-            <h2 class="titulo-destilarias">Destilarias 04</h2>
-            <p>Localidade: Rua General</p>
-            </div>
-            <div class="cartao-resumo sensores">
-                <h2>SENSORES</h2>
-                <p>06</p>
-            </div>
-            <div class="cartao-resumo atencao">
-                <h2>ATENÇÃO</h2>
-                <p>04</p>
+            <div class="cartao-localizacao">
+                <h2 class="titulo-destilarias">Destilarias 04</h2>
+                <p>Localidade: Rua General</p>
             </div>
             <div class="cartao-resumo grave">
                 <h2>GRAVE</h2>
-                <p>01</p>
+                <p>02</p>
+            </div>
+            <div class="cartao-resumo atencao">
+                <h2>ATENÇÃO</h2>
+                <p>03</p>
+            </div>
+             <div class="cartao-resumo sensores">
+                <h2>SENSORES</h2>
+                <p>06</p>
+            </div>
+            <div class="cartao-resumo ultimas-horas">
+                 <h3>Maior intervalo em alerta GRAVE</h3>
+                 <br>
+                <p>Sensor 1 - 6 horas</p>
             </div>
         </section>
-
         <div class="container">
             <nav class="abas-navegacao">
-                <ul>
-                    <li class="aba-ativa">Todos</li>
-                    <li>Grave</li>
-                    <li>Atenção</li>
-                    <li>Estável</li>
-                </ul>
-                <h2>Sensores</h2>
+               <h2>Sensores</h2>
+                <div class="filter">
+                    <h4>Filtros:</h4>
+                    <ul>
+                        <li class="aba-ativa">Todas</li>
+                        <li>Grave</li>
+                        <li>Atenção</li>
+                        <li>Estável</li>
+                    </ul>
+                </div>
+                <h3>Período: últimas 10h</h3>
             </nav>
 
             <section class="lista-sensores">
-                <div class="cartao-sensor atencao">
+                <div class="cartao-sensor  grave">
                     <div class="icone-barril">
-                        <img src="../sensores/TESTE_02 1.svg" width="70" alt="">
+                        <img src="../sensores/TESTE_02 1.svg" width="60" alt="">
                     </div>
                     <div class="info-sensor">
-                    <h3>Sensor 01</h3>
-                    <p class="temperatura"> 37°C<br>Temperatura</p>
-                    <p class="umidade"> 60%<br>Umidade</p>
+                        <h3>Sensor 06</h3>
+                        <div>
+                            <span class="temperatura"> 37°C </span><br><span>Temperatura</span>
+                        </div>
+                        <div>
+                            <span class="umidade"> 40% </span><br><span>Umidade</span>
+                        </div>
                     </div>
                 </div>
                 <div class="cartao-sensor grave">
-                    <h3>Sensor 02</h3>
-                    <div class="icone-barril"></div>
-                    <p class="temperatura">37°C<br>Temperatura</p>
-                    <p class="umidade"> 60%<br>Umidade</p>
+                    <div class="icone-barril">
+                        <img src="../sensores/TESTE_02 1.svg" width="60" alt="">
+                    </div>
+                    <div class="info-sensor">
+                        <h3>Sensor 02</h3>
+                        <div>
+                            <span class="temperatura"> 37°C </span><br><span>Temperatura</span>
+                        </div>
+                        <div>
+                            <span class="umidade"> 60% </span><br><span>Umidade</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cartao-sensor atencao">
+                    <div class="icone-barril">
+                        <img src="../sensores/TESTE_02 1.svg" width="60" alt="">
+                    </div>
+                    <div class="info-sensor">
+                        <h3>Sensor 03</h3>
+                        <div>
+                            <span class="temperatura"> 27°C </span><br><span>Temperatura</span>
+                        </div>
+                        <div>
+                            <span class="umidade"> 75% </span><br><span>Umidade</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cartao-sensor atencao">
+                    <div class="icone-barril">
+                        <img src="../sensores/TESTE_02 1.svg" width="60" alt="">
+                    </div>
+                    <div class="info-sensor">
+                        <h3>Sensor 04</h3>
+                        <div>
+                            <span class="temperatura"> 27°C </span><br><span>Temperatura</span>
+                        </div>
+                        <div>
+                            <span class="umidade"> 60% </span><br><span>Umidade</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cartao-sensor atencao">
+                    <div class="icone-barril">
+                        <img src="../sensores/TESTE_02 1.svg" width="60" alt="">
+                    </div>
+                    <div class="info-sensor">
+                        <h3>Sensor 01</h3>
+                        <div>
+                            <span class="temperatura"> 26°C </span><br><span>Temperatura</span>
+                        </div>
+                        <div>
+                            <span class="umidade"> 72% </span><br><span>Umidade</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="cartao-sensor estavel">
-                    <h3>Sensor 03</h3>
-                    <div class="icone-barril"></div>
-                    <p class="temperatura"> 37°C<br>Temperatura</p>
-                    <p class="umidade"> 60%<br>Umidade</p>
-                </div>
-                <div class="cartao-sensor atencao">
-                    <h3>Sensor 03</h3>
-                    <div class="icone-barril"></div>
-                    <p class="temperatura"> 37°C<br>Temperatura</p>
-                    <p class="umidade"> 60%<br>Umidade</p>
-                </div>
-                <div class="cartao-sensor atencao">
-                    <h3>Sensor 04</h3>
-                    <div class="icone-barril"></div>
-                    <p class="temperatura">37°C<br>Temperatura</p>
-                    <p class="umidade">60%<br>Umidade</p>
-                </div>
-                <div class="cartao-sensor atencao">
-                    <h3>Sensor 05</h3>
-                    <div class="icone-barril"></div>
-                    <p class="temperatura">37°C<br>Temperatura</p>
-                    <p class="umidade"> 60%<br>Umidade</p>
-                </div>
+                    <div class="icone-barril">
+                        <img src="../sensores/TESTE_02 1.svg" width="60" alt="">
+                    </div>
+                    <div class="info-sensor">
+                        <h3>Sensor 5</h3>
+                        <div>
+                            <span class="temperatura"> 37°C </span><br><span>Temperatura</span>
+                        </div>
+                        <div>
+                            <span class="umidade"> 60% </span><br><span>Umidade</span>
+                        </div>
+                    </div>
             </section>
         </div>
     </main>
 </body>
+
 </html>

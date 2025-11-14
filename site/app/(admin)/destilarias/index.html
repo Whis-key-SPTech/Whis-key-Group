@@ -16,48 +16,21 @@
 </head>
 
 <body>
-     <div class="header">
-            <a><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
-        </div>
-    <aside class="barra-lateral">
-        <nav class="navegacao-principal">
-            <ul>
-                <li class="ativo">
-                    Dashboard Geral
-                </li>
-                <li>
-                    Dashboard Barris
-                </li>
-                <li>
-                    Dashboard Sensor
-                </li>
-                <li>
-                    Usuários
-                </li>
-            </ul>
-        </nav>
-        <br><br>
-        <br>
-        <nav class="navegacao-secundaria">
-            <ul>
-                <li> Configurações</li>
-                <li>Trocar conta</li>
-            </ul>
-        </nav>
-    </aside>
-
+    <div class="header">
+        <a><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
+    </div>
     <main class="conteudo-principal">
         <section class="resumo">
-            <div class="cartao-resumo sensores">
-                <h2>Sensores</h2>
-                <p>24</p>
-            </div>
             <div class="cartao-resumo ultimas-horas">
-                <h2>Nas últimas</h2>
-                <p>10h</p>
+                <h3>Maior intervalo em alerta GRAVE</h3>
+                <p>Destilaria 1 - 4 horas</p>
+            </div>
+            <div class="cartao-resumo sensores">
+                <h3>Sensores</h3>
+                <p>30</p>
             </div>
             <div class="cartao-resumo tipos-situacao">
-                <h2>TIPOS DE SITUAÇÃO</h2>
+                <h3>TIPOS DE SITUAÇÃO</h3>
                 <p><span class="estavel">ESTÁVEL:</span> 0 alertas ativos</p>
                 <p><span class="atencao">ATENÇÃO:</span> >=1 alertas em atenção</p>
                 <p><span class="grave">GRAVE:</span> >=1 alertas grave</p>
@@ -66,69 +39,68 @@
 
         <div class="container">
             <nav class="abas-navegacao">
-                <ul>
-                    <li class="aba-ativa">Todas</li>
-                    <li>Grave</li>
-                    <li>Atenção</li>
-                    <li>Estável</li>
-                </ul>
                 <h2>Destilarias</h2>
+                <div class="filter">
+                    <h4>Filtros:</h4>
+                    <ul>
+                        <li class="aba-ativa">Todas</li>
+                        <li>Grave</li>
+                        <li>Atenção</li>
+                        <li>Estável</li>
+                    </ul>
+                </div>
+                <h3>Periodo: últimas 10h</h3>
             </nav>
 
             <section class="lista-destilarias">
-                <div class="cartao-destilaria grave">
-                    <h3>Destilaria 04</h3>
-                    <p>Localidade: Rua General</p>
-                    <div class="sensores-situacao">
-                        <span >SENSORES<br><span class="sensores">6</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">GRAVE</span></span>
+                <a href="../sensores/index.html">
+                    <div class="cartao-destilaria grave">
+                        <h3>Rua General</h3>
+                        <br> <div class="sensores-situacao">
+                            <span>SENSORES<br><span class="sensores">6</span></span>
+                            <span>SITUAÇÃO ATUAL<br><span class="situacao">GRAVE</span></span>
+                        </div>
                     </div>
-                </div>
+                </a>
                 <div class="cartao-destilaria grave">
-                    <h3>Destilaria 05</h3>
-                    <p>Localidade: Rua Miguel</p>
-                    <div class="sensores-situacao">
+                    <h3>Rua Miguel</h3>
+                    <br> <div class="sensores-situacao">
                         <span>SENSORES<br><span class="sensores">3</span></span>
                         <span>SITUAÇÃO ATUAL<br><span class="situacao">GRAVE</span></span>
                     </div>
                 </div>
                 <div class="cartao-destilaria atencao">
-                    <h3>Destilaria 08</h3>
-                    <p>Localidade: Rua Vitorino</p>
-                    <div class="sensores-situacao">
-                        <span >SENSORES<br><span class="sensores">4</span></span>
+                    <h3>Rua Vitoria</h3>
+                    <br> <div class="sensores-situacao">
+                        <span>SENSORES<br><span class="sensores">4</span></span>
                         <span>SITUAÇÃO ATUAL<br><span class="situacao">ATENÇÃO</span></span>
                     </div>
                 </div>
                 <div class="cartao-destilaria atencao">
-                    <h3>Destilaria 01</h3>
-                    <p>Localidade: Rua Boa Vista</p>
-                    <div class="sensores-situacao">
-                        <span >SENSORES<br><span class="sensores">9</span></span>
+                    <h3>Rua Boa Vista</h3>
+                    <br> <div class="sensores-situacao">
+                        <span>SENSORES<br><span class="sensores">9</span></span>
                         <span>SITUAÇÃO ATUAL<br><span class="situacao">ATENÇÃO</span></span>
                     </div>
                 </div>
                 <div class="cartao-destilaria estavel">
-                    <h3>Destilaria 02</h3>
-                    <p>Localidade: Rua Quitauna</p>
-                    <div class="sensores-situacao">
-                        <span >SENSORES<br><span class="sensores">2</span></span>
+                    <h3>Rua Quitauna</h3>
+                    <br> <div class="sensores-situacao">
+                        <span>SENSORES<br><span class="sensores">2</span></span>
                         <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
                     </div>
                 </div>
                 <div class="cartao-destilaria estavel">
-                    <h3>Destilaria 04</h3>
-                    <p>Localidade: Rua Belval</p>
-                    <div class="sensores-situacao">
-                        <span >SENSORES<br><span class="sensores">4</span></span>
+                    <h3>Rua Belval</h3>
+                    <br> <div class="sensores-situacao">
+                        <span>SENSORES<br><span class="sensores">4</span></span>
                         <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
                     </div>
                 </div>
                 <div class="cartao-destilaria estavel">
-                    <h3>Destilaria 10</h3>
-                    <p>Localidade: Rua  Rowling</p>
-                    <div class="sensores-situacao">
-                        <span >SENSORES<br><span class="sensores">2</span></span>
+                    <h3>Rua Rowling</h3>
+                    <br> <div class="sensores-situacao">
+                        <span>SENSORES<br><span class="sensores">2</span></span>
                         <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
                     </div>
                 </div>
