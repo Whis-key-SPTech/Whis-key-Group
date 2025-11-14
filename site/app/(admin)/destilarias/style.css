@@ -60,7 +60,7 @@ a{
 /* Conteúdo Principal */
 .conteudo-principal {
     flex-grow: 1;
-    padding: 20px 90px;
+    padding: 45px 75px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -200,14 +200,12 @@ a{
 
 
 .lista-destilarias {
-    margin: 45px;
+    margin: 30px;
     display: grid;
     grid-template-columns: repeat(4, minmax(200px, 1fr));
-    gap: 20px;
+    gap: 14px;
     overflow-y: scroll;
-    height: 400px;
-    gap: 40px;
-      pointer-events: none;
+    pointer-events: none;
 }
 .lista-destilarias::-webkit-scrollbar  {
       width: 8px; 
@@ -230,7 +228,7 @@ a{
     text-align: center;
     border: solid 3px #1C311E;
     color: #1C311E;
-    height: 187px;
+    height: 170px;
     cursor: pointer;
     transition: 0.6s ease-in-out;
     pointer-events: all;
@@ -239,15 +237,19 @@ a{
 .cartao-destilaria:hover{
     transform: translateY(0.8px);
 }
+.cartao-resumo .grave{
+    color: #CF1619;
+    font-weight: bold;
+}
 
 .cartao-destilaria h3 {
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 500;
     margin-bottom: 6px;
 }
 
 .cartao-destilaria p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 300;
     margin-bottom: 25px;
 }
