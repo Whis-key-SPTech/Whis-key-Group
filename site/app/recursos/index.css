@@ -51,9 +51,9 @@ main{
 }
 
 
-.container_p01 img {
+.container_p01{
   flex-shrink: 0;
-  margin-bottom: 100px;
+  margin-bottom: 100px;  
 }
 
 .container_p02 {
@@ -121,3 +121,8 @@ main{
 .texto-verde {
   color: #1c311e;
 }
+img{
+  border-radius: 30px;
+  border-style: none;
+} 
+/*Não consegui aplicar o border radius nas duas primeiras imagens*/

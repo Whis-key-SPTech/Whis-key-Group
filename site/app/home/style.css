@@ -3,6 +3,7 @@ body{
     margin: 0px;
     padding: 0px;
     font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
 }
 
 /* FIM HEADER E MENU*/
@@ -257,7 +258,11 @@ button:active {
 }
 
 .img_calculadora img {
-    width: 70%;
+    width: 700px;
+    border-radius: 30px;
+    position: absolute;
+    right: 20px;
+    left: auto;
 }
 
 .box_contato{
@@ -312,7 +317,7 @@ button:active {
     padding-left: 10px;
     padding-top: 10px;
 }
-/* nova adição */
+/* Fluxo de negócio */
 .conteiner-regra {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -320,6 +325,15 @@ button:active {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
+}
+
+.titulo-fluxo{
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    position: absolute;
+    top: 1470px;
+    right: auto;
+    left: auto;
 }
 
 .card {
@@ -332,6 +346,7 @@ button:active {
   background-clip: padding-box;
   box-shadow: 0 4px 14px rgba(0,0,0,0.08);
   transition: transform 0.35s ease, box-shadow 0.35s ease, border 0.35s ease;
+  border-color:#01371f;
 }
 
 .card:hover {
@@ -361,6 +376,9 @@ button:active {
   padding: 0.4rem 0;
   color: #000;
   text-shadow: 0 3px 8px rgba(0,0,0,0.4);
+  background-color: #01371f;
+  border-radius: 15px;
+  text-align: center;
 }
 
 .card-content h5 {
@@ -369,17 +387,14 @@ button:active {
   letter-spacing: 1px;
   text-transform: uppercase;
   font-weight: 700;
-  color: #002614;
+  color:  white;
   margin-bottom: 3px;
 }
 
-.card-content h3 {
-  font-family: "Lato", sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #fff;
-}
 
+/*FIM do fluxo de negócio*/
+
+/*Inicio do Entre em contato!*/
 .form_contato .ipt_mensagem{
     width: 630px;
     height: 200px;
