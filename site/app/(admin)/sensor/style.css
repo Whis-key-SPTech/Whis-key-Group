@@ -1,0 +1,353 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Alexandria", sans-serif;
+}
+
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+a{
+    text-decoration: none;
+    pointer-events: none;
+}
+
+/* Conteúdo Principal */
+.conteudo-principal {
+    flex-grow: 1;
+    padding: 45px 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 85%;
+    display: flex;
+    justify-content: center;
+}
+.info-kpis{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.infoSensor{
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 4px 4px 4px #1c311e51;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 370px;
+    gap: 20px;
+}
+
+.infoSensor h3 {
+    font-size: 26px;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+#corSituacaoBarril{
+    display: flex;
+    justify-content: center;
+    height: 120px;
+    width: 120px;
+    background-color: #BD2424A1;
+    border-radius: 50%;
+}
+
+.info-localidade{
+    position: relative;
+    top: 10px;
+}
+.titulo{
+    display: flex;
+    width: 100%;
+    justify-content: space-between
+}
+
+.infoAtual{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 70px;
+}
+
+.info-temperatura{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.info-umidade{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.graficos canvas{
+    width: 750px;
+}
+
+.resumo-temperatura{
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 4px 4px 4px #1c311e51;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 330px;
+    height: 330px;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.resumo-temperatura .titulo h3{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 60px;
+    color: #525252;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.resumo-umidade{
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 4px 4px 4px #1c311e51;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 330px;
+    height: 330px;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.resumo-umidade .titulo h3{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 75px;
+    color: #525252;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.fundoIcon{
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    background-color: #9CDA9F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.legenda{
+    width: 100%;
+    display: flex;
+    /* border: 1px solid red; */
+    justify-content: space-between;
+}
+
+.box-legenda{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.regular{
+    width: 35px;
+    height: 30px;
+    background-color: #1C311E;
+    border-radius: 5px;
+}
+
+.atencao{
+    width: 35px;
+    height: 30px;
+    background-color: #FFA500;
+    border-radius: 5px;
+}
+
+.grave{
+    width: 35px;
+    height: 30px;
+    background-color: #9F0F11;
+    border-radius: 5px;
+}
+
+.resumo-temperatura .parametro-regular::before{
+    content: "> 20ºC < 25ºC";
+    color: #2D5031;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.resumo-temperatura .parametro-atencao::before{
+    content: "< 20ºC > 25ºC";
+    color: #FFA500;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.resumo-temperatura .parametro-grave::before{
+    content: "< 15ºC > 30ºC";
+    color: #9F0F11;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.resumo-umidade .parametro-regular::before{
+    content: "> 50% < 80%";
+    color: #2D5031;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.resumo-umidade .parametro-atencao::before{
+    content: "< 50% > 80%";
+    color: #FFA500;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.resumo-umidade .parametro-grave::before{
+    content: "< 40% > 85%";
+    color: #9F0F11;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cartao-resumo h3 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+#temperatura-atual{
+    font-size: 75px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+#umidade-atual{
+    font-size: 75px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+.cartao-resumo p {
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #1C311E;
+}
+
+.alerta-atencao{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 208px;
+    height: 170px;
+    background-color: #ffa600;
+    border-radius: 20px;
+}
+
+.kpis{
+    display: flex;
+    gap: 50px;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.alerta-atencao #qtdAtencao{
+    font-size: 60px;
+    color: #711315;
+}
+
+.alerta-atencao span{
+    color: #fff;
+    font-weight: bold;
+}
+
+.alerta-grave{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 208px;
+    height: 170px;
+    background-color: #FE5A5A;
+    border-radius: 20px;
+}
+
+.alerta-grave #qtdGrave{
+    font-size: 60px;
+    color: #711315;
+}
+
+.alerta-grave span{
+    color: #fff;
+    font-weight: bold;
+}
+
+.graficos{
+    display: flex;
+    flex-direction: column;
+}
+
+.abas-navegacao {
+    display: flex;
+    justify-content: space-around;
+    background-color: #1C311E;
+    padding: 10px;
+    border-radius: 20px 20px 0px 0px;
+    margin-bottom: 20px;
+    align-items: center;
+    gap: 40px;
+    color: white;
+}
+
+.graficos{
+    display: flex;
+}
+
+
+.abas-navegacao h2 {
+    color: white;
+    font-size: 32px;
+    justify-self: center;
+}
+
+.data-horario{
+    display: flex;
+    justify-content: space-between;
+    width: 120px;
+}
+
+.container {
+    width: 100%;
+    background-color: #F9F9F9;
+    border-radius: 20px;
+}
