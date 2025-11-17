@@ -12,7 +12,7 @@ USE BD_WHISKEY;
 DROP DATABASE BD_WHISKEY;
 
 -- Tabela contendo as informações de cadastro das empresas contratantes.
-CREATE TABLE empresa(
+CREATE TABLE Empresa(
 id_empresa INT PRIMARY KEY AUTO_INCREMENT,
 nome_empresa VARCHAR (50)NOT NULL,
 cnpj CHAR (18) NOT NULL
@@ -37,7 +37,7 @@ CREATE TABLE Endereco (
 );
 
 -- Tabela em relação a localidade do sensor
-CREATE TABLE LocalidadeSensor (
+CREATE TABLE Localidade_Sensor (
     id_LocalidadeSensor INT PRIMARY KEY AUTO_INCREMENT,
     nome_localidade VARCHAR(45),
     numero_local INT
@@ -58,10 +58,7 @@ CREATE TABLE Sensor (
     id_sensor INT PRIMARY KEY AUTO_INCREMENT,
     codigo_sensor CHAR(5), -- Os dois primeiros números determinam o número do sensor e os outros determinam a identificação do barril a qual o sensor pertence.
     fk_idLocalidadeSensor INT,
-    Predfinicao_has_destilaria_Predfinicao_id_predfinicao INT,
-    Predfinicao_has_destilaria_destilaria_idDestilaria INT,
-    FOREIGN KEY (fk_idLocalidadeSensor) REFERENCES LocalidadeSensor(id_LocalidadeSensor),
-    FOREIGN KEY (Predfinicao_has_destilaria_destilaria_idDestilaria) REFERENCES Destilaria(idDestilaria)
+    FOREIGN KEY (fk_idLocalidadeSensor) REFERENCES Localidade_Sensor(id_LocalidadeSensor)
 );
 
 -- Tabela contendo os dados coletados pelos sensores de temperatura. 
@@ -106,21 +103,21 @@ INSERT INTO Usuario (fk_idEmpresa, nome_usuario, email, senha, privilegio) VALUE
 	(3,'André Luiz','andre.luiz@gmail.com', '4854616584',0);
 
     -- sensor
-INSERT INTO Sensor (codigo_sensor, fk_idPredefinicao, fk_idLocalidadeSensor) VALUE
-	('01556',1,1),
-	('02678',2,2),
-	('03478',3,3);
+INSERT INTO Sensor (codigo_sensor, fk_idLocalidadeSensor) values
+	('01556',1),
+	('02678',2),
+	('03478',3);
 
 -- registro
-INSERT INTO Registro (fk_idSensor,temperatura,umidade) VALUES
-	(1, 25, 50),
-	(2, 18, 60),
-	(3, 10, 30);
+INSERT INTO Registro (temperatura, umidade, fk_idSensor) VALUES
+	(25, 50, 1),
+	(18, 60, 2),
+	(10, 30, 3);
     
     select* from empresa;
     select* from registro;
     select* from sensor;
-    select*from usuario;
+    select* from usuario;
     
 -- JOIN COM AS TABELAS
 
@@ -209,6 +206,3 @@ JOIN Endereco e
 FROM Empresa e
 JOIN Destilaria d 
     ON e.id_empresa = d.fkEmpresa;
-
-    
-    
