@@ -14,6 +14,29 @@ id_empresa INT PRIMARY KEY AUTO_INCREMENT,
 nome_empresa VARCHAR (50)NOT NULL,
 cnpj CHAR (18) NOT NULL
 );
+SELECT * FROM destilaria
+JOIN empresa
+ON id_empresa = fk_empresa;
+
+-- Tabela contendo o endereço da Destilaria
+CREATE TABLE endereco(
+id_endereco INT PRIMARY KEY AUTO_INCREMENT,
+rua VARCHAR(45),
+numero INT,
+complemento VARCHAR(45));
+
+-- Tabela contendo as destilarias da Empresa
+CREATE TABLE destilaria (
+id_destilaria INT PRIMARY KEY AUTO_INCREMENT,
+fk_endereco INT,
+	CONSTRAINT EnderecoDistilaria
+		FOREIGN KEY (fk_endereco) 
+			REFERENCES endereco(id_endereco),
+fk_empresa INT,
+	CONSTRAINT EmpresaDestilaria
+		FOREIGN KEY (fk_Empresa)
+			REFERENCES empresa(id_empresa)
+);
 
 -- Tabela em relação a localidade do sensor
 CREATE TABLE localidade_sensor(
@@ -45,11 +68,11 @@ nome_usuario VARCHAR (50) NOT NULL,
 email VARCHAR (100) NOT NULL UNIQUE,
 senha VARCHAR (100) NOT NULL,
 privilegio INT,
-fk_idEmpresa INT NOT NULL,
+pk_idEmpresa INT NOT NULL,
 CONSTRAINT UsuarioEmpresa 
-foreign key (fk_idEmpresa) 
-references empresa(id_empresa),
-PRIMARY KEY (id_usuario, fk_idEmpresa)
+	FOREIGN KEY (pk_idEmpresa) 
+		REFERENCES empresa(id_empresa),
+			PRIMARY KEY (id_usuario, pk_idEmpresa)
 );
 
 -- Tabela contendo as informações dos sensores.
@@ -57,10 +80,10 @@ PRIMARY KEY (id_usuario, fk_idEmpresa)
 CREATE TABLE sensor(
 id_sensor INT AUTO_INCREMENT,
 codigo_sensor CHAR(5), -- Os dois primeiros números determinam o número do sensor e os outros determinam a identificação do barril a qual o sensor pertence.
-fk_idPredefinicao INT,
-CONSTRAINT SensorPredefinicao
-FOREIGN KEY(fk_idPredefinicao)
-REFERENCES predefinicao(id_Predefinicao),
+fk_destilaria INT,
+	CONSTRAINT DestilariaDoSensor
+		FOREIGN KEY(fk_destilaria)
+			REFERENCES destilaria(id_destilaria),
 fk_idLocalidadeSensor INT,
 	CONSTRAINT SensorLocalidade
 		FOREIGN KEY (fk_idLocalidadeSensor)
@@ -68,17 +91,19 @@ fk_idLocalidadeSensor INT,
 PRIMARY KEY (id_sensor, fk_idLocalidadeSensor)
 );
 
+
 -- Tabela contendo os dados coletados pelos sensores de temperatura. 
  CREATE TABLE registro(
-id_registro INT PRIMARY KEY AUTO_INCREMENT,
-fk_idSensor INT NOT NULL,
+id_registro INT AUTO_INCREMENT,
 dt_coleta DATE DEFAULT (CURRENT_DATE),
 hr_coleta TIME DEFAULT (CURRENT_TIME),
 temperatura DECIMAL (4,2) NOT NULL,
 umidade INT NOT NULL,
-CONSTRAINT SensorRegistro 
-foreign key (fk_idSensor) 
-references sensor(id_sensor)
+fk_sensor INT NOT NULL,
+	CONSTRAINT SensorRegistro 
+		FOREIGN KEY (fk_sensor) 
+			REFERENCES sensor(id_sensor),
+PRIMARY KEY (id_registro, fk_sensor)
 );
 
 -- Comando para descrever as configurações de cada tabela.
@@ -89,6 +114,9 @@ DESC predefinicao;
 DESC sensor;
 DESC localidade_sensor;
 
+
+
+
 -- Inserção dos dados na tabela empresa.
 INSERT INTO empresa (nome_empresa, cnpj) VALUE
 	('Brown-Forman', '36.631.108/0001-20'),
@@ -96,9 +124,18 @@ INSERT INTO empresa (nome_empresa, cnpj) VALUE
 	('Pernod Ricard', '33.856.394/0017-09'),
 	('Bacardi Limited', '59.104.737/0001-05'),
 	('Beam Suntor', '17.530.779/0001-50');
+
+-- Dados da destilaria
+INSERT INTO destilaria (fk_endereco, fk_empresa) VALUE
+	(1, 1),
+    (2, 2),
+    (3,3);
+
+-- Endereco da destilaria    
+INSERT INTO endereco (rua) VALUES
+('Rua Miguel'), ('Rua General'), ('Rua Vitoria');
     
 -- Localidade Sensor
-
 INSERT INTO localidade_sensor(nome_localidade, numero_local) VALUES
 	('Armazém norte','1'),
 	('Armazém sul','2'),
@@ -121,7 +158,7 @@ INSERT INTO usuario (fk_idEmpresa, nome_usuario, email, senha, privilegio) VALUE
 	(3,'Gustavo Henrique','gustavo.henrique@gmail.com', '4854616584',1),
 	(4,'Giovanni Angel','giovanni.angel@gmail.com', '4854616584',1),
 	(5,'Vitória Ferreira','vitoria.ferreira@gmail.com', '4854616584',1),
-	(3,'André Luiz','andre.luiz@gmail.com', '4854616584',0);
+	(3,'André Luis','andre.luis@gmail.com', '4854616584',0);
 
     -- sensor
 INSERT INTO sensor (codigo_sensor, fk_idPredefinicao, fk_idLocalidadeSensor) VALUE
@@ -159,7 +196,7 @@ JOIN empresa ON predefinicao.fk_idEmpresa = empresa.id_empresa
 ORDER BY ID;
 
 
-
+SELECT * FROM a a WHERE fk_empresa
 -- Empresa + Usuário
 SELECT empresa.nome_empresa AS Empresa,
        usuario.nome_usuario AS Usuario
