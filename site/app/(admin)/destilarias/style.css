@@ -132,7 +132,7 @@ a{
 .grave {
     color: #CF1619;
 }
-
+/*Filtro para destilarias*/
 .container {
     width: 100%;
     background-color: #F9F9F9;
@@ -160,6 +160,10 @@ a{
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 20px;
+}
+.filter ul{
+    gap: 50px;
 }
 .filter h4{
     color: white;
@@ -287,4 +291,31 @@ a{
 
 .cartao-destilaria.estavel .situacao {
     color: #50C156;
+}
+/* Adicione isso ao seu style.css
+  É a classe que o JavaScript usa para esconder os cartões
+*/
+.cartao-destilaria.hide {
+    display: none;
+}
+
+/* estilização do filtro
+*/
+.filter ul li {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Estilo do botão inativo */
+.filter {
+    color: #888;
+    background-color: transparent;
+}
+
+.filter-active {
+    color: #FFFFFF;
+    background-color: #FFA500; 
+    font-weight: bold;
 }
