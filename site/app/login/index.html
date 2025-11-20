@@ -57,41 +57,44 @@
 
   </footer>
   <script>
-    var tentativas = 4
+    // var tentativas = 4
+    // var email = ''
+    // var email = ipt_email.value;
+    // var senha = ipt_senha.value;
     function init() {
       animacao.innerHTML = `
       <img src="./animacao.svg" width="845" height="606" alt="" srcset="">
       `
     }
     init()
-    function input() {
-      if (tentativas > 1) {
-        toast.style.top = '-80px'
-        ipt_email.classList.remove('shake', 'error')
-        ipt_senha.classList.remove('shake', 'error')
-      }
-    }
-    function validarEmail() {
-      if (tentativas > 1) {
-        var email = ipt_email.value
-        if (!email.includes('@')) {
-          mensagem_error.innerHTML = 'Por favor, coloque um e-mail valido.'
-          ipt_email.classList.add('shake', 'error')
-          toast.style.top = '20px'
-          btn_login.classList.add('disable')
-          btn_login.disabled = true
-        } else {
-          btn_login.disabled = false
-          btn_login.classList.remove('disable')
-        }
-      }
-    }
-    function bloquear() {
-      mensagem_error.innerHTML = 'Conta bloqueada, acesse o e-mail de confirmação enviado.'
-      toast.style.top = '20px'
-      btn_login.classList.add('disable')
-      btn_login.disabled = true
-    }
+    // function input() {
+    //   if (tentativas > 1) {
+    //     toast.style.top = '-80px'
+    //     ipt_email.classList.remove('shake', 'error')
+    //     ipt_senha.classList.remove('shake', 'error')
+    //   }
+    // }
+    // function validarEmail() {
+    //   if (tentativas > 1) {
+    //     var email = ipt_email.value
+    //     if (!email.includes('@')) {
+    //       mensagem_error.innerHTML = 'Por favor, coloque um e-mail valido.'
+    //       ipt_email.classList.add('shake', 'error')
+    //       toast.style.top = '20px'
+    //       btn_login.classList.add('disable')
+    //       btn_login.disabled = true
+    //     } else {
+    //       btn_login.disabled = false
+    //       btn_login.classList.remove('disable')
+    //     }
+    //   }
+    // }
+    // function bloquear() {
+    //   mensagem_error.innerHTML = 'Conta bloqueada, acesse o e-mail de confirmação enviado.'
+    //   toast.style.top = '20px'
+    //   btn_login.classList.add('disable')
+    //   btn_login.disabled = true
+    // }
     function exibir() {
       if (senha_visibilidade.classList.contains('invisivel')) {
         ipt_senha.type = 'text'
@@ -104,35 +107,61 @@
       }
     }
     function login() {
-      var email = ''
-      var email = ipt_email.value
-      var senha = ipt_senha.value
+      var email = ipt_email.value;
+      var senha = ipt_senha.value;
       ipt_email.classList.remove('shake', 'error')
       ipt_senha.classList.remove('shake', 'error')
-      if (tentativas > 1) {
-        tentativas--
-        if (email === "" || senha === "") {
-          toast.style.top = '20px'
-          mensagem_error.innerHTML = 'Por favor, preencha todos os campos.'
-          ipt_email.classList.add('shake', 'error')
-          ipt_senha.classList.add('shake', 'error')
-          btn_login.classList.add('disable')
-          btn_login.disabled = true
-        } else {
-          if (email == 'claudio@whiskey.com' && senha == '1234') {
-            window.location.href = '../(admin)/painel/index.html';
-          } else {
-            ipt_email.classList.add('shake', 'error')
-            ipt_senha.classList.add('shake', 'error')
-            toast.style.top = '20px'
-            mensagem_error.innerHTML = `Senha ou e-mail invalido, possui mais ${tentativas} tentativas.`
-          };
-        }
-      } else {
-        bloquear()
+         if (email === "" || senha === "") {
+        toast.style.top = '20px';
+        mensagem_error.innerHTML = 'Por favor, preencha todos os campos.';
+        ipt_email.classList.add('shake', 'error');
+        ipt_senha.classList.add('shake', 'error');
+    }
+      else {
+            fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senha
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+              alert('Login')
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id
+                    setTimeout(function () {
+                        window.location = "../(admin)/destilarias/index.html";
+                    }, 1000); 
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+       
       }
     }
+      
+    
   </script>
-</body>
-
-</html>
