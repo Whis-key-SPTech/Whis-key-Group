@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+
 }
 
 a{
@@ -20,15 +20,13 @@ a{
 
 /* Conteúdo Principal */
 .conteudo-principal {
-    flex-grow: 1;
-    padding: 45px 120px;
+    display: flex;
+    padding: 120px 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 40px;
-    width: 85%;
-    display: flex;
-    justify-content: center;
+    max-width: 1400px;
+    /* width: 100%; */
 }
 .info-kpis{
     display: flex;
@@ -45,13 +43,12 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 370px;
+    width: 450px;
     gap: 20px;
 }
 
 .infoSensor h3 {
     font-size: 26px;
-    margin-bottom: 10px;
     font-weight: 400;
 }
 
@@ -86,7 +83,8 @@ a{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    gap: 20px;
+    gap: 50px;
+    margin-bottom: 100px;
 }
 
 .info-umidade{
@@ -101,141 +99,125 @@ a{
     width: 750px;
 }
 
-.resumo-temperatura{
-    background-color: white;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 4px 4px 4px #1c311e51;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 330px;
-    height: 330px;
-    gap: 20px;
-    justify-content: space-around;
-}
-
-.resumo-temperatura .titulo h3{
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    left: 60px;
-    color: #525252;
-    font-size: 26px;
-    font-weight: 400;
-}
-
+.resumo-temperatura,
 .resumo-umidade{
     background-color: white;
     padding: 20px;
     border-radius: 15px;
-    text-align: center;
     box-shadow: 4px 4px 4px #1c311e51;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 330px;
-    height: 330px;
-    gap: 20px;
-    justify-content: space-around;
+    gap: 18px;
+    position: relative;
 }
 
-.resumo-umidade .titulo h3{
+.resumo-temperatura .titulo,
+.resumo-umidade .titulo{
     display: flex;
-    flex-direction: column;
-    position: relative;
-    left: 75px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+.resumo-temperatura .titulo h3,
+.resumo-umidade .titulo h3{
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
     color: #525252;
-    font-size: 26px;
-    font-weight: 400;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
 }
 
 .fundoIcon{
-    height: 40px;
-    width: 40px;
-    border-radius: 10px;
     background-color: #9CDA9F;
+    padding: 10px 15px;
+    border-radius: 10px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 
 .legenda{
-    width: 100%;
     display: flex;
-    /* border: 1px solid red; */
-    justify-content: space-between;
+    justify-content: center;
+    gap: 10px;
 }
 
 .box-legenda{
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
+    
+}
+
+.box-legenda div{
+    width: 30px;
+    height: 30px;
+    border-bottom: 5px;
+    margin-bottom: 3px;
+    border-radius: 5px;
 }
 
 .regular{
-    width: 35px;
-    height: 30px;
     background-color: #1C311E;
-    border-radius: 5px;
 }
 
 .atencao{
-    width: 35px;
-    height: 30px;
     background-color: #FFA500;
-    border-radius: 5px;
 }
 
 .grave{
-    width: 35px;
-    height: 30px;
     background-color: #9F0F11;
-    border-radius: 5px;
 }
 
 .resumo-temperatura .parametro-regular::before{
     content: "> 20ºC < 25ºC";
     color: #2D5031;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .resumo-temperatura .parametro-atencao::before{
     content: "< 20ºC > 25ºC";
     color: #FFA500;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .resumo-temperatura .parametro-grave::before{
     content: "< 15ºC > 30ºC";
     color: #9F0F11;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .resumo-umidade .parametro-regular::before{
     content: "> 50% < 80%";
     color: #2D5031;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .resumo-umidade .parametro-atencao::before{
     content: "< 50% > 80%";
     color: #FFA500;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .resumo-umidade .parametro-grave::before{
     content: "< 40% > 85%";
     color: #9F0F11;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .cartao-resumo h3 {
@@ -244,16 +226,10 @@ a{
     font-weight: 400;
 }
 
-#temperatura-atual{
-    font-size: 75px;
-    font-weight: bold;
-    padding-bottom: 20px;
-}
-
+#temperatura-atual,
 #umidade-atual{
-    font-size: 75px;
-    font-weight: bold;
-    padding-bottom: 20px;
+    font-size: 40px;
+    font-weight: 700;
 }
 
 .cartao-resumo p {
@@ -350,4 +326,18 @@ a{
     width: 100%;
     background-color: #F9F9F9;
     border-radius: 20px;
+}
+
+.container-temperatura,
+.container-umidade {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    height: 240px;
+}
+
+#myChart_Temperature,
+#myChart_Umidade {
+    max-width: 100% !important;
+    height: auto !important;
 }
