@@ -1,12 +1,5 @@
-<<<<<<< HEAD
 var usuarioModel = require("../models/usuarioModel");
-
-=======
-    var usuarioModel = require("../models/usuarioModel");
-    var aquarioModel = require("../models/aquarioModel");
->>>>>>> 6a7aa97abd3dec4ddc2ebf0db0039f9a0c85ec87
-
-    function autenticar(req, res) {
+    function autenticar(req, res){
         var email = req.body.emailServer;
         var senha = req.body.senhaServer;
 
@@ -24,9 +17,6 @@ var usuarioModel = require("../models/usuarioModel");
 
                         if (resultadoAutenticar.length == 1) {
                             console.log(resultadoAutenticar);
-
-<<<<<<< HEAD
-                                if (resultadoAquarios.length > 0) {
                                     res.json({
                                         id: resultadoAutenticar[0].id,
                                         email: resultadoAutenticar[0].email,
@@ -40,7 +30,6 @@ var usuarioModel = require("../models/usuarioModel");
                     } else {
                         res.status(403).send("Mais de um usuário com o mesmo login e senha!");
                     }
-                }
     }).catch(
                 function (erro) {
                     console.log(erro);
@@ -48,37 +37,8 @@ var usuarioModel = require("../models/usuarioModel");
                     res.status(500).json(erro.sqlMessage);
                 }
             );
-=======
-                            aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                                .then((resultadoAquarios) => {
-                                    if (resultadoAquarios.length > 0) {
-                                        res.json({
-                                            id: resultadoAutenticar[0].id_usuario,
-                                            email: resultadoAutenticar[0].email,
-                                            nome: resultadoAutenticar[0].nome,
-                                            senha: resultadoAutenticar[0].senha                                    });
-                                    } else {
-                                        res.status(204).json({ aquarios: [] });
-                                    }
-                                })
-                        } else if (resultadoAutenticar.length == 0) {
-                            res.status(403).send("Email e/ou senha inválido(s)");
-                        } else {
-                            res.status(403).send("Mais de um usuário com o mesmo login e senha!");
-                        }
-                    }
-                ).catch(
-                    function (erro) {
-                        console.log(erro);
-                        console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-                        res.status(500).json(erro.sqlMessage);
-                    }
-                );
+    
         }
-
->>>>>>> 6a7aa97abd3dec4ddc2ebf0db0039f9a0c85ec87
-    }
-
     function cadastrar(req, res) {
         // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
         var nome = req.body.nomeServer;
@@ -115,4 +75,4 @@ var usuarioModel = require("../models/usuarioModel");
     module.exports = {
         autenticar,
         cadastrar
-    }
+    }}
