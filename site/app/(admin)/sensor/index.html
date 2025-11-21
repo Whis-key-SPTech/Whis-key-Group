@@ -47,7 +47,7 @@
         <section class="info-temperatura">
             <div class="resumo-temperatura">
                 <div class="titulo">
-                    <h3>Temperatura<div>Atual</div>
+                    <h3>Temperatura<br>Atual
                     </h3>
                     <div class="fundoIcon">
                         <img src="icons/tempIcon.png" height="25px">
@@ -89,12 +89,13 @@
                     </nav>
                     <canvas id="myChart_Temperature"></canvas>
                 </div>
+            </div>
         </section>
 
         <section class="info-umidade">
             <div class="resumo-umidade">
                 <div class="titulo">
-                    <h3>Umidade<div>Atual</div>
+                    <h3>Umidade<br>Atual
                     </h3>
                     <div class="fundoIcon">
                         <img src="icons/tempIcon.png" height="25px">
@@ -136,6 +137,7 @@
                     </nav>
                     <canvas id="myChart_Umidade"></canvas>
                 </div>
+            </div>
         </section>
     </main>
 </body>
@@ -143,6 +145,7 @@
 </html>
 <script>
     const ctx = document.getElementById('myChart_Temperature');
+
     var graficoLinha = new Chart(ctx, {
         type: 'line',
         data: {
@@ -177,7 +180,7 @@
             ]
         },
         options: {
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             scales: {
                 y: {
                     beginAtZero: true
@@ -218,6 +221,7 @@
     });
 
     const ctxUmidade = document.getElementById('myChart_Umidade');
+    
             var graficoLinha = new Chart(ctxUmidade, {
                 type: 'line',
                 data: {
@@ -254,7 +258,7 @@
                     ]
                 },
                 options: {
-                    maintainAspectRatio: true,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             min: 50,
