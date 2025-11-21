@@ -1,14 +1,14 @@
 var express = require("express");
 var router = express.Router();
 
-var destilariaController = require("../controllers/destilariaController");
+var sensorController = require("../controllers/sensorController");
 
 router.get("/all", function (req, res) {
-  destilariaController.listar(req, res);
+  sensorController.listar(req, res);
 });
 
 router.get("/buscar/:id", function (req, res) {
-  destilariaController.buscarPorId(req, res);
+  sensorController.buscarPorId(req, res);
 });
 
 router.post("/cadastrar", function (req, res) {

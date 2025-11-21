@@ -1,13 +1,13 @@
-var destilariaModel = require("../models/destilariaModel");
+var sensorModel = require("../models/sensorModel");
 
 function listar(req, res) {
-  destilariaModel.listarDestilaria().then((resultado) => {
+  sensorModel.listarSensor().then((resultado) => {
     res.status(200).json(resultado);
   });
 }
 function buscarPorId(req, res) {
   var id = req.params.id;
-  destilariaModel.buscarDestilaria(id).then((resultado) => {
+  sensorModel.buscarSensor(id).then((resultado) => {
     res.status(200).json(resultado);
   });
 }
@@ -24,7 +24,7 @@ function cadastrar(req, res) {
   } else {
 
 
-    destilariaModel.cadastrar(descricao, idUsuario)
+    sensorModel.cadastrar(descricao, idUsuario)
       .then((resultado) => {
         res.status(201).json(resultado);
       }

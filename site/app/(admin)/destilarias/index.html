@@ -12,7 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
-    
+
 </head>
 
 <body>
@@ -32,8 +32,8 @@
             <div class="cartao-resumo tipos-situacao">
                 <h3>TIPOS DE SITUAÇÃO</h3>
                 <p><span class="estavel">ESTÁVEL:</span> 0 alertas ativos</p>
-                <p><span class="atençao" style="color: #FFA500;" >ATENÇÃO:</span> >=1 alertas em atenção</p>
-                <p><span class="grave">GRAVE:</span> >=1 alertas grave</p>
+                <p><span class="atençao" style="color: #FFA500;">ATENÇÃO:</span> >= 1 alertas em atenção</p>
+                <p><span class="grave">GRAVE:</span> >= 1 alertas grave</p>
             </div>
         </section>
 
@@ -43,8 +43,8 @@
                 <div class="filter">
                     <h4>Filtros:</h4>
                     <ul>
-                        <li class= "filter-active" data-filter="todas">Todas</li>
-                        <li class="filter" data-filter="grave" >Grave</li>
+                        <li class="filter-active" data-filter="todas">Todas</li>
+                        <li class="filter" data-filter="grave">Grave</li>
                         <li class="filter" data-filter="atencao">Atenção</li>
                         <li class="filter" data-filter="estavel">Estável</li>
                     </ul>
@@ -52,11 +52,12 @@
                 <h3>Período: Últimas 10hs</h3>
             </nav>
 
-            <section class="lista-destilarias">
+            <section class="lista-destilarias" >
                 <a href="../sensores/index.html">
                     <div class="cartao-destilaria grave">
                         <h3>Rua General</h3>
-                        <br> <div class="sensores-situacao">
+                        <br>
+                        <div class="sensores-situacao">
                             <span>SENSORES<br><span class="sensores">6</span></span>
                             <span>SITUAÇÃO ATUAL<br><span class="situacao">GRAVE</span></span>
                         </div>
@@ -64,42 +65,48 @@
                 </a>
                 <div class="cartao-destilaria grave">
                     <h3>Rua Miguel</h3>
-                    <br> <div class="sensores-situacao">
+                    <br>
+                    <div class="sensores-situacao">
                         <span>SENSORES<br><span class="sensores">3</span></span>
                         <span>SITUAÇÃO ATUAL<br><span class="situacao">GRAVE</span></span>
                     </div>
                 </div>
                 <div class="cartao-destilaria atencao">
                     <h3>Rua Vitoria</h3>
-                    <br> <div class="sensores-situacao">
+                    <br>
+                    <div class="sensores-situacao">
                         <span>SENSORES<br><span class="sensores">4</span></span>
                         <span>SITUAÇÃO ATUAL<br><span class="situacao">ATENÇÃO</span></span>
                     </div>
                 </div>
                 <div class="cartao-destilaria atencao">
                     <h3>Rua Boa Vista</h3>
-                    <br> <div class="sensores-situacao">
+                    <br>
+                    <div class="sensores-situacao">
                         <span>SENSORES<br><span class="sensores">9</span></span>
                         <span>SITUAÇÃO ATUAL<br><span class="situacao">ATENÇÃO</span></span>
                     </div>
                 </div>
                 <div class="cartao-destilaria estavel">
                     <h3>Rua Quitauna</h3>
-                    <br> <div class="sensores-situacao">
+                    <br>
+                    <div class="sensores-situacao">
                         <span>SENSORES<br><span class="sensores">2</span></span>
                         <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
                     </div>
                 </div>
                 <div class="cartao-destilaria estavel">
                     <h3>Rua Belval</h3>
-                    <br> <div class="sensores-situacao">
+                    <br>
+                    <div class="sensores-situacao">
                         <span>SENSORES<br><span class="sensores">4</span></span>
                         <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
                     </div>
                 </div>
                 <div class="cartao-destilaria estavel">
                     <h3>Rua Rowling</h3>
-                    <br> <div class="sensores-situacao">
+                    <br>
+                    <div class="sensores-situacao">
                         <span>SENSORES<br><span class="sensores">2</span></span>
                         <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
                     </div>
@@ -108,6 +115,28 @@
         </section>
     </main>
     <script src="script.js"></script>
+    <script>
+        var listaDestilas = []
+         function listar() {
+    fetch("/destilaria/all", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((destilarias) => {
+          destilarias.forEach((destilaria) => {
+            listaDestilas.push(destilaria);
+
+            console.log("listadestilasCadastradas")
+            console.log(listaDestilas[0])
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+  listar()
+    </script>
 </body>
 
 </html>
