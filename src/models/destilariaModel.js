@@ -1,7 +1,8 @@
 var database = require("../database/config");
 
 function listarDestilaria() {
-  var instrucaoSql = `SELECT * FROM destilaria;`;
+  var instrucaoSql = `SELECT count(sensor.id_sensor) as qtdSensor, endereco.nome_localidade FROM destilaria join endereco on endereco.id_endereco = destilaria.fk_endereco join sensor on sensor.fk_destilaria = destilaria.id_destilaria;
+`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
@@ -12,12 +13,7 @@ function buscarDestilaria(id) {
   return database.executar(instrucaoSql);
 }
 
-<<<<<<< HEAD
 function cadastrar(empresaId, descricao) {
-=======
-function cadastrar(empresa_id, descricao) {
-  
->>>>>>> 6a7aa97abd3dec4ddc2ebf0db0039f9a0c85ec87
   var instrucaoSql = `INSERT INTO (descricao, fk_empresa) destilaria VALUES (${descricao}, ${empresaId})`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

@@ -8,6 +8,8 @@ CREATE DATABASE BD_WHISKEY;
 USE BD_WHISKEY;
 DROP DATABASE BD_WHISKEY;
 
+
+
 -- Tabela contendo as informações de cadastro das empresas contratantes.
 CREATE TABLE empresa(
 id_empresa INT PRIMARY KEY AUTO_INCREMENT,
@@ -23,6 +25,7 @@ rua VARCHAR(45));
 -- Tabela contendo as destilarias da Empresa
 CREATE TABLE destilaria (
 id_destilaria INT PRIMARY KEY AUTO_INCREMENT,
+qtdSensor int,
 fk_endereco INT,
 	CONSTRAINT EnderecoDestilaria
 		FOREIGN KEY (fk_endereco) 
@@ -32,6 +35,8 @@ fk_empresa INT,
 		FOREIGN KEY (fk_Empresa)
 			REFERENCES empresa(id_empresa)
 );
+
+
 
 -- Tabela em relação a localidade do sensor
 CREATE TABLE localidade_sensor(
@@ -57,7 +62,7 @@ CONSTRAINT UsuarioEmpresa
 -- Tabela contendo as informações dos sensores.
 CREATE TABLE sensor(
 id_sensor INT AUTO_INCREMENT,
-codigo_sensor CHAR(5), -- Os dois primeiros números determinam o número do sensor e os outros determinam a identificação do barril a qual o sensor pertence.
+codigo_sensor CHAR(5),
 fk_destilaria INT,
 	CONSTRAINT DestilariaDoSensor
 		FOREIGN KEY(fk_destilaria)
@@ -68,6 +73,7 @@ fk_idLocalidadeSensor INT,
 			REFERENCES localidade_sensor(id_LocalidadeSensor),
 PRIMARY KEY (id_sensor, fk_idLocalidadeSensor)
 );
+SELECT count(sensor.id_sensor), endereco.rua FROM destilaria join endereco on endereco.id_endereco = destilaria.fk_endereco join sensor on sensor.fk_destilaria = destilaria.id_destilaria group by endereco.rua;
 
 -- Tabela contendo os dados coletados pelos sensores de temperatura e umidade. 
  CREATE TABLE registro(
@@ -112,6 +118,12 @@ INSERT INTO destilaria (fk_endereco, fk_empresa) VALUES
 	(1, 1),
     (2, 2),
     (3, 3);
+    
+    INSERT INTO destilaria (fk_endereco, fk_empresa) VALUES
+	(1, 1),
+    (2, 2),
+    (3, 3);
+
 
 -- Localidade Sensor
 INSERT INTO localidade_sensor(nome_localidade, numero_local) VALUES
@@ -133,7 +145,8 @@ INSERT INTO sensor (codigo_sensor, fk_destilaria, fk_idLocalidadeSensor) VALUES
 	('01556', 1, 1),
 	('02678', 1, 2),
 	('03478', 1, 3);
-
+    
+   
 
 -- registro
 INSERT INTO registro (fk_sensor, temperatura, umidade) VALUES
@@ -149,6 +162,8 @@ INSERT INTO registro (fk_sensor, temperatura, umidade) VALUES
     SELECT * FROM usuario;
     SELECT * FROM registro;
     
+     SELECT endereco.rua FROM destilaria join  endereco on endereco.id_endereco = destilaria.fk_endereco join sensor on sensor.fk_destilaria = destilaria.id_destilaria;
+
     
 -- JOIN COM AS TABELAS
 

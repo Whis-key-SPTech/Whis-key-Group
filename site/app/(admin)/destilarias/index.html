@@ -12,9 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
-
 </head>
-
 <body>
     <div class="header">
         <a><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
@@ -52,90 +50,44 @@
                 <h3>Período: Últimas 10hs</h3>
             </nav>
 
-            <section class="lista-destilarias" >
-                <a href="../sensores/index.html">
-                    <div class="cartao-destilaria grave">
-                        <h3>Rua General</h3>
-                        <br>
-                        <div class="sensores-situacao">
-                            <span>SENSORES<br><span class="sensores">6</span></span>
-                            <span>SITUAÇÃO ATUAL<br><span class="situacao">GRAVE</span></span>
-                        </div>
-                    </div>
-                </a>
-                <div class="cartao-destilaria grave">
-                    <h3>Rua Miguel</h3>
-                    <br>
-                    <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">3</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">GRAVE</span></span>
-                    </div>
-                </div>
-                <div class="cartao-destilaria atencao">
-                    <h3>Rua Vitoria</h3>
-                    <br>
-                    <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">4</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ATENÇÃO</span></span>
-                    </div>
-                </div>
-                <div class="cartao-destilaria atencao">
-                    <h3>Rua Boa Vista</h3>
-                    <br>
-                    <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">9</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ATENÇÃO</span></span>
-                    </div>
-                </div>
-                <div class="cartao-destilaria estavel">
-                    <h3>Rua Quitauna</h3>
-                    <br>
-                    <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">2</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
-                    </div>
-                </div>
-                <div class="cartao-destilaria estavel">
-                    <h3>Rua Belval</h3>
-                    <br>
-                    <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">4</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
-                    </div>
-                </div>
-                <div class="cartao-destilaria estavel">
-                    <h3>Rua Rowling</h3>
-                    <br>
-                    <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">2</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
-                    </div>
-                </div>
-        </div>
-        </section>
+            <section class="lista-destilarias" id="lista_destilaria">
+
+            </section>
     </main>
     <script src="script.js"></script>
     <script>
         var listaDestilas = []
-         function listar() {
-    fetch("/destilaria/all", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((destilarias) => {
-          destilarias.forEach((destilaria) => {
-            listaDestilas.push(destilaria);
+        function listar() {
+            var listaMensagem = ''
+            fetch("/destilaria/all", {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    resposta.json().then((destilarias) => {
+                        destilarias.forEach((destilaria) => {
+                            listaMensagem += `
+            <a href="../sensores/index.html">
+              <div class="cartao-destilaria estavel">
+                    <h3>${destilaria.rua}</h3>
+                    <br>
+                    <div class="sensores-situacao">
+                        <span>SENSORES<br><span class="sensores">${destilaria.qtdSensor}</span></span>
+                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
+                    </div>
+                </div>
+            </a>
+           `;
 
-            console.log("listadestilasCadastradas")
-            console.log(listaDestilas[0])
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
-  listar()
+                        });
+                            console.log('entrou')
+                        lista_destilaria.innerHTML = listaMensagem
+                    });
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+        }
+        listar()
     </script>
 </body>
 
