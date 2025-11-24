@@ -10,24 +10,13 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow: hidden;
 }
 
 a{
     text-decoration: none;
     pointer-events: none;
 }
-/* Barra Lateral */
-.barra-lateral {
-    background-color: #F9F9F9;
-    width: 250px;
-    padding: 20px;
-    height: 100%;
-    position: fixed;
-    margin-top: 97px;
-   
-}
-
-
 .navegacao-principal ul {
     list-style: none;
 }
@@ -38,7 +27,6 @@ a{
     border-radius: 5px;
     cursor: pointer;
 }
-
 .navegacao-principal .ativo {
     background-color: #ccffcc;
     color: green;
@@ -56,7 +44,6 @@ a{
 .sair-vermelho {
     color: red;
 }
-
 /* Conteúdo Principal */
 .conteudo-principal {
     flex-grow: 1;
@@ -65,7 +52,7 @@ a{
     flex-direction: column;
     align-items: center;
     justify-content: baseline;
-    gap: 40px;
+    gap: 20px;
 }
 
 .resumo {
@@ -89,7 +76,8 @@ a{
 
 .cartao-resumo.tipos-situacao {
     width: 400px;
-    padding: 20px 34px;
+    height: 150px;
+    padding: 10px 30px;
 }
 .cartao-resumo.ultimas-horas{
     width: 500px;
@@ -99,7 +87,6 @@ a{
     margin-bottom: 25px;
     font-weight: 400;
 }
-
 .tipos-situacao h3{
     font-size: 24px;
     color: #1C311E;
@@ -137,6 +124,7 @@ a{
     width: 100%;
     background-color: #F9F9F9;
     border-radius: 20px;
+
 }
 
 .abas-navegacao {
@@ -292,15 +280,12 @@ a{
 .cartao-destilaria.estavel .situacao {
     color: #50C156;
 }
-/* Adicione isso ao seu style.css
-  É a classe que o JavaScript usa para esconder os cartões
-*/
+/*É a classe que o JavaScript usa para esconder os cartões */
 .cartao-destilaria.hide {
     display: none;
 }
 
-/* estilização do filtro
-*/
+/* estilização do filtro*/
 .filter ul li {
     cursor: pointer;
     padding: 5px 10px;
@@ -318,4 +303,16 @@ a{
     color: #FFFFFF;
     background-color: #FFA500; 
     font-weight: bold;
+}
+.bob{
+   background-color: #1C311E;
+   width: 85px;
+   height: 85px;
+   border-radius: 500px;
+   display: flex;
+   position: fixed;
+   bottom: 50px;
+   right: 50px;
+   left: auto;
+   top: auto;
 }
