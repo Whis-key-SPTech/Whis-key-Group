@@ -65,6 +65,8 @@ fk_idLocalidadeSensor INT,
 	CONSTRAINT SensorLocalidade
 		FOREIGN KEY (fk_idLocalidadeSensor)
 			REFERENCES localidade_sensor(id_LocalidadeSensor),
+situacao VARCHAR(45),
+CONSTRAINT CHK_situacao CHECK (situacao IN ('Estável', 'Atenção', 'Grave')),
 PRIMARY KEY (id_sensor, fk_idLocalidadeSensor)
 );
 
@@ -124,10 +126,10 @@ INSERT INTO usuario (fk_idEmpresa, nome_usuario, email, senha, privilegio) VALUE
 	(3,'André Luiz','andre.luiz@gmail.com', '4854616584',0);
 
     -- sensor
-INSERT INTO sensor (codigo_sensor, fk_idPredefinicao, fk_idLocalidadeSensor) VALUE
-	('01556',1,1),
-	('02678',2,2),
-	('03478',3,3);
+INSERT INTO sensor (codigo_sensor, fk_idPredefinicao, fk_idLocalidadeSensor,situação) VALUE
+	('01556',1,1,'Estável'),
+	('02678',2,2,'Atenção'),
+	('03478',3,3,'Grave');
 
 -- registro
 INSERT INTO registro (fk_idSensor,temperatura,umidade) VALUES
