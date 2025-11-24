@@ -71,6 +71,8 @@ fk_idLocalidadeSensor INT,
 	CONSTRAINT SensorLocalidade
 		FOREIGN KEY (fk_idLocalidadeSensor)
 			REFERENCES localidade_sensor(id_LocalidadeSensor),
+situacao VARCHAR(45),
+CONSTRAINT CHK_situacao CHECK (situacao IN ('Estável', 'Atenção', 'Grave')),
 PRIMARY KEY (id_sensor, fk_idLocalidadeSensor)
 );
 SELECT count(sensor.id_sensor), endereco.rua FROM destilaria join endereco on endereco.id_endereco = destilaria.fk_endereco join sensor on sensor.fk_destilaria = destilaria.id_destilaria group by endereco.rua;
@@ -145,8 +147,7 @@ INSERT INTO sensor (codigo_sensor, fk_destilaria, fk_idLocalidadeSensor) VALUES
 	('01556', 1, 1),
 	('02678', 1, 2),
 	('03478', 1, 3);
-    
-   
+
 
 -- registro
 INSERT INTO registro (fk_sensor, temperatura, umidade) VALUES

@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 
 var filterButtons = document.querySelectorAll('.filter ul li');
 var galleryItems = document.querySelectorAll('.cartao-destilaria');
@@ -28,3 +30,4 @@ for (var i = 0; i < filterButtons.length; i++) {
         }
     });
 }
+>>>>>>> 13dd184726af8e43d0e9188602f491ee7d8e118a
