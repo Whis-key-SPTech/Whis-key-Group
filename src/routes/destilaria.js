@@ -1,10 +1,10 @@
 var express = require("express");
 var router = express.Router();
 
-var aquarioController = require("../controllers/aquarioController");
+var destilariaontroller = require("../controllers/destilariaController");
 
-router.get("/:empresaId", function (req, res) {
-  aquarioController.buscarAquariosPorEmpresa(req, res);
+router.get("/destilatia", function (req, res) {
+  destilariaontroller.buscarDestilaria(req, res);
 });
 
 router.post("/cadastrar", function (req, res) {
