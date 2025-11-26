@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 var usuarioModel = require("../models/usuarioModel");
     function autenticar(req, res){
+=======
+    var usuarioModel = require("../models/usuarioModel");
+
+    function autenticar(req, res) {
+>>>>>>> 91d698a2965be0227b885a298a3785c0ea162d43
         var email = req.body.emailServer;
         var senha = req.body.senhaServer;
 
