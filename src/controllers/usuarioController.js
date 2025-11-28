@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-var usuarioModel = require("../models/usuarioModel");
-    function autenticar(req, res){
-=======
     var usuarioModel = require("../models/usuarioModel");
 
     function autenticar(req, res) {
->>>>>>> 91d698a2965be0227b885a298a3785c0ea162d43
         var email = req.body.emailServer;
         var senha = req.body.senhaServer;
 
@@ -28,7 +23,6 @@ var usuarioModel = require("../models/usuarioModel");
                                         email: resultadoAutenticar[0].email,
                                         nome: resultadoAutenticar[0].nome,
                                         senha: resultadoAutenticar[0].senha,
-                                        aquarios: resultadoAquarios
                                     });
                               
                     } else if (resultadoAutenticar.length == 0) {
@@ -45,6 +39,7 @@ var usuarioModel = require("../models/usuarioModel");
             );
     
         }
+    }
     function cadastrar(req, res) {
         // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
         var nome = req.body.nomeServer;
@@ -81,4 +76,4 @@ var usuarioModel = require("../models/usuarioModel");
     module.exports = {
         autenticar,
         cadastrar
-    }}
+    }

@@ -13,6 +13,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
     <div class="header">
         <a><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
@@ -41,104 +42,67 @@
                 <div class="filter">
                     <h4>Filtros:</h4>
                     <ul>
-                        <li class="filter-active" data-filter="todas">Todas</li>
-                        <li class="filter" data-filter="grave">Grave</li>
-                        <li class="filter" data-filter="atencao">Atenção</li>
-                        <li class="filter" data-filter="estavel">Estável</li>
+                        <li class="filter-active" onclick="filtrar(0)" data-filter="todas">Todas</li>
+                        <li class="filter" data-filter="grave" onclick="filtrar(3)">Grave</li>
+                        <li class="filter" data-filter="atencao" onclick="filtrar(2)">Atenção</li>
+                        <li class="filter" data-filter="estavel" onclick="filtrar(1)">Estável</li>
                     </ul>
                 </div>
                 <h3>Período: Últimas 10hs</h3>
             </nav>
 
-<<<<<<< HEAD
             <section class="lista-destilarias" id="lista_destilaria">
-
             </section>
-=======
-            <section class="lista-destilarias">
-                <a href="../sensores/index.html">
-                    <div class="cartao-destilaria grave">
-                        <h3>Rua General</h3>
-                        <br> <div class="sensores-situacao">
-                            <span>SENSORES<br><span class="sensores">6</span></span>
-                            <span>SITUAÇÃO ATUAL<br><span class="situacao">GRAVE</span></span>
-                        </div>
-                    </div>
-                </a>
-                <div class="cartao-destilaria grave">
-                    <h3>Rua Miguel</h3>
-                    <br> <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">3</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">GRAVE</span></span>
-                    </div>
-                </div>
-                <div class="cartao-destilaria atencao">
-                    <h3>Rua Vitoria</h3>
-                    <br> <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">4</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ATENÇÃO</span></span>
-                    </div>
-                </div>
-                <div class="cartao-destilaria atencao">
-                    <h3>Rua Boa Vista</h3>
-                    <br> <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">9</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ATENÇÃO</span></span>
-                    </div>
-                </div>
-                <div class="cartao-destilaria estavel">
-                    <h3>Rua Quitauna</h3>
-                    <br> <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">2</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
-                    </div>
-                </div>
-                <div class="cartao-destilaria estavel">
-                    <h3>Rua Belval</h3>
-                    <br> <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">4</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
-                    </div>
-                </div>
-                <div class="cartao-destilaria estavel">
-                    <h3>Rua Rowling</h3>
-                    <br> <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">2</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
-                    </div>
-                </div>
-        </section>
-        </div>
-        <div class="bob"><img src="">
-        </div>
->>>>>>> 91d698a2965be0227b885a298a3785c0ea162d43
+            <div class="bob"><img src="">
+            </div>
     </main>
-    <script src="script.js"></script>
     <script>
         var listaDestilas = []
-        function listar() {
+        function filtrar(opcao) {
+            var filtro = opcao
+            listar(filtro)
+        }
+
+        function listar(peso) {
             var listaMensagem = ''
             fetch("/destilaria/all", {
                 method: "GET",
             })
                 .then(function (resposta) {
                     resposta.json().then((destilarias) => {
+                        console.log(destilarias)
                         destilarias.forEach((destilaria) => {
-                            listaMensagem += `
-            <a href="../sensores/index.html">
-              <div class="cartao-destilaria estavel">
-                    <h3>${destilaria.rua}</h3>
-                    <br>
-                    <div class="sensores-situacao">
-                        <span>SENSORES<br><span class="sensores">${destilaria.qtdSensor}</span></span>
-                        <span>SITUAÇÃO ATUAL<br><span class="situacao">ESTÁVEL</span></span>
-                    </div>
-                </div>
-            </a>
-           `;
+                            var color = ''
+                            if (destilaria.situacao == 'GRAVE') {
+                                color = 'grave'
+                            }
+                            if (destilaria.situacao == 'ATENCAO') {
+                                color = 'atencao'
+                            }
+                            if (destilaria.situacao == 'ESTAVEL') {
+                                color = 'estavel'
+                            }
+
+                            if (destilaria.peso != peso && peso != 0 ) {
+                                listaMensagem += null
+                            }
+                            else {
+                                listaMensagem += `
+                        <a href="../sensores/index.html">
+                        <div class="cartao-destilaria ${color}">
+                                <h3>${destilaria.rua}</h3>
+                                <br>
+                                <div class="sensores-situacao">
+                                    <span>SENSORES<br><span class="sensores">${destilaria.qtdSensor}</span></span>
+                                    <span>SITUAÇÃO ATUAL<br><span class="situacao">${destilaria.situacao}</span></span>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                            }
 
                         });
-                            console.log('entrou')
+                        console.log('entrou')
                         lista_destilaria.innerHTML = listaMensagem
                     });
                 })
@@ -146,7 +110,7 @@
                     console.log(`#ERRO: ${resposta}`);
                 });
         }
-        listar()
+        listar(0)
     </script>
 </body>
 
