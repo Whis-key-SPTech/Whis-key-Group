@@ -43,6 +43,8 @@ app.listen(PORTA_SERVIDOR, () => {
 });
 
 // rota para receber perguntas e gerar respostas
+
+// faça pergunta para a IA
 app.post("/perguntar", async (req, res) => {
     const pergunta = req.body.pergunta;
 
@@ -56,6 +58,8 @@ app.post("/perguntar", async (req, res) => {
 });
 
 // função para gerar respostas usando o gemini
+
+// IA RESPONDE
 async function gerarResposta(mensagem) {
 
     try {
