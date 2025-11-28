@@ -10,7 +10,7 @@ function buscarDestilarias() {
 
 function cadastrar(empresa_id, descricao) {
   
-  var instrucaoSql = `INSERT INTO (descricao, fk_empresa) destilaria VALUES (${descricao}, ${empresaId})`;
+  var instrucaoSql = `INSERT INTO (descricao, fk_idEmpresa) destilaria VALUES (${descricao}, ${empresaId})`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

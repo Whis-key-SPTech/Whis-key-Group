@@ -131,18 +131,11 @@ INSERT INTO usuario (fk_idEmpresa, nome_usuario, email, senha, privilegio) VALUE
 	(3,'André Luis','andre.luis@gmail.com', '4854616584',0);
 
     -- sensor
-<<<<<<< HEAD
-INSERT INTO sensor (codigo_sensor, fk_idPredefinicao, fk_idLocalidadeSensor,situação) VALUE
-	('01556',1,1,'Estável'),
-	('02678',2,2,'Atenção'),
-	('03478',3,3,'Grave');
-=======
 INSERT INTO sensor (codigo_sensor, fk_destilaria, fk_idLocalidadeSensor) VALUES
 	('01556', 1, 1),
 	('02678', 1, 2),
 	('03478', 1, 3);
 
->>>>>>> 13dd184726af8e43d0e9188602f491ee7d8e118a
 
 -- registro
 INSERT INTO registro (fk_sensor, temperatura, umidade) VALUES

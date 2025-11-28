@@ -1,4 +1,6 @@
+
 // var ambiente_processo = 'producao';
+
 var ambiente_processo = 'desenvolvimento';
 
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
@@ -7,20 +9,24 @@ var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 
 require("dotenv").config({ path: caminho_env });
 
+const { GoogleGenAI } = require("@google/genai");
 var express = require("express");
 var cors = require("cors");
 var path = require("path");
 var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
 
-var app = express();
+// configurar a IA 
+const chatIA = new GoogleGenAI({ apiKey: process.env.MINHA_CHAVE });
 
+var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var avisosRouter = require("./src/routes/avisos");
 var medidasRouter = require("./src/routes/medidas");
 var destilariasRouter = require("./src/routes/destilarias");
 var empresasRouter = require("./src/routes/empresas");
+var iaRouter = require("./src/routes/ia");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,6 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "site", "app")));
 app.use(cors());
 
+app.use("/ia", iaRouter);
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
