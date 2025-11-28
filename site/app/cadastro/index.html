@@ -167,8 +167,8 @@ if (qtdEspecial < 1 || qtdNumeros < 1) {
   confirmar_senha.classList.add('shake', 'error');
   return;
 }
-}
-// Enviando o valor da nova input
+else{
+  // Enviando o valor da nova input
 fetch("/usuarios/cadastrar", {
   method: "POST",
   headers: {
@@ -200,6 +200,8 @@ fetch("/usuarios/cadastrar", {
   });
 
 return false;
-      }
+}
+}
+}
       
   </script>
