@@ -1,7 +1,6 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,124 +19,95 @@
 
 <body>
     <div class="header">
-        <a><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
     </div>
     <main class="conteudo-principal">
-        <section class="info-kpis">
-            <div class="infoSensor">
-                <h3>Sensor 6</h3>
-                <div id="corSituacaoBarril">
-                    <img src="icons/barril.svg">
-                </div>
-                <div class="infoLocalidade">Local: <span>Armazém 5 | Setor 2 - Cima</span></div>
+
+        <section class="resumo">
+            <div class="cartao-resumo card-identificacao">
+                <h2 class="titulo-sensors">SENSOR</h2>
+                <span class="nome-destaque">Sensor 6</span>
+                <span class="subtitulo-local">Armazém 5 | Setor 2</span>
             </div>
 
-            <div class="kpis">
-                <div class="alerta-atencao">
-                    <span id="qtdAtencao">3</span>
-                    <span>ALERTAS ATENÇÃO</span>
+            <div class="cartao-resumo">
+                <div class="tooltip-container">
+                    <div class="tooltip-icon">?</div>
+                    <div class="tooltip-msg">Total de ocorrências graves registradas por este sensor nas últimas 24h.
+                    </div>
                 </div>
-                <div class="alerta-grave">
-                    <span id="qtdGrave">5</span>
-                    <span>ALERTAS GRAVE</span>
+                <h3 class="titulo-kpi">ALERTAS GRAVES</h3>
+                <p id="qtdGrave" class="valor-kpi texto-grave">5</p>
+            </div>
+
+            <div class="cartao-resumo">
+                <div class="tooltip-container">
+                    <div class="tooltip-icon">?</div>
+                    <div class="tooltip-msg">Total de ocorrências de atenção registradas por este sensor nas últimas
+                        24h.</div>
+                </div>
+                <h3 class="titulo-kpi">ALERTAS ATENÇÃO</h3>
+                <p id="qtdAtencao" class="valor-kpi texto-atencao">3</p>
+            </div>
+
+            <div class="cartao-resumo">
+                <h3 class="titulo-kpi">TEMP. ATUAL</h3>
+                <div class="indicador-atual">
+                    <span class="valor-kpi texto-padrao">28ºC</span>
+                    <div class="status-dot atencao"></div>
+                </div>
+            </div>
+
+            <div class="cartao-resumo">
+                <h3 class="titulo-kpi">UMID. ATUAL</h3>
+                <div class="indicador-atual">
+                    <span class="valor-kpi texto-padrao">60%</span>
+                    <div class="status-dot estavel"></div>
                 </div>
             </div>
         </section>
 
-        <section class="info-temperatura">
-            <div class="resumo-temperatura">
-                <div class="titulo">
-                    <h3>Temperatura<br>Atual
-                    </h3>
-                    <div class="fundoIcon">
-                        <img src="icons/tempIcon.png" height="25px">
-                    </div>
-                </div>
-                <div id="temperatura-atual">
-                    28ºC
-                </div>
-                <div class="legenda">
-                    <div class="box-legenda">
-                        <div class="regular"></div>
-                        <span class="parametro-regular"></span>
-                    </div>
-                    <div class="box-legenda">
-                        <div class="atencao"></div>
-                        <span class="parametro-atencao"></span>
-                    </div>
-                    <div class="box-legenda">
-                        <div class="grave"></div>
-                        <span class="parametro-grave"></span>
-                    </div>
-                </div>
-            </div>
+        <section class="area-graficos">
 
-            <div class="graficos">
-                <div class="container-temperatura">
-                    <nav class="abas-navegacao">
+            <div class="container-grafico">
+                <nav class="abas-navegacao">
+                    <div class="nav-left">
                         <h2>Temperatura</h2>
-                        <div class="data-horario">
-                            <span id="dataAtual">
-                                14/10
-                            </span>
-                            <img src="icons/calendarIcon.png" height="20px">
-                            <select id="select_horario">
-                                <option value="am">AM</option>
-                                <option value="pm">PM</option>
-                            </select>
-                        </div>
-                    </nav>
+                    </div>
+                    <div class="data-horario">
+                        <span id="dataAtual">14/10</span>
+                        <img src="icons/calendarIcon.png" height="20px">
+                        <select id="select_horario">
+                            <option value="am">AM</option>
+                            <option value="pm">PM</option>
+                        </select>
+                    </div>
+                </nav>
+                <div class="chart-wrapper">
                     <canvas id="myChart_Temperature"></canvas>
                 </div>
-            </div>
-        </section>
-
-        <section class="info-umidade">
-            <div class="resumo-umidade">
-                <div class="titulo">
-                    <h3>Umidade<br>Atual
-                    </h3>
-                    <div class="fundoIcon">
-                        <img src="icons/tempIcon.png" height="25px">
-                    </div>
-                </div>
-                <div id="umidade-atual">
-                    60%
-                </div>
-                <div class="legenda">
-                    <div class="box-legenda">
-                        <div class="regular"></div>
-                        <span class="parametro-regular"></span>
-                    </div>
-                    <div class="box-legenda">
-                        <div class="atencao"></div>
-                        <span class="parametro-atencao"></span>
-                    </div>
-                    <div class="box-legenda">
-                        <div class="grave"></div>
-                        <span class="parametro-grave"></span>
-                    </div>
+                <div class="legenda-grafico">
+                    <span class="leg-item"><span class="dot regular"></span> Ideal (20-25ºC)</span>
+                    <span class="leg-item"><span class="dot atencao"></span> Atenção</span>
+                    <span class="leg-item"><span class="dot grave"></span> Crítico</span>
                 </div>
             </div>
 
-            <div class="graficos">
-                <div class="container-temperatura">
-                    <nav class="abas-navegacao">
+            <div class="container-grafico">
+                <nav class="abas-navegacao">
+                    <div class="nav-left">
                         <h2>Umidade</h2>
-                        <div class="data-horario">
-                            <span id="dataAtual">
-                                14/10
-                            </span>
-                            <img src="icons/calendarIcon.png" height="20px">
-                            <select id="select_horario">
-                                <option value="am">AM</option>
-                                <option value="pm">PM</option>
-                            </select>
-                        </div>
-                    </nav>
+                    </div>
+                </nav>
+                <div class="chart-wrapper">
                     <canvas id="myChart_Umidade"></canvas>
                 </div>
+                <div class="legenda-grafico">
+                    <span class="leg-item"><span class="dot regular"></span> Ideal (50-80%)</span>
+                    <span class="leg-item"><span class="dot atencao"></span> Atenção</span>
+                    <span class="leg-item"><span class="dot grave"></span> Crítico</span>
+                </div>
             </div>
+
         </section>
     </main>
 </body>
@@ -150,7 +120,7 @@
         type: 'line',
         data: {
             labels: ['10min', '20min', '30min', '40min', '50min', '60min'],
-            
+
             datasets: [
                 {
                     label: 'Temperatura',
@@ -222,81 +192,81 @@
     });
 
     const ctxUmidade = document.getElementById('myChart_Umidade');
-    
-            var graficoLinha = new Chart(ctxUmidade, {
-                type: 'line',
-                data: {
-                    labels: ['10min', '20min', '30min', '40min', '50min', '60min'],
-                    datasets: [
-                        {
-                            label: 'Umidade',
-                            tension: 0,
-                            fill: true,
-                            borderColor: '#2D5031',
-                            backgroundColor: 'rgba(80, 193, 86,0.5)',
-                            data: [72, 65, 60, 58, 59, 60, 61],
-                            borderWidth: 2,
-                            spanGaps: true,
-                        },
-                        {
-                            label: 'Máximo',
-                            fill: true,
-                            tension: 0.1,
-                            borderColor: '#7d080a80',
-                            backgroundColor: '#7d080a80',
-                            data: [],
-                            borderWidth: 2,
-                        },
-                        {
-                            label: 'Mínimo',
-                            fill: true,
-                            tension: 0.1,
-                            borderColor: '#0f6f9f80',
-                            backgroundColor: '#0f6f9f80',
-                            data: [],
-                            borderWidth: 2,
-                        }
-                    ]
+
+    var graficoLinha = new Chart(ctxUmidade, {
+        type: 'line',
+        data: {
+            labels: ['10min', '20min', '30min', '40min', '50min', '60min'],
+            datasets: [
+                {
+                    label: 'Umidade',
+                    tension: 0,
+                    fill: true,
+                    borderColor: '#2D5031',
+                    backgroundColor: 'rgba(80, 193, 86,0.5)',
+                    data: [72, 65, 60, 58, 59, 60, 61],
+                    borderWidth: 2,
+                    spanGaps: true,
                 },
-                options: {
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            min: 50,
-                            max: 90,
+                {
+                    label: 'Máximo',
+                    fill: true,
+                    tension: 0.1,
+                    borderColor: '#7d080a80',
+                    backgroundColor: '#7d080a80',
+                    data: [],
+                    borderWidth: 2,
+                },
+                {
+                    label: 'Mínimo',
+                    fill: true,
+                    tension: 0.1,
+                    borderColor: '#0f6f9f80',
+                    backgroundColor: '#0f6f9f80',
+                    data: [],
+                    borderWidth: 2,
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    min: 50,
+                    max: 90,
+                },
+            },
+            plugins: {
+                legend: {
+                    position: 'top'
+                },
+                tooltip: { enabled: true },
+                annotation: {
+                    annotations: {
+                        limiteMaximo: {
+                            type: 'line',
+                            yMin: 80,
+                            yMax: 80,
+                            borderColor: '#7d080a80',
+                            borderWidth: 3,
                         },
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top'
-                        },
-                        tooltip: { enabled: true },
-                        annotation: {
-                            annotations: {
-                                limiteMaximo: {
-                                    type: 'line',
-                                    yMin: 80,
-                                    yMax: 80,
-                                    borderColor: '#7d080a80',
-                                    borderWidth: 3,
-                                },
-                                limiteMinimo: {
-                                    type: 'line',
-                                    yMin: 60,
-                                    yMax: 60,
-                                    borderColor: '#0f6f9f80',
-                                    borderWidth: 3,
-                                    label: {
-                                        content: 'Limite Minimo (20 °C)',
-                                        enabled: true,
-                                        position: 'end',
-                                        backgroundColor: 'rgba(255,0,0,0.7)',
-                                        color: '#fff'
-                                    }
-                                }
+                        limiteMinimo: {
+                            type: 'line',
+                            yMin: 60,
+                            yMax: 60,
+                            borderColor: '#0f6f9f80',
+                            borderWidth: 3,
+                            label: {
+                                content: 'Limite Minimo (20 °C)',
+                                enabled: true,
+                                position: 'end',
+                                backgroundColor: 'rgba(255,0,0,0.7)',
+                                color: '#fff'
                             }
                         }
                     }
                 }
-            });
+            }
+        }
+    });
 </script>

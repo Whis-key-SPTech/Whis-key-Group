@@ -16,41 +16,99 @@
 
 <body>
     <div class="header">
-        <a><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
     </div>
     <main class="conteudo-principal">
         <section class="resumo">
-            <div class="cartao-resumo ultimas-horas">
-                <h3>Maior intervalo em alerta <span class="grave">GRAVE</span></h3>
-                <p>Rua Miguel - 4 horas</p>
+            <div class="cartao-resumo destaque-alerta">
+                <div class="tooltip-container">
+                    <div class="tooltip-icon">?</div>
+                    <div class="tooltip-msg">Indica a destilaria que ficou mais tempo consecutivo em estado crítico.
+                    </div>
+                </div>
+                <h3 class="titulo-kpi">Maior intervalo <span class="texto-grave">GRAVE</span></h3>
+                <p class="valor-destaque"><span id="span_rua_intervalo"></span> - <span
+                        id="span_horas_intervalo"></span> horas</p>
             </div>
-            <div onclick="window.location.href='.../../BobSite/index.html'" class="cartao-resumo sensores">
-                <h3>Sensores</h3>
-                <p>30</p>
+            <div class="cartao-resumo card-kpi">
+                <div class="tooltip-container">
+                    <div class="tooltip-icon">?</div>
+                    <div class="tooltip-msg">Porcentagem dos registros dos sensores que operaram dentro da faixa
+                        ideal.</div>
+                </div>
+                <h3 class="kpi-title">Estabilidade</h3>
+                <div id="div_estabilidade">
+                    <div class="kpi-value-huge">85%</div>
+                </div>
+                <div class="progress-container" id="progresso_eficiencia">
+                    <div class="progress-bar-fill" style="width: 85%;"></div>
+                </div>
             </div>
             <div class="cartao-resumo tipos-situacao">
+                <div class="tooltip-container">
+                    <div class="tooltip-icon">?</div>
+                    <div class="tooltip-msg">
+                        <p><span class="estavel" style="color: #50C156; ">ESTÁVEL:</span> 0 alertas ativos</p>
+                        <p><span class="atençao" style="color: #FFA500;">ATENÇÃO:</span> >= 1 alertas em atenção</p>
+                        <p><span class="grave">GRAVE:</span> >= 1 alertas grave</p>
+                    </div>
+                </div>
                 <h3>TIPOS DE SITUAÇÃO</h3>
-                <p><span class="estavel">ESTÁVEL:</span> 0 alertas ativos</p>
-                <p><span class="atençao" style="color: #FFA500;">ATENÇÃO:</span> >= 1 alertas em atenção</p>
-                <p><span class="grave">GRAVE:</span> >= 1 alertas grave</p>
+                <div class="lista-situacao">
+                    <div class="item-situacao">
+                        <span class="label">Grave:</span>
+                        <div class="flex">
+                            <span class="dot grave"></span>
+                            <span class="valor" id="div_qtdGrave">1</span>
+                        </div>
+                    </div>
+
+                    <div class="item-situacao">
+                        <span class="label">Atenção:</span>
+                        <div class="flex">
+                            <span class="dot atencao"></span>
+                            <span class="valor" id="div_qtdAtencao">1</span>
+                        </div>
+                    </div>
+                    <div class="item-situacao">
+                        <span class="label">Estável:</span>
+                        <div class="flex">
+                            <span class="dot estavel"></span>
+                            <span class="valor" id="div_qtdEstavel">0</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-
         <div class="container">
             <nav class="abas-navegacao">
-                <h2>Destilarias</h2>
-                <div class="filter">
+                <div class="nav-left">
+                    <h2>Destilarias</h2>
+                    <div class="sensor-count" title="Total de sensores monitorados">
+                        <img src="./sensor-white.svg" width='15' style="color: white;">
+                        <span><span id="div_qtdSensores">30</span> total sensores</span>
+                    </div>
+                </div>
+
+                <div class="filter-container">
                     <h4>Filtros:</h4>
                     <ul>
-                        <li class="filter-active" onclick="filtrar(0)" data-filter="todas">Todas</li>
-                        <li class="filter" data-filter="grave" onclick="filtrar(3)">Grave</li>
-                        <li class="filter" data-filter="atencao" onclick="filtrar(2)">Atenção</li>
-                        <li class="filter" data-filter="estavel" onclick="filtrar(1)">Estável</li>
+                        <li class="filter-item active" onclick="filtrar('all')" data-filter="all">Todas</li>
+                        <li class="filter-item" data-filter="grave" onclick="filtrar('grave')">Grave</li>
+                        <li class="filter-item" data-filter="atencao" onclick="filtrar('atencao')">Atenção</li>
+                        <li class="filter-item" data-filter="estavel" onclick="filtrar('estavel')">Estável</li>
                     </ul>
                 </div>
-                <h3>Período: Últimas 10hs</h3>
-            </nav>
 
+                <div class="period-selector">
+                    <label for="periodo">Período:</label>
+                    <select name="periodo" id="periodo" onchange="filtrarHora(this.value)">
+                        <option value="12">Últimas 12hs</option>
+                        <option value="24">Últimas 24hs</option>
+                        <option value="168">Última Semana</option>
+                        <option value="720">Último Mês</option>
+                    </select>
+                </div>
+            </nav>
             <section class="lista-destilarias" id="lista_destilaria">
             </section>
             <div class="bob"><img src="">
@@ -58,59 +116,195 @@
     </main>
     <script>
         var listaDestilas = []
-        function filtrar(opcao) {
-            var filtro = opcao
-            listar(filtro)
+        var pesoGlobal = 'all'
+        var horarioGlobal = 12
+        function filtrar(valorFiltro) {
+            var opcoesFiltro = document.querySelectorAll('.filter-item');
+            for (var i = 0; i < opcoesFiltro.length; i++) {
+                opcoesFiltro[i].classList.remove('active');
+                if (opcoesFiltro[i].getAttribute('data-filter') === valorFiltro) {
+                    opcoesFiltro[i].classList.add('active');
+                }
+            }
+            var filtro = valorFiltro
+            pesoGlobal = valorFiltro
+            atualizarLista(filtro, horarioGlobal)
         }
 
-        function listar(peso) {
+        function filtrarHora(horario) {
+            horarioGlobal = horario
+            atualizarLista(pesoGlobal, horario)
+        }
+
+        function IniciarListar(peso, horario) {
+            var qtdSensores = 0
+            var qtdGrave = 0
+            var qtdAtencao = 0
+            var qtdEstavel = 0
             var listaMensagem = ''
-            fetch("/destilaria/all", {
+
+            fetch(`/destilaria/all?situacao=${peso || 'all'}&horas=${horario || 12}`, {
                 method: "GET",
             })
                 .then(function (resposta) {
                     resposta.json().then((destilarias) => {
-                        console.log(destilarias)
                         destilarias.forEach((destilaria) => {
                             var color = ''
                             if (destilaria.situacao == 'GRAVE') {
                                 color = 'grave'
+                                qtdGrave++
                             }
-                            if (destilaria.situacao == 'ATENCAO') {
+                            else if (destilaria.situacao == 'ATENCAO') {
                                 color = 'atencao'
+                                qtdAtencao++
                             }
-                            if (destilaria.situacao == 'ESTAVEL') {
+                            else if (destilaria.situacao == 'ESTAVEL') {
                                 color = 'estavel'
+                                qtdEstavel++
                             }
-
-                            if (destilaria.peso != peso && peso != 0 ) {
-                                listaMensagem += null
-                            }
-                            else {
-                                listaMensagem += `
-                        <a href="../sensores/index.html">
-                        <div class="cartao-destilaria ${color}">
-                                <h3>${destilaria.rua}</h3>
-                                <br>
-                                <div class="sensores-situacao">
-                                    <span>SENSORES<br><span class="sensores">${destilaria.qtdSensor}</span></span>
-                                    <span>SITUAÇÃO ATUAL<br><span class="situacao">${destilaria.situacao}</span></span>
+                            qtdSensores += destilaria.qtdSensor
+                            listaMensagem += `
+                            <div class="card card-destilaria status-${color}" onclick='handleDestilaria(${destilaria.id_destilaria})'>
+                            <div class="card-header-stripe"></div>
+                            <div class="card-body">
+                                <h3 class="card-title">${destilaria.rua}</h3>
+                                <div class="info-row">
+                                    <div class="info-block">
+                                        <span class="info-label">SENSORES</span>
+                                        <div class="info-value-large">
+                                            <img src="./sensor.svg" width='30' class="sensor-icon">
+                                            ${destilaria.qtdSensor}
+                                        </div>
+                                    </div>
+                                    <div class="info-block">
+                                        <span class="info-label">SITUAÇÃO ATUAL</span>
+                                        <div class="status-badge">
+                                            <img src="./alert.svg" width='25' class="alert-icon">
+                                             ${destilaria.situacao.toUpperCase()}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     `;
-                            }
-
                         });
-                        console.log('entrou')
                         lista_destilaria.innerHTML = listaMensagem
+                        div_qtdGrave.innerHTML = qtdGrave
+                        div_qtdAtencao.innerHTML = qtdAtencao
+                        div_qtdEstavel.innerHTML = qtdEstavel
+                        div_qtdSensores.innerHTML = qtdSensores
                     });
                 })
                 .catch(function (resposta) {
                     console.log(`#ERRO: ${resposta}`);
                 });
         }
-        listar(0)
+        function kpis(horario) {
+            fetch(`/destilaria/maiorIntervalo?horas=${horario || 12}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    resposta.json().then((dados) => {
+                        var dado = dados[0]
+                        span_rua_intervalo.innerHTML = dado.rua
+                        span_horas_intervalo.innerHTML = dado.horas_consecutivas
+                    });
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+
+            fetch(`/destilaria/eficiencia?horas=${horario || 12}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    resposta.json().then((dados) => {
+                        var dado = dados[0]
+                        div_estabilidade.innerHTML = `
+                           <div class="kpi-value-huge">${dado.eficiencia}%</div>
+                        `
+                        progresso_eficiencia.innerHTML = `
+                         <div class="progress-bar-fill" style="width: ${dado.eficiencia}%;"></div>
+                        `
+                    });
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                })
+        }
+        function atualizarLista(peso, horario) {
+            qtdGrave = 0
+            qtdAtencao = 0
+            qtdEstavel = 0
+            var qtdSensores = 0
+            var listaMensagem = ''
+            fetch(`/destilaria/all?situacao=${peso || 'all'}&horas=${horario || 12}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    resposta.json().then((destilarias) => {
+                        destilarias.forEach((destilaria) => {
+                            var color = ''
+                            if (destilaria.situacao == 'GRAVE') {
+                                color = 'grave'
+                                qtdGrave++
+                            }
+                            else if (destilaria.situacao == 'ATENCAO') {
+                                color = 'atencao'
+                                qtdAtencao++
+                            }
+                            else if (destilaria.situacao == 'ESTAVEL') {
+                                color = 'estavel'
+                                qtdEstavel++
+                            }
+                            qtdSensores += destilaria.qtdSensor
+                            listaMensagem += `
+                            <div class="card card-destilaria status-${color}" onclick='handleDestilaria(${destilaria.id_destilaria})'>
+                            <div class="card-header-stripe"></div>
+                            <div class="card-body">
+                                <h3 class="card-title">${destilaria.rua}</h3>
+                                <div class="info-row">
+                                    <div class="info-block">
+                                        <span class="info-label">SENSORES</span>
+                                        <div class="info-value-large">
+                                            <img src="./sensor.svg" width='30' class="sensor-icon">
+                                            ${destilaria.qtdSensor}
+                                        </div>
+                                    </div>
+                                    <div class="info-block">
+                                        <span class="info-label">SITUAÇÃO ATUAL</span>
+                                        <div class="status-badge">
+                                            <img src="./alert.svg" width='25' class="alert-icon">
+                                             ${destilaria.situacao.toUpperCase()}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                        });
+                        lista_destilaria.innerHTML = listaMensagem
+                        div_qtdSensores.innerHTML = qtdSensores
+                        div_qtdGrave.innerHTML = qtdGrave
+                        div_qtdAtencao.innerHTML = qtdAtencao
+                        div_qtdEstavel.innerHTML = qtdEstavel
+                        div_qtdSensores.innerHTML = qtdSensores
+                    });
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+
+                 if(horario){
+                    kpis(horario)
+                }
+        }
+        IniciarListar(0, 12)
+        kpis()
+        function handleDestilaria(id_destilaria) {
+            sessionStorage.ID_DESTILARIA = id_destilaria
+            window.location = "../../(admin)/sensores/index.html";
+        }
     </script>
 </body>
 

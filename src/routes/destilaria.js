@@ -7,6 +7,12 @@ router.get("/all", function (req, res) {
   destilariaController.listar(req, res);
 });
 
+router.get("/maiorIntervalo", function (req, res) {
+  destilariaController.maiorIntervalo(req, res);
+});
+router.get("/eficiencia", function (req, res) {
+  destilariaController.eficiencia(req, res);
+});
 router.get("/buscar/:id", function (req, res) {
   destilariaController.buscarPorId(req, res);
 });

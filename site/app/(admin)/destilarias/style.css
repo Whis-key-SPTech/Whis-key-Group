@@ -13,10 +13,17 @@ body {
     overflow: hidden;
 }
 
-a{
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+a {
     text-decoration: none;
     pointer-events: none;
 }
+
 .navegacao-principal ul {
     list-style: none;
 }
@@ -27,6 +34,7 @@ a{
     border-radius: 5px;
     cursor: pointer;
 }
+
 .navegacao-principal .ativo {
     background-color: #ccffcc;
     color: green;
@@ -44,10 +52,11 @@ a{
 .sair-vermelho {
     color: red;
 }
-/* Conteúdo Principal */
+
+
 .conteudo-principal {
     flex-grow: 1;
-    padding: 45px 75px;
+    padding: 25px 75px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,69 +66,165 @@ a{
 
 .resumo {
     display: flex;
-    gap: 28px;
+    gap: 20px;
+    justify-content: space-between; 
+    width: 100%;
 }
 
 .cartao-resumo {
     background-color: white;
-    padding: 20px;
-    border-radius: 15px;
+    padding: 25px;
+    border-radius: 16px;
     text-align: center;
-    box-shadow: 4px 4px 4px #1c311e51;
-    width: 200px;
+    box-shadow: 0 4px 15px rgba(28, 49, 30, 0.08); 
+    position: relative; 
+    flex: 1; 
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    align-self: center;
+    transition: transform 0.2s ease;
+    min-height: 120px;
 }
 
-.cartao-resumo.tipos-situacao {
-    width: 400px;
-    height: 150px;
-    padding: 10px 30px;
-}
-.cartao-resumo.ultimas-horas{
-    width: 500px;
-}
 .cartao-resumo h3 {
-    font-size: 26px;
-    margin-bottom: 25px;
-    font-weight: 400;
+    font-size: 20px;
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
-.tipos-situacao h3{
-    font-size: 24px;
-    color: #1C311E;
-    font-weight: bold;
+.titulo-kpi{
+    justify-self: baseline;
 }
-
-.cartao-resumo p {
-    font-size: 28px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #1C311E;
-}
-
-.tipos-situacao p {
-    font-size: 18px;
-    margin-bottom: 5px;
-    font-weight: bolder;
-    align-self: flex-start;
-    color: #1C311E;
-}
-
-.estavel {
-    color: #50C156;
-}
-
-.atencao {
-    color: #FFA500;
-}
-
-.grave {
+.texto-grave {
     color: #CF1619;
+    font-weight: 800;
 }
-/*Filtro para destilarias*/
+
+.valor-destaque {
+    font-size: 27px;
+    font-weight: 800;
+    color: #1C311E;
+    margin: 0;
+}
+
+
+.kpi-value-huge {
+    font-size: 32px;
+    font-weight: 800;
+    color: #2f9e44;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.progress-container {
+    height: 10px;
+    width: 100%;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+    max-width: 200px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #2f9e44;
+    border-radius: 5px;
+}
+
+.lista-situacao {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    gap: 15px;
+}
+
+.item-situacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dot {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.dot.estavel { background-color: #50C156; }
+.dot.atencao { background-color: #FFA500; }
+.dot.grave   { background-color: #CF1619; }
+
+.item-situacao .label {
+    font-size: 18px;
+    color: #161616;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 2px;
+    margin-right: 15px;
+}
+
+.item-situacao .valor {
+    font-size: 22px;
+    font-weight: 800;
+    color: #333;
+}
+
+.tooltip-container {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: help;
+    z-index: 10;
+}
+
+.tooltip-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    color: #3f4142;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.tooltip-icon:hover {
+    background-color: #141e15;
+    color: white;
+}
+
+.tooltip-msg {
+    visibility: hidden;
+    opacity: 0;
+    width: 400px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 18px;
+    font-weight: 400;
+    position: absolute;
+    bottom: -125%; 
+    left: -20%;
+    transform: translateX(-105%); 
+    transition: opacity 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
+.tooltip-container:hover .tooltip-msg {
+    visibility: visible;
+    opacity: 1;
+}
 .container {
     width: 100%;
     background-color: #F9F9F9;
@@ -129,67 +234,136 @@ a{
 
 .abas-navegacao {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
     background-color: #1C311E;
-    padding: 10px;
+    padding: 15px 30px;
     border-radius: 20px 20px 0px 0px;
     margin-bottom: 20px;
-    align-items: center;
-    gap: 40px;
     color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    gap: 20px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .abas-navegacao h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
     color: white;
-    font-size: 32px;
-    justify-self: center;
-}
-.filter{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-.filter ul{
-    gap: 50px;
-}
-.filter h4{
-    color: white;
+    letter-spacing: 0.5px;
 }
 
-.abas-navegacao ul {
+.sensor-count {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #e9ecef;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.filter-container h4 {
+    margin: 0;
+    font-weight: 400;
+    color: #adb5bd;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.filter-container ul {
     display: flex;
     list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+.filter-item {
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 400;
+    color: #e9ecef;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    font-size: 15px;
+    position: relative;
+}
+.filter-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 14px;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.filter-item:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.filter-item.active {
+    font-weight: 700;
+    color: #1C311E;
+    background-color: #fcc419;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.filter-item.active::after {
+    display: none;
+}
+
+
+.period-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.period-selector label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #e9ecef;
+}
+
+.period-selector select {
+    background-color: rgba(0, 0, 0, 0.2);
+    /* Fundo escuro para o input */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.period-selector select:hover,
+.period-selector select:focus {
+    border-color: #fcc419;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.period-selector option {
     background-color: #1C311E;
     color: white;
 }
-
-.abas-navegacao li {
-    padding: 10px 20px;
-    cursor: pointer;
-    position: relative;
-    box-sizing: border-box;
-    text-align: center;
-    flex: 0px;
-    font-weight: 300;
-}
-
-.abas-navegacao .aba-ativa {
-    font-weight: bolder;
-}
-
-.abas-navegacao li:not(:last-child)::before {
-    content: '';
-    height: 36px;
-    width: 1px;
-    background-color: #D9D9D9;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    transform: scaleX(2);
-    transform-origin: right;
-}
-
 
 .lista-destilarias {
     margin: 30px;
@@ -197,20 +371,22 @@ a{
     grid-template-columns: repeat(4, minmax(200px, 1fr));
     gap: 14px;
     overflow-y: scroll;
+    min-height: 200px;
     pointer-events: none;
 }
-.lista-destilarias::-webkit-scrollbar  {
-      width: 8px; 
+
+.lista-destilarias::-webkit-scrollbar {
+    width: 8px;
 }
 
 .lista-destilarias::-webkit-scrollbar-track {
-  background: #f1f1f100;
-  border-radius: 8px;
+    background: #f1f1f100;
+    border-radius: 8px;
 }
 
 .lista-destilarias::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 8px;
+    background: #888;
+    border-radius: 8px;
 }
 
 .cartao-destilaria {
@@ -226,10 +402,12 @@ a{
     pointer-events: all;
     z-index: 10;
 }
-.cartao-destilaria:hover{
+
+.cartao-destilaria:hover {
     transform: translateY(0.8px);
 }
-.cartao-resumo .grave{
+
+.cartao-resumo .grave {
     color: #CF1619;
     font-weight: bold;
 }
@@ -280,12 +458,8 @@ a{
 .cartao-destilaria.estavel .situacao {
     color: #50C156;
 }
-/*É a classe que o JavaScript usa para esconder os cartões */
-.cartao-destilaria.hide {
-    display: none;
-}
 
-/* estilização do filtro*/
+
 .filter ul li {
     cursor: pointer;
     padding: 5px 10px;
@@ -293,7 +467,6 @@ a{
     transition: all 0.3s ease;
 }
 
-/* Estilo do botão inativo */
 .filter {
     color: #888;
     background-color: transparent;
@@ -301,18 +474,132 @@ a{
 
 .filter-active {
     color: #FFFFFF;
-    background-color: #FFA500; 
+    background-color: #FFA500;
     font-weight: bold;
 }
-.bob{
-   background-color: #1C311E;
-   width: 85px;
-   height: 85px;
-   border-radius: 500px;
-   display: flex;
-   position: fixed;
-   bottom: 50px;
-   right: 50px;
-   left: auto;
-   top: auto;
+
+.bob {
+    background-color: #1C311E;
+    width: 85px;
+    height: 85px;
+    border-radius: 500px;
+    display: flex;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    left: auto;
+    top: auto;
 }
+
+.card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    width: 100%;
+    background-color: #fff;
+    max-height: 180px;
+}
+
+.card-destilaria {
+    max-width: 380px;
+    z-index: 10;
+    pointer-events: all;
+    cursor: pointer;
+}
+.card-destilaria:hover {
+    transform: translateY(-2px);
+}
+.card-header-stripe {
+    height: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.status-grave .card-header-stripe {
+    background-color: #c92a2a;
+}
+
+.status-atencao .card-header-stripe {
+    background-color: #f59f00;
+}
+
+.status-estavel .card-header-stripe {
+    background-color: #2f9e44;
+}
+
+
+.card-title {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 25px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+.info-block {
+    text-align: center;
+}
+
+.info-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #95a5a6;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.info-value-large {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.sensor-icon {
+    color: #555;
+}
+
+.status-badge {
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.status-grave .status-badge {
+    background-color: #c92a2a;
+    box-shadow: 0 4px 6px rgba(201, 42, 42, 0.3);
+}
+
+.status-atencao .status-badge {
+    background-color: #f59f00;
+}
+
+.status-estavel .status-badge {
+    background-color: #2f9e44;
+}
+
+
+
+
+
+
+
+

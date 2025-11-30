@@ -1,20 +1,20 @@
-var destilariaModel = require("../models/destilariaModel");
-var ordernacao = require("../utils/ordenacao");
+var sensorModel = require("../models/sensoresModel");
 var validationsStatus = require("../utils/validation");
+
 
 function listar(req, res) {
   var statusFiltro = req.query.situacao || 'ALL';
   var statusData = req.query.horas || 12;
+  var destilariaId = req.params.idDestilaria;
   statusFiltro = statusFiltro.toLowerCase();
   var listaOrdenada = []
   
-  destilariaModel.listarDestilaria(statusData).then((resultado) => {
+  sensorModel.listarSensores(destilariaId, statusData).then((resultado) => {
     for (var i = 0; i < resultado.length; i++) {
       var maxTempStatus = validationsStatus.verificarStatusTemperatura(resultado[i].max_temp)
       var minTempStatus = validationsStatus.verificarStatusTemperatura(resultado[i].min_temp)
       var maxUmidStatus = validationsStatus.verificarStatusUmidade(resultado[i].max_umid)
       var minUmidStatus = validationsStatus.verificarStatusUmidade(resultado[i].min_umid)
-
       if (maxTempStatus == 'GRAVE' || minTempStatus == 'GRAVE' || maxUmidStatus == 'GRAVE' || minUmidStatus == 'GRAVE') {
         resultado[i].situacao = 'GRAVE'
         resultado[i].peso = 3
@@ -35,16 +35,27 @@ function listar(req, res) {
         }
       }
     }
-     listaOrdenada = ordernacao.ordenar(listaOrdenada)
+    for(var i = 0; i < listaOrdenada.length - 1; i++){
+      for(var j = 0; j < listaOrdenada.length - 1 - i; j++){
+          var atual = listaOrdenada[j]
+          var proximo = listaOrdenada[j + 1]
+        if(atual.peso < proximo.peso){
+          listaOrdenada[j]  = proximo
+          listaOrdenada[j + 1] = atual
+        }
+      }
+    }
     res.status(200).json(listaOrdenada);
   });
 }
 
+
 function maiorIntervalo(req, res) {
   var statusFiltro = req.query.situacao || 'ALL';
   var statusData = req.query.horas || 12;
+  var destilariaId = req.params.idDestilaria;
   statusFiltro = statusFiltro.toLowerCase();
-  destilariaModel.maiorIntervalo(statusData).then((resultado) => {
+  sensorModel.maiorIntervalo(destilariaId, statusData).then((resultado) => {
     res.status(200).json(resultado);
   });
 }
@@ -53,50 +64,25 @@ function maiorIntervalo(req, res) {
 function eficiencia(req, res) {
   var statusFiltro = req.query.situacao || 'ALL';
   var statusData = req.query.horas || 12;
+  var destilariaId = req.params.idDestilaria;
   statusFiltro = statusFiltro.toLowerCase();
-  destilariaModel.eficiencia(statusData).then((resultado) => {
+  sensorModel.eficiencia(destilariaId, statusData).then((resultado) => {
     res.status(200).json(resultado);
   });
 }
 
 function buscarPorId(req, res) {
   var id = req.params.id;
-  destilariaModel.buscarDestilaria(id).then((resultado) => {
+  sensorModel.buscarSensor(id).then((resultado) => {
     res.status(200).json(resultado);
   });
 }
 
 
-function cadastrar(req, res) {
-  var descricao = req.body.descricao;
-  var idUsuario = req.body.idUsuario;
-
-  if (descricao == undefined) {
-    res.status(400).send("descricao está undefined!");
-  } else if (idUsuario == undefined) {
-    res.status(400).send("idUsuario está undefined!");
-  } else {
-
-
-    destilariaModel.cadastrar(descricao, idUsuario)
-      .then((resultado) => {
-        res.status(201).json(resultado);
-      }
-      ).catch((erro) => {
-        console.log(erro);
-        console.log(
-          "\nHouve um erro ao realizar o cadastro! Erro: ",
-          erro.sqlMessage
-        );
-        res.status(500).json(erro.sqlMessage);
-      });
-  }
-}
 
 module.exports = {
   listar,
-  buscarPorId,
   maiorIntervalo,
   eficiencia,
-  cadastrar
+  buscarPorId
 }

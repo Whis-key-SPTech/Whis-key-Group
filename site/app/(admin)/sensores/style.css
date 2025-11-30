@@ -58,7 +58,6 @@ body {
     color: red;
 }
 
-/* Conteúdo Principal */
 .conteudo-principal {
     flex-grow: 1;
     padding: 20px 75px;
@@ -71,83 +70,189 @@ body {
 
 .resumo {
     display: flex;
-    gap: 28px;
-    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: stretch; 
+    width: 100%;
+    margin-top: 10px;
 }
 
-.titulo-destilarias {
-    font-size: 26px;
-    color: #1C311E;
-    font-weight: bold;
-    align-self: center;
-}
-.cartao-resumo.ultimas-horas{
-    width: 450px;
-    font-size: 18px;
-}
-.cartao-localizacao{
-    margin-top: 85px;
-}
 .cartao-resumo {
     background-color: white;
     padding: 20px;
-    border-radius: 15px;
+    border-radius: 16px;
     text-align: center;
-    box-shadow: 4px 4px 4px #1c311e51;
-    width: 150px;
+    box-shadow: 0 4px 15px rgba(28, 49, 30, 0.08);
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    align-self: center;
-    height: 125px;
+    flex: 1; 
+    min-height: 140px;
+    transition: transform 0.2s ease;
 }
 
-.cartao-resumo h2 {
-    font-size: 24px;
-    margin-bottom: 25px;
-    font-weight: 400;
+
+.card-identificacao {
+    flex: 0.8; 
+    border-left: 5px solid #1C311E; 
+    align-items: flex-start; 
+    padding-left: 30px;
+}
+.tipos-situacao {
+    flex: 1.25; 
 }
 
-.cartao-resumo p {
-    font-size: 34px;
-    line-height: 15px;
-    margin-bottom: 10px;
-    font-weight: bold;
+
+.cartao-resumo h3, 
+.titulo-kpi, 
+.titulo-sensors {
+    font-size: 20px; 
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nome-destaque {
+    font-size: 28px;
     color: #1C311E;
+    font-weight: 800;
 }
 
-.cartao-resumo.atencao {
-    background-color: #FFA500;
+
+.valor-destaque {
+    font-size: 27px; 
+    font-weight: 800;
+    color: #1C311E;
+    margin: 0;
+}
+
+.kpi-value-huge {
+    font-size: 32px; 
+    font-weight: 800;
+    color: #2f9e44;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.texto-grave { color: #CF1619; font-weight: 800; }
+.texto-atencao { color: #FFA500; }
+.texto-padrao { color: #1C311E; }
+
+.progress-container {
+    height: 10px;
+    width: 100%;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+    max-width: 200px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #2f9e44;
+    border-radius: 5px;
+}
+
+.lista-situacao {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    gap: 15px;
+}
+
+.item-situacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.label {
+    font-size: 18px; 
+    color: #161616;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.valor {
+    font-size: 22px;
+    font-weight: 800;
+    color: #333;
+}
+
+.dot {
+    height: 30px; 
+    width: 30px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.dot.estavel { background-color: #50C156; }
+.dot.atencao { background-color: #FFA500; }
+.dot.grave   { background-color: #CF1619; }
+
+
+.tooltip-container {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: help;
+    z-index: 20; 
+}
+
+.tooltip-icon {
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    color: #3f4142;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.tooltip-icon:hover {
+    background-color: #141e15;
     color: white;
 }
 
-.cartao-resumo.atencao h2,
-.cartao-resumo.atencao p {
-    color: white;
+.tooltip-msg {
+    visibility: hidden;
+    opacity: 0;
+    width: 400px; 
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 18px;
+    font-weight: 400;
+    position: absolute;
+    bottom: -150%; 
+    left: -400px; 
+    transition: opacity 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 100;
 }
 
-.cartao-resumo.grave {
-    background-color: #CF1619;
-    color: white;
+
+.tooltip-container:hover .tooltip-msg {
+    visibility: visible;
+    opacity: 1;
 }
 
-.cartao-resumo.grave h2,
-.cartao-resumo.grave p {
-    color: white;
-}
-
-.estavel {
-    color: #50C156;
-}
-
-.atencao {
-    color: #FFA500;
-}
-
-.grave {
-    color: #CF1619;
-}
 
 .container {
     width: 100%;
@@ -155,64 +260,138 @@ body {
     border-radius: 20px;
 }
 
+
 .abas-navegacao {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
     background-color: #1C311E;
-    padding: 10px;
+    padding: 15px 30px;
     border-radius: 20px 20px 0px 0px;
     margin-bottom: 20px;
-    align-items: center;
-    gap: 40px;
     color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    gap: 20px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .abas-navegacao h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
     color: white;
-    font-size: 32px;
-    justify-self: center;
+    letter-spacing: 0.5px;
 }
-.filter{
+
+.sensor-count {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-.filter h4{
-    color: white;
+    gap: 6px;
+    color: #e9ecef;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.abas-navegacao ul {
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.filter-container h4 {
+    margin: 0;
+    font-weight: 400;
+    color: #adb5bd;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.filter-container ul {
     display: flex;
     list-style: none;
-    background-color: #1C311E;
-    color: white;
+    margin: 0;
+    padding: 0;
+    align-items: center;
 }
-
-.abas-navegacao li {
-    padding: 10px 20px;
+.filter-item {
+    padding: 8px 16px;
     cursor: pointer;
+    font-weight: 400;
+    color: #e9ecef;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    font-size: 15px;
     position: relative;
-    box-sizing: border-box;
-    text-align: center;
-    flex: 0px;
-    font-weight: 300;
 }
-
-
-.abas-navegacao .aba-ativa {
-    font-weight: bolder;
-}
-
-.abas-navegacao li:not(:last-child)::before {
+.filter-item:not(:last-child)::after {
     content: '';
-    height: 36px;
-    width: 1px;
-    background-color: #D9D9D9;
     position: absolute;
     right: 0;
-    bottom: 0;
-    transform: scaleX(2);
-    transform-origin: right;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 14px;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.filter-item:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.filter-item.active {
+    font-weight: 700;
+    color: #1C311E;
+    background-color: #fcc419;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.filter-item.active::after {
+    display: none;
+}
+
+
+.period-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.period-selector label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #e9ecef;
+}
+
+.period-selector select {
+    background-color: rgba(0, 0, 0, 0.2);
+    /* Fundo escuro para o input */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.period-selector select:hover,
+.period-selector select:focus {
+    border-color: #fcc419;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.period-selector option {
+    background-color: #1C311E;
+    color: white;
 }
 
 /* Lista de Sensores */
@@ -247,7 +426,7 @@ body {
     text-align: center;
     color: #1C311E;
     height: 187px;
-    width: 285px;
+    width: 350px;
     cursor: pointer;
     display: flex;
     align-items: center;
