@@ -348,3 +348,15 @@ a{
     padding: 20px;
     border-radius: 10px;
 }
+.bob{
+   background-color: #1C311E;
+   width: 85px;
+   height: 85px;
+   border-radius: 500px;
+   display: flex;
+   position: fixed;
+   bottom: 50px;
+   right: 50px;
+   left: auto;
+   top: auto;
+}
