@@ -49,8 +49,6 @@
     width: 18px;
 }
 
-/* END HEADER */
-
 main{
     display: flex;
     align-items: center;
@@ -70,7 +68,6 @@ main .box_left{
     background-color: #FFFAFA;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
     border-radius: 5%;
-    /* border: red solid 2px; */
 }
 
 main .box_left .title{

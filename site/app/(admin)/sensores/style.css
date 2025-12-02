@@ -12,8 +12,6 @@ body {
     height: 100vh;
 }
 
-
-/* Barra Lateral */
 .barra-lateral {
     background-color: #F9F9F9;
     width: 250px;
@@ -65,7 +63,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    gap: 40px;
+    gap: 20px;
 }
 
 .resumo {
@@ -371,7 +369,6 @@ body {
 
 .period-selector select {
     background-color: rgba(0, 0, 0, 0.2);
-    /* Fundo escuro para o input */
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     padding: 8px 12px;
@@ -433,6 +430,9 @@ body {
     justify-content: center;
     gap: 20px;
     box-shadow: 4px 4px 4px #1c311e51;
+}
+.cartao-sensor:hover{
+    transform: translateY(-2px);
 }
 
 .cartao-sensor h3 {

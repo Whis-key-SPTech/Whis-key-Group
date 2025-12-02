@@ -1,6 +1,7 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,91 +24,171 @@
     <main class="conteudo-principal">
 
         <section class="resumo">
-            <div class="cartao-resumo card-identificacao">
-                <h2 class="titulo-sensors">SENSOR</h2>
-                <span class="nome-destaque">Sensor 6</span>
-                <span class="subtitulo-local">Armazém 5 | Setor 2</span>
-            </div>
 
-            <div class="cartao-resumo">
-                <div class="tooltip-container">
-                    <div class="tooltip-icon">?</div>
-                    <div class="tooltip-msg">Total de ocorrências graves registradas por este sensor nas últimas 24h.
+            <div class="cartao-resumo card-identificacao  kpi-sensor">
+                <div class="identity">
+                    <div class="flex">
+                        <h2>COD Barril - </span>
+                            <h2>#001</h2>
                     </div>
                 </div>
-                <h3 class="titulo-kpi">ALERTAS GRAVES</h3>
-                <p id="qtdGrave" class="valor-kpi texto-grave">5</p>
+                <br>
+                <div class="flex">
+                    <div class="container">
+                        <div class="circle">
+                            <div>
+                            </div>
+                            <img src="../../public/painel/barrel-2 5.png" width="44" height="38" alt=""
+                                style="z-index: 50; margin-left: 5px;">
+                        </div>
+                    </div>
+                    <div class="flex local">
+                        <span class="text">Local: </span>
+                        <span> armazem 5 </span>
+                    </div>
+                </div>
             </div>
 
-            <div class="cartao-resumo">
+            <div class="cartao-resumo destaque-alerta">
                 <div class="tooltip-container">
                     <div class="tooltip-icon">?</div>
-                    <div class="tooltip-msg">Total de ocorrências de atenção registradas por este sensor nas últimas
-                        24h.</div>
+                    <div class="tooltip-msg">Indica o período em que ficou mais tempo consecutivo em estado crítico.
+                    </div>
                 </div>
-                <h3 class="titulo-kpi">ALERTAS ATENÇÃO</h3>
-                <p id="qtdAtencao" class="valor-kpi texto-atencao">3</p>
+                <h3 class="titulo-kpi">Maior intervalo <span class="texto-grave">GRAVE</span></h3>
+                <p class="valor-destaque"><span id="span_rua_intervalo"></span> - <span
+                        id="span_horas_intervalo"></span> horas</p>
             </div>
-
-            <div class="cartao-resumo">
-                <h3 class="titulo-kpi">TEMP. ATUAL</h3>
-                <div class="indicador-atual">
-                    <span class="valor-kpi texto-padrao">28ºC</span>
-                    <div class="status-dot atencao"></div>
+            <div class="cartao-resumo card-kpi">
+                <div class="tooltip-container">
+                    <div class="tooltip-icon">?</div>
+                    <div class="tooltip-msg">Porcentagem dos registros  que operaram dentro da faixa
+                        ideal.</div>
+                </div>
+                <h3 class="kpi-title">Estabilidade</h3>
+                <div id="div_estabilidade">
+                    <div class="kpi-value-huge">85%</div>
+                </div>
+                <div class="progress-container" id="progresso_eficiencia">
+                    <div class="progress-bar-fill" style="width: 85%;"></div>
                 </div>
             </div>
+            <div class="cartao-resumo tipos-situacao">
+                <div class="tooltip-container">
+                    <div class="tooltip-icon">?</div>
+                    <div class="tooltip-msg">
+                        <p><span class="estavel" style="color: #50C156; ">ESTÁVEL:</span> 0 alertas ativos</p>
+                        <p><span class="atençao" style="color: #FFA500;">ATENÇÃO:</span> >= 1 alertas em atenção</p>
+                        <p><span class="grave" style="color: #CF1619">GRAVE:</span> >= 1 alertas grave</p>
+                    </div>
+                </div>
+                <h3>TIPOS DE SITUAÇÃO</h3>
+                <div class="lista-situacao">
+                    <div class="item-situacao">
+                        <span class="label">Grave:</span>
+                        <div class="flex">
+                            <span class="dot grave"></span>
+                            <span class="valor" id="div_qtdGrave">1</span>
+                        </div>
+                    </div>
 
-            <div class="cartao-resumo">
-                <h3 class="titulo-kpi">UMID. ATUAL</h3>
-                <div class="indicador-atual">
-                    <span class="valor-kpi texto-padrao">60%</span>
-                    <div class="status-dot estavel"></div>
+                    <div class="item-situacao">
+                        <span class="label">Atenção:</span>
+                        <div class="flex">
+                            <span class="dot atencao"></span>
+                            <span class="valor" id="div_qtdAtencao">1</span>
+                        </div>
+                    </div>
+                    <div class="item-situacao">
+                        <span class="label">Estável:</span>
+                        <div class="flex">
+                            <span class="dot estavel"></span>
+                            <span class="valor" id="div_qtdEstavel">0</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+        <section class="monitoramento-cockpit">
 
-        <section class="area-graficos">
-
-            <div class="container-grafico">
-                <nav class="abas-navegacao">
-                    <div class="nav-left">
-                        <h2>Temperatura</h2>
+            <div class="painel-linha">
+                <div class="kpi-lateral kpi-temp">
+                    <div class="kpi-header-lat">
+                        <img src="icons/tempIcon.png" width="24">
+                        <span>TEMPERATURA</span>
                     </div>
-                    <div class="data-horario">
-                        <span id="dataAtual">14/10</span>
-                        <img src="icons/calendarIcon.png" height="20px">
-                        <select id="select_horario">
-                            <option value="am">AM</option>
-                            <option value="pm">PM</option>
-                        </select>
+                    <div class="kpi-valor-lat">
+                        28°C
                     </div>
-                </nav>
-                <div class="chart-wrapper">
-                    <canvas id="myChart_Temperature"></canvas>
+                    <div class="kpi-status-lat status-atencao">
+                        <span class="dot"></span> ATENÇÃO
+                    </div>
+                    <div class="kpi-meta">Ideal: 20° - 25°</div>
                 </div>
-                <div class="legenda-grafico">
-                    <span class="leg-item"><span class="dot regular"></span> Ideal (20-25ºC)</span>
-                    <span class="leg-item"><span class="dot atencao"></span> Atenção</span>
-                    <span class="leg-item"><span class="dot grave"></span> Crítico</span>
+
+                <div class="grafico-lateral">
+                    <div class="grafico-header">
+                        <h3>Histórico (12h)</h3>
+                        <div class="data-horario">
+                            <label for="periodo">Período:</label>
+                            <input type="date" id="data_dashboard" onchange="atualizarGrafico(this.value)">
+
+                            <div class="period-selector">
+                                <select name="periodo" id="periodo" onchange="filtrarHora(this.value)">
+                                    <option value="12">Últimas 12hs</option>
+                                    <option value="24">Últimas 24hs</option>
+                                    <option value="168">Última Semana</option>
+                                    <option value="720">Último Mês</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="myChart_Temperature"></canvas>
+                    </div>
                 </div>
             </div>
 
-            <div class="container-grafico">
-                <nav class="abas-navegacao">
-                    <div class="nav-left">
-                        <h2>Umidade</h2>
+            <div class="painel-linha">
+                <div class="kpi-lateral kpi-umid">
+                    <div class="kpi-header-lat">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                        </svg>
+                        <span>UMIDADE</span>
                     </div>
-                </nav>
-                <div class="chart-wrapper">
-                    <canvas id="myChart_Umidade"></canvas>
+                    <div class="kpi-valor-lat">
+                        60%
+                    </div>
+                    <div class="kpi-status-lat status-estavel">
+                        <span class="dot"></span> ESTÁVEL
+                    </div>
+                    <div class="kpi-meta">Ideal: 50% - 80%</div>
                 </div>
-                <div class="legenda-grafico">
-                    <span class="leg-item"><span class="dot regular"></span> Ideal (50-80%)</span>
-                    <span class="leg-item"><span class="dot atencao"></span> Atenção</span>
-                    <span class="leg-item"><span class="dot grave"></span> Crítico</span>
+
+                <div class="grafico-lateral">
+                    <div class="grafico-header">
+                        <h3>Histórico (12h)</h3>
+                        <div class="data-horario">
+                             <label for="periodo">Período:</label>
+                            <input type="date" id="data_dashboard" onchange="atualizarGrafico(this.value)">
+
+                            <div class="period-selector">
+                                <select name="periodo" id="periodo" onchange="filtrarHora(this.value)">
+                                    <option value="12">Últimas 12hs</option>
+                                    <option value="24">Últimas 24hs</option>
+                                    <option value="168">Última Semana</option>
+                                    <option value="720">Último Mês</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="myChart_Umidade"></canvas>
+                    </div>
                 </div>
             </div>
-
         </section>
     </main>
 </body>
