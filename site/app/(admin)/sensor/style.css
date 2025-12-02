@@ -584,6 +584,7 @@ body {
     min-height: 0;
 }
 
+<<<<<<< HEAD
 .dot {
     height: 30px; 
     width: 30px;
@@ -666,3 +667,25 @@ body {
     background-color: #1C311E;
     color: white;
 }
+=======
+#myChart_Temperature,
+#myChart_Umidade {
+    max-width: 100% !important;
+    height: auto !important;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+.bob{
+   background-color: #1C311E;
+   width: 85px;
+   height: 85px;
+   border-radius: 500px;
+   display: flex;
+   position: fixed;
+   bottom: 50px;
+   right: 50px;
+   left: auto;
+   top: auto;
+}
+>>>>>>> 0dc10e6f1c6dc7764ef7b384f6a38645502865cf

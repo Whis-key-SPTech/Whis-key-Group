@@ -476,6 +476,7 @@ a {
     background-color: #FFA500;
     font-weight: bold;
 }
+<<<<<<< HEAD
 
 .bob {
     background-color: #1C311E;
@@ -602,3 +603,18 @@ a {
 
 
 
+=======
+.bob{
+   background-color: #1C311E;
+   width: 85px;
+   height: 85px;
+   border-radius: 500px;
+   display: flex;
+   position: fixed;
+   bottom: 50px;
+   right: 50px;
+   left: auto;
+   top: auto;
+   cursor: pointer;
+}
+>>>>>>> 0dc10e6f1c6dc7764ef7b384f6a38645502865cf
