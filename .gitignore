@@ -2,3 +2,8 @@
 .vs/
 .env.dev
 .env
+
+node_modules
+package-lock.json
+
+.github

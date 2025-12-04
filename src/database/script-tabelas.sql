@@ -1,8 +1,8 @@
  -- Integrantes do Grupo 05
 
--- Gustavo Henrique Ra: 01252106      -- Gustavo Rucaglia  Ra: 01252040
--- Giovanni Angel Ra: 01252135        -- André  Ra: 01252023
--- Kauan Batista Ra: 01252066         -- Vitória Ferreira Ra: 01252130
+-- Gustavo Henrique RA: 01252106      -- Gustavo Rucaglia  RA: 01252040
+-- Giovanni Angel RA: 01252135        -- André Santos RA: 01252023
+-- Kauan Batista RA: 01252066         -- Vitória Ferreira RA: 01252130
 
 CREATE DATABASE BD_WHISKEY;
 USE BD_WHISKEY;
