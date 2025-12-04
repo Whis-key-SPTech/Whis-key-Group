@@ -1,4 +1,4 @@
--- Integrantes do Grupo 05
+ -- Integrantes do Grupo 05
 
 -- Gustavo Henrique Ra: 01252106      -- Gustavo Rucaglia  Ra: 01252040
 -- Giovanni Angel Ra: 01252135        -- André  Ra: 01252023
@@ -151,9 +151,12 @@ INSERT INTO sensor (codigo_sensor, fk_destilaria, fk_idLocalidadeSensor) VALUES
 
 -- registro
 INSERT INTO registro (fk_sensor, temperatura, umidade) VALUES
-	(1, 25, 50),
+	(1, 2, 50),
 	(2, 18, 60),
 	(3, 10, 30);
+    
+    
+    select * from registro;
     
     SELECT * FROM empresa;
     SELECT * FROM destilaria;
@@ -199,3 +202,166 @@ SELECT registro.id_registro AS ID,
        FROM registro
 JOIN sensor ON registro.fk_sensor = sensor.id_sensor
 ORDER BY ID;
+ 
+-- NEW VERSION VIEW AND SELECT Destilaria
+CREATE OR REPLACE VIEW destilaria_registro_base AS
+SELECT 
+    d.id_destilaria,
+    e.rua,
+    s.id_sensor,
+    r.temperatura,
+    r.umidade,
+    r.dt_coleta,
+    r.hr_coleta
+FROM destilaria d
+LEFT JOIN endereco e ON e.id_endereco = d.fk_endereco
+JOIN sensor s ON s.fk_destilaria = d.id_destilaria
+JOIN registro r ON r.fk_sensor = s.id_sensor;
+
+SELECT
+    id_destilaria,
+    rua,
+    COUNT(id_sensor) AS qtdSensor,
+    MAX(temperatura) AS max_temp,
+    MIN(temperatura) AS min_temp,
+    MAX(umidade) AS max_umid,
+    MIN(umidade) AS min_umid 
+FROM destilaria_registro_base 
+WHERE 
+    dt_coleta >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+GROUP BY id_destilaria, rua;
+
+
+
+-- NEW VERSION Sensor
+CREATE OR REPLACE VIEW vw_dados_sensor_completo AS
+SELECT 
+    d.id_destilaria,
+    s.id_sensor,
+    e.rua,
+    l.nome_localidade,
+    r.temperatura,
+    r.umidade,
+    r.dt_coleta,
+    r.hr_coleta,
+    s.fk_destilaria
+FROM destilaria d
+JOIN endereco e ON e.id_endereco = d.fk_endereco
+JOIN sensor s ON s.fk_destilaria = d.id_destilaria
+JOIN registro r ON r.fk_sensor = s.id_sensor
+LEFT JOIN localidade_sensor l ON s.fk_idLocalidadeSensor = l.id_localidadeSensor;
+
+SELECT 
+    rua,
+    nome_localidade,
+    MAX(temperatura) as max_temp,
+    MIN(temperatura) as min_temp,
+    MAX(umidade) as max_umid,
+    MIN(umidade) as min_umid,
+    (SELECT temperatura FROM registro WHERE fk_sensor = v.id_sensor ORDER BY dt_coleta DESC LIMIT 1) as temperatura_atual,
+    (SELECT umidade FROM registro WHERE fk_sensor = v.id_sensor ORDER BY dt_coleta DESC LIMIT 1) as umidade_atual
+
+FROM vw_dados_sensor_completo v
+
+WHERE 
+    v.fk_destilaria = 1 
+    AND v.dt_coleta >= DATE_SUB(NOW(), INTERVAL 12 HOUR)
+
+GROUP BY 
+    v.id_sensor, v.rua, v.nome_localidade;
+
+-- Maior intervalo Destilaria
+SELECT r.dt_coleta, r.temperatura, r.umidade 
+        FROM registro r
+        JOIN sensor s ON r.fk_sensor = s.id_sensor
+        WHERE s.fk_destilaria = 1
+        AND r.hr_coleta >= DATE_SUB(NOW(), INTERVAL 24 HOUR)
+        ORDER BY r.dt_coleta ASC;
+
+-- Descobrir Destilaria com maior Intervalo
+SELECT 
+    e.rua,
+    TIMESTAMPDIFF(HOUR, MAX(TIMESTAMP(r.dt_coleta, r.hr_coleta)), NOW()) as horas_consecutivas
+FROM registro r
+JOIN sensor s ON r.fk_sensor = s.id_sensor
+JOIN destilaria d ON s.fk_destilaria = d.id_destilaria
+JOIN endereco e ON d.fk_endereco = e.id_endereco
+WHERE 
+    r.temperatura BETWEEN 18 AND 25
+     AND 
+     TIMESTAMP(r.dt_coleta, r.hr_coleta) >= DATE_SUB(NOW(), INTERVAL 12
+     HOUR)
+GROUP BY d.id_destilaria, e.rua
+ORDER BY horas_consecutivas DESC limit 1 ;
+
+
+-- Descobrir Sensor com maior Intervalo
+SELECT 
+    l.nome_localidade,
+    TIMESTAMPDIFF(HOUR, MAX(TIMESTAMP(r.dt_coleta, r.hr_coleta)), NOW()) as horas_consecutivas
+FROM registro r
+JOIN sensor s ON r.fk_sensor = s.id_sensor
+LEFT JOIN localidade_sensor l ON s.fk_idLocalidadeSensor = l.id_localidadeSensor
+JOIN destilaria d ON s.fk_destilaria = d.id_destilaria
+WHERE 
+    r.temperatura BETWEEN 18 AND 25
+     AND 
+     TIMESTAMP(r.dt_coleta, r.hr_coleta) >= DATE_SUB(NOW(), INTERVAL 120
+     HOUR)
+     and id_destilaria = 1
+GROUP BY s.id_sensor, l.nome_localidade
+ORDER BY horas_consecutivas DESC limit 1 ;
+
+-- Descobrir Porcentagem de eficiencia 
+SELECT 
+	round(SUM(case when r.temperatura BETWEEN 18 AND 25 then 1 else 0 end) / count( r.temperatura) * 100 )as qtd_bom
+FROM registro r
+JOIN sensor s ON r.fk_sensor = s.id_sensor
+LEFT JOIN localidade_sensor l ON s.fk_idLocalidadeSensor = l.id_localidadeSensor
+JOIN destilaria d ON s.fk_destilaria = d.id_destilaria
+WHERE 
+     TIMESTAMP(r.dt_coleta, r.hr_coleta) >= DATE_SUB(NOW(), INTERVAL 120
+     HOUR);
+     
+
+-- Descobrir Porcentagem de eficiencia por destilaria
+SELECT 
+	round(SUM(case when r.temperatura BETWEEN 18 AND 25 then 1 else 0 end) / count( r.temperatura) * 100 )as qtd_bom
+FROM registro r
+JOIN sensor s ON r.fk_sensor = s.id_sensor
+LEFT JOIN localidade_sensor l ON s.fk_idLocalidadeSensor = l.id_localidadeSensor
+JOIN destilaria d ON s.fk_destilaria = d.id_destilaria
+WHERE 
+     TIMESTAMP(r.dt_coleta, r.hr_coleta) >= DATE_SUB(NOW(), INTERVAL 120
+     HOUR)
+     and id_destilaria = 1;
+
+ -- OLD VERSION
+ CREATE VIEW relatorio_sensor_atual AS SELECT 
+ endereco.rua as rua, 
+ localidade_sensor.nome_localidade, 
+ MAX(registro.temperatura) as max_temp,
+ MIN(registro.temperatura) as min_temp,  
+ MAX(registro.umidade) as max_umid, 
+ MIN(registro.umidade) as min_umid, 
+ (SELECT temperatura 
+     FROM registro 
+     WHERE fk_sensor = sensor.id_sensor 
+     ORDER BY dt_coleta DESC 
+     LIMIT 1) as temperatura_atual,
+    (SELECT umidade 
+     FROM registro 
+     WHERE fk_sensor = sensor.id_sensor 
+     ORDER BY dt_coleta DESC 
+     LIMIT 1) as umidade_atual
+ FROM destilaria  
+ join endereco on endereco.id_endereco = destilaria.fk_endereco
+ join sensor on sensor.fk_destilaria = destilaria.id_destilaria 
+ join registro on registro.fk_sensor = sensor.id_sensor 
+ left join localidade_sensor on sensor.fk_idLocalidadeSensor = localidade_sensor.id_localidadeSensor
+ WHERE
+    registro.hr_coleta >= DATE_SUB(NOW(), INTERVAL 12 HOUR)  
+    and fk_destilaria  = 1
+group by sensor.id_sensor, endereco.rua, localidade_sensor.nome_localidade;
+
+
