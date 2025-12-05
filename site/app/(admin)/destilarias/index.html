@@ -111,8 +111,11 @@
             </nav>
             <section class="lista-destilarias" id="lista_destilaria">
             </section>
+            <button onclick="window.location.href='../../cadastro/index.html'" class="btn_cadastrar"
+            id="btnCadastrar" 
+    style="display: none";>CADASTRAR</button>
         </div>
-        <div class="bob"><a href="../destilarias/index.html"></a><img src="">
+        <div style="display: none" id="bob" class="bob"><a href="../destilarias/index.html"></a><img src="">
         </div>
     </main>
     <script>
@@ -306,6 +309,13 @@
             sessionStorage.ID_DESTILARIA = id_destilaria
             window.location = "../../(admin)/sensores/index.html";
         }
+
+        if (sessionStorage.PRIVILEGIO == 1) {
+      btnCadastrar.style.display = "block";
+       }
+       if (sessionStorage.EMAIL_USUARIO.includes('suporte')) {
+      bob.style.display = "block";
+       }
     </script>
 </body>
 

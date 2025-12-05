@@ -73,9 +73,72 @@ function buscarSensor(id) {
   return database.executar(instrucaoSql);
 }
 
+
+
+// DashBoard Sensor Específico 
+
+function tempAtual(idSensor) {
+  var instrucaoSql = `
+  SELECT temperatura, dt_coleta, hr_coleta
+  FROM registro
+  WHERE fk_sensor = ${idSensor}      
+  ORDER BY dt_coleta DESC, hr_coleta DESC
+  LIMIT 1;`
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+
+function umidAtual(idSensor) {
+  var instrucaoSql = `
+  SELECT umidade, dt_coleta, hr_coleta
+  FROM registro
+  WHERE fk_sensor = ${idSensor}      
+  ORDER BY dt_coleta DESC, hr_coleta DESC
+  LIMIT 1;`
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+
+function contagemStatus(idSensor) {
+  var instrucaoSql = `
+      SELECT
+          SUM(CASE 
+                WHEN temperatura >= 30 
+                  OR temperatura <= 10
+                  OR umidade >= 80
+                  OR umidade <= 20
+              THEN 1 ELSE 0 END) AS grave,
+
+          SUM(CASE 
+                WHEN (temperatura >= 25 AND temperatura < 30)
+                  OR (temperatura > 10 AND temperatura <= 20)
+                  OR (umidade >= 60 AND umidade < 80)
+                  OR (umidade > 20 AND umidade <= 40)
+              THEN 1 ELSE 0 END) AS atencao,
+
+          SUM(CASE 
+                WHEN temperatura > 20 AND temperatura < 25
+                  AND umidade > 40 AND umidade < 60
+              THEN 1 ELSE 0 END) AS estavel
+      FROM registro
+      WHERE fk_sensor = ${idSensor};
+  `;
+
+  console.log("Executando SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+
 module.exports = {
   listarSensores,
   buscarSensor,
   eficiencia,
-  maiorIntervalo
+  maiorIntervalo,
+  tempAtual,
+  umidAtual,
+  contagemStatus
 }

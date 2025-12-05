@@ -23,4 +23,21 @@ router.post("/cadastrar", function (req, res) {
   aquarioController.cadastrar(req, res);
 })
 
+
+
+// DashBoard Sensor Específico 
+router.get("/tempAtual/:idSensor", function (req, res) {
+  sensorController.tempAtual(req, res);
+});
+
+router.get("/umidAtual/:idSensor", function (req, res) {
+  sensorController.umidAtual(req, res);
+});
+
+router.get("/contagemStatus/:idSensor", function (req, res) {
+  sensorController.contagemStatus(req, res);
+});
+
+
+
 module.exports = router;

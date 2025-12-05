@@ -136,7 +136,9 @@
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id
+                    sessionStorage.ID_USUARIO = json.id,
+                    sessionStorage.EMPRESA_ID = json.empresaId,
+                    sessionStorage.PRIVILEGIO = json.privilegio;
                     setTimeout(function () {
                         window.location = "../(admin)/destilarias/index.html";
                     }, 1000); 

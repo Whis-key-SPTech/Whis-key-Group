@@ -177,7 +177,8 @@ fetch("/usuarios/cadastrar", {
   body: JSON.stringify({
     nomeServer: nome_valor,
     emailServer: email,
-    senhaServer: senha
+    senhaServer: senha,
+    empresaIdServer: sessionStorage.EMPRESA_ID
   }),
 })
   .then(function (resposta) {

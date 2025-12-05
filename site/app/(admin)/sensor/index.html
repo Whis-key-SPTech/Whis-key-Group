@@ -88,7 +88,7 @@
                         <span class="label">Grave:</span>
                         <div class="flex">
                             <span class="dot grave"></span>
-                            <span class="valor" id="div_qtdGrave">1</span>
+                            <span class="valor" id="kpi_grave">1</span>
                         </div>
                     </div>
 
@@ -96,14 +96,14 @@
                         <span class="label">Atenção:</span>
                         <div class="flex">
                             <span class="dot atencao"></span>
-                            <span class="valor" id="div_qtdAtencao">1</span>
+                            <span class="valor" id="kpi_atencao">1</span>
                         </div>
                     </div>
                     <div class="item-situacao">
                         <span class="label">Estável:</span>
                         <div class="flex">
                             <span class="dot estavel"></span>
-                            <span class="valor" id="div_qtdEstavel">0</span>
+                            <span class="valor" id="kpi_estavel">0</span>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                         <span>TEMPERATURA</span>
                     </div>
                     <div class="kpi-valor-lat">
-                        28°C
+                        <div id="temperaturaAtual"></div>
                     </div>
                     <div class="kpi-status-lat status-atencao">
                         <span class="dot"></span> ATENÇÃO
@@ -159,7 +159,7 @@
                         <span>UMIDADE</span>
                     </div>
                     <div class="kpi-valor-lat">
-                        60%
+                        <div id="umidadeAtual"></div>
                     </div>
                     <div class="kpi-status-lat status-estavel">
                         <span class="dot"></span> ESTÁVEL
@@ -198,7 +198,9 @@
 
 </html>
 <script>
+    var idSensor = 1;
     const ctx = document.getElementById('myChart_Temperature');
+    carregarKPIStatus(idSensor);
 
     var graficoLinha = new Chart(ctx, {
         type: 'line',
@@ -353,4 +355,105 @@
             }
         }
     });
+
+
+
+    // TEMPERATURA
+
+    fetch(`/sensor/tempAtual/${idSensor}`)
+    .then(res => res.json())
+    .then(dados => {
+        const div = document.getElementById("temperaturaAtual");
+        if(dados && dados.temperatura != undefined) {
+            const temp = dados.temperatura;
+            div.innerHTML = `${temp}°C`;
+            atualizarEstadoTemp(temp);
+        } else {
+            div.innerHTML = 0;
+        }
+    })
+    .catch(err => {
+        console.error("Erro ao exibir a temperatura", err);
+    });
+
+    function atualizarEstadoTemp(temp) {
+    const bloco = document.querySelector(".kpi-temp .kpi-status-lat");
+
+    if (temp <= 10 || temp >= 30) {
+        bloco.classList.remove("status-estavel", "status-atencao");
+        bloco.classList.add("status-grave");
+        bloco.innerHTML = `<span class="dot"></span> GRAVE`;
+    }
+    else if (temp <= 20 || temp >= 25) {
+        bloco.classList.remove("status-estavel", "status-grave");
+        bloco.classList.add("status-atencao");
+        bloco.innerHTML = `<span class="dot"></span> ATENÇÃO`;
+    }
+    else {
+        bloco.classList.remove("status-grave", "status-atencao");
+        bloco.classList.add("status-estavel");
+        bloco.innerHTML = `<span class="dot"></span> ESTÁVEL`;
+    }
+}
+
+
+
+    // UMIDADE
+
+    fetch(`/sensor/umidAtual/${idSensor}`)
+    .then(res => res.json())
+    .then(dados => {
+        const div = document.getElementById("umidadeAtual");
+        if(dados && dados.umidade != undefined) {
+            const umid = dados.umidade;
+            div.innerHTML = `${umid}%`;
+            atualizarEstadoUmid(umid);
+        } else {
+            div.innerHTML = 404;
+        }
+    })
+    .catch(err => {
+        console.error("Erro ao exibir a umidade", err);
+    });
+
+    function atualizarEstadoUmid(umid) {
+    const bloco = document.querySelector(".kpi-umid .kpi-status-lat");
+
+    if (umid <= 30 || umid >= 90) {
+        bloco.classList.remove("status-estavel", "status-atencao");
+        bloco.classList.add("status-grave");
+        bloco.innerHTML = `<span class="dot"></span> GRAVE`;
+    }
+    else if (umid <= 50 || umid >= 80) {
+        bloco.classList.remove("status-estavel", "status-grave");
+        bloco.classList.add("status-atencao");
+        bloco.innerHTML = `<span class="dot"></span> ATENÇÃO`;
+    }
+    else {
+        bloco.classList.remove("status-grave", "status-atencao");
+        bloco.classList.add("status-estavel");
+        bloco.innerHTML = `<span class="dot"></span> ESTÁVEL`;
+    }
+}
+
+
+
+// KPI TIPOS DE SITUAÇÕES
+
+function carregarKPIStatus(idSensor) {
+    fetch(`/sensor/contagemStatus/${idSensor}`)
+        .then(res => res.json())
+        .then(dados => {
+            let grave = dados.grave;
+            let atencao = dados.atencao;
+            let estavel = dados.estavel;
+
+            document.getElementById("kpi_grave").innerText = grave;
+            document.getElementById("kpi_atencao").innerText = atencao;
+            document.getElementById("kpi_estavel").innerText = estavel;
+        })
+        .catch(err => console.error("Erro:", err));
+}
+
+
 </script>

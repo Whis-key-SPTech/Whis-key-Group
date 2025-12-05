@@ -191,3 +191,25 @@ body {
   to { transform: translateX(50px); opacity: 0; }
 }
 
+.areaSupport{
+  position: relative;
+  top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+div .btn_support{
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+  background-color: #e29700;
+  padding: 14px;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+div .btn_support:hover{
+  background-color: #ffb218;
+}
+

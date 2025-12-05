@@ -21,7 +21,8 @@
                     id: usuario.id_usuario,
                     email: usuario.email,
                     nome: usuario.nome_usuario,
-                    empresaId: usuario.empresaId
+                    empresaId: usuario.empresaId,
+                    privilegio: usuario.privilegio
                 });
 
             } else if (resultadoAutenticar.length === 0) {
@@ -44,6 +45,7 @@
         var nome = req.body.nomeServer;
         var email = req.body.emailServer;
         var senha = req.body.senhaServer;
+        var empresaId = req.body.empresaIdServer; 
 
         // Faça as validações dos valores
         if (nome == undefined) {
@@ -54,7 +56,7 @@
             res.status(400).send("Sua senha está undefined!");
         } else {
             // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-            usuarioModel.cadastrar(nome, email, senha)
+            usuarioModel.cadastrar(nome, email, senha,empresaId)
                 .then(
                     function (resultado) {
                         res.json(resultado);
