@@ -21,7 +21,6 @@ body {
 }
 a {
     text-decoration: none;
-    pointer-events: none;
 }
 
 .navegacao-principal ul {
@@ -604,6 +603,7 @@ a {
 
 
 =======
+
 .bob{
    background-color: #1C311E;
    width: 85px;

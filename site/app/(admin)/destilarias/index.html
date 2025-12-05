@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WHISKEY</title>
+    <title>Dashboard Destilarias</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,11 +12,22 @@
         href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../utils/index.css" />
 </head>
 
 <body>
-    <div class="header">
-    </div>
+    <header id="header">
+        <nav>
+          <a href="../home/index.html"><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
+        </nav>
+    
+        <div id="menu">
+            <a href="../../cadastro/index.html"  style="text-decoration: none;">
+             <button class="btn_cliente">CADASTRAR USUÁRIO</button>
+            </a>
+        </div>
+      </header>
+
     <main class="conteudo-principal">
         <section class="resumo">
             <div class="cartao-resumo destaque-alerta">
@@ -111,9 +122,6 @@
             </nav>
             <section class="lista-destilarias" id="lista_destilaria">
             </section>
-            <button onclick="window.location.href='../../cadastro/index.html'" class="btn_cadastrar"
-            id="btnCadastrar" 
-    style="display: none";>CADASTRAR</button>
         </div>
         <div style="display: none" id="bob" class="bob"><a href="../destilarias/index.html"></a><img src="">
         </div>
@@ -310,12 +318,7 @@
             window.location = "../../(admin)/sensores/index.html";
         }
 
-        if (sessionStorage.PRIVILEGIO == 1) {
-      btnCadastrar.style.display = "block";
-       }
-       if (sessionStorage.EMAIL_USUARIO.includes('suporte')) {
-      bob.style.display = "block";
-       }
+        
     </script>
 </body>
 
