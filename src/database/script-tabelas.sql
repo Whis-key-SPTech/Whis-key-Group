@@ -1,7 +1,7 @@
  -- Integrantes do Grupo 05
 
 -- Gustavo Henrique RA: 01252106      -- Gustavo Rucaglia  RA: 01252040
--- Giovanni Angel RA: 01252135        -- André Santos RA: 01252023
+-- Giovanni Angel RA: 01252135        -- André Santos  RA: 01252023
 -- Kauan Batista RA: 01252066         -- Vitória Ferreira RA: 01252130
 
 CREATE DATABASE BD_WHISKEY;
@@ -75,7 +75,7 @@ situacao VARCHAR(45),
 CONSTRAINT CHK_situacao CHECK (situacao IN ('Estável', 'Atenção', 'Grave')),
 PRIMARY KEY (id_sensor, fk_idLocalidadeSensor)
 );
-SELECT count(sensor.id_sensor), endereco.rua FROM destilaria join endereco on endereco.id_endereco = destilaria.fk_endereco join sensor on sensor.fk_destilaria = destilaria.id_destilaria group by endereco.rua;
+
 
 -- Tabela contendo os dados coletados pelos sensores de temperatura e umidade. 
  CREATE TABLE registro(
@@ -105,26 +105,18 @@ DESC registro;
 
 -- Inserção dos dados na tabela empresa.
 INSERT INTO empresa (nome_empresa, cnpj) VALUES
-	('Brown-Forman', '36.631.108/0001-20'),
-	('Diageo plc', '62.166.848/0001-42'),
-	('Pernod Ricard', '33.856.394/0017-09'),
-	('Bacardi Limited', '59.104.737/0001-05'),
-	('Beam Suntor', '17.530.779/0001-50');
-
+	('Lamas Destilaria', '32.797.397/0001-80');
+    
+    
 -- Endereco da destilaria    
 INSERT INTO endereco (rua) VALUES
-('Rua Miguel'), ('Rua General'), ('Rua Vitoria');
+('Rua Miguel'), ('Rua General'), ('Rua Vitória');
 
 -- Dados da destilaria
 INSERT INTO destilaria (fk_endereco, fk_empresa) VALUES
 	(1, 1),
-    (2, 2),
-    (3, 3);
-    
-    INSERT INTO destilaria (fk_endereco, fk_empresa) VALUES
-	(1, 1),
-    (2, 2),
-    (3, 3);
+    (2, 1),
+    (3, 1);
 
 
 -- Localidade Sensor
@@ -135,18 +127,20 @@ INSERT INTO localidade_sensor(nome_localidade, numero_local) VALUES
 
 -- Inserção dos dados na tabela usuario.
 INSERT INTO usuario (fk_idEmpresa, nome_usuario, email, senha, privilegio) VALUES
-	(1,'Kauan Batista','kauan.batista@gmail.com', '1651656125',0),
-	(2,'Gustavo Rucaglia','gustavo.rucaglia@gmail.com', '165165561',1),
-	(3,'Gustavo Henrique','gustavo.henrique@gmail.com', '4854616584',1),
-	(4,'Giovanni Angel','giovanni.angel@gmail.com', '9209394028',1),
-	(5,'Vitória Ferreira','vitoria.ferreira@gmail.com', 'ferreira@123',1),
-	(3,'André Luis','andre.luis@gmail.com', '4854616584',0);
+	(1,'Kauan Batista','kauan.batista@whiskey.com', '1651656125',0),
+	(1,'Gustavo Rucaglia','gustavo.rucaglia@whiskey.com', '165165561',1),
+	(1,'Gustavo Henrique','gustavo.henrique@suporte.com', '4854616584',0),
+	(1,'Giovanni Angel','giovanni.angel@whiskey.com', '9209394028',0),
+	(1,'Vitória Ferreira','vitoria.ferreira@whiskey.com', 'ferreira@123',0),
+	(1,'André Luis','andre.luis@whiskey.com', '4854616584',0);
 
     -- sensor
 INSERT INTO sensor (codigo_sensor, fk_destilaria, fk_idLocalidadeSensor) VALUES
-	('01556', 1, 1),
-	('02678', 1, 2),
-	('03478', 1, 3);
+	('0001', 1, 1),
+	('0002', 2, 2),
+	('0003', 3, 3);
+
+
 
 
 -- registro
@@ -156,8 +150,7 @@ INSERT INTO registro (fk_sensor, temperatura, umidade) VALUES
 	(3, 10, 30);
     
     
-    select * from registro;
-    
+    -- SELECT TABELAS
     SELECT * FROM empresa;
     SELECT * FROM destilaria;
     SELECT * FROM endereco;
@@ -165,9 +158,8 @@ INSERT INTO registro (fk_sensor, temperatura, umidade) VALUES
     SELECT * FROM localidade_sensor;
     SELECT * FROM usuario;
     SELECT * FROM registro;
-    
-     SELECT endereco.rua FROM destilaria join  endereco on endereco.id_endereco = destilaria.fk_endereco join sensor on sensor.fk_destilaria = destilaria.id_destilaria;
 
+    
     
 -- JOIN COM AS TABELAS
 
@@ -202,7 +194,12 @@ SELECT registro.id_registro AS ID,
        FROM registro
 JOIN sensor ON registro.fk_sensor = sensor.id_sensor
 ORDER BY ID;
- 
+
+
+
+
+-- CRIANDO VIEWS
+
 -- NEW VERSION VIEW AND SELECT Destilaria
 CREATE OR REPLACE VIEW destilaria_registro_base AS
 SELECT 
@@ -217,21 +214,6 @@ FROM destilaria d
 LEFT JOIN endereco e ON e.id_endereco = d.fk_endereco
 JOIN sensor s ON s.fk_destilaria = d.id_destilaria
 JOIN registro r ON r.fk_sensor = s.id_sensor;
-
-SELECT
-    id_destilaria,
-    rua,
-    COUNT(id_sensor) AS qtdSensor,
-    MAX(temperatura) AS max_temp,
-    MIN(temperatura) AS min_temp,
-    MAX(umidade) AS max_umid,
-    MIN(umidade) AS min_umid 
-FROM destilaria_registro_base 
-WHERE 
-    dt_coleta >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
-GROUP BY id_destilaria, rua;
-
-
 
 -- NEW VERSION Sensor
 CREATE OR REPLACE VIEW vw_dados_sensor_completo AS
@@ -251,6 +233,52 @@ JOIN sensor s ON s.fk_destilaria = d.id_destilaria
 JOIN registro r ON r.fk_sensor = s.id_sensor
 LEFT JOIN localidade_sensor l ON s.fk_idLocalidadeSensor = l.id_localidadeSensor;
 
+
+-- OLD VERSION Sensor
+ CREATE VIEW relatorio_sensor_atual AS SELECT 
+ endereco.rua as rua, 
+ localidade_sensor.nome_localidade, 
+ MAX(registro.temperatura) as max_temp,
+ MIN(registro.temperatura) as min_temp,  
+ MAX(registro.umidade) as max_umid, 
+ MIN(registro.umidade) as min_umid, 
+ (SELECT temperatura 
+     FROM registro 
+     WHERE fk_sensor = sensor.id_sensor 
+     ORDER BY dt_coleta DESC 
+     LIMIT 1) as temperatura_atual,
+    (SELECT umidade 
+     FROM registro 
+     WHERE fk_sensor = sensor.id_sensor 
+     ORDER BY dt_coleta DESC 
+     LIMIT 1) as umidade_atual
+ FROM destilaria  
+ join endereco on endereco.id_endereco = destilaria.fk_endereco
+ join sensor on sensor.fk_destilaria = destilaria.id_destilaria 
+ join registro on registro.fk_sensor = sensor.id_sensor 
+ left join localidade_sensor on sensor.fk_idLocalidadeSensor = localidade_sensor.id_localidadeSensor
+ WHERE
+    registro.hr_coleta >= DATE_SUB(NOW(), INTERVAL 12 HOUR)  
+    and fk_destilaria  = 1
+group by sensor.id_sensor, endereco.rua, localidade_sensor.nome_localidade;
+
+
+-- SELECT USANDO VIEW
+
+SELECT
+    id_destilaria,
+    rua,
+    COUNT(id_sensor) AS qtdSensor,
+    MAX(temperatura) AS max_temp,
+    MIN(temperatura) AS min_temp,
+    MAX(umidade) AS max_umid,
+    MIN(umidade) AS min_umid 
+FROM destilaria_registro_base 
+WHERE 
+    dt_coleta >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+GROUP BY id_destilaria, rua;
+
+
 SELECT 
     rua,
     nome_localidade,
@@ -269,6 +297,11 @@ WHERE
 
 GROUP BY 
     v.id_sensor, v.rua, v.nome_localidade;
+
+
+
+
+
 
 -- Maior intervalo Destilaria
 SELECT r.dt_coleta, r.temperatura, r.umidade 
@@ -336,32 +369,5 @@ WHERE
      HOUR)
      and id_destilaria = 1;
 
- -- OLD VERSION
- CREATE VIEW relatorio_sensor_atual AS SELECT 
- endereco.rua as rua, 
- localidade_sensor.nome_localidade, 
- MAX(registro.temperatura) as max_temp,
- MIN(registro.temperatura) as min_temp,  
- MAX(registro.umidade) as max_umid, 
- MIN(registro.umidade) as min_umid, 
- (SELECT temperatura 
-     FROM registro 
-     WHERE fk_sensor = sensor.id_sensor 
-     ORDER BY dt_coleta DESC 
-     LIMIT 1) as temperatura_atual,
-    (SELECT umidade 
-     FROM registro 
-     WHERE fk_sensor = sensor.id_sensor 
-     ORDER BY dt_coleta DESC 
-     LIMIT 1) as umidade_atual
- FROM destilaria  
- join endereco on endereco.id_endereco = destilaria.fk_endereco
- join sensor on sensor.fk_destilaria = destilaria.id_destilaria 
- join registro on registro.fk_sensor = sensor.id_sensor 
- left join localidade_sensor on sensor.fk_idLocalidadeSensor = localidade_sensor.id_localidadeSensor
- WHERE
-    registro.hr_coleta >= DATE_SUB(NOW(), INTERVAL 12 HOUR)  
-    and fk_destilaria  = 1
-group by sensor.id_sensor, endereco.rua, localidade_sensor.nome_localidade;
 
 
