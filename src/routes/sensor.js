@@ -1,22 +1,22 @@
 var express = require("express");
 var router = express.Router();
 
-var sensorController = require("../controllers/sensoresController");
+var sensoresController = require("../controllers/sensoresController");
 
 router.get("/all/:idDestilaria", function (req, res) {
-  sensorController.listar(req, res);
+  sensoresController.listar(req, res);
 });
 
 
 router.get("/maiorIntervalo/:idDestilaria", function (req, res) {
-  sensorController.maiorIntervalo(req, res);
+  sensoresController.maiorIntervalo(req, res);
 });
 router.get("/eficiencia/:idDestilaria", function (req, res) {
-  sensorController.eficiencia(req, res);
+  sensoresController.eficiencia(req, res);
 });
 
 router.get("/buscar/:id", function (req, res) {
-  sensorController.buscarPorId(req, res);
+  sensoresController.buscarPorId(req, res);
 });
 
 router.post("/cadastrar", function (req, res) {
@@ -24,19 +24,23 @@ router.post("/cadastrar", function (req, res) {
 })
 
 
-
-// DashBoard Sensor Específico 
+// DashBoard Sensor
 router.get("/tempAtual/:idSensor", function (req, res) {
-  sensorController.tempAtual(req, res);
+  sensoresController.tempAtual(req, res);
 });
 
 router.get("/umidAtual/:idSensor", function (req, res) {
-  sensorController.umidAtual(req, res);
+  sensoresController.umidAtual(req, res);
 });
 
 router.get("/contagemStatus/:idSensor", function (req, res) {
-  sensorController.contagemStatus(req, res);
+  sensoresController.contagemStatus(req, res);
 });
+
+router.get("/tempHistorico/:idSensor", function (req, res) {
+  sensoresController.tempHistorico(req, res);
+});
+
 
 
 

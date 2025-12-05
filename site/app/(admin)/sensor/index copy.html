@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="../painel/icons/favicon.png" type="image/x-icon">
+
     <link
         href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet">
@@ -24,6 +26,41 @@
     <main class="conteudo-principal">
 
         <section class="resumo">
+
+            <div class="cartao-resumo card-identificacao  kpi-sensor">
+                <div class="identity">
+                    <div class="flex">
+                        <h2>COD Barril - </span>
+                            <h2>#001</h2>
+                    </div>
+                </div>
+                <br>
+                <div class="flex">
+                    <div class="container">
+                        <div class="circle">
+                            <div>
+                            </div>
+                            <img src="../../public/painel/barrel-2 5.png" width="44" height="38" alt=""
+                                style="z-index: 50; margin-left: 5px;">
+                        </div>
+                    </div>
+                    <div class="flex local">
+                        <span class="text">Local: </span>
+                        <span> armazem 5 </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cartao-resumo destaque-alerta">
+                <div class="tooltip-container">
+                    <div class="tooltip-icon">?</div>
+                    <div class="tooltip-msg">Indica o período em que ficou mais tempo consecutivo em estado crítico.
+                    </div>
+                </div>
+                <h3 class="titulo-kpi">Maior intervalo <span class="texto-grave">GRAVE</span></h3>
+                <p class="valor-destaque"><span id="span_rua_intervalo"></span> - <span
+                        id="span_horas_intervalo"></span> horas</p>
+            </div>
             <div class="cartao-resumo card-kpi">
                 <div class="tooltip-container">
                     <div class="tooltip-icon">?</div>
@@ -61,7 +98,7 @@
                         <span class="label">Atenção:</span>
                         <div class="flex">
                             <span class="dot atencao"></span>
-                            <span class="valor" id="kpi_atencao">1</span>
+                            <span class="valor" id="kpi_atencao">0</span>
                         </div>
                     </div>
                     <div class="item-situacao">
@@ -83,9 +120,10 @@
                         <span>TEMPERATURA</span>
                     </div>
                     <div class="kpi-valor-lat">
-                        <div id="temperaturaAtual"></div>
+                        <div id="temperaturaAtual">25.0°C</div>
                     </div>
                     <div class="kpi-status-lat status-atencao">
+                        <span class="dot"></span> ATENÇÃO
                     </div>
                     <div class="kpi-meta">Ideal: 20° - 25°</div>
                 </div>
@@ -123,12 +161,12 @@
                         <span>UMIDADE</span>
                     </div>
                     <div class="kpi-valor-lat">
-                        <div id="umidadeAtual"></div>
+                        <div id="umidadeAtual">55%</div>
                     </div>
                     <div class="kpi-status-lat status-estavel">
                         <span class="dot"></span> ESTÁVEL
                     </div>
-                    <div class="kpi-meta">Ideal: 50% - 80%</div>
+                    <div class="kpi-meta">Ideal: 60% - 80%</div>
                 </div>
 
                 <div class="grafico-lateral">
@@ -155,18 +193,30 @@
             </div>
         </section>
         </div>
-        <div class="bob"><img src="">
-        </div>
+       
+
     </main>
 </body>
-
 </html>
 <script>
-    var idSensor = 1;
+var idSensor = 1;
+
+const ctxTemp = document.getElementById('myChart_Temperature');
+const ctxUmid = document.getElementById('myChart_Umidade');
+
+carregarKPIStatus(idSensor);
+carregarTemperaturaAtual(idSensor);
+carregarUmidadeAtual(idSensor);
+carregarHistorico(idSensor);    
+
+setInterval(() => {
     carregarKPIStatus(idSensor);
+    carregarTemperaturaAtual(idSensor);
+    carregarUmidadeAtual(idSensor);
+    carregarHistorico(idSensor);
+}, 5000);
 
-
-    const chartTemperatura = new Chart(document.getElementById('myChart_Temperature'), {
+ var graficoLinha = new Chart(ctx, {
         type: 'line',
         data: {
             labels: ['10min', '20min', '30min', '40min', '50min', '60min'],
@@ -178,6 +228,7 @@
                     tension: 0.1,
                     borderColor: '#2D5031',
                     backgroundColor: 'rgba(80, 193, 86,0.5)',
+                    data: [25, 31, 32, 37, 31, 29, 28],
                     borderWidth: 2,
                 }, {
                     label: 'Máximo',
@@ -240,7 +291,9 @@
         }
     });
 
-    const chartUmidade = new Chart(document.getElementById('myChart_Umidade'), {
+    const ctxUmidade = document.getElementById('myChart_Umidade');
+
+    var graficoLinha = new Chart(ctxUmidade, {
         type: 'line',
         data: {
             labels: ['10min', '20min', '30min', '40min', '50min', '60min'],
@@ -251,6 +304,7 @@
                     fill: true,
                     borderColor: '#2D5031',
                     backgroundColor: 'rgba(80, 193, 86,0.5)',
+                    data: [72, 65, 60, 58, 59, 60, 61],
                     borderWidth: 2,
                     spanGaps: true,
                 },
@@ -316,146 +370,216 @@
         }
     });
 
-    var paginacao = {};
-    var tempo = {};
+var graficoTemp = new Chart(ctxTemp, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [
+            {
+                label: "Temperatura",
+                data: [],
+                fill: true,
+                tension: 0.1,
+                borderColor: "#2D5031",
+                backgroundColor: "rgba(80,193,86,0.5)"
+            },
+            {
+                label: "Máximo",
+                data: [],
+                fill: true,
+                tension: 0.1,
+                borderColor: "#7d080a80",
+                backgroundColor: "#7d080a80"
+            },
+            {
+                label: "Mínimo",
+                data: [],
+                fill: true,
+                tension: 0.1,
+                borderColor: "#0f6f9f80",
+                backgroundColor: "#0f6f9f80"
+            }
+        ]
+    },
+    options: { maintainAspectRatio: false }
+});
+var graficoUmidade = new Chart(ctxUmid, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [
+            {
+                label: "Umidade",
+                data: [],
+                fill: true,
+                tension: 0.1,
+                borderColor: "#2D5031",
+                backgroundColor: "rgba(80,193,86,0.5)"
+            },
+            {
+                label: "Máximo",
+                data: [],
+                fill: true,
+                tension: 0.1,
+                borderColor: "#7d080a80",
+                backgroundColor: "#7d080a80"
+            },
+            {
+                label: "Mínimo",
+                data: [],
+                fill: true,
+                tension: 0.1,
+                borderColor: "#0f6f9f80",
+                backgroundColor: "#0f6f9f80"
+            }
+        ]
+    },
+    options: { maintainAspectRatio: false }
+});
 
-    function obterDados(grafico, endpoint) {
-        fetch('http://localhost:3333/sensor/' + endpoint)
-            .then(response => response.json())
-            .then(dado => {
-
-                var numero = dado.temperatura || dado.umidade || dado.valor;
-                console.log(dado)
-
-                numero = parseFloat(numero);
-                if (isNaN(numero)) return;
-
-                if (endpoint.includes("temperatura")) {
-                    document.getElementById("temperaturaAtual").innerText = numero.toFixed(2);
-                }
-
-                if (endpoint.includes("umidade")) {
-                    document.getElementById("umidadeAtual").innerText = numero.toFixed(2);
-                }
-
-                if (grafico.data.labels.length >= 10) {
-                    grafico.data.labels.shift();
-                    grafico.data.datasets[0].data.shift();
-                }
-
-                grafico.data.labels.push(dado.hr_coleta || new Date().toLocaleTimeString());
-                grafico.data.datasets[0].data.push(numero);
-
-                grafico.update();
-            })
-            .catch(error => console.error('Erro ao obter dados:', error));
-    }
-
-
-
-    setInterval(() => {
-        obterDados(chartTemperatura, `tempAtual/${idSensor}`);
-        obterDados(chartUmidade, `umidAtual/${idSensor}`);
-    }, 1000);
-
-
-
-    // TEMPERATURA
-
-    fetch(`/sensor/tempAtual/${idSensor}`)
+function carregarHistorico(idSensor) {
+    fetch(`/sensores/tempHistorico/${idSensor}`)
         .then(res => res.json())
         .then(dados => {
-            const div = document.getElementById("temperaturaAtual");
-            if (dados && dados.temperatura != undefined) {
-                const temp = dados.temperatura;
-                div.innerHTML = `${temp}°C`;
-                atualizarEstadoTemp(temp);
-            } else {
-                div.innerHTML = 0;
+            if (!dados || dados.length === 0) return;
+
+            graficoTemp.data.labels = [];
+            graficoTemp.data.datasets[0].data = [];
+            graficoTemp.data.datasets[1].data = [];
+            graficoTemp.data.datasets[2].data = [];
+
+            graficoUmidade.data.labels = [];
+            graficoUmidade.data.datasets[0].data = [];
+            graficoUmidade.data.datasets[1].data = [];
+            graficoUmidade.data.datasets[2].data = [];
+
+            for (var i = 0; i < dados.length; i++) {
+                var r = dados[i];
+                var hora = r.hr_coleta.substring(0, 5);
+
+                graficoTemp.data.labels.push(hora);
+                graficoTemp.data.datasets[0].data.push(r.temperatura);
+                graficoTemp.data.datasets[1].data.push(30);
+                graficoTemp.data.datasets[2].data.push(20);
+
+                graficoUmidade.data.labels.push(hora);
+                graficoUmidade.data.datasets[0].data.push(r.umidade);
+                graficoUmidade.data.datasets[1].data.push(80);
+                graficoUmidade.data.datasets[2].data.push(60);
             }
-        })
-        .catch(err => {
-            console.error("Erro ao exibir a temperatura", err);
+
+            graficoTemp.update();
+            graficoUmidade.update();
         });
+}
+
+
+function atualizarStatus(valor, bloco, minAtencao, maxAtencao, minGrave, maxGrave) {
+    if (valor <= minGrave || valor >= maxGrave) {
+        bloco.className = "kpi-status-lat status-grave";
+        bloco.innerHTML = `<span class="dot"></span> GRAVE`;
+    } else if (valor < minAtencao || valor > maxAtencao) {
+        bloco.className = "kpi-status-lat status-atencao";
+        bloco.innerHTML = `<span class="dot"></span> ATENÇÃO`;
+    } else {
+        bloco.className = "kpi-status-lat status-estavel";
+        bloco.innerHTML = `<span class="dot"></span> ESTÁVEL`;
+    }
+}
+
+
+    fetch(`/sensor/tempAtual/${idSensor}`)
+    .then(res => res.json())
+    .then(dados => {
+        const div = document.getElementById("temperaturaAtual");
+        if(dados && dados.temperatura != undefined) {
+            const temp = dados.temperatura;
+            div.innerHTML = `${temp}°C`;
+            atualizarEstadoTemp(temp);
+        } else {
+            div.innerHTML = 0;
+        }
+    })
+    .catch(err => {
+        console.error("Erro ao exibir a temperatura", err);
+    });
 
     function atualizarEstadoTemp(temp) {
-        const bloco = document.querySelector(".kpi-temp .kpi-status-lat");
+    const bloco = document.querySelector(".kpi-temp .kpi-status-lat");
 
-        if (temp <= 10 || temp >= 30) {
-            bloco.classList.remove("status-estavel", "status-atencao");
-            bloco.classList.add("status-grave");
-            bloco.innerHTML = `<span class="dot"></span> GRAVE`;
-        }
-        else if (temp <= 20 || temp >= 25) {
-            bloco.classList.remove("status-estavel", "status-grave");
-            bloco.classList.add("status-atencao");
-            bloco.innerHTML = `<span class="dot"></span> ATENÇÃO`;
-        }
-        else {
-            bloco.classList.remove("status-grave", "status-atencao");
-            bloco.classList.add("status-estavel");
-            bloco.innerHTML = `<span class="dot"></span> ESTÁVEL`;
-        }
+    if (temp <= 10 || temp >= 30) {
+        bloco.classList.remove("status-estavel", "status-atencao");
+        bloco.classList.add("status-grave");
+        bloco.innerHTML = `<span class="dot"></span> GRAVE`;
     }
+    else if (temp <= 20 || temp >= 25) {
+        bloco.classList.remove("status-estavel", "status-grave");
+        bloco.classList.add("status-atencao");
+        bloco.innerHTML = `<span class="dot"></span> ATENÇÃO`;
+    }
+    else {
+        bloco.classList.remove("status-grave", "status-atencao");
+        bloco.classList.add("status-estavel");
+        bloco.innerHTML = `<span class="dot"></span> ESTÁVEL`;
+    }
+}
 
 
 
     // UMIDADE
 
     fetch(`/sensor/umidAtual/${idSensor}`)
-        .then(res => res.json())
-        .then(dados => {
-            const div = document.getElementById("umidadeAtual");
-            if (dados && dados.umidade != undefined) {
-                const umid = dados.umidade;
-                div.innerHTML = `${umid}%`;
-                atualizarEstadoUmid(umid);
-            } else {
-                div.innerHTML = 404;
-            }
-        })
-        .catch(err => {
-            console.error("Erro ao exibir a umidade", err);
-        });
+    .then(res => res.json())
+    .then(dados => {
+        const div = document.getElementById("umidadeAtual");
+        if(dados && dados.umidade != undefined) {
+            const umid = dados.umidade;
+            div.innerHTML = `${umid}%`;
+            atualizarEstadoUmid(umid);
+        } else {
+            div.innerHTML = 404;
+        }
+    })
+    .catch(err => {
+        console.error("Erro ao exibir a umidade", err);
+    });
 
     function atualizarEstadoUmid(umid) {
-        const bloco = document.querySelector(".kpi-umid .kpi-status-lat");
+    const bloco = document.querySelector(".kpi-umid .kpi-status-lat");
 
-        if (umid <= 30 || umid >= 90) {
-            bloco.classList.remove("status-estavel", "status-atencao");
-            bloco.classList.add("status-grave");
-            bloco.innerHTML = `<span class="dot"></span> GRAVE`;
-        }
-        else if (umid <= 50 || umid >= 80) {
-            bloco.classList.remove("status-estavel", "status-grave");
-            bloco.classList.add("status-atencao");
-            bloco.innerHTML = `<span class="dot"></span> ATENÇÃO`;
-        }
-        else {
-            bloco.classList.remove("status-grave", "status-atencao");
-            bloco.classList.add("status-estavel");
-            bloco.innerHTML = `<span class="dot"></span> ESTÁVEL`;
-        }
+    if (umid <= 30 || umid >= 90) {
+        bloco.classList.remove("status-estavel", "status-atencao");
+        bloco.classList.add("status-grave");
+        bloco.innerHTML = `<span class="dot"></span> GRAVE`;
     }
-
-
-
-    // KPI TIPOS DE SITUAÇÕES
-
-    function carregarKPIStatus(idSensor) {
-        fetch(`/sensor/contagemStatus/${idSensor}`)
-            .then(res => res.json())
-            .then(dados => {
-                let grave = dados.grave;
-                let atencao = dados.atencao;
-                let estavel = dados.estavel;
-
-                document.getElementById("kpi_grave").innerText = grave;
-                document.getElementById("kpi_atencao").innerText = atencao;
-                document.getElementById("kpi_estavel").innerText = estavel;
-            })
-            .catch(err => console.error("Erro:", err));
+    else if (umid <= 50 || umid >= 80) {
+        bloco.classList.remove("status-estavel", "status-grave");
+        bloco.classList.add("status-atencao");
+        bloco.innerHTML = `<span class="dot"></span> ATENÇÃO`;
     }
+    else {
+        bloco.classList.remove("status-grave", "status-atencao");
+        bloco.classList.add("status-estavel");
+        bloco.innerHTML = `<span class="dot"></span> ESTÁVEL`;
+    }
+}
 
 
+
+// KPI TIPOS DE SITUAÇÕES
+
+function carregarKPIStatus(idSensor) {
+    fetch(`/sensor/contagemStatus/${idSensor}`)
+        .then(res => res.json())
+        .then(dados => {
+            let grave = dados.grave;
+            let atencao = dados.atencao;
+            let estavel = dados.estavel;
+
+            document.getElementById("kpi_grave").innerText = grave;
+            document.getElementById("kpi_atencao").innerText = atencao;
+            document.getElementById("kpi_estavel").innerText = estavel;
+        })
+        .catch(err => console.error("Erro:", err));
+}
 </script>

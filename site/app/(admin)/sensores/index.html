@@ -21,9 +21,9 @@
           <a href="../home/index.html"><img src="../../public/institucional/logo-whiskey.svg" alt=""></a>
         </nav>
     
-        <div id="menu">
-            <a href="../../cadastro/index.html"  style="text-decoration: none;">
-             <button class="btn_cliente">CADASTRAR USUÁRIO</button>
+             <div id="menu" style="display: none;">
+            <a href="../../cadastro/index.html">
+                <button class="btn_cliente">CADASTRAR USUÁRIO</button>
             </a>
         </div>
       </header>
@@ -129,6 +129,8 @@
             </nav>
             <section class="lista-sensores" id="lista_sensores">
             </section>
+            <div style="display: none;" id="bob" class="bob"><a href="../destilarias/index.html"></a><img src="">
+        </div>
         </div>
     </main>
 </body>
@@ -252,4 +254,7 @@
             window.location = "../../(admin)/sensor/index.html";
     }
     listar(0, 12)
+    if (sessionStorage.PRIVILEGIO == 1) {
+    menu.style.display = 'block';
+}
 </script>

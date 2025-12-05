@@ -1,4 +1,4 @@
-var sensorModel = require("../models/sensoresModel");
+var sensoresModel = require("../models/sensoresModel");
 var validationsStatus = require("../utils/validation");
 
 
@@ -9,7 +9,7 @@ function listar(req, res) {
   statusFiltro = statusFiltro.toLowerCase();
   var listaOrdenada = []
   
-  sensorModel.listarSensores(destilariaId, statusData).then((resultado) => {
+  sensoresModel.listarSensores(destilariaId, statusData).then((resultado) => {
     for (var i = 0; i < resultado.length; i++) {
       var maxTempStatus = validationsStatus.verificarStatusTemperatura(resultado[i].max_temp)
       var minTempStatus = validationsStatus.verificarStatusTemperatura(resultado[i].min_temp)
@@ -55,7 +55,7 @@ function maiorIntervalo(req, res) {
   var statusData = req.query.horas || 12;
   var destilariaId = req.params.idDestilaria;
   statusFiltro = statusFiltro.toLowerCase();
-  sensorModel.maiorIntervalo(destilariaId, statusData).then((resultado) => {
+  sensoresModel.maiorIntervalo(destilariaId, statusData).then((resultado) => {
     res.status(200).json(resultado);
   });
 }
@@ -66,14 +66,14 @@ function eficiencia(req, res) {
   var statusData = req.query.horas || 12;
   var destilariaId = req.params.idDestilaria;
   statusFiltro = statusFiltro.toLowerCase();
-  sensorModel.eficiencia(destilariaId, statusData).then((resultado) => {
+  sensoresModel.eficiencia(destilariaId, statusData).then((resultado) => {
     res.status(200).json(resultado);
   });
 }
 
 function buscarPorId(req, res) {
   var id = req.params.id;
-  sensorModel.buscarSensor(id).then((resultado) => {
+  sensoresModel.buscarSensor(id).then((resultado) => {
     res.status(200).json(resultado);
   });
 }
@@ -82,9 +82,11 @@ function buscarPorId(req, res) {
 
 // DashBoard Sensor Específico 
 
+var sensoresModel = require("../models/sensoresModel");
+
 function tempAtual(req, res) {
   var idSensor = req.params.idSensor;
-  sensorModel.tempAtual(idSensor)
+  sensoresModel.tempAtual(idSensor)
         .then(
             function (resultado) {
                 if (resultado.length > 0) {
@@ -104,11 +106,9 @@ function tempAtual(req, res) {
         );
 }
 
-
-
 function umidAtual(req, res) {
   var idSensor = req.params.idSensor;
-  sensorModel.umidAtual(idSensor)
+  sensoresModel.umidAtual(idSensor)
         .then(
             function (resultado) {
                 if (resultado.length > 0) {
@@ -128,12 +128,10 @@ function umidAtual(req, res) {
         );
 }
 
-
-
 function contagemStatus(req, res) {
   var idSensor = req.params.idSensor;
 
-  sensorModel.contagemStatus(idSensor)
+  sensoresModel.contagemStatus(idSensor)
       .then(resultado => {
           if (resultado.length > 0) {
               res.status(200).json(resultado[0]);
@@ -150,6 +148,31 @@ function contagemStatus(req, res) {
           res.status(500).json(erro.sqlMessage);
       });
 }
+
+
+function tempHistorico(req, res) {
+  var idSensor = req.params.idSensor;
+  sensoresModel.tempHistorico(idSensor)
+        .then(
+            function (resultado) {
+                if (resultado.length > 0) {
+                    res.json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado encontrado!");
+                }
+            })
+        .catch(
+            function (erro) {
+                console.log(
+                    "Houve um erro ao buscar o histórico da temperatura do sensor: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+
 
 module.exports = {
   listar,
