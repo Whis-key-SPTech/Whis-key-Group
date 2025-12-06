@@ -24,20 +24,6 @@
     <main class="conteudo-principal">
 
         <section class="resumo">
-            <div class="cartao-resumo card-kpi">
-                <div class="tooltip-container">
-                    <div class="tooltip-icon">?</div>
-                    <div class="tooltip-msg">Porcentagem dos registros que operaram dentro da faixa
-                        ideal.</div>
-                </div>
-                <h3 class="kpi-title">Estabilidade</h3>
-                <div id="div_estabilidade">
-                    <div class="kpi-value-huge">85%</div>
-                </div>
-                <div class="progress-container" id="progresso_eficiencia">
-                    <div class="progress-bar-fill" style="width: 85%;"></div>
-                </div>
-            </div>
             <div class="cartao-resumo tipos-situacao">
                 <div class="tooltip-container">
                     <div class="tooltip-icon">?</div>
@@ -330,13 +316,19 @@
                 numero = parseFloat(numero);
                 if (isNaN(numero)) return;
 
-                if (endpoint.includes("temperatura")) {
-                    document.getElementById("temperaturaAtual").innerText = numero.toFixed(2);
-                }
+                    if(dado.temperatura){
+                    document.getElementById("temperaturaAtual").innerText = dado.temperatura;
+                    }else{
+                         document.getElementById("temperaturaAtual").innerText =  26.20;
+                    }   
+                
 
-                if (endpoint.includes("umidade")) {
-                    document.getElementById("umidadeAtual").innerText = numero.toFixed(2);
-                }
+                    if(dado.umidade){
+                    document.getElementById("umidadeAtual").innerText = dado.umidade;
+                    }else{
+                        document.getElementById("umidadeAtual").innerText = 48
+                    }
+                
 
                 if (grafico.data.labels.length >= 10) {
                     grafico.data.labels.shift();
@@ -362,7 +354,7 @@
 
     // TEMPERATURA
 
-    fetch(`/sensor/tempAtual/${idSensor}`)
+    fetch(`/especifica/tempAtual/${idSensor}`)
         .then(res => res.json())
         .then(dados => {
             const div = document.getElementById("temperaturaAtual");
@@ -402,7 +394,7 @@
 
     // UMIDADE
 
-    fetch(`/sensor/umidAtual/${idSensor}`)
+    fetch(`/especifica/umidAtual/${idSensor}`)
         .then(res => res.json())
         .then(dados => {
             const div = document.getElementById("umidadeAtual");
@@ -443,7 +435,7 @@
     // KPI TIPOS DE SITUAÇÕES
 
     function carregarKPIStatus(idSensor) {
-        fetch(`/sensor/contagemStatus/${idSensor}`)
+        fetch(`/especifica/contagemStatus/${idSensor}`)
             .then(res => res.json())
             .then(dados => {
                 let grave = dados.grave;

@@ -82,104 +82,11 @@ function buscarPorId(req, res) {
 
 // DashBoard Sensor Específico 
 
-var sensoresModel = require("../models/sensoresModel");
-
-function tempAtual(req, res) {
-  var idSensor = req.params.idSensor;
-  sensoresModel.tempAtual(idSensor)
-        .then(
-            function (resultado) {
-                if (resultado.length > 0) {
-                    res.json(resultado[0]);
-                } else {
-                    res.status(204).send("Nenhum resultado encontrado!");
-                }
-            })
-        .catch(
-            function (erro) {
-                console.log(
-                    "Houve um erro ao buscar temperatura atual do sensor: ",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-}
-
-function umidAtual(req, res) {
-  var idSensor = req.params.idSensor;
-  sensoresModel.umidAtual(idSensor)
-        .then(
-            function (resultado) {
-                if (resultado.length > 0) {
-                    res.json(resultado[0]);
-                } else {
-                    res.status(204).send("Nenhum resultado encontrado!");
-                }
-            })
-        .catch(
-            function (erro) {
-                console.log(
-                    "Houve um erro ao buscar umidade atual do sensor: ",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-}
-
-function contagemStatus(req, res) {
-  var idSensor = req.params.idSensor;
-
-  sensoresModel.contagemStatus(idSensor)
-      .then(resultado => {
-          if (resultado.length > 0) {
-              res.status(200).json(resultado[0]);
-          } else {
-              res.status(200).json({
-                  grave: 0,
-                  atencao: 0,
-                  estavel: 0
-              });
-          }
-      })
-      .catch(erro => {
-          console.log("Erro ao buscar contagem:", erro.sqlMessage);
-          res.status(500).json(erro.sqlMessage);
-      });
-}
-
-
-function tempHistorico(req, res) {
-  var idSensor = req.params.idSensor;
-  sensoresModel.tempHistorico(idSensor)
-        .then(
-            function (resultado) {
-                if (resultado.length > 0) {
-                    res.json(resultado);
-                } else {
-                    res.status(204).send("Nenhum resultado encontrado!");
-                }
-            })
-        .catch(
-            function (erro) {
-                console.log(
-                    "Houve um erro ao buscar o histórico da temperatura do sensor: ",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-}
-
 
 
 module.exports = {
   listar,
   maiorIntervalo,
   eficiencia,
-  buscarPorId,
-  tempAtual,
-  umidAtual,
-  contagemStatus
+  buscarPorId
 }

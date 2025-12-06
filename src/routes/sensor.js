@@ -24,24 +24,5 @@ router.post("/cadastrar", function (req, res) {
 })
 
 
-// DashBoard Sensor
-router.get("/tempAtual/:idSensor", function (req, res) {
-  sensoresController.tempAtual(req, res);
-});
-
-router.get("/umidAtual/:idSensor", function (req, res) {
-  sensoresController.umidAtual(req, res);
-});
-
-router.get("/contagemStatus/:idSensor", function (req, res) {
-  sensoresController.contagemStatus(req, res);
-});
-
-router.get("/tempHistorico/:idSensor", function (req, res) {
-  sensoresController.tempHistorico(req, res);
-});
-
-
-
 
 module.exports = router;

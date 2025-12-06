@@ -119,12 +119,13 @@
             </nav>
             <section class="lista-destilarias" id="lista_destilaria">
             </section>
+            <button id="cadastrar" style="display: none;" onclick="window.location.href='../../cadastro/index.html'">Cadastrar</button>
         </div>
     </main>
     <script>
         var listaDestilas = []
         var pesoGlobal = 'all'
-        var horarioGlobal = 12
+        var horarioGlobal = 6
         function filtrar(valorFiltro) {
             var opcoesFiltro = document.querySelectorAll('.filter-item');
             for (var i = 0; i < opcoesFiltro.length; i++) {
@@ -200,6 +201,8 @@
                         div_qtdAtencao.innerHTML = qtdAtencao
                         div_qtdEstavel.innerHTML = qtdEstavel
                         div_qtdSensores.innerHTML = qtdSensores
+
+                        
                     });
                 })
                 .catch(function (resposta) {
@@ -240,9 +243,9 @@
                 })
         }
         function atualizarLista(peso, horario) {
-            qtdGrave = 0
-            qtdAtencao = 0
-            qtdEstavel = 0
+            var qtdGrave = 0
+            var qtdAtencao = 0
+            var qtdEstavel = 0
             var qtdSensores = 0
             var listaMensagem = ''
             fetch(`/destilaria/all?situacao=${peso || 'all'}&horas=${horario || 12}`, {
@@ -311,6 +314,9 @@
         function handleDestilaria(id_destilaria) {
             sessionStorage.ID_DESTILARIA = id_destilaria
             window.location = "../../(admin)/sensores/index.html";
+        }
+        if(sessionStorage.PRIVILEGIO==1){
+        cadastrar.style.display = 'block';
         }
 
         

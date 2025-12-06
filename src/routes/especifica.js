@@ -1,0 +1,26 @@
+var express = require("express");
+var router = express.Router();
+
+var especificoController = require("../controllers/sensoresController");
+
+// DashBoard Sensor
+router.get("/tempAtual/:idSensor", function (req, res) {
+  especificoController.tempAtual(req, res);
+});
+
+router.get("/umidAtual/:idSensor", function (req, res) {
+  especificoController.umidAtual(req, res);
+});
+
+router.get("/contagemStatus/:idSensor", function (req, res) {
+  especificoController.contagemStatus(req, res);
+});
+
+router.get("/tempHistorico/:idSensor", function (req, res) {
+  especificoController.tempHistorico(req, res);
+});
+
+
+
+
+module.exports = router;
