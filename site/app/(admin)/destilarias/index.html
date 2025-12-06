@@ -141,7 +141,7 @@
 
         function filtrarHora(horario) {
             horarioGlobal = horario
-            atualizarLista(pesoGlobal, horario)
+            atualizarLista(pesoGlobal, [horario])
         }
 
         function IniciarListar(peso, horario) {
@@ -243,9 +243,9 @@
                 })
         }
         function atualizarLista(peso, horario) {
-            var qtdGrave = 0
-            var qtdAtencao = 0
-            var qtdEstavel = 0
+             var qtdGrave = 0
+             var qtdAtencao = 0
+             var qtdEstavel = 0
             var qtdSensores = 0
             var listaMensagem = ''
             fetch(`/destilaria/all?situacao=${peso || 'all'}&horas=${horario || 12}`, {

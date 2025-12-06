@@ -1,20 +1,25 @@
 var database = require("../database/config");
 
+// adicionei select sem fitro para rodar tudo e pegar tudo
 function listarDestilaria(horas) {
   var instrucaoSql = `
-         SELECT
-        id_destilaria,
-        rua,
-        COUNT(id_sensor) AS qtdSensor,
-        MAX(temperatura) AS max_temp,
-        MIN(temperatura) AS min_temp,
-        MAX(umidade) AS max_umid,
-        MIN(umidade) AS min_umid 
-    FROM destilaria_registro_base 
-    WHERE 
-       TIMESTAMP(dt_coleta, hr_coleta) >= DATE_SUB(NOW(), INTERVAL ${horas}
-     HOUR)
-    GROUP BY id_destilaria, rua;
+        SELECT
+    d.id_destilaria,
+    e.rua,
+    COUNT(s.id_sensor) AS qtdSensor,
+    MAX(r.temperatura) AS max_temp,
+    MIN(r.temperatura) AS min_temp,
+    MAX(r.umidade) AS max_umid,
+    MIN(r.umidade) AS min_umid
+FROM destilaria d
+JOIN endereco e ON e.id_endereco = d.fk_endereco
+LEFT JOIN sensor s ON s.fk_destilaria = d.id_destilaria
+LEFT JOIN registro r 
+       ON r.fk_sensor = s.id_sensor 
+      AND TIMESTAMP(r.dt_coleta, r.hr_coleta) >= DATE_SUB(NOW(), INTERVAL ${horas} HOUR)
+GROUP BY d.id_destilaria, e.rua
+ORDER BY d.id_destilaria;
+
 `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
