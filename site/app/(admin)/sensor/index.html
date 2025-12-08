@@ -78,8 +78,8 @@
 
                 <div class="grafico-lateral">
                     <div class="grafico-header">
-                        <h3>Histórico (12h)</h3>
-                        <div class="data-horario">
+                        <h3>Histórico</h3>
+                        <!-- <div class="data-horario">
                             <label for="periodo">Período:</label>
                             <input type="date" id="data_dashboard" onchange="atualizarGrafico(this.value)">
 
@@ -91,7 +91,7 @@
                                     <option value="720">Último Mês</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="canvas-wrapper">
                         <canvas id="myChart_Temperature"></canvas>
@@ -119,8 +119,8 @@
 
                 <div class="grafico-lateral">
                     <div class="grafico-header">
-                        <h3>Histórico (12h)</h3>
-                        <div class="data-horario">
+                        <h3>Histórico</h3>
+                        <!-- <div class="data-horario">
                             <label for="periodo">Período:</label>
                             <input type="date" id="data_dashboard" onchange="atualizarGrafico(this.value)">
 
@@ -132,7 +132,7 @@
                                     <option value="720">Último Mês</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="canvas-wrapper">
                         <canvas id="myChart_Umidade"></canvas>
@@ -150,8 +150,15 @@
 <script>
     var idSensor = 1;
     carregarKPIStatus(idSensor);
+    temperaturaAtual();
+    umidAtual();
+    carregarHistoricoTemperatura();
+    carregarHistoricoUmidade();
     setInterval(temperaturaAtual, 3000);
     setInterval(umidAtual, 3000);
+    setInterval(carregarHistoricoTemperatura, 5000);
+    setInterval(carregarHistoricoUmidade, 5000);
+
 
 
     const chartTemperatura = new Chart(document.getElementById('myChart_Temperature'), {
@@ -307,50 +314,12 @@
     var paginacao = {};
     var tempo = {};
 
-    // function obterDados(grafico, endpoint) {
-    //     fetch('http://localhost:3333/sensor/' + endpoint)
-    //         .then(response => response.json())
-    //         .then(dado => {
 
-    //             var numero = dado.temperatura || dado.umidade || dado.valor;
-    //             console.log(dado)
+    setInterval(() => {
+        obterDados(chartTemperatura, `tempAtual/${idSensor}`);
+        obterDados(chartUmidade, `umidAtual/${idSensor}`);
+    }, 1000);
 
-    //             numero = parseFloat(numero);
-    //             if (isNaN(numero)) return;
-
-    //             if (dado.temperatura) {
-    //                 document.getElementById("temperaturaAtual").innerText = dado.temperatura;
-    //             } else {
-    //                 document.getElementById("temperaturaAtual").innerText = 26.20;
-    //             }
-
-
-    //             if (dado.umidade) {
-    //                 document.getElementById("umidadeAtual").innerText = dado.umidade;
-    //             } else {
-    //                 document.getElementById("umidadeAtual").innerText = 48
-    //             }
-
-
-    //             if (grafico.data.labels.length >= 10) {
-    //                 grafico.data.labels.shift();
-    //                 grafico.data.datasets[0].data.shift();
-    //             }
-
-    //             grafico.data.labels.push(dado.hr_coleta || new Date().toLocaleTimeString());
-    //             grafico.data.datasets[0].data.push(numero);
-
-    //             grafico.update();
-    //         })
-    //         .catch(error => console.error('Erro ao obter dados:', error));
-    // }
-
-
-
-    // setInterval(() => {
-    //     obterDados(chartTemperatura, `tempAtual/${idSensor}`);
-    //     obterDados(chartUmidade, `umidAtual/${idSensor}`);
-    // }, 1000);
 
 
 
@@ -397,6 +366,25 @@
     }
 
 
+    function carregarHistoricoTemperatura() {
+    fetch(`/especifico/tempHistorico/${idSensor}`)
+        .then(res => res.json())
+        .then(dados => {
+            dados.reverse();
+
+            const labels = dados.map((item, i) => `${(i+1)*10} min`);
+            const temperaturas = dados.map(item => item.temperatura);
+
+            chartTemperatura.data.labels = labels;
+            chartTemperatura.data.datasets[0].data = temperaturas;
+
+            chartTemperatura.update();
+        })
+        .catch(err => console.error("Erro ao carregar histórico:", err));
+}
+
+
+
 
     // UMIDADE
 
@@ -440,6 +428,22 @@
         }
     }
 
+    function carregarHistoricoUmidade() {
+    fetch(`/especifico/umidHistorico/${idSensor}`)
+        .then(res => res.json())
+        .then(dados => {
+            dados.reverse();
+
+            const labels = dados.map((item, i) => `${(i+1)*10} min`);
+            const umidades = dados.map(item => item.umidade);
+
+            chartUmidade.data.labels = labels;
+            chartUmidade.data.datasets[0].data = umidades;
+
+            chartUmidade.update();
+        })
+        .catch(err => console.error("Erro ao carregar histórico:", err));
+}
 
 
     // KPI TIPOS DE SITUAÇÕES

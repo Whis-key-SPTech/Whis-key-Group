@@ -68,26 +68,40 @@ function contagemStatus(req, res) {
 
 
 function tempHistorico(req, res) {
-  var idSensor = req.params.idSensor;
-  especificoModel.tempHistorico(idSensor)
-        .then(
-            function (resultado) {
-                if (resultado.length > 0) {
-                    res.json(resultado);
-                } else {
-                    res.status(204).send("Nenhum resultado encontrado!");
-                }
-            })
-        .catch(
-            function (erro) {
-                console.log(
-                    "Houve um erro ao buscar o histórico da temperatura do sensor: ",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
+    var idSensor = req.params.idSensor;
+
+    especificoModel.tempHistorico(idSensor)
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } else {
+                res.status(204).send([]);
             }
-        );
+        })
+        .catch(erro => {
+            console.log("Erro:", erro);
+            res.status(500).json(erro);
+        });
 }
+
+function umidHistorico(req, res) {
+    var idSensor = req.params.idSensor;
+
+    especificoModel.umidHistorico(idSensor)
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } else {
+                res.status(204).send([]);
+            }
+        })
+        .catch(erro => {
+            console.log("Erro:", erro);
+            res.status(500).json(erro);
+        });
+}
+
+
 
 
 
@@ -95,5 +109,6 @@ module.exports = {
   tempAtual,
   umidAtual,
   contagemStatus,
-  tempHistorico
+  tempHistorico,
+  umidHistorico
 }

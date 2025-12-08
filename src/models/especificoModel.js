@@ -80,27 +80,38 @@ function eficienciaSensor(idDestilaria, horas) {
 
   function tempHistorico(idSensor) {
     var instrucaoSql = `
-          SELECT
-              temperatura,
-              umidade,
-              dt_coleta,
-              hr_coleta,
-              TIMESTAMP(dt_coleta, hr_coleta) AS data_hora
-          FROM registro
-          WHERE
-              fk_sensor = ${idSensor}
-              AND TIMESTAMP(dt_coleta, hr_coleta) >= DATE_SUB(NOW(), INTERVAL 6 HOUR)
-          ORDER BY data_hora ASC;
-      `;
+        SELECT temperatura,
+               dt_coleta,
+               hr_coleta
+        FROM registro
+        WHERE fk_sensor = ${idSensor}
+        ORDER BY dt_coleta DESC, hr_coleta DESC
+        LIMIT 6;
+    `;
+    console.log("Executando SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
-      console.log("Executando a instrução SQL: \n" + instrucaoSql);
-      return database.executar(instrucaoSql);
-  }
+function umidHistorico(idSensor) {
+  var instrucaoSql = `
+      SELECT umidade,
+             dt_coleta,
+             hr_coleta
+      FROM registro
+      WHERE fk_sensor = ${idSensor}
+      ORDER BY dt_coleta DESC, hr_coleta DESC
+      LIMIT 6;
+  `;
+  console.log("Executando SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 
   module.exports = {
   tempAtual,
+  umidAtual,
   eficienciaSensor,
   tempHistorico,
-  umidAtual,
+  umidHistorico,
   contagemStatus
 }

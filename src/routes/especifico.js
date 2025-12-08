@@ -20,6 +20,11 @@ router.get("/tempHistorico/:idSensor", function (req, res) {
   especificoController.tempHistorico(req, res);
 });
 
+router.get("/umidHistorico/:idSensor", function (req, res) {
+  especificoController.umidHistorico(req, res);
+});
+
+
 
 
 

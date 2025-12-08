@@ -82,7 +82,7 @@ PRIMARY KEY (id_sensor, fk_idLocalidadeSensor)
 id_registro INT AUTO_INCREMENT,
 dt_coleta DATE DEFAULT (CURRENT_DATE),
 hr_coleta TIME DEFAULT (CURRENT_TIME),
-temperatura DECIMAL (4,2) NOT NULL,
+temperatura DECIMAL (3,1) NOT NULL,
 umidade INT NOT NULL,
 fk_sensor INT NOT NULL,
 	CONSTRAINT SensorRegistro 
