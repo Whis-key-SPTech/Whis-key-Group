@@ -150,6 +150,8 @@
 <script>
     var idSensor = 1;
     carregarKPIStatus(idSensor);
+    setInterval(temperaturaAtual, 3000);
+    setInterval(umidAtual, 3000);
 
 
     const chartTemperatura = new Chart(document.getElementById('myChart_Temperature'), {
@@ -305,70 +307,74 @@
     var paginacao = {};
     var tempo = {};
 
-    function obterDados(grafico, endpoint) {
-        fetch('http://localhost:3333/sensor/' + endpoint)
-            .then(response => response.json())
-            .then(dado => {
+    // function obterDados(grafico, endpoint) {
+    //     fetch('http://localhost:3333/sensor/' + endpoint)
+    //         .then(response => response.json())
+    //         .then(dado => {
 
-                var numero = dado.temperatura || dado.umidade || dado.valor;
-                console.log(dado)
+    //             var numero = dado.temperatura || dado.umidade || dado.valor;
+    //             console.log(dado)
 
-                numero = parseFloat(numero);
-                if (isNaN(numero)) return;
+    //             numero = parseFloat(numero);
+    //             if (isNaN(numero)) return;
 
-                    if(dado.temperatura){
-                    document.getElementById("temperaturaAtual").innerText = dado.temperatura;
-                    }else{
-                         document.getElementById("temperaturaAtual").innerText =  26.20;
-                    }   
-                
-
-                    if(dado.umidade){
-                    document.getElementById("umidadeAtual").innerText = dado.umidade;
-                    }else{
-                        document.getElementById("umidadeAtual").innerText = 48
-                    }
-                
-
-                if (grafico.data.labels.length >= 10) {
-                    grafico.data.labels.shift();
-                    grafico.data.datasets[0].data.shift();
-                }
-
-                grafico.data.labels.push(dado.hr_coleta || new Date().toLocaleTimeString());
-                grafico.data.datasets[0].data.push(numero);
-
-                grafico.update();
-            })
-            .catch(error => console.error('Erro ao obter dados:', error));
-    }
+    //             if (dado.temperatura) {
+    //                 document.getElementById("temperaturaAtual").innerText = dado.temperatura;
+    //             } else {
+    //                 document.getElementById("temperaturaAtual").innerText = 26.20;
+    //             }
 
 
+    //             if (dado.umidade) {
+    //                 document.getElementById("umidadeAtual").innerText = dado.umidade;
+    //             } else {
+    //                 document.getElementById("umidadeAtual").innerText = 48
+    //             }
 
-    setInterval(() => {
-        obterDados(chartTemperatura, `tempAtual/${idSensor}`);
-        obterDados(chartUmidade, `umidAtual/${idSensor}`);
-    }, 1000);
+
+    //             if (grafico.data.labels.length >= 10) {
+    //                 grafico.data.labels.shift();
+    //                 grafico.data.datasets[0].data.shift();
+    //             }
+
+    //             grafico.data.labels.push(dado.hr_coleta || new Date().toLocaleTimeString());
+    //             grafico.data.datasets[0].data.push(numero);
+
+    //             grafico.update();
+    //         })
+    //         .catch(error => console.error('Erro ao obter dados:', error));
+    // }
+
+
+
+    // setInterval(() => {
+    //     obterDados(chartTemperatura, `tempAtual/${idSensor}`);
+    //     obterDados(chartUmidade, `umidAtual/${idSensor}`);
+    // }, 1000);
 
 
 
     // TEMPERATURA
 
-    fetch(`/especifica/tempAtual/${idSensor}`)
-        .then(res => res.json())
-        .then(dados => {
-            const div = document.getElementById("temperaturaAtual");
-            if (dados && dados.temperatura != undefined) {
-                const temp = dados.temperatura;
-                div.innerHTML = `${temp}°C`;
-                atualizarEstadoTemp(temp);
-            } else {
-                div.innerHTML = 0;
-            }
-        })
-        .catch(err => {
-            console.error("Erro ao exibir a temperatura", err);
-        });
+    function temperaturaAtual() {
+        fetch(`/especifico/tempAtual/${idSensor}`)
+            .then(res => res.json())
+            .then(dados => {
+                const div = document.getElementById("temperaturaAtual");
+                if (dados && dados.temperatura != undefined) {
+                    const temp = dados.temperatura;
+                    div.innerHTML = `${temp}°C`;
+                    atualizarEstadoTemp(temp);
+                } else {
+                    div.innerHTML = 0;
+                }
+            })
+            .catch(err => {
+                console.error("Erro ao exibir a temperatura", err);
+            });
+    }
+
+
 
     function atualizarEstadoTemp(temp) {
         const bloco = document.querySelector(".kpi-temp .kpi-status-lat");
@@ -394,21 +400,25 @@
 
     // UMIDADE
 
-    fetch(`/especifica/umidAtual/${idSensor}`)
-        .then(res => res.json())
-        .then(dados => {
-            const div = document.getElementById("umidadeAtual");
-            if (dados && dados.umidade != undefined) {
-                const umid = dados.umidade;
-                div.innerHTML = `${umid}%`;
-                atualizarEstadoUmid(umid);
-            } else {
-                div.innerHTML = 404;
-            }
-        })
-        .catch(err => {
-            console.error("Erro ao exibir a umidade", err);
-        });
+    function umidAtual() {
+        fetch(`/especifico/umidAtual/${idSensor}`)
+            .then(res => res.json())
+            .then(dados => {
+                const div = document.getElementById("umidadeAtual");
+                if (dados && dados.umidade != undefined) {
+                    const umid = dados.umidade;
+                    div.innerHTML = `${umid}%`;
+                    atualizarEstadoUmid(umid);
+                } else {
+                    div.innerHTML = 404;
+                }
+            })
+            .catch(err => {
+                console.error("Erro ao exibir a umidade", err);
+            });
+    }
+
+
 
     function atualizarEstadoUmid(umid) {
         const bloco = document.querySelector(".kpi-umid .kpi-status-lat");
@@ -435,7 +445,7 @@
     // KPI TIPOS DE SITUAÇÕES
 
     function carregarKPIStatus(idSensor) {
-        fetch(`/especifica/contagemStatus/${idSensor}`)
+        fetch(`/especifico/contagemStatus/${idSensor}`)
             .then(res => res.json())
             .then(dados => {
                 let grave = dados.grave;

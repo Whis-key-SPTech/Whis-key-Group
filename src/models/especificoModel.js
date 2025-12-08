@@ -101,5 +101,6 @@ function eficienciaSensor(idDestilaria, horas) {
   tempAtual,
   eficienciaSensor,
   tempHistorico,
-  umidAtual
+  umidAtual,
+  contagemStatus
 }

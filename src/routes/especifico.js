@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-var especificoController = require("../controllers/sensoresController");
+var especificoController = require("../controllers/especificoController");
 
 // DashBoard Sensor
 router.get("/tempAtual/:idSensor", function (req, res) {

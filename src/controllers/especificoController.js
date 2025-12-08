@@ -1,6 +1,5 @@
-var especificoModel = require("../models/especioficoModel");
-
-var especificoModel = require("../models/sensoresModel");
+var especificoModel = require("../models/especificoModel");
+// var validationsStatus = require("../utils/validation");
 
 function tempAtual(req, res) {
   var idSensor = req.params.idSensor;

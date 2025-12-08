@@ -75,8 +75,6 @@ function buscarSensor(id) {
 
 
 
-// DashBoard Sensor Específico 
-
 module.exports = {
   listarSensores,
   buscarSensor,

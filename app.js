@@ -28,6 +28,7 @@ var destilariasRouter = require("./src/routes/destilaria");
 var sensorRouter = require("./src/routes/sensor");
 var empresasRouter = require("./src/routes/empresas");
 var iaRouter = require("./src/routes/ia");
+var especificoRouter = require("./src/routes/especifico");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -44,6 +45,7 @@ app.use("/medidas", medidasRouter);
 app.use("/destilaria", destilariasRouter);
 app.use("/empresas", empresasRouter);
 app.use("/sensor", sensorRouter);
+app.use("/especifico", especificoRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
